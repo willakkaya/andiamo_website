@@ -1,0 +1,254 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-gold-dark: var(--gold-dark);
+  --color-cream: var(--cream);
+  --color-burgundy: var(--burgundy);
+  --color-warm-white: var(--warm-white);
+  --color-charcoal: var(--charcoal);
+  --color-espresso: var(--espresso);
+  --font-display: "Playfair Display", "Georgia", serif;
+  --font-body: "DM Sans", "Helvetica Neue", sans-serif;
+  --font-accent: "Cormorant Garamond", "Georgia", serif;
+}
+
+:root {
+  --radius: 0;
+  /* Warm ivory base — like a linen tablecloth in candlelight */
+  --background: oklch(0.95 0.012 75);
+  --foreground: oklch(0.20 0.01 50);
+  /* Cards: warm white */
+  --card: oklch(0.98 0.008 75);
+  --card-foreground: oklch(0.20 0.01 50);
+  --popover: oklch(0.98 0.008 75);
+  --popover-foreground: oklch(0.20 0.01 50);
+  /* Gold primary — antique, warm, rich */
+  --primary: oklch(0.58 0.14 60);
+  --primary-foreground: oklch(0.98 0.008 75);
+  /* Warm muted surfaces */
+  --secondary: oklch(0.92 0.015 72);
+  --secondary-foreground: oklch(0.25 0.01 50);
+  --muted: oklch(0.90 0.012 72);
+  --muted-foreground: oklch(0.45 0.015 55);
+  /* Accent: warm gold tint */
+  --accent: oklch(0.93 0.02 72);
+  --accent-foreground: oklch(0.20 0.01 50);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.20 0.01 50 / 10%);
+  --input: oklch(0.20 0.01 50 / 10%);
+  --ring: oklch(0.58 0.14 60);
+  /* Brand colors — the palette of an Italian fine dining room */
+  --gold: oklch(0.58 0.14 60);
+  --gold-light: oklch(0.68 0.12 68);
+  --gold-dark: oklch(0.48 0.12 52);
+  --cream: oklch(0.94 0.015 75);
+  --burgundy: oklch(0.30 0.13 18);
+  --warm-white: oklch(0.97 0.008 75);
+  --charcoal: oklch(0.20 0.01 50);
+  --espresso: oklch(0.24 0.025 45);
+  /* Charts */
+  --chart-1: oklch(0.58 0.14 60);
+  --chart-2: oklch(0.68 0.12 68);
+  --chart-3: oklch(0.48 0.12 52);
+  --chart-4: oklch(0.30 0.13 18);
+  --chart-5: oklch(0.35 0.1 250);
+  --sidebar: oklch(0.94 0.012 75);
+  --sidebar-foreground: oklch(0.20 0.01 50);
+  --sidebar-primary: oklch(0.58 0.14 60);
+  --sidebar-primary-foreground: oklch(0.98 0.008 75);
+  --sidebar-accent: oklch(0.90 0.012 72);
+  --sidebar-accent-foreground: oklch(0.20 0.01 50);
+  --sidebar-border: oklch(0.20 0.01 50 / 10%);
+  --sidebar-ring: oklch(0.58 0.14 60);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [type="button"]:not(:disabled),
+  [type="submit"]:not(:disabled),
+  [type="reset"]:not(:disabled),
+  a[href],
+  select:not(:disabled),
+  input[type="checkbox"]:not(:disabled),
+  input[type="radio"]:not(:disabled) {
+    @apply cursor-pointer;
+  }
+}
+
+@layer components {
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .flex {
+    min-height: 0;
+    min-width: 0;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 3rem;
+      padding-right: 3rem;
+      max-width: 1320px;
+    }
+  }
+
+  /* Gold gradient text */
+  .text-gradient-gold {
+    background: linear-gradient(135deg, oklch(0.68 0.12 68), oklch(0.58 0.14 60), oklch(0.48 0.12 52));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Elegant divider */
+  .divider-gold {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, oklch(0.58 0.14 60 / 30%), transparent);
+  }
+
+  /* Thin ornamental line */
+  .ornament-line {
+    width: 60px;
+    height: 1px;
+    background: oklch(0.58 0.14 60 / 50%);
+    margin: 0 auto;
+  }
+
+  /* Section padding */
+  .section-padding {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+
+  @media (min-width: 768px) {
+    .section-padding {
+      padding-top: 8rem;
+      padding-bottom: 8rem;
+    }
+  }
+
+  /* Smooth image reveal */
+  .img-reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .img-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Rich dark section — espresso/walnut tones, like the restaurant interior */
+  .section-dark {
+    background-color: oklch(0.20 0.02 50);
+    color: oklch(0.92 0.01 75);
+  }
+
+  /* Deep burgundy accent section */
+  .section-burgundy {
+    background-color: oklch(0.30 0.13 18);
+    color: oklch(0.95 0.01 75);
+  }
+
+  /* Warm cream section */
+  .section-cream {
+    background-color: oklch(0.94 0.015 75);
+    color: oklch(0.20 0.01 50);
+  }
+
+  /* Warm white section */
+  .section-warm {
+    background-color: oklch(0.97 0.008 75);
+    color: oklch(0.20 0.01 50);
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Elegant scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: oklch(0.92 0.01 75);
+}
+::-webkit-scrollbar-thumb {
+  background: oklch(0.65 0.04 60);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.55 0.08 60);
+}
+
+/* Selection color */
+::selection {
+  background: oklch(0.58 0.14 60 / 25%);
+  color: oklch(0.15 0.01 50);
+}
