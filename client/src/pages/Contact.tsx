@@ -1,8 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import PageLayout from "@/components/PageLayout";
 import { IMAGES, LINKS } from "@/lib/images";
 import { motion } from "framer-motion";
-import { MapPin, Phone, Mail, Clock, Instagram, Car, Train } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Instagram, Car, Train, ArrowRight, Check } from "lucide-react";
+import { submitForm } from "@/lib/formspree";
+import { toast } from "sonner";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -12,6 +14,119 @@ const fadeUp = {
     transition: { delay: i * 0.12, duration: 0.6, ease: "easeOut" },
   }),
 };
+
+function ContactForm() {
+  const [formData, setFormData] = useState({ name: "", email: "", phone: "", message: "" });
+  const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitting(true);
+    const ok = await submitForm({ ...formData, _subject: "Website Inquiry", source: "contact" });
+    if (ok) {
+      setSubmitted(true);
+      toast.success("Message sent! We'll get back to you soon.");
+    } else {
+      toast.error("Something went wrong. Please call us at (650) 745-8811.");
+    }
+    setSubmitting(false);
+  };
+
+  const inputClass =
+    "w-full bg-transparent border-b border-charcoal/15 px-0 py-3 text-charcoal font-accent text-sm tracking-wide focus:border-gold/50 focus:outline-none transition-colors placeholder:text-charcoal/25";
+
+  return (
+    <section className="section-padding bg-background">
+      <div className="container max-w-2xl">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          custom={0}
+        >
+          <div className="text-center mb-14">
+            <div className="ornament-line mb-6" />
+            <p className="font-accent text-sm tracking-[0.3em] uppercase text-gold/70 mb-4">
+              Get in Touch
+            </p>
+            <h2 className="font-display text-3xl md:text-4xl text-charcoal mb-4">Send Us a Message</h2>
+            <p className="font-accent text-charcoal/50 text-sm tracking-wide">
+              Questions, feedback, or special requests — we'd love to hear from you.
+            </p>
+          </div>
+
+          {submitted ? (
+            <div className="text-center py-16 border border-gold/20 px-8">
+              <Check size={48} className="text-gold mx-auto mb-4" />
+              <h3 className="font-display text-2xl text-charcoal mb-3">Thank You</h3>
+              <p className="font-accent text-charcoal/50 tracking-wide">
+                We'll get back to you within 24 hours.
+              </p>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6">
+                <div>
+                  <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/40 mb-1">Name *</label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className={inputClass}
+                    placeholder="Your name"
+                  />
+                </div>
+                <div>
+                  <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/40 mb-1">Email *</label>
+                  <input
+                    type="email"
+                    required
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className={inputClass}
+                    placeholder="your@email.com"
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/40 mb-1">Phone</label>
+                <input
+                  type="tel"
+                  value={formData.phone}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  className={inputClass}
+                  placeholder="(555) 123-4567"
+                />
+              </div>
+              <div>
+                <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/40 mb-1">Message *</label>
+                <textarea
+                  rows={4}
+                  required
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  className="w-full bg-transparent border border-charcoal/10 px-4 py-3 text-charcoal font-accent text-sm tracking-wide focus:border-gold/50 focus:outline-none transition-colors resize-none placeholder:text-charcoal/25"
+                  placeholder="How can we help?"
+                />
+              </div>
+              <button
+                type="submit"
+                disabled={submitting}
+                className="w-full flex items-center justify-center gap-2 px-8 py-4 bg-charcoal text-white font-body text-[12px] tracking-[0.2em] uppercase hover:bg-charcoal/85 transition-all duration-500 disabled:opacity-50"
+              >
+                {submitting ? "Sending..." : "Send Message"}
+                <ArrowRight size={14} />
+              </button>
+            </form>
+          )}
+        </motion.div>
+      </div>
+    </section>
+  );
+}
 
 export default function Contact() {
   useEffect(() => {
@@ -167,6 +282,9 @@ export default function Contact() {
           </div>
         </div>
       </section>
+
+      {/* Inquiry Form */}
+      <ContactForm />
 
       {/* Hours — dark section */}
       <section className="section-dark">
