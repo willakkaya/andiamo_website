@@ -15,12 +15,12 @@ const fadeUp = {
 export default function OurStory() {
   useEffect(() => {
     document.title = "Our Story | Andiamo in Banca";
-    document.querySelector('meta[name="description"]')?.setAttribute("content", "Discover the story of Andiamo in Banca — upscale Italian dining in a restored 1920s bank building in South San Francisco.");
+    document.querySelector('meta[name="description"]')?.setAttribute("content", "From Cafe Figaro in 1989 to Andiamo in Banca — the Akkaya family has been feeding the Bay Area for over 35 years. Discover our story.");
   }, []);
 
   return (
     <PageLayout>
-      {/* Hero — full-bleed image */}
+      {/* Hero */}
       <section className="relative h-[60vh] min-h-[480px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img
@@ -32,7 +32,7 @@ export default function OurStory() {
         </div>
         <div className="relative z-10 text-center px-6">
           <p className="font-accent text-sm tracking-[0.3em] uppercase text-cream/60 mb-5">
-            Est. 2018 &middot; South San Francisco
+            Three Decades &middot; Three Restaurants &middot; One Family
           </p>
           <h1 className="font-display text-5xl md:text-7xl lg:text-8xl text-cream">
             Our Story
@@ -40,7 +40,7 @@ export default function OurStory() {
         </div>
       </section>
 
-      {/* The Building — cream section */}
+      {/* The Beginning — Cafe Figaro */}
       <section className="section-cream">
         <div className="container max-w-3xl py-24 md:py-32">
           <motion.div
@@ -53,87 +53,29 @@ export default function OurStory() {
           >
             <div className="ornament-line mx-auto mb-6" />
             <p className="font-accent text-[11px] tracking-[0.3em] uppercase text-gold mb-4">
-              The Building
+              Where It All Began
             </p>
             <h2 className="font-display text-3xl md:text-5xl text-charcoal mb-10">
-              A Historic Bank Building Reborn
-            </h2>
-            <p className="font-accent text-charcoal/70 leading-[1.9] text-base md:text-lg">
-              Standing proudly at 301 Linden Avenue in the heart of downtown South San Francisco,
-              our building has been a landmark for generations. Originally constructed as a
-              bank, its grand columns, soaring ceilings, and ornate architectural details
-              spoke to an era of craftsmanship that valued beauty and permanence. For decades,
-              it served the community as a financial institution — a place of trust and
-              significance in the neighborhood.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Full-bleed dual image break */}
-      <section className="section-dark">
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          custom={0}
-        >
-          <div className="grid grid-cols-1 md:grid-cols-2">
-            <div className="aspect-[4/3] overflow-hidden">
-              <img
-                src={IMAGES.exterior}
-                alt="The restored bank building exterior with columns"
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div className="aspect-[4/3] overflow-hidden">
-              <img
-                src={IMAGES.vault}
-                alt="The Vault private dining room"
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </div>
-        </motion.div>
-      </section>
-
-      {/* The Transformation — warm section */}
-      <section className="section-warm">
-        <div className="container max-w-3xl py-24 md:py-32">
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            custom={0}
-            className="text-center"
-          >
-            <div className="ornament-line mx-auto mb-6" />
-            <p className="font-accent text-[11px] tracking-[0.3em] uppercase text-gold mb-4">
-              The Transformation
-            </p>
-            <h2 className="font-display text-3xl md:text-5xl text-charcoal mb-10">
-              From Vault to Table
+              Cafe Figaro, 1989
             </h2>
             <p className="font-accent text-charcoal/70 leading-[1.9] text-base md:text-lg mb-8">
-              When we discovered this space, we saw more than a building — we saw a story
-              waiting to be told. The meticulous restoration preserved the original
-              architectural elements that make this space extraordinary: the grand facade,
-              the soaring interior, and most remarkably, the original bank vault.
+              John Akkaya left Turkey at sixteen years old with nothing but determination
+              and a willingness to work. After years in the hospitality industry learning
+              his craft, he opened Cafe Figaro on Broadway in Burlingame in 1989 — a small
+              Italian cafe that would become a beloved neighborhood institution for over
+              35 years.
             </p>
             <p className="font-accent text-charcoal/70 leading-[1.9] text-base md:text-lg">
-              That vault — once home to safety deposit boxes and the community's most
-              precious possessions — has been transformed into South San Francisco's most
-              exclusive private dining room. The massive vault door remains, a stunning
-              reminder of the building's heritage and a portal to an unforgettable
-              dining experience.
+              From the very first year, John began a tradition that would define the family's
+              approach to the restaurant business: every Thanksgiving, he opened the doors
+              and served free meals to anyone who walked in — no questions asked. That tradition
+              has continued for over three decades, serving more than 1,500 people each year.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Quote — dark espresso section */}
+      {/* Quote */}
       <section className="section-dark">
         <div className="container max-w-3xl py-20 md:py-28">
           <motion.div
@@ -146,7 +88,7 @@ export default function OurStory() {
           >
             <div className="ornament-line mx-auto mb-10 opacity-40" />
             <p className="font-display text-2xl md:text-4xl text-cream/90 italic leading-relaxed">
-              "Simply Delicious."
+              "Things you have, you share. And things you don't have, you work for."
             </p>
             <p className="font-accent text-[11px] tracking-[0.3em] uppercase text-gold/60 mt-6">
               — John Akkaya, Founder
@@ -155,41 +97,7 @@ export default function OurStory() {
         </div>
       </section>
 
-      {/* The Philosophy — cream section */}
-      <section className="section-cream">
-        <div className="container max-w-3xl py-24 md:py-32">
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            custom={0}
-            className="text-center"
-          >
-            <div className="ornament-line mx-auto mb-6" />
-            <p className="font-accent text-[11px] tracking-[0.3em] uppercase text-gold mb-4">
-              The Philosophy
-            </p>
-            <h2 className="font-display text-3xl md:text-5xl text-charcoal mb-10">
-              Simply Delicious
-            </h2>
-            <p className="font-accent text-charcoal/70 leading-[1.9] text-base md:text-lg mb-8">
-              At Andiamo in Banca, we believe that great Italian cuisine is an act of
-              respect — respect for ingredients, for tradition, and for the people who
-              gather around the table. Our pasta is made by hand, daily, using techniques
-              passed down through generations. Our sauces simmer slowly. Our wine list
-              is curated with the same care we bring to every plate.
-            </p>
-            <p className="font-accent text-charcoal/70 leading-[1.9] text-base md:text-lg">
-              The name "Andiamo" means "let's go" in Italian — an invitation to experience
-              something special. "In Banca" honors the building that houses us. Together,
-              they capture our spirit: a forward-looking restaurant deeply rooted in history.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* The Location — warm section */}
+      {/* Don Giovanni & Growth */}
       <section className="section-warm">
         <div className="container max-w-3xl py-24 md:py-32">
           <motion.div
@@ -202,17 +110,156 @@ export default function OurStory() {
           >
             <div className="ornament-line mx-auto mb-6" />
             <p className="font-accent text-[11px] tracking-[0.3em] uppercase text-gold mb-4">
-              The Location
+              Growing the Family
             </p>
             <h2 className="font-display text-3xl md:text-5xl text-charcoal mb-10">
-              The Heart of South San Francisco
+              Ristorante Don Giovanni
             </h2>
+            <p className="font-accent text-charcoal/70 leading-[1.9] text-base md:text-lg mb-8">
+              In 1997, John expanded the family's footprint with Ristorante Don Giovanni
+              on Castro Street in Mountain View. Set inside the old California Bakery
+              building with its soaring ceilings and warm atmosphere, Don Giovanni quickly
+              became a neighborhood favorite for fine Italian dining in the heart of
+              Silicon Valley.
+            </p>
             <p className="font-accent text-charcoal/70 leading-[1.9] text-base md:text-lg">
-              Located at 301 Linden Avenue in downtown South San Francisco, we sit at the
-              crossroads of the city's historic core and its booming biotech future.
-              Just minutes from Oyster Point and the biotech corridor, Andiamo in Banca
-              is where Silicon Valley's innovators come to unwind, celebrate, and connect
-              over exceptional food and wine.
+              The Thanksgiving tradition grew with it — 150 turkeys, a volunteer army
+              of family and friends, and full sit-down meals for anyone who showed up.
+              It wasn't charity. It was family. That's how the Akkayas have always
+              done things.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Family Photo + Second Generation */}
+      <section className="section-cream">
+        <div className="container max-w-5xl py-24 md:py-32">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={0}
+              className="aspect-[3/4] overflow-hidden"
+            >
+              <img
+                src="/akkaya-family.jpg"
+                alt="Will and John Akkaya"
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={1}
+            >
+              <div className="ornament-line !mx-0 mb-6" />
+              <p className="font-accent text-[11px] tracking-[0.3em] uppercase text-gold mb-4">
+                Second Generation
+              </p>
+              <h2 className="font-display text-3xl md:text-4xl text-charcoal mb-8">
+                Father & Son
+              </h2>
+              <p className="font-accent text-charcoal/70 leading-[1.9] text-base md:text-lg mb-6">
+                Will Akkaya grew up in the restaurants — bussing tables, watching his
+                father treat every guest like family, and learning that hospitality
+                isn't a business, it's a way of life.
+              </p>
+              <p className="font-accent text-charcoal/70 leading-[1.9] text-base md:text-lg mb-6">
+                Now running the family's restaurants, Will has brought his own passion to
+                the table: an award-winning wine program recognized by Wine Spectator
+                and Star Wine List, a commitment to sourcing the finest ingredients,
+                and the same belief his father instilled — that a great restaurant
+                is built on generosity.
+              </p>
+              <p className="font-accent text-charcoal/50 text-sm italic leading-relaxed">
+                "Whoever wrote the rule that a little cafe can't have the best wines
+                in the world?"
+              </p>
+              <p className="font-accent text-[11px] tracking-[0.2em] uppercase text-gold/50 mt-2">
+                — Will Akkaya
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Full-bleed dual image break */}
+      <section>
+        <div className="grid grid-cols-1 md:grid-cols-2">
+          <div className="aspect-[4/3] overflow-hidden">
+            <img
+              src={IMAGES.exterior}
+              alt="The restored bank building exterior with columns"
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <div className="aspect-[4/3] overflow-hidden">
+            <img
+              src={IMAGES.vault}
+              alt="The Vault private dining room"
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Andiamo in Banca */}
+      <section className="section-dark">
+        <div className="container max-w-3xl py-24 md:py-32">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            custom={0}
+            className="text-center"
+          >
+            <div className="ornament-line mx-auto mb-6 opacity-40" />
+            <p className="font-accent text-[11px] tracking-[0.3em] uppercase text-gold-light/60 mb-4">
+              The Next Chapter
+            </p>
+            <h2 className="font-display text-3xl md:text-5xl text-cream mb-10">
+              Andiamo in Banca
+            </h2>
+            <p className="font-accent text-cream/60 leading-[1.9] text-base md:text-lg mb-8">
+              In 2019, the Akkaya family opened the doors to their most ambitious project
+              yet: Andiamo in Banca, housed in a beautifully restored historic bank building
+              at 301 Linden Avenue in downtown South San Francisco. The name says it all —
+              "Andiamo" means "let's go" in Italian, and "in Banca" honors the building
+              that houses us.
+            </p>
+            <p className="font-accent text-cream/60 leading-[1.9] text-base md:text-lg mb-8">
+              The grand columns and soaring ceilings were preserved. The original bank vault
+              was transformed into the Peninsula's most exclusive private dining room — the
+              massive vault door still intact, a stunning portal between the building's
+              past and its future.
+            </p>
+            <p className="font-accent text-cream/60 leading-[1.9] text-base md:text-lg">
+              Three restaurants. Over 35 years. One family's unwavering belief that great
+              food, great wine, and genuine hospitality can make any night extraordinary.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Simply Delicious */}
+      <section className="section-cream">
+        <div className="container max-w-3xl py-20 md:py-28">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            custom={0}
+            className="text-center"
+          >
+            <p className="font-display text-3xl md:text-5xl text-charcoal italic">
+              Simply Delicious.
             </p>
           </motion.div>
         </div>
