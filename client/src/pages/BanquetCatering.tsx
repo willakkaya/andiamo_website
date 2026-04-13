@@ -171,7 +171,7 @@ const banquetMenus = [
           { name: "Pan-Roasted Chilean Sea Bass", desc: "Lemon-caper beurre blanc, fingerling potatoes, market vegetables (Gluten-Free, Pescatarian)" },
           { name: "Herb-Crusted California Rack of Lamb", desc: "Garlic, rosemary, aged balsamic — truffle mashed potatoes and seasonal vegetables (Gluten-Free)" },
           { name: "Grilled Prime Filet Mignon", desc: "10 oz center-cut filet, red wine demi-glace, choice of blue cheese butter or herb-garlic olive oil (Gluten-Free)" },
-          { name: "Whole Roasted Branzino", desc: "Mediterranean sea bass with lemon, capers, olives, and fresh herbs — deboned tableside (Gluten-Free, Pescatarian)" },
+          { name: "Gamberi al Limone", desc: "Tiger prawns sautéed with garlic, white wine, basil, and citrus — served with roasted potatoes and vegetables (Gluten-Free, Pescatarian)" },
           { name: "Osso Buco alla Milanese", desc: "Slow-braised veal shank with saffron risotto and gremolata — a timeless Italian classic" },
           { name: "Roasted Cauliflower Steak", desc: "Smoked tomato-caper vinaigrette, pine nuts, herbs (Vegan, Gluten-Free)" },
         ],
