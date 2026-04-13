@@ -3,7 +3,7 @@ import { IMAGES, LINKS } from "@/lib/images";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { Star, ArrowRight, ChevronDown, ShoppingBag, MapPin } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -13,22 +13,6 @@ const fadeUp = {
     transition: { delay: i * 0.12, duration: 0.8, ease: [0.25, 0.1, 0.25, 1] },
   }),
 };
-
-function OpenTableWidget() {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!containerRef.current) return;
-    containerRef.current.innerHTML = "";
-    const script = document.createElement("script");
-    script.type = "text/javascript";
-    script.src =
-      "//www.opentable.com/widget/reservation/loader?rid=1035160&type=standard&theme=standard&color=1&dark=false&iframe=true&domain=com&lang=en-US&newtab=false&ot_source=Restaurant%20website&cfe=true";
-    containerRef.current.appendChild(script);
-  }, []);
-
-  return <div ref={containerRef} className="flex justify-center" />;
-}
 
 const REVIEWS = [
   {
@@ -63,7 +47,10 @@ export default function Home() {
   return (
     <PageLayout>
       {/* ========== HERO WITH VIDEO ========== */}
-      <section className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden">
+      <section
+        className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden"
+        style={{ backgroundImage: `url(${IMAGES.exterior})`, backgroundSize: "cover", backgroundPosition: "center" }}
+      >
         <div className="absolute inset-0">
           <video
             autoPlay
@@ -200,6 +187,17 @@ export default function Home() {
               Andiamo in Banca transforms a piece of South San Francisco's architectural
               heritage into the Peninsula's most distinctive Italian dining destination.
             </motion.p>
+            <motion.p
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={3}
+              className="text-charcoal/40 text-sm mt-8 flex items-center justify-center gap-2 font-accent tracking-wide"
+            >
+              <MapPin size={14} className="text-gold" />
+              301 Linden Avenue, South San Francisco, CA 94080
+            </motion.p>
           </div>
         </div>
       </section>
@@ -208,7 +206,7 @@ export default function Home() {
       <section className="relative h-[50vh] min-h-[400px] overflow-hidden">
         <img
           src={IMAGES.exterior}
-          alt="Andiamo in Banca exterior"
+          alt="Andiamo in Banca exterior — restored 1920s bank building"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20" />
@@ -220,52 +218,6 @@ export default function Home() {
             <p className="font-display text-2xl md:text-3xl text-white mt-1">
               A Restored 1920s Bank Building
             </p>
-          </div>
-        </div>
-      </section>
-
-      {/* ========== RESERVATION WIDGET ========== */}
-      <section className="section-padding section-cream">
-        <div className="container">
-          <div className="max-w-2xl mx-auto text-center">
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={0}
-              className="ornament-line mb-6"
-            />
-            <motion.h2
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={1}
-              className="font-display text-3xl md:text-4xl text-charcoal mb-8"
-            >
-              Book Your Table
-            </motion.h2>
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={2}
-            >
-              <OpenTableWidget />
-            </motion.div>
-            <motion.p
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={3}
-              className="text-charcoal/50 text-sm mt-6 flex items-center justify-center gap-2 font-accent tracking-wide"
-            >
-              <MapPin size={14} className="text-gold" />
-              301 Linden Avenue, South San Francisco, CA 94080
-            </motion.p>
           </div>
         </div>
       </section>
@@ -358,7 +310,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ========== MENU PREVIEW ========== */}
+      {/* ========== FROM OUR KITCHEN ========== */}
       <section className="section-padding bg-background">
         <div className="container">
           <div className="text-center mb-16">
@@ -424,138 +376,22 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ========== HAPPY HOUR ========== */}
-      <section className="section-burgundy py-20">
+      {/* ========== HAPPY HOUR BANNER ========== */}
+      <section className="section-burgundy py-14">
         <div className="container text-center">
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            custom={0}
-          >
-            <div className="ornament-line !bg-white/20 mb-8" />
-            <p className="font-accent text-sm tracking-[0.3em] uppercase text-white/40 mb-4">
-              Tuesday – Friday
-            </p>
-            <h2 className="font-display text-3xl md:text-5xl text-white mb-3">
-              Happy Hour
-            </h2>
-            <p className="font-accent text-xl tracking-[0.15em] text-white/60">
-              4:00 – 5:00 PM
-            </p>
-            <p className="text-white/40 text-sm mt-6 max-w-md mx-auto font-accent tracking-wide">
-              Specially priced wines, cocktails, and appetizers
-            </p>
-          </motion.div>
+          <p className="font-accent text-sm tracking-[0.3em] uppercase text-white/40 mb-2">
+            Tuesday – Friday &middot; 4:00 – 5:00 PM
+          </p>
+          <h2 className="font-display text-2xl md:text-3xl text-white">
+            Happy Hour
+          </h2>
+          <p className="text-white/40 text-sm mt-3 font-accent tracking-wide">
+            Specially priced wines, cocktails, and appetizers
+          </p>
         </div>
       </section>
 
-      {/* ========== CORPORATE DINING ========== */}
-      <section className="section-padding bg-background">
-        <div className="container">
-          <div className="max-w-3xl mx-auto text-center">
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={0}
-              className="ornament-line mb-6"
-            />
-            <motion.p
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={1}
-              className="font-accent text-sm tracking-[0.3em] uppercase text-gold/60 mb-4"
-            >
-              For the Biotech Corridor
-            </motion.p>
-            <motion.h2
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={2}
-              className="font-display text-3xl md:text-5xl text-charcoal mb-6"
-            >
-              Corporate Dining & Events
-            </motion.h2>
-            <motion.p
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={3}
-              className="text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed font-accent text-lg tracking-wide"
-            >
-              Steps from Oyster Point and the biotech corridor, Andiamo in Banca is the
-              ideal venue for client dinners, team celebrations, and corporate events.
-            </motion.p>
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={4}
-              className="flex flex-col sm:flex-row items-center justify-center gap-4"
-            >
-              <Link
-                href="/corporate-dining"
-                className="inline-flex items-center gap-3 px-10 py-4 bg-charcoal text-white font-body text-[12px] tracking-[0.2em] uppercase font-semibold hover:bg-espresso transition-all duration-500"
-              >
-                Learn More
-                <ArrowRight size={14} />
-              </Link>
-              <a
-                href="tel:+16507458811"
-                className="inline-flex items-center gap-2 px-10 py-4 border border-charcoal/15 text-charcoal font-body text-[12px] tracking-[0.2em] uppercase hover:border-charcoal/30 transition-all duration-500"
-              >
-                Call {LINKS.phone}
-              </a>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* ========== INSTAGRAM FEED ========== */}
-      <section className="section-padding section-dark">
-        <div className="container">
-          <div className="text-center mb-12">
-            <div className="ornament-line !bg-gold/30 mb-6" />
-            <h2 className="font-display text-3xl md:text-4xl text-cream mb-2">
-              @andiamoinbanca
-            </h2>
-            <p className="text-cream/40 text-sm font-accent tracking-wider">
-              Follow us on Instagram
-            </p>
-          </div>
-          <div className="max-w-4xl mx-auto">
-            <iframe
-              src="https://www.instagram.com/andiamoinbanca/embed"
-              className="w-full border-0"
-              style={{ minHeight: "480px" }}
-              title="Andiamo in Banca Instagram Feed"
-              loading="lazy"
-            />
-          </div>
-          <div className="text-center mt-8">
-            <a
-              href={LINKS.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 text-gold-light font-body text-[12px] tracking-[0.2em] uppercase hover:text-gold transition-colors duration-500"
-            >
-              Follow Us on Instagram
-              <ArrowRight size={14} />
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* ========== REVIEWS ========== */}
+      {/* ========== REVIEWS + SOCIAL ========== */}
       <section className="section-padding bg-background">
         <div className="container">
           <div className="text-center mb-16">
@@ -603,6 +439,19 @@ export default function Home() {
                 </div>
               </motion.a>
             ))}
+          </div>
+
+          {/* Social follow */}
+          <div className="text-center mt-16 pt-12 border-t border-charcoal/5">
+            <a
+              href={LINKS.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 text-charcoal/40 hover:text-gold font-accent text-sm tracking-[0.2em] uppercase transition-colors duration-500"
+            >
+              Follow @andiamoinbanca on Instagram
+              <ArrowRight size={14} />
+            </a>
           </div>
         </div>
       </section>
