@@ -192,12 +192,12 @@ const eventEnhancements = [
 ];
 
 const horsDoeuves = [
-  { name: "Bruschetta al Pomodoro", desc: "Toasted slices of bread topped with tomato cubes marinated with olive oil, garlic and basil" },
-  { name: "Italian Meatballs", desc: "Delicious Italian meatballs served with a dipping sauce" },
-  { name: "Shrimp Cocktail", desc: "Fresh shrimp with cocktail sauce" },
-  { name: "Calamari Fritti", desc: "Fresh squid fried and tossed in a garlic lemon sauce served with cocktail sauce" },
-  { name: "Grilled Chicken Skewer", desc: "Marinated chicken breast grilled over charcoal grill" },
-  { name: "Garlic Bread", desc: "Warm, toasty bread with garlic butter baked in" },
+  { name: "Bruschetta al Pomodoro", desc: "Toasted slices of bread topped with tomato cubes marinated with olive oil, garlic and basil", price: "$4 / person" },
+  { name: "Italian Meatballs", desc: "Delicious Italian meatballs served with a dipping sauce", price: "$5 / person" },
+  { name: "Shrimp Cocktail", desc: "Fresh shrimp with cocktail sauce", price: "$7 / person" },
+  { name: "Calamari Fritti", desc: "Fresh squid fried and tossed in a garlic lemon sauce served with cocktail sauce", price: "$6 / person" },
+  { name: "Grilled Chicken Skewer", desc: "Marinated chicken breast grilled over charcoal grill", price: "$5 / person" },
+  { name: "Garlic Bread", desc: "Warm, toasty bread with garlic butter baked in", price: "$3 / person" },
 ];
 
 /* ── Catering Menu ── */
@@ -440,16 +440,17 @@ export default function BanquetCatering() {
                     Hors d'Oeuvres — Priced Per Guest Count
                   </p>
                   <p className="text-charcoal/55 text-sm mb-6 font-accent italic tracking-wide">
-                    Perfect for cocktail hours and reception-style events. Contact us for a custom quote.
+                    Perfect for cocktail hours and reception-style events. Add any combination to your banquet package.
                   </p>
                   <div className="space-y-4">
                     {horsDoeuves.map((item, i) => (
                       <div key={i} className="group">
-                        <div className="flex items-baseline gap-3">
+                        <div className="flex items-baseline justify-between gap-3">
                           <h4 className="font-display text-base text-charcoal group-hover:text-gold transition-colors duration-500">
                             {item.name}
                           </h4>
                           <div className="flex-1 border-b border-dotted border-charcoal/20 mb-1.5 min-w-[20px]" />
+                          <span className="font-accent text-gold text-sm tracking-wide shrink-0">{item.price}</span>
                         </div>
                         <p className="text-charcoal/60 text-sm mt-1 font-accent italic tracking-wide leading-relaxed">
                           {item.desc}
