@@ -193,6 +193,16 @@ const banquetMenus = [
   },
 ];
 
+/* ── Event Enhancements ── */
+const eventEnhancements = [
+  { name: "Champagne Toast", price: "$12 / person", desc: "A glass of premium sparkling wine to welcome your guests", note: "Included in $120 menu" },
+  { name: "Oysters Rockefeller", price: "$18 / person", desc: "Half-dozen baked oysters per guest with spinach, Pernod, and Parmigiano", note: "Included in $120 menu" },
+  { name: "Antipasto & Cheese Display", price: "$15 / person", desc: "Imported cheeses, cured meats, marinated olives, and fresh focaccia" },
+  { name: "Limoncello Toast", price: "$6 / person", desc: "House limoncello digestivo — a classic Italian after-dinner tradition" },
+  { name: "Espresso & Cappuccino Bar", price: "$8 / person", desc: "Full after-dinner coffee service with espresso, cappuccino, and biscotti" },
+  { name: "Soft Drinks & Beverages", price: "$5 / person", desc: "Assorted sodas, sparkling water, iced tea, and fresh lemonade" },
+];
+
 /* ── Catering Menu ── */
 const cateringMenu = [
   {
@@ -415,6 +425,39 @@ export default function BanquetCatering() {
                   )}
                 </div>
               ))}
+
+              {/* Event Enhancements */}
+              <div className="mt-20">
+                <div className="text-center mb-10">
+                  <div className="ornament-line mb-6" />
+                  <h3 className="font-display text-2xl md:text-3xl text-charcoal">Event Enhancements</h3>
+                  <p className="font-accent text-sm text-charcoal/40 tracking-wider mt-2">
+                    Elevate any banquet menu with these add-ons
+                  </p>
+                  <div className="w-12 h-px bg-gold/30 mx-auto mt-4" />
+                </div>
+                <div className="max-w-2xl mx-auto border border-gold/15 p-8 md:p-10">
+                  <div className="space-y-6">
+                    {eventEnhancements.map((item, i) => (
+                      <div key={i}>
+                        <div className="flex items-baseline justify-between gap-3">
+                          <span className="font-display text-base text-charcoal">{item.name}</span>
+                          <div className="flex-1 border-b border-dotted border-charcoal/10 mb-1.5 min-w-[20px]" />
+                          <span className="font-accent text-gold text-sm tracking-wide shrink-0">{item.price}</span>
+                        </div>
+                        <p className="text-charcoal/40 text-sm mt-1 font-accent italic tracking-wide leading-relaxed">
+                          {item.desc}
+                        </p>
+                        {item.note && (
+                          <p className="text-gold/50 text-xs mt-1 font-accent tracking-wide">
+                            {item.note}
+                          </p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </motion.div>
           )}
 
