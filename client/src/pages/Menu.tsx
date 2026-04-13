@@ -220,7 +220,7 @@ function MenuSection({ title, subtitle, note, items }: { title: string; subtitle
       <div className="mb-8">
         <h3 className="font-display text-2xl md:text-3xl text-charcoal">{title}</h3>
         {subtitle && <p className="font-accent text-sm text-muted-foreground tracking-wider mt-1">{subtitle}</p>}
-        {note && <p className="font-accent text-xs text-gold/60 tracking-wider mt-2">{note}</p>}
+        {note && <p className="font-accent text-xs text-gold tracking-wider mt-2">{note}</p>}
         <div className="w-12 h-px bg-gold/30 mt-4" />
       </div>
       <div className="space-y-5">
@@ -230,7 +230,7 @@ function MenuSection({ title, subtitle, note, items }: { title: string; subtitle
               <h4 className="font-display text-base text-charcoal group-hover:text-gold transition-colors duration-500">
                 {item.name}
               </h4>
-              <div className="flex-1 border-b border-dotted border-charcoal/10 mb-1.5 min-w-[20px]" />
+              <div className="flex-1 border-b border-dotted border-charcoal/20 mb-1.5 min-w-[20px]" />
               {item.price && (
                 <span className="font-accent text-gold text-sm tracking-wide shrink-0">{item.price}</span>
               )}
@@ -297,7 +297,7 @@ export default function Menu() {
                 className={`px-6 py-2.5 font-accent text-sm tracking-[0.15em] transition-all duration-500 ${
                   active === tab.key
                     ? "text-gold border-b-2 border-gold"
-                    : "text-charcoal/40 hover:text-charcoal/70"
+                    : "text-charcoal/55 hover:text-charcoal/80"
                 }`}
               >
                 {tab.label}

@@ -297,7 +297,7 @@ export default function BanquetCatering() {
             variants={fadeUp}
             className="text-center mb-14"
           >
-            <p className="font-accent text-charcoal/50 text-lg leading-relaxed max-w-2xl mx-auto tracking-wide mb-8">
+            <p className="font-accent text-charcoal/65 text-lg leading-relaxed max-w-2xl mx-auto tracking-wide mb-8">
               From intimate private dinners in The Vault to large-scale catered events,
               we bring Andiamo's flavors to your celebration.
             </p>
@@ -321,7 +321,7 @@ export default function BanquetCatering() {
                 className={`px-8 py-2.5 font-accent text-sm tracking-[0.15em] transition-all duration-500 ${
                   activeTab === tab
                     ? "text-gold border-b-2 border-gold"
-                    : "text-charcoal/40 hover:text-charcoal/70"
+                    : "text-charcoal/55 hover:text-charcoal/80"
                 }`}
               >
                 {tab === "banquet" ? "Banquet Menu" : "Catering Menu"}
@@ -340,7 +340,7 @@ export default function BanquetCatering() {
               <div className="text-center mb-14">
                 <div className="ornament-line mb-6" />
                 <h2 className="font-display text-3xl md:text-4xl text-charcoal mb-3">Banquet Dining</h2>
-                <p className="font-accent text-charcoal/50 max-w-2xl mx-auto tracking-wide">
+                <p className="font-accent text-charcoal/65 max-w-2xl mx-auto tracking-wide">
                   Perfect for private events in The Vault or our main dining room. Choose from our curated prix fixe options.
                 </p>
               </div>
@@ -350,7 +350,7 @@ export default function BanquetCatering() {
                   <div className="text-center mb-8">
                     <h3 className="font-display text-2xl md:text-3xl text-charcoal">{menu.title}</h3>
                     {menu.subtitle && (
-                      <p className="font-accent text-sm text-gold/60 tracking-[0.15em] uppercase mt-2">{menu.subtitle}</p>
+                      <p className="font-accent text-sm text-gold/80 tracking-[0.15em] uppercase mt-2">{menu.subtitle}</p>
                     )}
                     <div className="w-12 h-px bg-gold/30 mx-auto mt-4" />
                   </div>
@@ -364,9 +364,9 @@ export default function BanquetCatering() {
                             <h4 className="font-display text-base text-charcoal group-hover:text-gold transition-colors duration-500">
                               {item.name}
                             </h4>
-                            <div className="flex-1 border-b border-dotted border-charcoal/10 mb-1.5 min-w-[20px]" />
+                            <div className="flex-1 border-b border-dotted border-charcoal/20 mb-1.5 min-w-[20px]" />
                           </div>
-                          <p className="text-charcoal/40 text-sm mt-1 font-accent italic tracking-wide leading-relaxed">
+                          <p className="text-charcoal/60 text-sm mt-1 font-accent italic tracking-wide leading-relaxed">
                             {item.desc}
                           </p>
                         </div>
@@ -379,7 +379,7 @@ export default function BanquetCatering() {
                     <div className="max-w-2xl mx-auto space-y-12">
                       {menu.sections.map((section, si) => (
                         <div key={si}>
-                          <p className="font-accent text-xs tracking-[0.25em] uppercase text-gold/60 mb-5 border-b border-gold/15 pb-2">
+                          <p className="font-accent text-xs tracking-[0.25em] uppercase text-gold/80 mb-5 border-b border-gold/15 pb-2">
                             {section.heading}
                           </p>
                           <div className="space-y-5">
@@ -389,9 +389,9 @@ export default function BanquetCatering() {
                                   <h4 className="font-display text-base text-charcoal group-hover:text-gold transition-colors duration-500">
                                     {item.name}
                                   </h4>
-                                  <div className="flex-1 border-b border-dotted border-charcoal/10 mb-1.5 min-w-[20px]" />
+                                  <div className="flex-1 border-b border-dotted border-charcoal/20 mb-1.5 min-w-[20px]" />
                                 </div>
-                                <p className="text-charcoal/40 text-sm mt-1 font-accent italic tracking-wide leading-relaxed">
+                                <p className="text-charcoal/60 text-sm mt-1 font-accent italic tracking-wide leading-relaxed">
                                   {item.desc}
                                 </p>
                               </div>
@@ -405,14 +405,14 @@ export default function BanquetCatering() {
                   {/* Wine pairing extras */}
                   {menu.extras && (
                     <div className="max-w-2xl mx-auto mt-10 border border-gold/15 p-8">
-                      <p className="font-accent text-xs tracking-[0.25em] uppercase text-gold/60 mb-6">
+                      <p className="font-accent text-xs tracking-[0.25em] uppercase text-gold/80 mb-6">
                         Optional Wine Pairing — Curated by Our Sommelier
                       </p>
                       <div className="space-y-4">
                         {menu.extras.map((extra, ei) => (
                           <div key={ei} className="flex items-baseline justify-between gap-3">
                             <span className="font-display text-base text-charcoal">{extra.label}</span>
-                            <div className="flex-1 border-b border-dotted border-charcoal/10 mb-1.5 min-w-[20px]" />
+                            <div className="flex-1 border-b border-dotted border-charcoal/20 mb-1.5 min-w-[20px]" />
                             <span className="font-accent text-gold text-sm tracking-wide shrink-0">{extra.price}</span>
                           </div>
                         ))}
@@ -442,14 +442,14 @@ export default function BanquetCatering() {
                       <div key={i}>
                         <div className="flex items-baseline justify-between gap-3">
                           <span className="font-display text-base text-charcoal">{item.name}</span>
-                          <div className="flex-1 border-b border-dotted border-charcoal/10 mb-1.5 min-w-[20px]" />
+                          <div className="flex-1 border-b border-dotted border-charcoal/20 mb-1.5 min-w-[20px]" />
                           <span className="font-accent text-gold text-sm tracking-wide shrink-0">{item.price}</span>
                         </div>
-                        <p className="text-charcoal/40 text-sm mt-1 font-accent italic tracking-wide leading-relaxed">
+                        <p className="text-charcoal/60 text-sm mt-1 font-accent italic tracking-wide leading-relaxed">
                           {item.desc}
                         </p>
                         {item.note && (
-                          <p className="text-gold/50 text-xs mt-1 font-accent tracking-wide">
+                          <p className="text-gold/70 text-xs mt-1 font-accent tracking-wide">
                             {item.note}
                           </p>
                         )}
@@ -472,7 +472,7 @@ export default function BanquetCatering() {
               <div className="text-center mb-14">
                 <div className="ornament-line mb-6" />
                 <h2 className="font-display text-3xl md:text-4xl text-charcoal mb-3">Catering Menu</h2>
-                <p className="font-accent text-charcoal/50 max-w-2xl mx-auto tracking-wide">
+                <p className="font-accent text-charcoal/65 max-w-2xl mx-auto tracking-wide">
                   Bring Andiamo's flavors to your office, home, or event venue. Family-style trays available for 10 or 20 guests.
                 </p>
               </div>
@@ -501,7 +501,7 @@ export default function BanquetCatering() {
                             <h4 className="font-display text-base text-charcoal group-hover:text-gold transition-colors duration-500 shrink-0">
                               {item.name}
                             </h4>
-                            <div className="flex-1 border-b border-dotted border-charcoal/10 mb-1.5 min-w-[20px]" />
+                            <div className="flex-1 border-b border-dotted border-charcoal/20 mb-1.5 min-w-[20px]" />
                           </div>
                           {"s10" in item && (
                             <div className="flex gap-6 shrink-0">
@@ -510,7 +510,7 @@ export default function BanquetCatering() {
                             </div>
                           )}
                         </div>
-                        <p className="text-charcoal/40 text-sm mt-1 font-accent italic tracking-wide leading-relaxed">
+                        <p className="text-charcoal/60 text-sm mt-1 font-accent italic tracking-wide leading-relaxed">
                           {item.desc}
                         </p>
                       </div>
@@ -519,7 +519,7 @@ export default function BanquetCatering() {
 
                   {/* Note for items without prices */}
                   {cat.items[0] && !("s10" in cat.items[0]) && (
-                    <p className="text-center font-accent text-gold/50 text-sm mt-8 italic tracking-wide">
+                    <p className="text-center font-accent text-gold/70 text-sm mt-8 italic tracking-wide">
                       Pricing varies based on guest count and selections. Contact us for a custom quote.
                     </p>
                   )}
@@ -528,7 +528,7 @@ export default function BanquetCatering() {
 
               {/* ezCater CTA — right after browsing the menu */}
               <div className="text-center mt-16 pt-12 border-t border-charcoal/8">
-                <p className="font-accent text-charcoal/50 text-sm tracking-wide mb-6">
+                <p className="font-accent text-charcoal/65 text-sm tracking-wide mb-6">
                   Ready to order? Place your catering order online.
                 </p>
                 <a
@@ -580,7 +580,7 @@ export default function BanquetCatering() {
           </div>
           <p className="text-white/30 text-sm mt-5 font-accent tracking-wide">
             Or call us at{" "}
-            <a href="tel:+16507458811" className="text-gold/60 hover:text-gold transition-colors">
+            <a href="tel:+16507458811" className="text-gold/80 hover:text-gold transition-colors">
               (650) 745-8811
             </a>
           </p>
