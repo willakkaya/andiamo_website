@@ -121,3 +121,13 @@ shared/
 vitest.config.ts
 todo.md
 .gitkeep
+
+# Old Manus components (not used)
+client/src/_core/
+client/src/contexts/ThemeContext.tsx
+client/src/components/AIChatBox.tsx
+client/src/components/DashboardLayout.tsx
+client/src/components/DashboardLayoutSkeleton.tsx
+client/src/components/ManusDialog.tsx
+client/src/lib/trpc.ts
+client/src/pages/ComponentShowcase.tsx
