@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import PageLayout from "@/components/PageLayout";
 import { IMAGES, LINKS } from "@/lib/images";
 import { motion } from "framer-motion";
@@ -13,6 +14,11 @@ const fadeUp = {
 };
 
 export default function Contact() {
+  useEffect(() => {
+    document.title = "Contact & Hours | Andiamo in Banca";
+    document.querySelector('meta[name="description"]')?.setAttribute("content", "Visit us at 301 Linden Ave, South San Francisco. Reservations, hours, and directions for Andiamo in Banca.");
+  }, []);
+
   return (
     <PageLayout>
       {/* Hero */}

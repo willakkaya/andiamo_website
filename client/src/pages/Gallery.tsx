@@ -1,7 +1,7 @@
 import PageLayout from "@/components/PageLayout";
 import { IMAGES } from "@/lib/images";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
 type Category = "All" | "The Building" | "Private Dining" | "Cuisine";
@@ -26,6 +26,11 @@ const fadeUp = {
 };
 
 export default function Gallery() {
+  useEffect(() => {
+    document.title = "Gallery | Andiamo in Banca";
+    document.querySelector('meta[name="description"]')?.setAttribute("content", "Photos of our dining room, dishes, and historic bank building. Andiamo in Banca — South San Francisco.");
+  }, []);
+
   const [activeCategory, setActiveCategory] = useState<Category>("All");
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 

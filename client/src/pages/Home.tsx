@@ -55,6 +55,11 @@ const REVIEWS = [
 ];
 
 export default function Home() {
+  useEffect(() => {
+    document.title = "Andiamo in Banca | Upscale Italian Dining — South San Francisco";
+    document.querySelector('meta[name="description"]')?.setAttribute("content", "South San Francisco's premier Italian restaurant in a restored 1920s bank building. Handmade pasta, curated wines, and The Vault private dining.");
+  }, []);
+
   return (
     <PageLayout>
       {/* ========== HERO WITH VIDEO ========== */}

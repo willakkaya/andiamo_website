@@ -2,7 +2,7 @@ import PageLayout from "@/components/PageLayout";
 import { IMAGES, LINKS } from "@/lib/images";
 import { motion } from "framer-motion";
 import { Building2, Users, Clock, MapPin, ArrowRight, Check, Briefcase } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { submitForm } from "@/lib/formspree";
 
@@ -16,6 +16,11 @@ const fadeUp = {
 };
 
 export default function CorporateDining() {
+  useEffect(() => {
+    document.title = "Corporate Dining | Andiamo in Banca";
+    document.querySelector('meta[name="description"]')?.setAttribute("content", "Corporate lunches, client dinners, and team events minutes from the SSF biotech corridor. Andiamo in Banca.");
+  }, []);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",

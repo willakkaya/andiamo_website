@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import PageLayout from "@/components/PageLayout";
 import { IMAGES } from "@/lib/images";
 import { motion } from "framer-motion";
@@ -12,6 +13,11 @@ const fadeUp = {
 };
 
 export default function OurStory() {
+  useEffect(() => {
+    document.title = "Our Story | Andiamo in Banca";
+    document.querySelector('meta[name="description"]')?.setAttribute("content", "Discover the story of Andiamo in Banca — upscale Italian dining in a restored 1920s bank building in South San Francisco.");
+  }, []);
+
   return (
     <PageLayout>
       {/* Hero — full-bleed image */}
