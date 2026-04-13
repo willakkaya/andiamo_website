@@ -95,6 +95,92 @@ const banquetMenus = [
     extras: [
       { label: "Standard Wine Pairing", price: "$30 / person", note: "Curated by our Sommelier" },
       { label: "Rare Wine Pairing", price: "$75 / person", note: "Curated by our Sommelier" },
+      { label: "Legendary Wine Pairing", price: "$150 / person", note: "Curated by our Sommelier" },
+    ],
+  },
+  {
+    title: "$80 Per Person",
+    subtitle: "Dinner",
+    sections: [
+      {
+        heading: "Salad — Choice of One Per Guest",
+        items: [
+          { name: "Verde Mista", desc: "Organic spring mixed, shaved carrots, in a balsamic vinaigrette" },
+          { name: "Caesar Salad", desc: "Organic romaine lettuce, house made Caesar dressing, croutons and shaved Parmigiano Regiano" },
+        ],
+      },
+      {
+        heading: "Appetizer — Served Family Style",
+        items: [
+          { name: "Burrata & Roasted Peppers", desc: "Creamy burrata with fire-roasted bell peppers, fresh basil, and aged balsamic" },
+          { name: "Crab Cakes", desc: "Golden, pan-seared lump crab cakes with a crispy exterior and tender center, served with lemon-caper aioli and microgreens" },
+        ],
+      },
+      {
+        heading: "Entrée — Choice of One Per Guest",
+        items: [
+          { name: "Filet Mignon with Red Wine Demi-Glace", desc: "Prime center-cut filet mignon, seared to perfection, served with truffle mashed potatoes and seasonal vegetables" },
+          { name: "Halibut Piccata", desc: "Delicate, pan-seared halibut with lemon-caper white wine sauce, saffron-infused risotto and sautéed broccolini" },
+          { name: "Chicken Saltimbocca", desc: "Free-range chicken breast layered with prosciutto and sage in a white wine butter sauce, with roasted garlic mashed potatoes and baby zucchini" },
+          { name: "Roasted Rack of Lamb with Rosemary Jus", desc: "Herb-crusted New Zealand rack of lamb, roasted to perfection and drizzled with a rosemary-infused jus" },
+          { name: "Wild Mushroom & Truffle Risotto", desc: "Creamy aged Carnaroli rice infused with black truffle and slow-roasted wild mushrooms, finished with Parmigiano-Reggiano and white truffle oil (Vegetarian)" },
+        ],
+      },
+      {
+        heading: "Dessert — Choice of One Per Guest",
+        items: [
+          { name: "Tiramisu", desc: "Espresso-soaked ladyfingers, silky mascarpone cream, and a dusting of cocoa" },
+          { name: "Lemon Blueberry Cheesecake", desc: "Rich and creamy lemon-infused cheesecake with a graham cracker crust, finished with a fresh blueberry compote and lemon zest" },
+        ],
+      },
+    ],
+    extras: [
+      { label: "Standard Wine Pairing", price: "$30 / person", note: "Curated by our Sommelier" },
+      { label: "Rare Wine Pairing", price: "$75 / person", note: "Curated by our Sommelier" },
+      { label: "Legendary Wine Pairing", price: "$150 / person", note: "Curated by our Sommelier" },
+    ],
+  },
+  {
+    title: "$120 Per Person",
+    subtitle: "Premier Dinner — Our Most Elevated Experience",
+    sections: [
+      {
+        heading: "First Course — All Guests",
+        items: [
+          { name: "Burrata di Bufala", desc: "Creamy buffalo-milk burrata, blood orange, marcona almonds, basil oil (Vegetarian, Gluten-Free)" },
+          { name: "Winter Citrus & Fennel Salad", desc: "Shaved fennel, cara cara orange, arugula, champagne vinaigrette (Vegan, Gluten-Free)" },
+        ],
+      },
+      {
+        heading: "Second Course — Choice of One",
+        items: [
+          { name: "Rigatoni alla Norma Bianca", desc: "Roasted eggplant, garlic, basil, whipped ricotta, Calabrian chili (Vegetarian)" },
+          { name: "Wild Mushroom & Truffle Risotto", desc: "Creamy aged Carnaroli rice with black truffle and slow-roasted wild mushrooms, Parmigiano-Reggiano and white truffle oil (Vegetarian, Gluten-Free)" },
+        ],
+      },
+      {
+        heading: "Main Course — Choice of One Per Guest",
+        items: [
+          { name: "Pan-Roasted Chilean Sea Bass", desc: "Lemon-caper beurre blanc, fingerling potatoes, market vegetables (Gluten-Free, Pescatarian)" },
+          { name: "Gamberi al Limone", desc: "Tiger prawns, garlic, white wine, basil, citrus — roasted potatoes and vegetables (Gluten-Free, Pescatarian)" },
+          { name: "Herb-Crusted California Rack of Lamb", desc: "Garlic, rosemary, aged balsamic — truffle mashed potatoes and vegetables (Gluten-Free)" },
+          { name: "Grilled Filet Mignon", desc: "Red wine reduction, choice of blue cheese butter or herb-garlic olive oil (Gluten-Free)" },
+          { name: "Free-Range Chicken Marsala", desc: "Wild mushroom Marsala jus, roasted potatoes and vegetables" },
+          { name: "Roasted Cauliflower Steak", desc: "Smoked tomato-caper vinaigrette, pine nuts, herbs (Vegan, Gluten-Free)" },
+        ],
+      },
+      {
+        heading: "Dessert — Choice of One Per Guest",
+        items: [
+          { name: "Affogato al Caffè", desc: "Vanilla gelato, hot espresso, biscotti" },
+          { name: "Seasonal Citrus & Berries with Lemon Mascarpone", desc: "A light, elegant finish with fresh seasonal fruit (Gluten-Free)" },
+        ],
+      },
+    ],
+    extras: [
+      { label: "Standard Wine Pairing", price: "$30 / person", note: "Curated by our Sommelier" },
+      { label: "Rare Wine Pairing", price: "$75 / person", note: "Curated by our Sommelier" },
+      { label: "Legendary Wine Pairing", price: "$150 / person", note: "Curated by our Sommelier" },
     ],
   },
 ];
