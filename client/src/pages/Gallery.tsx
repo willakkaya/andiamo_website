@@ -81,7 +81,7 @@ export default function Gallery() {
           {/* Ornament + heading */}
           <div className="text-center mb-16">
             <div className="ornament-line mx-auto mb-6 opacity-40" />
-            <p className="font-accent text-[11px] tracking-[0.3em] uppercase text-gold/60 mb-2">
+            <p className="font-accent text-[11px] tracking-[0.3em] uppercase text-gold/80 mb-2">
               Browse by Category
             </p>
           </div>
@@ -95,7 +95,7 @@ export default function Gallery() {
                 className={`px-6 py-2.5 font-body text-[12px] tracking-[0.2em] uppercase transition-all duration-300 rounded-none ${
                   activeCategory === cat
                     ? "bg-gold text-charcoal"
-                    : "text-cream/40 hover:text-cream/80 border border-cream/10 hover:border-cream/30"
+                    : "text-cream/60 hover:text-cream/80 border border-cream/10 hover:border-cream/30"
                 }`}
               >
                 {cat}
@@ -146,12 +146,12 @@ export default function Gallery() {
           {/* Description + Internal Links */}
           <div className="text-center mt-20 max-w-2xl mx-auto">
             <div className="ornament-line mx-auto mb-6 opacity-30" />
-            <p className="font-accent text-cream/50 text-sm leading-relaxed mb-6">
+            <p className="font-accent text-cream/65 text-sm leading-relaxed mb-6">
               Andiamo in Banca occupies a beautifully restored 1920s bank building at the heart of South San Francisco.
               From the grand marble columns and original vault door to the intimate private dining room, every detail
               tells a story of Italian craftsmanship and hospitality.
             </p>
-            <p className="font-accent text-cream/50 text-sm leading-relaxed mb-8">
+            <p className="font-accent text-cream/65 text-sm leading-relaxed mb-8">
               Our kitchen produces handmade pasta daily, sources the finest seasonal ingredients, and presents
               each dish with the care it deserves. Whether it's a weeknight dinner or a private celebration in
               The Vault, the experience is always simply delicious.
@@ -167,7 +167,7 @@ export default function Gallery() {
                 Visit Us
               </Link>
             </div>
-            <p className="font-accent text-cream/40 text-sm italic">
+            <p className="font-accent text-cream/60 text-sm italic">
               Follow us on{" "}
               <a
                 href="https://www.instagram.com/andiamoinbanca"
@@ -196,7 +196,7 @@ export default function Gallery() {
           >
             <button
               onClick={closeLightbox}
-              className="absolute top-6 right-6 text-cream/30 hover:text-cream transition-colors duration-300 z-10"
+              className="absolute top-6 right-6 text-cream/65 hover:text-cream transition-colors duration-300 z-10"
               aria-label="Close lightbox"
             >
               <X size={28} />
@@ -227,10 +227,10 @@ export default function Gallery() {
               <ChevronRight size={36} />
             </button>
             <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-center">
-              <p className="font-accent text-[10px] tracking-[0.3em] uppercase text-gold/40">
+              <p className="font-accent text-[10px] tracking-[0.3em] uppercase text-gold/70">
                 {filtered[lightboxIndex].category}
               </p>
-              <p className="font-accent text-cream/30 text-xs mt-1">
+              <p className="font-accent text-cream/65 text-xs mt-1">
                 {lightboxIndex + 1} / {filtered.length}
               </p>
             </div>

@@ -8,7 +8,7 @@ export default function Footer() {
       {/* Pre-footer CTA — warm cream background */}
       <div className="section-padding bg-background text-center">
         <div className="ornament-line mb-8" />
-        <p className="font-accent text-sm tracking-[0.3em] uppercase text-gold/60 mb-4">
+        <p className="font-accent text-sm tracking-[0.3em] uppercase text-gold/80 mb-4">
           Experience the Extraordinary
         </p>
         <h2 className="font-display text-3xl md:text-5xl text-charcoal mb-8">
@@ -32,7 +32,7 @@ export default function Footer() {
             Order Online <ExternalLink size={13} />
           </a>
         </div>
-        <p className="text-charcoal/40 text-sm mt-5 font-accent tracking-wide">
+        <p className="text-charcoal/60 text-sm mt-5 font-accent tracking-wide">
           Or call us at{" "}
           <a href="tel:+16507458811" className="text-gold hover:text-gold-light transition-colors">
             {LINKS.phone}
@@ -47,7 +47,7 @@ export default function Footer() {
             {/* Brand */}
             <div>
               <img src={IMAGES.logo} alt="Andiamo in Banca" className="h-14 w-auto mb-5 brightness-0 invert opacity-80" />
-              <p className="text-cream/50 text-sm leading-relaxed font-accent tracking-wide">
+              <p className="text-cream/65 text-sm leading-relaxed font-accent tracking-wide">
                 Upscale Italian dining in a beautifully restored historic bank building.
                 South San Francisco's most unique culinary destination.
               </p>
@@ -61,19 +61,19 @@ export default function Footer() {
               </h4>
               <div className="space-y-3 text-sm font-accent tracking-wide">
                 <div className="flex justify-between gap-4">
-                  <span className="text-cream/50">Monday</span>
-                  <span className="text-cream/30">Closed</span>
+                  <span className="text-cream/65">Monday</span>
+                  <span className="text-cream/50">Closed</span>
                 </div>
                 <div className="flex justify-between gap-4">
-                  <span className="text-cream/50">Tue – Fri</span>
+                  <span className="text-cream/65">Tue – Fri</span>
                   <span className="text-cream/70">11am – 2pm, 4pm – 9pm</span>
                 </div>
                 <div className="flex justify-between gap-4">
-                  <span className="text-cream/50">Sat – Sun</span>
+                  <span className="text-cream/65">Sat – Sun</span>
                   <span className="text-cream/70">4pm – 9pm</span>
                 </div>
                 <div className="pt-3 border-t border-cream/10">
-                  <span className="text-gold/60 text-xs tracking-wider">Happy Hour &middot; Tue–Fri 4–5pm</span>
+                  <span className="text-gold/80 text-xs tracking-wider">Happy Hour &middot; Tue–Fri 4–5pm</span>
                 </div>
               </div>
             </div>
@@ -88,16 +88,16 @@ export default function Footer() {
                   href="https://maps.google.com/?q=301+Linden+Avenue+South+San+Francisco+CA+94080"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-start gap-3 text-cream/50 hover:text-cream/80 transition-colors"
+                  className="flex items-start gap-3 text-cream/65 hover:text-cream/80 transition-colors"
                 >
                   <MapPin size={15} className="text-gold/50 mt-0.5 shrink-0" />
                   <span className="font-accent tracking-wide">301 Linden Avenue<br />South San Francisco, CA 94080</span>
                 </a>
-                <a href="tel:+16507458811" className="flex items-center gap-3 text-cream/50 hover:text-cream/80 transition-colors">
+                <a href="tel:+16507458811" className="flex items-center gap-3 text-cream/65 hover:text-cream/80 transition-colors">
                   <Phone size={15} className="text-gold/50 shrink-0" />
                   <span className="font-accent tracking-wide">{LINKS.phone}</span>
                 </a>
-                <a href={`mailto:${LINKS.email}`} className="flex items-center gap-3 text-cream/50 hover:text-cream/80 transition-colors">
+                <a href={`mailto:${LINKS.email}`} className="flex items-center gap-3 text-cream/65 hover:text-cream/80 transition-colors">
                   <Mail size={15} className="text-gold/50 shrink-0" />
                   <span className="font-accent tracking-wide">{LINKS.email}</span>
                 </a>
@@ -110,22 +110,22 @@ export default function Footer() {
                 Explore
               </h4>
               <div className="space-y-3 text-sm font-accent tracking-wide">
-                <Link href="/menu" className="block text-cream/50 hover:text-cream/80 transition-colors">
+                <Link href="/menu" className="block text-cream/65 hover:text-cream/80 transition-colors">
                   Dinner Menu
                 </Link>
-                <Link href="/the-vault" className="block text-cream/50 hover:text-cream/80 transition-colors">
+                <Link href="/the-vault" className="block text-cream/65 hover:text-cream/80 transition-colors">
                   The Vault &mdash; Private Dining
                 </Link>
-                <Link href="/corporate-dining" className="block text-cream/50 hover:text-cream/80 transition-colors">
+                <Link href="/corporate-dining" className="block text-cream/65 hover:text-cream/80 transition-colors">
                   Corporate Events
                 </Link>
-                <Link href="/banquet-catering" className="block text-cream/50 hover:text-cream/80 transition-colors">
+                <Link href="/banquet-catering" className="block text-cream/65 hover:text-cream/80 transition-colors">
                   Banquet & Catering
                 </Link>
-                <Link href="/gallery" className="block text-cream/50 hover:text-cream/80 transition-colors">
+                <Link href="/gallery" className="block text-cream/65 hover:text-cream/80 transition-colors">
                   Gallery
                 </Link>
-                <Link href="/our-story" className="block text-cream/50 hover:text-cream/80 transition-colors">
+                <Link href="/our-story" className="block text-cream/65 hover:text-cream/80 transition-colors">
                   Our Story
                 </Link>
               </div>
@@ -136,7 +136,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-cream/8 py-6">
           <div className="container flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-[11px] text-cream/30 tracking-wider">
+            <p className="text-[11px] text-cream/50 tracking-wider">
               &copy; {new Date().getFullYear()} Andiamo in Banca. All rights reserved.
             </p>
             <div className="flex items-center gap-6">
@@ -144,7 +144,7 @@ export default function Footer() {
                 href={LINKS.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-cream/40 hover:text-gold transition-colors"
+                className="text-cream/60 hover:text-gold transition-colors"
                 aria-label="Instagram"
               >
                 <Instagram size={16} />
@@ -153,9 +153,9 @@ export default function Footer() {
                 href={LINKS.yelp}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[11px] text-cream/40 hover:text-gold transition-colors tracking-wider"
+                className="text-[11px] text-cream/60 hover:text-gold transition-colors tracking-wider"
               >
-                <span className="text-gold/60">&#9733;</span> 4.2 on Yelp
+                <span className="text-gold/80">&#9733;</span> 4.2 on Yelp
               </a>
             </div>
           </div>

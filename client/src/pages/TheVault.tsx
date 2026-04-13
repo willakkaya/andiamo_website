@@ -105,7 +105,7 @@ export default function TheVault() {
               >
                 <feat.icon size={24} className="text-gold mx-auto mb-4 stroke-[1.5]" />
                 <h3 className="font-display text-base md:text-lg text-charcoal mb-2">{feat.title}</h3>
-                <p className="font-accent text-charcoal/50 text-sm">{feat.desc}</p>
+                <p className="font-accent text-charcoal/65 text-sm">{feat.desc}</p>
               </div>
             ))}
           </motion.div>
@@ -125,7 +125,7 @@ export default function TheVault() {
                 celebrating a milestone, or bringing your team together, The Vault provides a setting
                 that elevates any occasion.
               </p>
-              <p className="font-accent text-charcoal/50 text-base leading-[1.8] mb-10">
+              <p className="font-accent text-charcoal/65 text-base leading-[1.8] mb-10">
                 Our dedicated events team will work with you to create a custom menu and experience
                 tailored to your vision.
               </p>
@@ -178,7 +178,7 @@ export default function TheVault() {
               Your Event, Your Way
             </p>
             <h2 className="font-display text-3xl md:text-4xl text-cream mb-6">Dining Options</h2>
-            <p className="font-accent text-cream/40 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+            <p className="font-accent text-cream/60 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
               Every event in The Vault is custom-tailored. Choose from our banquet prix fixe menus
               or work with our chef to create a bespoke dining experience.
             </p>
@@ -198,15 +198,15 @@ export default function TheVault() {
               <div className="flex items-center justify-center gap-8 mb-6">
                 <div>
                   <span className="font-display text-3xl text-cream">$35</span>
-                  <span className="font-accent text-cream/40 text-sm block mt-1">per person, lunch</span>
+                  <span className="font-accent text-cream/60 text-sm block mt-1">per person, lunch</span>
                 </div>
                 <div className="w-px h-12 bg-cream/10" />
                 <div>
                   <span className="font-display text-3xl text-cream">$65</span>
-                  <span className="font-accent text-cream/40 text-sm block mt-1">per person, dinner</span>
+                  <span className="font-accent text-cream/60 text-sm block mt-1">per person, dinner</span>
                 </div>
               </div>
-              <p className="font-accent text-cream/40 text-sm mb-8 leading-relaxed">
+              <p className="font-accent text-cream/60 text-sm mb-8 leading-relaxed">
                 Curated multi-course menus with optional wine pairings from our cellar.
               </p>
               <a
@@ -222,9 +222,9 @@ export default function TheVault() {
               <h3 className="font-display text-2xl text-gold-light mb-6">Custom Experience</h3>
               <div className="mb-6">
                 <span className="font-display text-3xl text-cream">Bespoke</span>
-                <span className="font-accent text-cream/40 text-sm block mt-1">tailored to your vision</span>
+                <span className="font-accent text-cream/60 text-sm block mt-1">tailored to your vision</span>
               </div>
-              <p className="font-accent text-cream/40 text-sm mb-8 leading-relaxed">
+              <p className="font-accent text-cream/60 text-sm mb-8 leading-relaxed">
                 Work directly with our chef and events team to design a completely
                 personalized menu and experience for your group.
               </p>
@@ -255,7 +255,7 @@ export default function TheVault() {
               Book The Vault
             </p>
             <h2 className="font-display text-3xl md:text-4xl text-charcoal mb-4">Inquire About Your Event</h2>
-            <p className="font-accent text-charcoal/50 text-sm">
+            <p className="font-accent text-charcoal/65 text-sm">
               Fill out the form below and our events team will respond within 24 hours.
             </p>
           </motion.div>
@@ -271,7 +271,7 @@ export default function TheVault() {
               <div className="text-center py-20 bg-charcoal/5 border border-gold/10 px-8">
                 <Check size={40} className="text-gold mx-auto mb-5 stroke-[1.5]" />
                 <h3 className="font-display text-2xl text-charcoal mb-3">Thank You</h3>
-                <p className="font-accent text-charcoal/50">
+                <p className="font-accent text-charcoal/65">
                   We've received your inquiry and will be in touch within 24 hours.
                 </p>
               </div>
@@ -287,24 +287,24 @@ export default function TheVault() {
                     { label: "Guest Count", key: "guestCount", type: "number", placeholder: "12\u201320", required: false },
                   ].map((field) => (
                     <div key={field.key}>
-                      <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/50 mb-2.5">{field.label}</label>
+                      <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/65 mb-2.5">{field.label}</label>
                       <input
                         type={field.type}
                         required={field.required}
                         value={formData[field.key as keyof typeof formData]}
                         onChange={(e) => setFormData({ ...formData, [field.key]: e.target.value })}
-                        className="w-full bg-charcoal/[0.03] border border-charcoal/10 px-4 py-3.5 text-charcoal font-accent text-sm placeholder:text-charcoal/25 focus:border-gold/40 focus:bg-white focus:outline-none transition-all duration-300"
+                        className="w-full bg-charcoal/[0.03] border border-charcoal/20 px-4 py-3.5 text-charcoal font-accent text-sm placeholder:text-charcoal/25 focus:border-gold/40 focus:bg-white focus:outline-none transition-all duration-300"
                         placeholder={field.placeholder}
                       />
                     </div>
                   ))}
                 </div>
                 <div>
-                  <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/50 mb-2.5">Event Type</label>
+                  <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/65 mb-2.5">Event Type</label>
                   <select
                     value={formData.eventType}
                     onChange={(e) => setFormData({ ...formData, eventType: e.target.value })}
-                    className="w-full bg-charcoal/[0.03] border border-charcoal/10 px-4 py-3.5 text-charcoal font-accent text-sm focus:border-gold/40 focus:bg-white focus:outline-none transition-all duration-300"
+                    className="w-full bg-charcoal/[0.03] border border-charcoal/20 px-4 py-3.5 text-charcoal font-accent text-sm focus:border-gold/40 focus:bg-white focus:outline-none transition-all duration-300"
                   >
                     <option value="">Select event type</option>
                     <option value="corporate-dinner">Corporate Dinner</option>
@@ -317,12 +317,12 @@ export default function TheVault() {
                   </select>
                 </div>
                 <div>
-                  <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/50 mb-2.5">Additional Details</label>
+                  <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/65 mb-2.5">Additional Details</label>
                   <textarea
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     rows={4}
-                    className="w-full bg-charcoal/[0.03] border border-charcoal/10 px-4 py-3.5 text-charcoal font-accent text-sm placeholder:text-charcoal/25 focus:border-gold/40 focus:bg-white focus:outline-none transition-all duration-300 resize-none"
+                    className="w-full bg-charcoal/[0.03] border border-charcoal/20 px-4 py-3.5 text-charcoal font-accent text-sm placeholder:text-charcoal/25 focus:border-gold/40 focus:bg-white focus:outline-none transition-all duration-300 resize-none"
                     placeholder="Tell us about your event..."
                   />
                 </div>
@@ -333,7 +333,7 @@ export default function TheVault() {
                 >
                   {submitting ? "Submitting..." : "Submit Inquiry"}
                 </button>
-                <p className="text-center font-accent text-charcoal/40 text-xs">
+                <p className="text-center font-accent text-charcoal/60 text-xs">
                   Or call us directly at{" "}
                   <a href="tel:+16507458811" className="text-gold hover:text-gold-light transition-colors">
                     {LINKS.phone}

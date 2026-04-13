@@ -91,7 +91,7 @@ export default function OurStory() {
             <p className="font-display text-2xl md:text-4xl text-cream/90 italic leading-relaxed">
               "Things you have, you share. And things you don't have, you work for."
             </p>
-            <p className="font-accent text-[11px] tracking-[0.3em] uppercase text-gold/60 mt-6">
+            <p className="font-accent text-[11px] tracking-[0.3em] uppercase text-gold/80 mt-6">
               — John Akkaya, Founder
             </p>
           </motion.div>
@@ -177,7 +177,7 @@ export default function OurStory() {
                 and the same belief his father instilled — that a great restaurant
                 is built on generosity.
               </p>
-              <p className="font-accent text-charcoal/50 text-sm italic leading-relaxed">
+              <p className="font-accent text-charcoal/65 text-sm italic leading-relaxed">
                 "Whoever wrote the rule that a little cafe can't have the best wines
                 in the world?"
               </p>

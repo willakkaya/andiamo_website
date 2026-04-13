@@ -116,7 +116,7 @@ export default function CorporateDining() {
                 </div>
                 <div>
                   <h3 className="font-display text-lg text-charcoal mb-2">{feat.title}</h3>
-                  <p className="font-accent text-charcoal/50 text-sm leading-relaxed tracking-wide">{feat.desc}</p>
+                  <p className="font-accent text-charcoal/65 text-sm leading-relaxed tracking-wide">{feat.desc}</p>
                 </div>
               </motion.div>
             ))}
@@ -136,7 +136,7 @@ export default function CorporateDining() {
             className="text-center mb-16"
           >
             <div className="ornament-line !bg-white/20 mb-6" />
-            <p className="font-accent text-sm tracking-[0.3em] uppercase text-white/40 mb-4">
+            <p className="font-accent text-sm tracking-[0.3em] uppercase text-white/60 mb-4">
               Tailored Experiences
             </p>
             <h2 className="font-display text-3xl md:text-4xl text-cream mb-6">
@@ -179,7 +179,7 @@ export default function CorporateDining() {
                   <h3 className="font-display text-2xl text-cream">{item.title}</h3>
                   <span className="font-accent text-gold text-sm tracking-wide">{item.price}</span>
                 </div>
-                <p className="font-accent text-white/45 text-sm leading-relaxed tracking-wide max-w-xl">
+                <p className="font-accent text-white/60 text-sm leading-relaxed tracking-wide max-w-xl">
                   {item.desc}
                 </p>
               </motion.div>
@@ -221,7 +221,7 @@ export default function CorporateDining() {
                 Get Started
               </p>
               <h2 className="font-display text-3xl md:text-4xl text-charcoal mb-4">Plan Your Corporate Event</h2>
-              <p className="font-accent text-charcoal/50 text-sm tracking-wide">
+              <p className="font-accent text-charcoal/65 text-sm tracking-wide">
                 Tell us about your event and our corporate dining team will create a custom proposal.
               </p>
             </div>
@@ -230,7 +230,7 @@ export default function CorporateDining() {
               <div className="text-center py-16 border border-gold/20 px-8">
                 <Check size={48} className="text-gold mx-auto mb-4" />
                 <h3 className="font-display text-2xl text-charcoal mb-3">Thank You</h3>
-                <p className="font-accent text-charcoal/50 tracking-wide">
+                <p className="font-accent text-charcoal/65 tracking-wide">
                   Our corporate events team will be in touch within 24 hours with a custom proposal.
                 </p>
               </div>
@@ -238,7 +238,7 @@ export default function CorporateDining() {
               <form onSubmit={handleSubmit} className="space-y-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6">
                   <div>
-                    <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/40 mb-1">Name *</label>
+                    <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Name *</label>
                     <input
                       type="text"
                       required
@@ -249,7 +249,7 @@ export default function CorporateDining() {
                     />
                   </div>
                   <div>
-                    <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/40 mb-1">Company *</label>
+                    <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Company *</label>
                     <input
                       type="text"
                       required
@@ -260,7 +260,7 @@ export default function CorporateDining() {
                     />
                   </div>
                   <div>
-                    <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/40 mb-1">Email *</label>
+                    <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Email *</label>
                     <input
                       type="email"
                       required
@@ -271,7 +271,7 @@ export default function CorporateDining() {
                     />
                   </div>
                   <div>
-                    <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/40 mb-1">Phone</label>
+                    <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Phone</label>
                     <input
                       type="tel"
                       value={formData.phone}
@@ -281,7 +281,7 @@ export default function CorporateDining() {
                     />
                   </div>
                   <div>
-                    <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/40 mb-1">Preferred Date</label>
+                    <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Preferred Date</label>
                     <input
                       type="date"
                       value={formData.eventDate}
@@ -290,7 +290,7 @@ export default function CorporateDining() {
                     />
                   </div>
                   <div>
-                    <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/40 mb-1">Guest Count</label>
+                    <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Guest Count</label>
                     <select
                       value={formData.guestCount}
                       onChange={(e) => setFormData({ ...formData, guestCount: e.target.value })}
@@ -306,7 +306,7 @@ export default function CorporateDining() {
                   </div>
                 </div>
                 <div>
-                  <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/40 mb-1">Event Type</label>
+                  <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Event Type</label>
                   <select
                     value={formData.eventType}
                     onChange={(e) => setFormData({ ...formData, eventType: e.target.value })}
@@ -323,12 +323,12 @@ export default function CorporateDining() {
                   </select>
                 </div>
                 <div>
-                  <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/40 mb-1">Tell Us More</label>
+                  <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Tell Us More</label>
                   <textarea
                     rows={4}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full bg-transparent border border-charcoal/10 px-4 py-3 text-charcoal font-accent text-sm tracking-wide focus:border-gold/50 focus:outline-none transition-colors resize-none placeholder:text-charcoal/25"
+                    className="w-full bg-transparent border border-charcoal/20 px-4 py-3 text-charcoal font-accent text-sm tracking-wide focus:border-gold/50 focus:outline-none transition-colors resize-none placeholder:text-charcoal/25"
                     placeholder="Budget range, dietary requirements, A/V needs, special requests..."
                   />
                 </div>

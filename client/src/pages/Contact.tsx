@@ -53,7 +53,7 @@ function ContactForm() {
               Get in Touch
             </p>
             <h2 className="font-display text-3xl md:text-4xl text-charcoal mb-4">Send Us a Message</h2>
-            <p className="font-accent text-charcoal/50 text-sm tracking-wide">
+            <p className="font-accent text-charcoal/65 text-sm tracking-wide">
               Questions, feedback, or special requests — we'd love to hear from you.
             </p>
           </div>
@@ -62,7 +62,7 @@ function ContactForm() {
             <div className="text-center py-16 border border-gold/20 px-8">
               <Check size={48} className="text-gold mx-auto mb-4" />
               <h3 className="font-display text-2xl text-charcoal mb-3">Thank You</h3>
-              <p className="font-accent text-charcoal/50 tracking-wide">
+              <p className="font-accent text-charcoal/65 tracking-wide">
                 We'll get back to you within 24 hours.
               </p>
             </div>
@@ -70,7 +70,7 @@ function ContactForm() {
             <form onSubmit={handleSubmit} className="space-y-8">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6">
                 <div>
-                  <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/40 mb-1">Name *</label>
+                  <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Name *</label>
                   <input
                     type="text"
                     required
@@ -81,7 +81,7 @@ function ContactForm() {
                   />
                 </div>
                 <div>
-                  <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/40 mb-1">Email *</label>
+                  <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Email *</label>
                   <input
                     type="email"
                     required
@@ -93,7 +93,7 @@ function ContactForm() {
                 </div>
               </div>
               <div>
-                <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/40 mb-1">Phone</label>
+                <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Phone</label>
                 <input
                   type="tel"
                   value={formData.phone}
@@ -103,13 +103,13 @@ function ContactForm() {
                 />
               </div>
               <div>
-                <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/40 mb-1">Message *</label>
+                <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Message *</label>
                 <textarea
                   rows={4}
                   required
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full bg-transparent border border-charcoal/10 px-4 py-3 text-charcoal font-accent text-sm tracking-wide focus:border-gold/50 focus:outline-none transition-colors resize-none placeholder:text-charcoal/25"
+                  className="w-full bg-transparent border border-charcoal/20 px-4 py-3 text-charcoal font-accent text-sm tracking-wide focus:border-gold/50 focus:outline-none transition-colors resize-none placeholder:text-charcoal/25"
                   placeholder="How can we help?"
                 />
               </div>
@@ -176,7 +176,7 @@ export default function Contact() {
                   href="https://maps.google.com/?q=301+Linden+Avenue+South+San+Francisco+CA+94080"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-accent text-charcoal/50 hover:text-charcoal transition-colors leading-relaxed block mb-6"
+                  className="font-accent text-charcoal/65 hover:text-charcoal transition-colors leading-relaxed block mb-6"
                 >
                   301 Linden Avenue<br />
                   South San Francisco, CA 94080
@@ -184,11 +184,11 @@ export default function Contact() {
                 <div className="space-y-3">
                   <div className="flex items-start gap-3">
                     <Car size={15} className="text-gold/50 shrink-0 mt-0.5 stroke-[1.5]" />
-                    <span className="font-accent text-charcoal/40 text-sm leading-relaxed">Free street parking on Linden Ave and surrounding streets</span>
+                    <span className="font-accent text-charcoal/60 text-sm leading-relaxed">Free street parking on Linden Ave and surrounding streets</span>
                   </div>
                   <div className="flex items-start gap-3">
                     <Train size={15} className="text-gold/50 shrink-0 mt-0.5 stroke-[1.5]" />
-                    <span className="font-accent text-charcoal/40 text-sm leading-relaxed">10 minutes from South San Francisco BART station</span>
+                    <span className="font-accent text-charcoal/60 text-sm leading-relaxed">10 minutes from South San Francisco BART station</span>
                   </div>
                 </div>
               </motion.div>
@@ -220,7 +220,7 @@ export default function Contact() {
                     href={`mailto:${LINKS.email}`}
                     className="flex items-center gap-3 font-accent text-charcoal/60 hover:text-gold transition-colors"
                   >
-                    <Mail size={16} className="text-gold/40 stroke-[1.5]" />
+                    <Mail size={16} className="text-gold/70 stroke-[1.5]" />
                     {LINKS.email}
                   </a>
                   <a
@@ -229,7 +229,7 @@ export default function Contact() {
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 font-accent text-charcoal/60 hover:text-gold transition-colors"
                   >
-                    <Instagram size={16} className="text-gold/40 stroke-[1.5]" />
+                    <Instagram size={16} className="text-gold/70 stroke-[1.5]" />
                     @andiamoinbanca
                   </a>
                 </div>
@@ -325,13 +325,13 @@ export default function Contact() {
               ].map((item) => (
                 <div key={item.day} className="flex justify-between items-center py-4 border-b border-cream/8">
                   <span className="font-accent text-cream/60 text-sm tracking-wide">{item.day}</span>
-                  <span className={`font-accent text-sm ${item.hours === "Closed" ? "text-cream/25 italic" : "text-cream/45"}`}>
+                  <span className={`font-accent text-sm ${item.hours === "Closed" ? "text-cream/45 italic" : "text-cream/45"}`}>
                     {item.hours}
                   </span>
                 </div>
               ))}
             </div>
-            <p className="font-accent text-cream/25 text-xs mt-8 text-center italic leading-relaxed">
+            <p className="font-accent text-cream/45 text-xs mt-8 text-center italic leading-relaxed">
               Happy Hour: Tuesday \u2013 Friday, 4:00 PM \u2013 5:00 PM. Holiday hours may vary.
             </p>
             <div className="flex flex-wrap justify-center gap-6 mt-10">

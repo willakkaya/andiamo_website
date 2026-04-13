@@ -193,7 +193,7 @@ export default function Home() {
               whileInView="visible"
               viewport={{ once: true }}
               custom={3}
-              className="text-charcoal/40 text-sm mt-8 flex items-center justify-center gap-2 font-accent tracking-wide"
+              className="text-charcoal/60 text-sm mt-8 flex items-center justify-center gap-2 font-accent tracking-wide"
             >
               <MapPin size={14} className="text-gold" />
               301 Linden Avenue, South San Francisco, CA 94080
@@ -379,13 +379,13 @@ export default function Home() {
       {/* ========== HAPPY HOUR BANNER ========== */}
       <section className="section-burgundy py-14">
         <div className="container text-center">
-          <p className="font-accent text-sm tracking-[0.3em] uppercase text-white/40 mb-2">
+          <p className="font-accent text-sm tracking-[0.3em] uppercase text-white/60 mb-2">
             Tuesday – Friday &middot; 4:00 – 5:00 PM
           </p>
           <h2 className="font-display text-2xl md:text-3xl text-white">
             Happy Hour
           </h2>
-          <p className="text-white/40 text-sm mt-3 font-accent tracking-wide">
+          <p className="text-white/60 text-sm mt-3 font-accent tracking-wide">
             Specially priced wines, cocktails, and appetizers
           </p>
         </div>
@@ -434,7 +434,7 @@ export default function Home() {
                   "{review.text}"
                 </p>
                 <div className="flex items-center justify-between">
-                  <span className="text-charcoal/50 text-xs font-body tracking-wider uppercase">{review.author}</span>
+                  <span className="text-charcoal/65 text-xs font-body tracking-wider uppercase">{review.author}</span>
                   <span className="text-charcoal/30 text-xs">{review.source}</span>
                 </div>
               </motion.a>
@@ -447,7 +447,7 @@ export default function Home() {
               href={LINKS.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 text-charcoal/40 hover:text-gold font-accent text-sm tracking-[0.2em] uppercase transition-colors duration-500"
+              className="inline-flex items-center gap-3 text-charcoal/60 hover:text-gold font-accent text-sm tracking-[0.2em] uppercase transition-colors duration-500"
             >
               Follow @andiamoinbanca on Instagram
               <ArrowRight size={14} />
