@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import PageLayout from "@/components/PageLayout";
-import { IMAGES } from "@/lib/images";
+import { IMAGES, LINKS } from "@/lib/images";
+import { ShoppingBag, ArrowRight } from "lucide-react";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -279,10 +280,19 @@ export default function BanquetCatering() {
             variants={fadeUp}
             className="text-center mb-14"
           >
-            <p className="font-accent text-charcoal/50 text-lg leading-relaxed max-w-2xl mx-auto tracking-wide">
+            <p className="font-accent text-charcoal/50 text-lg leading-relaxed max-w-2xl mx-auto tracking-wide mb-8">
               From intimate private dinners in The Vault to large-scale catered events,
               we bring Andiamo's flavors to your celebration.
             </p>
+            <a
+              href={LINKS.ezcater}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-10 py-4 bg-charcoal text-white font-body text-[12px] tracking-[0.2em] uppercase font-semibold hover:bg-espresso transition-all duration-500"
+            >
+              <ShoppingBag size={14} />
+              Order Catering Online
+            </a>
           </motion.div>
 
           {/* Tab Navigation — matches Menu page style */}
@@ -465,6 +475,22 @@ export default function BanquetCatering() {
                   )}
                 </div>
               ))}
+
+              {/* ezCater CTA — right after browsing the menu */}
+              <div className="text-center mt-16 pt-12 border-t border-charcoal/8">
+                <p className="font-accent text-charcoal/50 text-sm tracking-wide mb-6">
+                  Ready to order? Place your catering order online.
+                </p>
+                <a
+                  href={LINKS.ezcater}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-10 py-4 bg-charcoal text-white font-body text-[12px] tracking-[0.2em] uppercase font-semibold hover:bg-espresso transition-all duration-500"
+                >
+                  <ShoppingBag size={14} />
+                  Order on ezCater
+                </a>
+              </div>
             </motion.div>
           )}
         </div>
@@ -487,18 +513,27 @@ export default function BanquetCatering() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
+              href={LINKS.ezcater}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-white text-charcoal font-body text-[12px] tracking-[0.2em] uppercase font-semibold hover:bg-white/90 transition-all duration-500"
+            >
+              <ShoppingBag size={14} />
+              Order Catering Online
+            </a>
+            <a
               href="/the-vault"
-              className="inline-flex items-center justify-center px-10 py-4 bg-white text-charcoal font-body text-[12px] tracking-[0.2em] uppercase font-semibold hover:bg-white/90 transition-all duration-500"
+              className="inline-flex items-center justify-center px-10 py-4 border border-white/20 text-white font-body text-[12px] tracking-[0.2em] uppercase hover:bg-white/5 transition-all duration-500"
             >
               Inquire About The Vault
             </a>
-            <a
-              href="tel:+16507458811"
-              className="inline-flex items-center justify-center px-10 py-4 border border-white/20 text-white font-body text-[12px] tracking-[0.2em] uppercase hover:bg-white/5 transition-all duration-500"
-            >
-              Call (650) 745-8811
-            </a>
           </div>
+          <p className="text-white/30 text-sm mt-5 font-accent tracking-wide">
+            Or call us at{" "}
+            <a href="tel:+16507458811" className="text-gold/60 hover:text-gold transition-colors">
+              (650) 745-8811
+            </a>
+          </p>
         </motion.div>
       </section>
     </PageLayout>
