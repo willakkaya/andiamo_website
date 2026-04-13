@@ -3,6 +3,7 @@ import { IMAGES } from "@/lib/images";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { Link } from "wouter";
 
 type Category = "All" | "The Building" | "Private Dining" | "Cuisine";
 
@@ -142,9 +143,30 @@ export default function Gallery() {
             </AnimatePresence>
           </motion.div>
 
-          {/* Instagram CTA */}
-          <div className="text-center mt-20">
+          {/* Description + Internal Links */}
+          <div className="text-center mt-20 max-w-2xl mx-auto">
             <div className="ornament-line mx-auto mb-6 opacity-30" />
+            <p className="font-accent text-cream/50 text-sm leading-relaxed mb-6">
+              Andiamo in Banca occupies a beautifully restored 1920s bank building at the heart of South San Francisco.
+              From the grand marble columns and original vault door to the intimate private dining room, every detail
+              tells a story of Italian craftsmanship and hospitality.
+            </p>
+            <p className="font-accent text-cream/50 text-sm leading-relaxed mb-8">
+              Our kitchen produces handmade pasta daily, sources the finest seasonal ingredients, and presents
+              each dish with the care it deserves. Whether it's a weeknight dinner or a private celebration in
+              The Vault, the experience is always simply delicious.
+            </p>
+            <div className="flex flex-wrap justify-center gap-6 mb-8">
+              <Link href="/menu" className="font-accent text-gold/70 hover:text-gold text-sm tracking-wide transition-colors duration-300">
+                Explore Our Menu
+              </Link>
+              <Link href="/the-vault" className="font-accent text-gold/70 hover:text-gold text-sm tracking-wide transition-colors duration-300">
+                Private Dining
+              </Link>
+              <Link href="/contact" className="font-accent text-gold/70 hover:text-gold text-sm tracking-wide transition-colors duration-300">
+                Visit Us
+              </Link>
+            </div>
             <p className="font-accent text-cream/40 text-sm italic">
               Follow us on{" "}
               <a

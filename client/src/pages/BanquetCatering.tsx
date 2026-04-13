@@ -14,18 +14,6 @@ type TabKey = "banquet" | "catering";
 /* ── Banquet Menus ── */
 const banquetMenus = [
   {
-    title: "Hors d'Oeuvres",
-    subtitle: "For events serving appetizers only. Prices vary based on guest count — contact us for a quote.",
-    items: [
-      { name: "Bruschetta al Pomodoro", desc: "Toasted slices of bread topped with tomato cubes marinated with olive oil, garlic and basil" },
-      { name: "Italian Meatballs", desc: "Delicious Italian meatballs served with a dipping sauce" },
-      { name: "Shrimp Cocktail", desc: "Fresh shrimp with cocktail sauce" },
-      { name: "Calamari Fritti", desc: "Fresh squid fried and tossed in a garlic lemon sauce served with cocktail sauce" },
-      { name: "Grilled Chicken Skewer", desc: "Marinated chicken breast grilled over charcoal grill" },
-      { name: "Garlic Bread", desc: "Warm, toasty bread with garlic butter baked in" },
-    ],
-  },
-  {
     title: "$35 Per Person",
     subtitle: "Lunch Only",
     sections: [
@@ -201,6 +189,15 @@ const eventEnhancements = [
   { name: "Limoncello Toast", price: "$6 / person", desc: "House limoncello digestivo — a classic Italian after-dinner tradition" },
   { name: "Espresso & Cappuccino Bar", price: "$8 / person", desc: "Full after-dinner coffee service with espresso, cappuccino, and biscotti" },
   { name: "Soft Drinks & Beverages", price: "$5 / person", desc: "Assorted sodas, sparkling water, iced tea, and fresh lemonade" },
+];
+
+const horsDoeuves = [
+  { name: "Bruschetta al Pomodoro", desc: "Toasted slices of bread topped with tomato cubes marinated with olive oil, garlic and basil" },
+  { name: "Italian Meatballs", desc: "Delicious Italian meatballs served with a dipping sauce" },
+  { name: "Shrimp Cocktail", desc: "Fresh shrimp with cocktail sauce" },
+  { name: "Calamari Fritti", desc: "Fresh squid fried and tossed in a garlic lemon sauce served with cocktail sauce" },
+  { name: "Grilled Chicken Skewer", desc: "Marinated chicken breast grilled over charcoal grill" },
+  { name: "Garlic Bread", desc: "Warm, toasty bread with garlic butter baked in" },
 ];
 
 /* ── Catering Menu ── */
@@ -436,7 +433,37 @@ export default function BanquetCatering() {
                   </p>
                   <div className="w-12 h-px bg-gold/30 mx-auto mt-4" />
                 </div>
+
+                {/* Hors d'Oeuvres */}
+                <div className="max-w-2xl mx-auto mb-12">
+                  <p className="font-accent text-xs tracking-[0.25em] uppercase text-gold/80 mb-5 border-b border-gold/15 pb-2">
+                    Hors d'Oeuvres — Priced Per Guest Count
+                  </p>
+                  <p className="text-charcoal/55 text-sm mb-6 font-accent italic tracking-wide">
+                    Perfect for cocktail hours and reception-style events. Contact us for a custom quote.
+                  </p>
+                  <div className="space-y-4">
+                    {horsDoeuves.map((item, i) => (
+                      <div key={i} className="group">
+                        <div className="flex items-baseline gap-3">
+                          <h4 className="font-display text-base text-charcoal group-hover:text-gold transition-colors duration-500">
+                            {item.name}
+                          </h4>
+                          <div className="flex-1 border-b border-dotted border-charcoal/20 mb-1.5 min-w-[20px]" />
+                        </div>
+                        <p className="text-charcoal/60 text-sm mt-1 font-accent italic tracking-wide leading-relaxed">
+                          {item.desc}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Enhancement Add-Ons */}
                 <div className="max-w-2xl mx-auto border border-gold/15 p-8 md:p-10">
+                  <p className="font-accent text-xs tracking-[0.25em] uppercase text-gold/80 mb-6">
+                    Add-Ons
+                  </p>
                   <div className="space-y-6">
                     {eventEnhancements.map((item, i) => (
                       <div key={i}>

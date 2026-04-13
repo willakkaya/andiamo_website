@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import PageLayout from "@/components/PageLayout";
 import { IMAGES } from "@/lib/images";
 import { motion } from "framer-motion";
+import { Link } from "wouter";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -258,9 +259,20 @@ export default function OurStory() {
             custom={0}
             className="text-center"
           >
-            <p className="font-display text-3xl md:text-5xl text-charcoal italic">
+            <p className="font-display text-3xl md:text-5xl text-charcoal italic mb-10">
               Simply Delicious.
             </p>
+            <div className="flex flex-wrap justify-center gap-6">
+              <Link href="/menu" className="font-accent text-gold/70 hover:text-gold text-sm tracking-wide transition-colors duration-300">
+                Explore Our Menu
+              </Link>
+              <Link href="/the-vault" className="font-accent text-gold/70 hover:text-gold text-sm tracking-wide transition-colors duration-300">
+                The Vault
+              </Link>
+              <Link href="/gallery" className="font-accent text-gold/70 hover:text-gold text-sm tracking-wide transition-colors duration-300">
+                Gallery
+              </Link>
+            </div>
           </motion.div>
         </div>
       </section>

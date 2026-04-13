@@ -3,6 +3,7 @@ import PageLayout from "@/components/PageLayout";
 import { IMAGES, LINKS } from "@/lib/images";
 import { motion } from "framer-motion";
 import { MapPin, Phone, Mail, Clock, Instagram, Car, Train, ArrowRight, Check } from "lucide-react";
+import { Link } from "wouter";
 import { submitForm } from "@/lib/formspree";
 import { toast } from "sonner";
 
@@ -333,6 +334,17 @@ export default function Contact() {
             <p className="font-accent text-cream/25 text-xs mt-8 text-center italic leading-relaxed">
               Happy Hour: Tuesday \u2013 Friday, 4:00 PM \u2013 5:00 PM. Holiday hours may vary.
             </p>
+            <div className="flex flex-wrap justify-center gap-6 mt-10">
+              <Link href="/menu" className="font-accent text-gold/70 hover:text-gold text-sm tracking-wide transition-colors duration-300">
+                View Our Menu
+              </Link>
+              <Link href="/the-vault" className="font-accent text-gold/70 hover:text-gold text-sm tracking-wide transition-colors duration-300">
+                Private Dining
+              </Link>
+              <Link href="/banquet-catering" className="font-accent text-gold/70 hover:text-gold text-sm tracking-wide transition-colors duration-300">
+                Banquet & Catering
+              </Link>
+            </div>
           </motion.div>
         </div>
       </section>

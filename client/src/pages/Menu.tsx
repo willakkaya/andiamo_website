@@ -3,6 +3,7 @@ import { IMAGES, LINKS } from "@/lib/images";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ShoppingBag } from "lucide-react";
+import { Link } from "wouter";
 
 type MenuTab = "lunch" | "dinner" | "pizza" | "wine" | "happyhour";
 
@@ -344,6 +345,17 @@ export default function Menu() {
               Vegan & gluten free lentil pasta available as a substitution for all pasta dishes.
               A 20% gratuity will be added for parties of 6 or more.
             </p>
+            <div className="flex flex-wrap justify-center gap-6 mt-8">
+              <Link href="/banquet-catering" className="font-accent text-gold/70 hover:text-gold text-sm tracking-wide transition-colors duration-300">
+                Banquet & Catering Menus
+              </Link>
+              <Link href="/the-vault" className="font-accent text-gold/70 hover:text-gold text-sm tracking-wide transition-colors duration-300">
+                Private Dining
+              </Link>
+              <Link href="/contact" className="font-accent text-gold/70 hover:text-gold text-sm tracking-wide transition-colors duration-300">
+                Contact Us
+              </Link>
+            </div>
           </div>
         </div>
       </section>
