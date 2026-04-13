@@ -105,7 +105,7 @@ export default function TheVault() {
               >
                 <feat.icon size={24} className="text-gold mx-auto mb-4 stroke-[1.5]" />
                 <h3 className="font-display text-base md:text-lg text-charcoal mb-2">{feat.title}</h3>
-                <p className="font-accent text-charcoal/65 text-sm">{feat.desc}</p>
+                <p className="font-accent text-charcoal/65 text-base">{feat.desc}</p>
               </div>
             ))}
           </motion.div>
@@ -137,7 +137,7 @@ export default function TheVault() {
                   "Rehearsal dinners", "Holiday gatherings",
                   "Product launches", "Wine dinners",
                 ].map((item) => (
-                  <div key={item} className="flex items-center gap-2.5 font-accent text-sm text-charcoal/60">
+                  <div key={item} className="flex items-center gap-2.5 font-accent text-base text-charcoal/60">
                     <Check size={13} className="text-gold shrink-0 stroke-[1.5]" />
                     {item}
                   </div>
@@ -198,15 +198,15 @@ export default function TheVault() {
               <div className="flex items-center justify-center gap-8 mb-6">
                 <div>
                   <span className="font-display text-3xl text-cream">$35</span>
-                  <span className="font-accent text-cream/60 text-sm block mt-1">per person, lunch</span>
+                  <span className="font-accent text-cream/60 text-base block mt-1">per person, lunch</span>
                 </div>
                 <div className="w-px h-12 bg-cream/10" />
                 <div>
                   <span className="font-display text-3xl text-cream">$65</span>
-                  <span className="font-accent text-cream/60 text-sm block mt-1">per person, dinner</span>
+                  <span className="font-accent text-cream/60 text-base block mt-1">per person, dinner</span>
                 </div>
               </div>
-              <p className="font-accent text-cream/60 text-sm mb-8 leading-relaxed">
+              <p className="font-accent text-cream/60 text-base mb-8 leading-relaxed">
                 Curated multi-course menus with optional wine pairings from our cellar.
               </p>
               <a
@@ -222,9 +222,9 @@ export default function TheVault() {
               <h3 className="font-display text-2xl text-gold-light mb-6">Custom Experience</h3>
               <div className="mb-6">
                 <span className="font-display text-3xl text-cream">Bespoke</span>
-                <span className="font-accent text-cream/60 text-sm block mt-1">tailored to your vision</span>
+                <span className="font-accent text-cream/60 text-base block mt-1">tailored to your vision</span>
               </div>
-              <p className="font-accent text-cream/60 text-sm mb-8 leading-relaxed">
+              <p className="font-accent text-cream/60 text-base mb-8 leading-relaxed">
                 Work directly with our chef and events team to design a completely
                 personalized menu and experience for your group.
               </p>
@@ -255,7 +255,7 @@ export default function TheVault() {
               Book The Vault
             </p>
             <h2 className="font-display text-3xl md:text-4xl text-charcoal mb-4">Inquire About Your Event</h2>
-            <p className="font-accent text-charcoal/65 text-sm">
+            <p className="font-accent text-charcoal/65 text-base">
               Fill out the form below and our events team will respond within 24 hours.
             </p>
           </motion.div>

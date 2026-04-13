@@ -116,7 +116,7 @@ export default function CorporateDining() {
                 </div>
                 <div>
                   <h3 className="font-display text-lg text-charcoal mb-2">{feat.title}</h3>
-                  <p className="font-accent text-charcoal/65 text-sm leading-relaxed tracking-wide">{feat.desc}</p>
+                  <p className="font-accent text-charcoal/65 text-base leading-relaxed tracking-wide">{feat.desc}</p>
                 </div>
               </motion.div>
             ))}
@@ -179,7 +179,7 @@ export default function CorporateDining() {
                   <h3 className="font-display text-2xl text-cream">{item.title}</h3>
                   <span className="font-accent text-gold text-sm tracking-wide">{item.price}</span>
                 </div>
-                <p className="font-accent text-white/60 text-sm leading-relaxed tracking-wide max-w-xl">
+                <p className="font-accent text-white/60 text-base leading-relaxed tracking-wide max-w-xl">
                   {item.desc}
                 </p>
               </motion.div>
@@ -221,7 +221,7 @@ export default function CorporateDining() {
                 Get Started
               </p>
               <h2 className="font-display text-3xl md:text-4xl text-charcoal mb-4">Plan Your Corporate Event</h2>
-              <p className="font-accent text-charcoal/65 text-sm tracking-wide">
+              <p className="font-accent text-charcoal/65 text-base tracking-wide">
                 Tell us about your event and our corporate dining team will create a custom proposal.
               </p>
             </div>

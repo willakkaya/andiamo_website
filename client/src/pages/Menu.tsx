@@ -237,7 +237,7 @@ function MenuSection({ title, subtitle, note, items }: { title: string; subtitle
               )}
             </div>
             {item.desc && (
-              <p className="text-muted-foreground text-sm mt-1 font-accent italic tracking-wide leading-relaxed">{item.desc}</p>
+              <p className="text-muted-foreground text-base mt-1 font-accent italic tracking-wide leading-relaxed">{item.desc}</p>
             )}
           </div>
         ))}
@@ -338,7 +338,7 @@ export default function Menu() {
 
           {/* Note */}
           <div className="mt-12 text-center">
-            <p className="text-muted-foreground text-sm italic font-accent tracking-wide">
+            <p className="text-muted-foreground text-base italic font-accent tracking-wide">
               Menu items and prices are subject to change. Please inform your server of any allergies or dietary restrictions.
             </p>
             <p className="text-muted-foreground text-xs mt-3 font-accent tracking-wide">

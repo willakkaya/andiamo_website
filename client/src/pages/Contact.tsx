@@ -53,7 +53,7 @@ function ContactForm() {
               Get in Touch
             </p>
             <h2 className="font-display text-3xl md:text-4xl text-charcoal mb-4">Send Us a Message</h2>
-            <p className="font-accent text-charcoal/65 text-sm tracking-wide">
+            <p className="font-accent text-charcoal/65 text-base tracking-wide">
               Questions, feedback, or special requests — we'd love to hear from you.
             </p>
           </div>
@@ -184,11 +184,11 @@ export default function Contact() {
                 <div className="space-y-3">
                   <div className="flex items-start gap-3">
                     <Car size={15} className="text-gold/50 shrink-0 mt-0.5 stroke-[1.5]" />
-                    <span className="font-accent text-charcoal/60 text-sm leading-relaxed">Free street parking on Linden Ave and surrounding streets</span>
+                    <span className="font-accent text-charcoal/60 text-base leading-relaxed">Free street parking on Linden Ave and surrounding streets</span>
                   </div>
                   <div className="flex items-start gap-3">
                     <Train size={15} className="text-gold/50 shrink-0 mt-0.5 stroke-[1.5]" />
-                    <span className="font-accent text-charcoal/60 text-sm leading-relaxed">10 minutes from South San Francisco BART station</span>
+                    <span className="font-accent text-charcoal/60 text-base leading-relaxed">10 minutes from South San Francisco BART station</span>
                   </div>
                 </div>
               </motion.div>
@@ -324,8 +324,8 @@ export default function Contact() {
                 { day: "Sunday", hours: "4:00 PM \u2013 9:00 PM" },
               ].map((item) => (
                 <div key={item.day} className="flex justify-between items-center py-4 border-b border-cream/8">
-                  <span className="font-accent text-cream/60 text-sm tracking-wide">{item.day}</span>
-                  <span className={`font-accent text-sm ${item.hours === "Closed" ? "text-cream/45 italic" : "text-cream/45"}`}>
+                  <span className="font-accent text-cream/60 text-base tracking-wide">{item.day}</span>
+                  <span className={`font-accent text-base ${item.hours === "Closed" ? "text-cream/45 italic" : "text-cream/45"}`}>
                     {item.hours}
                   </span>
                 </div>

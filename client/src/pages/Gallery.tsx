@@ -146,12 +146,12 @@ export default function Gallery() {
           {/* Description + Internal Links */}
           <div className="text-center mt-20 max-w-2xl mx-auto">
             <div className="ornament-line mx-auto mb-6 opacity-30" />
-            <p className="font-accent text-cream/65 text-sm leading-relaxed mb-6">
+            <p className="font-accent text-cream/65 text-base leading-relaxed mb-6">
               Andiamo in Banca occupies a beautifully restored 1920s bank building at the heart of South San Francisco.
               From the grand marble columns and original vault door to the intimate private dining room, every detail
               tells a story of Italian craftsmanship and hospitality.
             </p>
-            <p className="font-accent text-cream/65 text-sm leading-relaxed mb-8">
+            <p className="font-accent text-cream/65 text-base leading-relaxed mb-8">
               Our kitchen produces handmade pasta daily, sources the finest seasonal ingredients, and presents
               each dish with the care it deserves. Whether it's a weeknight dinner or a private celebration in
               The Vault, the experience is always simply delicious.

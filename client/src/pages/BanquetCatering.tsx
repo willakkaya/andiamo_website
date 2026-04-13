@@ -363,7 +363,7 @@ export default function BanquetCatering() {
                             </h4>
                             <div className="flex-1 border-b border-dotted border-charcoal/20 mb-1.5 min-w-[20px]" />
                           </div>
-                          <p className="text-charcoal/60 text-sm mt-1 font-accent italic tracking-wide leading-relaxed">
+                          <p className="text-charcoal/60 text-base mt-1 font-accent italic tracking-wide leading-relaxed">
                             {item.desc}
                           </p>
                         </div>
@@ -388,7 +388,7 @@ export default function BanquetCatering() {
                                   </h4>
                                   <div className="flex-1 border-b border-dotted border-charcoal/20 mb-1.5 min-w-[20px]" />
                                 </div>
-                                <p className="text-charcoal/60 text-sm mt-1 font-accent italic tracking-wide leading-relaxed">
+                                <p className="text-charcoal/60 text-base mt-1 font-accent italic tracking-wide leading-relaxed">
                                   {item.desc}
                                 </p>
                               </div>
@@ -452,7 +452,7 @@ export default function BanquetCatering() {
                           <div className="flex-1 border-b border-dotted border-charcoal/20 mb-1.5 min-w-[20px]" />
                           <span className="font-accent text-gold text-sm tracking-wide shrink-0">{item.price}</span>
                         </div>
-                        <p className="text-charcoal/60 text-sm mt-1 font-accent italic tracking-wide leading-relaxed">
+                        <p className="text-charcoal/60 text-base mt-1 font-accent italic tracking-wide leading-relaxed">
                           {item.desc}
                         </p>
                       </div>
@@ -473,7 +473,7 @@ export default function BanquetCatering() {
                           <div className="flex-1 border-b border-dotted border-charcoal/20 mb-1.5 min-w-[20px]" />
                           <span className="font-accent text-gold text-sm tracking-wide shrink-0">{item.price}</span>
                         </div>
-                        <p className="text-charcoal/60 text-sm mt-1 font-accent italic tracking-wide leading-relaxed">
+                        <p className="text-charcoal/60 text-base mt-1 font-accent italic tracking-wide leading-relaxed">
                           {item.desc}
                         </p>
                         {item.note && (
@@ -538,7 +538,7 @@ export default function BanquetCatering() {
                             </div>
                           )}
                         </div>
-                        <p className="text-charcoal/60 text-sm mt-1 font-accent italic tracking-wide leading-relaxed">
+                        <p className="text-charcoal/60 text-base mt-1 font-accent italic tracking-wide leading-relaxed">
                           {item.desc}
                         </p>
                       </div>

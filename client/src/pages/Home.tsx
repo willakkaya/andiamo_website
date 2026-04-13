@@ -385,7 +385,7 @@ export default function Home() {
           <h2 className="font-display text-2xl md:text-3xl text-white">
             Happy Hour
           </h2>
-          <p className="text-white/60 text-sm mt-3 font-accent tracking-wide">
+          <p className="text-white/60 text-base mt-3 font-accent tracking-wide">
             Specially priced wines, cocktails, and appetizers
           </p>
         </div>
@@ -430,7 +430,7 @@ export default function Home() {
                     <Star key={j} size={12} className={j < review.rating ? "text-gold fill-gold" : "text-charcoal/10 fill-charcoal/10"} />
                   ))}
                 </div>
-                <p className="text-charcoal/70 text-sm leading-relaxed mb-6 font-accent italic tracking-wide">
+                <p className="text-charcoal/70 text-base leading-relaxed mb-6 font-accent italic tracking-wide">
                   "{review.text}"
                 </p>
                 <div className="flex items-center justify-between">

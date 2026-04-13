@@ -177,7 +177,7 @@ export default function OurStory() {
                 and the same belief his father instilled — that a great restaurant
                 is built on generosity.
               </p>
-              <p className="font-accent text-charcoal/65 text-sm italic leading-relaxed">
+              <p className="font-accent text-charcoal/65 text-base italic leading-relaxed">
                 "Whoever wrote the rule that a little cafe can't have the best wines
                 in the world?"
               </p>
