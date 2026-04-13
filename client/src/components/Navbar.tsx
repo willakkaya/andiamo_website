@@ -54,22 +54,13 @@ export default function Navbar() {
         <div className="container flex items-center justify-between h-20 md:h-24">
           {/* Logo */}
           <Link href="/" className="flex items-center group">
-            <div className="flex flex-col leading-none">
-              <span
-                className={`font-display text-[22px] md:text-[28px] tracking-[0.04em] transition-colors duration-700 ${
-                  showSolid ? "text-charcoal" : "text-white"
-                }`}
-              >
-                Andiamo
-              </span>
-              <span
-                className={`font-accent text-[9px] md:text-[10px] tracking-[0.25em] uppercase transition-colors duration-700 ${
-                  showSolid ? "text-charcoal/40" : "text-white/50"
-                }`}
-              >
-                in Banca
-              </span>
-            </div>
+            <img
+              src={IMAGES.logo}
+              alt="Andiamo in Banca"
+              className={`h-10 md:h-14 w-auto transition-all duration-700 ${
+                showSolid ? "" : "brightness-0 invert"
+              }`}
+            />
           </Link>
 
           {/* Desktop Nav */}

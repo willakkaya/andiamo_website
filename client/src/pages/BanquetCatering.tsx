@@ -146,16 +146,22 @@ const banquetMenus = [
     subtitle: "Premier Dinner — Our Most Elevated Experience",
     sections: [
       {
+        heading: "Welcome — All Guests",
+        items: [
+          { name: "Champagne Toast", desc: "A glass of premium sparkling wine to welcome your guests and set the tone for an unforgettable evening" },
+        ],
+      },
+      {
         heading: "First Course — All Guests",
         items: [
-          { name: "Burrata di Bufala", desc: "Creamy buffalo-milk burrata, blood orange, marcona almonds, basil oil (Vegetarian, Gluten-Free)" },
+          { name: "Oysters Rockefeller", desc: "Half-dozen baked oysters per guest with spinach, Pernod, Parmigiano, and herb breadcrumbs — a classic showstopper" },
           { name: "Winter Citrus & Fennel Salad", desc: "Shaved fennel, cara cara orange, arugula, champagne vinaigrette (Vegan, Gluten-Free)" },
         ],
       },
       {
         heading: "Second Course — Choice of One",
         items: [
-          { name: "Rigatoni alla Norma Bianca", desc: "Roasted eggplant, garlic, basil, whipped ricotta, Calabrian chili (Vegetarian)" },
+          { name: "Lobster Ravioli", desc: "Housemade ravioli filled with Maine lobster and mascarpone in a saffron cream sauce with fresh tarragon" },
           { name: "Wild Mushroom & Truffle Risotto", desc: "Creamy aged Carnaroli rice with black truffle and slow-roasted wild mushrooms, Parmigiano-Reggiano and white truffle oil (Vegetarian, Gluten-Free)" },
         ],
       },
@@ -163,18 +169,19 @@ const banquetMenus = [
         heading: "Main Course — Choice of One Per Guest",
         items: [
           { name: "Pan-Roasted Chilean Sea Bass", desc: "Lemon-caper beurre blanc, fingerling potatoes, market vegetables (Gluten-Free, Pescatarian)" },
-          { name: "Gamberi al Limone", desc: "Tiger prawns, garlic, white wine, basil, citrus — roasted potatoes and vegetables (Gluten-Free, Pescatarian)" },
-          { name: "Herb-Crusted California Rack of Lamb", desc: "Garlic, rosemary, aged balsamic — truffle mashed potatoes and vegetables (Gluten-Free)" },
-          { name: "Grilled Filet Mignon", desc: "Red wine reduction, choice of blue cheese butter or herb-garlic olive oil (Gluten-Free)" },
-          { name: "Free-Range Chicken Marsala", desc: "Wild mushroom Marsala jus, roasted potatoes and vegetables" },
+          { name: "Herb-Crusted California Rack of Lamb", desc: "Garlic, rosemary, aged balsamic — truffle mashed potatoes and seasonal vegetables (Gluten-Free)" },
+          { name: "Grilled Prime Filet Mignon", desc: "10 oz center-cut filet, red wine demi-glace, choice of blue cheese butter or herb-garlic olive oil (Gluten-Free)" },
+          { name: "Whole Roasted Branzino", desc: "Mediterranean sea bass with lemon, capers, olives, and fresh herbs — deboned tableside (Gluten-Free, Pescatarian)" },
+          { name: "Osso Buco alla Milanese", desc: "Slow-braised veal shank with saffron risotto and gremolata — a timeless Italian classic" },
           { name: "Roasted Cauliflower Steak", desc: "Smoked tomato-caper vinaigrette, pine nuts, herbs (Vegan, Gluten-Free)" },
         ],
       },
       {
         heading: "Dessert — Choice of One Per Guest",
         items: [
-          { name: "Affogato al Caffè", desc: "Vanilla gelato, hot espresso, biscotti" },
-          { name: "Seasonal Citrus & Berries with Lemon Mascarpone", desc: "A light, elegant finish with fresh seasonal fruit (Gluten-Free)" },
+          { name: "Classic Tiramisu", desc: "Espresso-soaked ladyfingers, silky mascarpone cream, and a dusting of Valrhona cocoa" },
+          { name: "Affogato al Caffè", desc: "Vanilla gelato, hot espresso, amaretti biscotti" },
+          { name: "Chocolate Lava Cake", desc: "Warm Valrhona chocolate fondant with a molten center, served with vanilla gelato and fresh berries" },
         ],
       },
     ],
