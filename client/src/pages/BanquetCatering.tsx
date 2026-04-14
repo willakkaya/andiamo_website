@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { Link } from "wouter";
 import PageLayout from "@/components/PageLayout";
 import { IMAGES, LINKS } from "@/lib/images";
-import { ShoppingBag, ArrowRight } from "lucide-react";
+import { ShoppingBag, ArrowRight, Star } from "lucide-react";
+import EventQuoteCalculator from "@/components/EventQuoteCalculator";
+import StickyEventCTA from "@/components/StickyEventCTA";
+import EmailCapture from "@/components/EmailCapture";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -573,6 +577,95 @@ export default function BanquetCatering() {
           )}
         </div>
       </section>
+
+      {/* Quote Calculator */}
+      <EventQuoteCalculator />
+
+      {/* Event Testimonials */}
+      <section className="section-cream">
+        <div className="max-w-5xl mx-auto px-6 py-20 md:py-24">
+          <div className="text-center mb-12">
+            <div className="ornament-line mx-auto mb-6" />
+            <h2 className="font-display text-2xl md:text-3xl text-charcoal mb-3">What Event Hosts Say</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {[
+              {
+                text: "We hosted a corporate dinner in The Vault and it was perfect. The staff was attentive, the food was exceptional, and our clients were thoroughly impressed. The historic bank setting is unlike anything else on the Peninsula.",
+                author: "Corporate Client",
+                type: "Holiday Dinner in The Vault",
+                rating: 5,
+              },
+              {
+                text: "Andiamo handled our company's holiday party for 60 people flawlessly. The prix fixe menu was outstanding — every course was a hit. Our team is still talking about it months later.",
+                author: "Event Planner",
+                type: "Corporate Holiday Party",
+                rating: 5,
+              },
+            ].map((review, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.15, duration: 0.6 }}
+                className="p-8 bg-white/50 border border-charcoal/5"
+              >
+                <div className="flex gap-1 mb-4">
+                  {[...Array(5)].map((_, j) => (
+                    <Star key={j} size={13} className={j < review.rating ? "text-gold fill-gold" : "text-charcoal/10"} />
+                  ))}
+                </div>
+                <p className="font-accent text-charcoal/70 text-base leading-relaxed italic mb-5">
+                  "{review.text}"
+                </p>
+                <div>
+                  <span className="font-body text-[10px] tracking-[0.2em] uppercase text-charcoal/50">{review.author}</span>
+                  <span className="font-accent text-charcoal/30 text-xs block mt-0.5">{review.type}</span>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Event Type Landing Pages */}
+      <section className="section-warm">
+        <div className="max-w-4xl mx-auto px-6 py-16 md:py-20">
+          <div className="text-center mb-10">
+            <h3 className="font-display text-2xl text-charcoal mb-2">Planning a Specific Event?</h3>
+            <p className="font-accent text-charcoal/50 text-sm">Explore our dedicated event pages with tailored packages and details.</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl mx-auto">
+            <Link
+              href="/holiday-parties"
+              className="flex items-center justify-between p-5 border border-charcoal/10 hover:border-gold/30 bg-white/50 transition-all duration-300 group"
+            >
+              <div>
+                <span className="font-display text-lg text-charcoal group-hover:text-gold transition-colors">Holiday Parties</span>
+                <span className="font-accent text-charcoal/40 text-xs block mt-0.5">Corporate & team celebrations</span>
+              </div>
+              <ArrowRight size={16} className="text-charcoal/20 group-hover:text-gold transition-colors" />
+            </Link>
+            <Link
+              href="/rehearsal-dinners"
+              className="flex items-center justify-between p-5 border border-charcoal/10 hover:border-gold/30 bg-white/50 transition-all duration-300 group"
+            >
+              <div>
+                <span className="font-display text-lg text-charcoal group-hover:text-gold transition-colors">Rehearsal Dinners</span>
+                <span className="font-accent text-charcoal/40 text-xs block mt-0.5">Private dining in The Vault</span>
+              </div>
+              <ArrowRight size={16} className="text-charcoal/20 group-hover:text-gold transition-colors" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Email Capture */}
+      <EmailCapture />
+
+      {/* Sticky Mobile CTA */}
+      <StickyEventCTA />
 
       {/* CTA */}
       <section className="section-dark py-20">

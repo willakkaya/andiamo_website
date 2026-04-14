@@ -12,6 +12,8 @@ import CorporateDining from "./pages/CorporateDining";
 import Contact from "./pages/Contact";
 import Gallery from "./pages/Gallery";
 import BanquetCatering from "./pages/BanquetCatering";
+import HolidayParties from "./pages/HolidayParties";
+import RehearsalDinners from "./pages/RehearsalDinners";
 
 function ScrollToTop() {
   const [location] = useLocation();
@@ -34,6 +36,8 @@ function Router() {
         <Route path={"/contact"} component={Contact} />
         <Route path={"/gallery"} component={Gallery} />
         <Route path={"/banquet-catering"} component={BanquetCatering} />
+        <Route path={"/holiday-parties"} component={HolidayParties} />
+        <Route path={"/rehearsal-dinners"} component={RehearsalDinners} />
         <Route path={"/404"} component={NotFound} />
         <Route component={NotFound} />
       </Switch>
