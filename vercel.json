@@ -23,7 +23,21 @@
     { "source": "/order", "destination": "https://slicelife.com/restaurants/ca/south-san-francisco/94080/andiamo-in-banca/menu", "statusCode": 301 },
     { "source": "/order-online", "destination": "https://slicelife.com/restaurants/ca/south-san-francisco/94080/andiamo-in-banca/menu", "statusCode": 301 },
     { "source": "/photos", "destination": "/gallery", "statusCode": 301 },
-    { "source": "/contact-us", "destination": "/contact", "statusCode": 301 }
+    { "source": "/contact-us", "destination": "/contact", "statusCode": 301 },
+    { "source": "/directions", "destination": "/contact", "statusCode": 301 },
+    { "source": "/find-us", "destination": "/contact", "statusCode": 301 },
+    { "source": "/location", "destination": "/contact", "statusCode": 301 },
+    { "source": "/hours", "destination": "/contact", "statusCode": 301 },
+    { "source": "/banquet-menu", "destination": "/banquet-catering", "statusCode": 301 },
+    { "source": "/banquets", "destination": "/banquet-catering", "statusCode": 301 },
+    { "source": "/wine-list", "destination": "/menu", "statusCode": 301 },
+    { "source": "/wine", "destination": "/menu", "statusCode": 301 },
+    { "source": "/happy-hour", "destination": "/menu", "statusCode": 301 },
+    { "source": "/est-2019", "destination": "/our-story", "statusCode": 301 },
+    { "source": "/our-history", "destination": "/our-story", "statusCode": 301 },
+    { "source": "/story", "destination": "/our-story", "statusCode": 301 },
+    { "source": "/the-vault-private-dining", "destination": "/the-vault", "statusCode": 301 },
+    { "source": "/vault", "destination": "/the-vault", "statusCode": 301 }
   ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
