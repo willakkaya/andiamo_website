@@ -3,6 +3,28 @@
   "buildCommand": "pnpm run build",
   "outputDirectory": "dist",
   "framework": "vite",
+  "redirects": [
+    { "source": "/dinner-menu", "destination": "/menu", "statusCode": 301 },
+    { "source": "/lunch-menu", "destination": "/menu", "statusCode": 301 },
+    { "source": "/menu-1", "destination": "/menu", "statusCode": 301 },
+    { "source": "/menus", "destination": "/menu", "statusCode": 301 },
+    { "source": "/private-dining", "destination": "/the-vault", "statusCode": 301 },
+    { "source": "/bay-area-private-dining", "destination": "/the-vault", "statusCode": 301 },
+    { "source": "/private-events", "destination": "/the-vault", "statusCode": 301 },
+    { "source": "/reviews", "destination": "/#reviews", "statusCode": 301 },
+    { "source": "/add-your-review", "destination": "https://www.yelp.com/biz/andiamo-in-banca-south-san-francisco-3", "statusCode": 301 },
+    { "source": "/about", "destination": "/our-story", "statusCode": 301 },
+    { "source": "/about-us", "destination": "/our-story", "statusCode": 301 },
+    { "source": "/catering", "destination": "/banquet-catering", "statusCode": 301 },
+    { "source": "/banquet", "destination": "/banquet-catering", "statusCode": 301 },
+    { "source": "/events", "destination": "/banquet-catering", "statusCode": 301 },
+    { "source": "/corporate", "destination": "/corporate-dining", "statusCode": 301 },
+    { "source": "/reservations", "destination": "https://www.opentable.com/r/andiamo-in-banca-reservations-san-francisco?restref=1035160", "statusCode": 301 },
+    { "source": "/order", "destination": "https://slicelife.com/restaurants/ca/south-san-francisco/94080/andiamo-in-banca/menu", "statusCode": 301 },
+    { "source": "/order-online", "destination": "https://slicelife.com/restaurants/ca/south-san-francisco/94080/andiamo-in-banca/menu", "statusCode": 301 },
+    { "source": "/photos", "destination": "/gallery", "statusCode": 301 },
+    { "source": "/contact-us", "destination": "/contact", "statusCode": 301 }
+  ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ]
