@@ -208,6 +208,7 @@ export default function Home() {
           src={IMAGES.exterior}
           alt="Andiamo in Banca exterior — restored 1920s bank building"
           className="w-full h-full object-cover"
+          loading="lazy"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20" />
         <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12">
@@ -230,6 +231,7 @@ export default function Home() {
               src={IMAGES.vault}
               alt="The Vault private dining room at Andiamo in Banca"
               className="w-full h-full object-cover"
+              loading="lazy"
             />
           </div>
 
@@ -352,6 +354,7 @@ export default function Home() {
                   src={item.img}
                   alt={item.title}
                   className="w-full h-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-105"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/5 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-8">
