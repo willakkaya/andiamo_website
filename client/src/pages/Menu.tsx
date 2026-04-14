@@ -220,24 +220,24 @@ function MenuSection({ title, subtitle, note, items }: { title: string; subtitle
     <div className="mb-16">
       <div className="mb-8">
         <h3 className="font-display text-2xl md:text-3xl text-charcoal">{title}</h3>
-        {subtitle && <p className="font-accent text-sm text-muted-foreground tracking-wider mt-1">{subtitle}</p>}
-        {note && <p className="font-accent text-xs text-gold tracking-wider mt-2">{note}</p>}
+        {subtitle && <p className="font-accent text-base md:text-lg text-muted-foreground tracking-wider mt-1">{subtitle}</p>}
+        {note && <p className="font-accent text-sm md:text-base text-gold tracking-wider mt-2">{note}</p>}
         <div className="w-12 h-px bg-gold/30 mt-4" />
       </div>
       <div className="space-y-5">
         {items.map((item) => (
           <div key={item.name} className="group">
             <div className="flex items-baseline justify-between gap-3">
-              <h4 className="font-display text-base text-charcoal group-hover:text-gold transition-colors duration-500">
+              <h4 className="font-display text-lg md:text-xl text-charcoal group-hover:text-gold transition-colors duration-500">
                 {item.name}
               </h4>
               <div className="flex-1 border-b border-dotted border-charcoal/20 mb-1.5 min-w-[20px]" />
               {item.price && (
-                <span className="font-accent text-gold text-sm tracking-wide shrink-0">{item.price}</span>
+                <span className="font-accent text-gold text-base md:text-lg tracking-wide shrink-0">{item.price}</span>
               )}
             </div>
             {item.desc && (
-              <p className="text-muted-foreground text-base mt-1 font-accent italic tracking-wide leading-relaxed">{item.desc}</p>
+              <p className="text-muted-foreground text-base md:text-lg mt-1.5 font-accent italic tracking-wide leading-relaxed">{item.desc}</p>
             )}
           </div>
         ))}
@@ -295,10 +295,10 @@ export default function Menu() {
               <button
                 key={tab.key}
                 onClick={() => setActive(tab.key)}
-                className={`px-6 py-2.5 font-accent text-sm tracking-[0.15em] transition-all duration-500 ${
+                className={`px-6 py-2.5 font-accent text-base md:text-lg tracking-[0.15em] transition-all duration-500 ${
                   active === tab.key
                     ? "text-gold border-b-2 border-gold"
-                    : "text-charcoal/55 hover:text-charcoal/80"
+                    : "text-charcoal/70 hover:text-charcoal"
                 }`}
               >
                 {tab.label}
@@ -338,21 +338,21 @@ export default function Menu() {
 
           {/* Note */}
           <div className="mt-12 text-center">
-            <p className="text-muted-foreground text-base italic font-accent tracking-wide">
+            <p className="text-muted-foreground text-base md:text-lg italic font-accent tracking-wide">
               Menu items and prices are subject to change. Please inform your server of any allergies or dietary restrictions.
             </p>
-            <p className="text-muted-foreground text-xs mt-3 font-accent tracking-wide">
+            <p className="text-muted-foreground text-sm md:text-base mt-3 font-accent tracking-wide">
               Vegan & gluten free lentil pasta available as a substitution for all pasta dishes.
               A 20% gratuity will be added for parties of 6 or more.
             </p>
             <div className="flex flex-wrap justify-center gap-6 mt-8">
-              <Link href="/banquet-catering" className="font-accent text-gold/70 hover:text-gold text-sm tracking-wide transition-colors duration-300">
+              <Link href="/banquet-catering" className="font-accent text-gold/80 hover:text-gold text-base md:text-lg tracking-wide transition-colors duration-300">
                 Banquet & Catering Menus
               </Link>
-              <Link href="/the-vault" className="font-accent text-gold/70 hover:text-gold text-sm tracking-wide transition-colors duration-300">
+              <Link href="/the-vault" className="font-accent text-gold/80 hover:text-gold text-base md:text-lg tracking-wide transition-colors duration-300">
                 Private Dining
               </Link>
-              <Link href="/contact" className="font-accent text-gold/70 hover:text-gold text-sm tracking-wide transition-colors duration-300">
+              <Link href="/contact" className="font-accent text-gold/80 hover:text-gold text-base md:text-lg tracking-wide transition-colors duration-300">
                 Contact Us
               </Link>
             </div>

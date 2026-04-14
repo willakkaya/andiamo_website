@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Calculator, Users, Wine, ChevronDown, ChevronUp, ArrowRight, Check } from "lucide-react";
 import { submitForm } from "@/lib/formspree";
@@ -14,10 +14,10 @@ const MENU_TIERS: { key: MenuTier; label: string; price: number; desc: string }[
 ];
 
 const WINE_PAIRINGS = [
-  { key: "none", label: "No Wine Pairing", price: 0 },
-  { key: "standard", label: "Standard Pairing", price: 30 },
-  { key: "rare", label: "Rare Pairing", price: 75 },
-  { key: "legendary", label: "Legendary Pairing", price: 150 },
+  { key: "none", label: "No Wine Pairing", price: 0, desc: "" },
+  { key: "standard", label: "Standard Pairing", price: 30, desc: "Curated Italian & California wines paired to each course by our sommelier" },
+  { key: "rare", label: "Rare Pairing", price: 75, desc: "Reserve selections — Barolo, Super Tuscans, and Napa cult favorites" },
+  { key: "legendary", label: "Legendary Pairing", price: 150, desc: "Trophy wines — Brunello Riserva, Amarone, first-growth Bordeaux & premium Champagne" },
 ];
 
 const ENHANCEMENTS = [
@@ -49,6 +49,7 @@ export default function EventQuoteCalculator() {
   const [formData, setFormData] = useState({ name: "", email: "", phone: "", eventDate: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const inquiryRef = useRef<HTMLDivElement>(null);
 
   const tier = MENU_TIERS.find((t) => t.key === menuTier)!;
   const wine = WINE_PAIRINGS.find((w) => w.key === winePairing)!;
@@ -122,7 +123,7 @@ export default function EventQuoteCalculator() {
           <h2 className="font-display text-3xl md:text-4xl text-cream mb-4">
             Build Your Event Quote
           </h2>
-          <p className="font-accent text-cream/50 text-base max-w-xl mx-auto leading-relaxed">
+          <p className="font-accent text-cream/70 text-base max-w-xl mx-auto leading-relaxed">
             Select your menu, add enhancements, and see your estimated total in real time.
             No commitment — just a starting point for planning.
           </p>
@@ -156,7 +157,7 @@ export default function EventQuoteCalculator() {
                     onChange={(e) => setGuestCount(Math.max(1, Number(e.target.value)))}
                     className="w-16 bg-transparent border border-cream/20 text-cream text-center py-1.5 font-display text-lg focus:border-gold/50 focus:outline-none"
                   />
-                  <span className="text-cream/40 text-sm font-accent">guests</span>
+                  <span className="text-cream/60 text-sm font-accent">guests</span>
                 </div>
               </div>
             </div>
@@ -184,7 +185,7 @@ export default function EventQuoteCalculator() {
                   </button>
                 ))}
               </div>
-              <p className="font-accent text-cream/40 text-xs mt-3 italic">{tier.desc}</p>
+              <p className="font-accent text-cream/60 text-xs mt-3 italic">{tier.desc}</p>
             </div>
 
             {/* Wine Pairing */}
@@ -193,20 +194,25 @@ export default function EventQuoteCalculator() {
                 <Wine size={14} />
                 Wine Pairing
               </label>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {WINE_PAIRINGS.map((w) => (
                   <button
                     key={w.key}
                     onClick={() => setWinePairing(w.key)}
-                    className={`p-3 border text-center transition-all duration-300 ${
+                    className={`p-4 border text-left transition-all duration-300 ${
                       winePairing === w.key
                         ? "border-gold bg-gold/10 text-cream"
-                        : "border-cream/10 text-cream/50 hover:border-cream/30"
+                        : "border-cream/10 text-cream/70 hover:border-cream/30"
                     }`}
                   >
-                    <span className="font-accent text-sm block">{w.label}</span>
-                    {w.price > 0 && (
-                      <span className="font-accent text-[10px] text-gold/70 block mt-0.5">${w.price}/pp</span>
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="font-accent text-sm font-medium">{w.label}</span>
+                      {w.price > 0 && (
+                        <span className="font-display text-base text-gold">${w.price}<span className="text-xs text-gold/70">/pp</span></span>
+                      )}
+                    </div>
+                    {w.desc && (
+                      <span className="font-accent text-xs text-cream/55 leading-relaxed block">{w.desc}</span>
                     )}
                   </button>
                 ))}
@@ -239,7 +245,7 @@ export default function EventQuoteCalculator() {
                     className="overflow-hidden"
                   >
                     <div className="mt-4 space-y-2">
-                      <p className="font-accent text-cream/30 text-[10px] tracking-wider uppercase mb-2">Enhancements</p>
+                      <p className="font-accent text-cream/50 text-[10px] tracking-wider uppercase mb-2">Enhancements</p>
                       {ENHANCEMENTS.map((e) => {
                         const included = is120 && e.includedIn120;
                         return (
@@ -269,7 +275,7 @@ export default function EventQuoteCalculator() {
                     </div>
 
                     <div className="mt-6 space-y-2">
-                      <p className="font-accent text-cream/30 text-[10px] tracking-wider uppercase mb-2">Hors d'Oeuvres</p>
+                      <p className="font-accent text-cream/50 text-[10px] tracking-wider uppercase mb-2">Hors d'Oeuvres</p>
                       {HORS_DOEUVRES.map((h) => (
                         <label
                           key={h.key}
@@ -305,25 +311,25 @@ export default function EventQuoteCalculator() {
 
               <div className="space-y-3 mb-6">
                 <div className="flex justify-between text-sm">
-                  <span className="font-accent text-cream/50">{tier.label} × {guestCount}</span>
-                  <span className="font-accent text-cream/70">${menuTotal.toLocaleString()}</span>
+                  <span className="font-accent text-cream/70">{tier.label} × {guestCount}</span>
+                  <span className="font-accent text-cream font-medium">${menuTotal.toLocaleString()}</span>
                 </div>
                 {wineTotal > 0 && (
                   <div className="flex justify-between text-sm">
-                    <span className="font-accent text-cream/50">{wine.label}</span>
-                    <span className="font-accent text-cream/70">${wineTotal.toLocaleString()}</span>
+                    <span className="font-accent text-cream/70">{wine.label}</span>
+                    <span className="font-accent text-cream font-medium">${wineTotal.toLocaleString()}</span>
                   </div>
                 )}
                 {enhancementTotal > 0 && (
                   <div className="flex justify-between text-sm">
-                    <span className="font-accent text-cream/50">Enhancements</span>
-                    <span className="font-accent text-cream/70">${enhancementTotal.toLocaleString()}</span>
+                    <span className="font-accent text-cream/70">Enhancements</span>
+                    <span className="font-accent text-cream font-medium">${enhancementTotal.toLocaleString()}</span>
                   </div>
                 )}
                 {horsTotal > 0 && (
                   <div className="flex justify-between text-sm">
-                    <span className="font-accent text-cream/50">Hors d'Oeuvres</span>
-                    <span className="font-accent text-cream/70">${horsTotal.toLocaleString()}</span>
+                    <span className="font-accent text-cream/70">Hors d'Oeuvres</span>
+                    <span className="font-accent text-cream font-medium">${horsTotal.toLocaleString()}</span>
                   </div>
                 )}
                 {is120 && selectedEnhancements.some((k) => ENHANCEMENTS.find((e) => e.key === k)?.includedIn120) && (
@@ -339,17 +345,20 @@ export default function EventQuoteCalculator() {
                   <span className="font-display text-lg text-cream">Estimated Total</span>
                   <span className="font-display text-2xl text-gold">${grandTotal.toLocaleString()}</span>
                 </div>
-                <p className="font-accent text-cream/40 text-xs mt-1 text-right">
+                <p className="font-accent text-cream/60 text-xs mt-1 text-right">
                   ${perPerson.toFixed(0)} per person
                 </p>
               </div>
 
-              <p className="font-accent text-cream/30 text-[10px] mt-4 leading-relaxed italic">
+              <p className="font-accent text-cream/50 text-[10px] mt-4 leading-relaxed italic">
                 Estimate only. Tax and gratuity not included. Final pricing confirmed by our events team.
               </p>
 
               <button
-                onClick={() => setShowInquiry(true)}
+                onClick={() => {
+                  setShowInquiry(true);
+                  setTimeout(() => inquiryRef.current?.scrollIntoView({ behavior: "smooth", block: "center" }), 150);
+                }}
                 className="w-full mt-6 py-3.5 bg-gold text-charcoal font-body text-[12px] tracking-[0.2em] uppercase font-semibold hover:bg-gold-light transition-all duration-300 flex items-center justify-center gap-2"
               >
                 Send This Quote
@@ -358,7 +367,7 @@ export default function EventQuoteCalculator() {
 
               <a
                 href="tel:+16507458811"
-                className="block text-center font-accent text-cream/40 text-xs mt-3 hover:text-gold/70 transition-colors"
+                className="block text-center font-accent text-cream/60 text-xs mt-3 hover:text-gold/70 transition-colors"
               >
                 or call (650) 745-8811
               </a>
@@ -367,6 +376,7 @@ export default function EventQuoteCalculator() {
         </div>
 
         {/* Inquiry Form — slides in when "Send This Quote" is clicked */}
+        <div ref={inquiryRef}>
         <AnimatePresence>
           {showInquiry && !submitted && (
             <motion.div
@@ -377,7 +387,7 @@ export default function EventQuoteCalculator() {
             >
               <div className="bg-cream/[0.04] border border-cream/10 p-8">
                 <h3 className="font-display text-xl text-cream mb-2">Send Your Quote</h3>
-                <p className="font-accent text-cream/40 text-sm mb-6">
+                <p className="font-accent text-cream/60 text-sm mb-6">
                   We'll follow up within 24 hours with availability and a finalized proposal.
                 </p>
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -438,12 +448,13 @@ export default function EventQuoteCalculator() {
             >
               <Check size={40} className="text-gold mx-auto mb-4 stroke-[1.5]" />
               <h3 className="font-display text-2xl text-cream mb-3">Quote Sent!</h3>
-              <p className="font-accent text-cream/50">
+              <p className="font-accent text-cream/70">
                 We'll be in touch within 24 hours with availability and a finalized proposal for your {guestCount}-guest event.
               </p>
             </motion.div>
           )}
         </AnimatePresence>
+        </div>
       </div>
     </section>
   );
