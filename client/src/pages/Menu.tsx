@@ -228,12 +228,12 @@ function MenuSection({ title, subtitle, note, items }: { title: string; subtitle
         {items.map((item) => (
           <div key={item.name} className="group">
             <div className="flex items-baseline justify-between gap-3">
-              <h4 className="font-display text-lg md:text-xl text-charcoal group-hover:text-gold transition-colors duration-500">
+              <h4 className="font-display text-lg md:text-2xl text-charcoal group-hover:text-gold transition-colors duration-500">
                 {item.name}
               </h4>
               <div className="flex-1 border-b border-dotted border-charcoal/20 mb-1.5 min-w-[20px]" />
               {item.price && (
-                <span className="font-accent text-gold text-base md:text-lg tracking-wide shrink-0">{item.price}</span>
+                <span className="font-accent text-gold text-base md:text-xl tracking-wide shrink-0">{item.price}</span>
               )}
             </div>
             {item.desc && (

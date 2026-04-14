@@ -232,6 +232,19 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Bigger base font on desktop — scales every rem-based text size site-wide.
+   Mobile stays at the browser default (16px) so it doesn't get oversized. */
+@media (min-width: 768px) {
+  html {
+    font-size: 17.5px;
+  }
+}
+@media (min-width: 1280px) {
+  html {
+    font-size: 18px;
+  }
+}
+
 /* Elegant scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
