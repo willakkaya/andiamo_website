@@ -46,7 +46,7 @@ export default function EventQuoteCalculator() {
   const [selectedHors, setSelectedHors] = useState<string[]>([]);
   const [showDetails, setShowDetails] = useState(false);
   const [showInquiry, setShowInquiry] = useState(false);
-  const [formData, setFormData] = useState({ name: "", email: "", phone: "", eventDate: "", message: "" });
+  const [formData, setFormData] = useState({ name: "", email: "", phone: "", eventDate: "", eventTime: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const inquiryRef = useRef<HTMLDivElement>(null);
@@ -94,6 +94,7 @@ export default function EventQuoteCalculator() {
       _subject: `Event Quote — ${guestCount} guests, ${tier.label}`,
       source: "quote-calculator",
       guestCount: String(guestCount),
+      eventTime: formData.eventTime || "Not specified",
       menuTier: tier.label,
       winePairing: wine.label,
       enhancements: selectedEnhancements.join(", "),
@@ -421,6 +422,29 @@ export default function EventQuoteCalculator() {
                       onChange={(e) => setFormData({ ...formData, eventDate: e.target.value })}
                       className="w-full bg-transparent border border-cream/15 px-4 py-3 text-cream font-accent text-sm placeholder:text-cream/25 focus:border-gold/40 focus:outline-none transition-all"
                     />
+                    <select
+                      value={formData.eventTime}
+                      onChange={(e) => setFormData({ ...formData, eventTime: e.target.value })}
+                      className="w-full bg-charcoal border border-cream/15 px-4 py-3 text-cream font-accent text-sm focus:border-gold/40 focus:outline-none transition-all"
+                    >
+                      <option value="">Preferred start time</option>
+                      <optgroup label="Lunch">
+                        <option value="11:00 AM">11:00 AM</option>
+                        <option value="11:30 AM">11:30 AM</option>
+                        <option value="12:00 PM">12:00 PM</option>
+                        <option value="12:30 PM">12:30 PM</option>
+                        <option value="1:00 PM">1:00 PM</option>
+                      </optgroup>
+                      <optgroup label="Dinner">
+                        <option value="5:00 PM">5:00 PM</option>
+                        <option value="5:30 PM">5:30 PM</option>
+                        <option value="6:00 PM">6:00 PM</option>
+                        <option value="6:30 PM">6:30 PM</option>
+                        <option value="7:00 PM">7:00 PM</option>
+                        <option value="7:30 PM">7:30 PM</option>
+                        <option value="8:00 PM">8:00 PM</option>
+                      </optgroup>
+                    </select>
                   </div>
                   <textarea
                     value={formData.message}

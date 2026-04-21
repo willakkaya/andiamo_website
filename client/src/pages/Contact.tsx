@@ -17,7 +17,7 @@ const fadeUp = {
 };
 
 function ContactForm() {
-  const [formData, setFormData] = useState({ name: "", email: "", phone: "", message: "" });
+  const [formData, setFormData] = useState({ name: "", email: "", phone: "", eventTime: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
@@ -101,6 +101,32 @@ function ContactForm() {
                   className={inputClass}
                   placeholder="(555) 123-4567"
                 />
+              </div>
+              <div>
+                <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Preferred Time</label>
+                <select
+                  value={formData.eventTime}
+                  onChange={(e) => setFormData({ ...formData, eventTime: e.target.value })}
+                  className="w-full bg-transparent border-b border-charcoal/15 px-0 py-3 text-charcoal font-accent text-sm tracking-wide focus:border-gold/50 focus:outline-none transition-colors"
+                >
+                  <option value="">Select a time slot</option>
+                  <optgroup label="Lunch">
+                    <option value="11:00 AM">11:00 AM</option>
+                    <option value="11:30 AM">11:30 AM</option>
+                    <option value="12:00 PM">12:00 PM</option>
+                    <option value="12:30 PM">12:30 PM</option>
+                    <option value="1:00 PM">1:00 PM</option>
+                  </optgroup>
+                  <optgroup label="Dinner">
+                    <option value="5:00 PM">5:00 PM</option>
+                    <option value="5:30 PM">5:30 PM</option>
+                    <option value="6:00 PM">6:00 PM</option>
+                    <option value="6:30 PM">6:30 PM</option>
+                    <option value="7:00 PM">7:00 PM</option>
+                    <option value="7:30 PM">7:30 PM</option>
+                    <option value="8:00 PM">8:00 PM</option>
+                  </optgroup>
+                </select>
               </div>
               <div>
                 <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Message *</label>
