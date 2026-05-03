@@ -23,10 +23,25 @@ function ScrollToTop() {
   return null;
 }
 
+function PageviewTracker() {
+  const [location] = useLocation();
+  useEffect(() => {
+    if (typeof window.gtag === "function") {
+      window.gtag("event", "page_view", {
+        page_path: location,
+        page_location: window.location.href,
+        page_title: document.title,
+      });
+    }
+  }, [location]);
+  return null;
+}
+
 function Router() {
   return (
     <>
       <ScrollToTop />
+      <PageviewTracker />
       <Switch>
         <Route path={"/"} component={Home} />
         <Route path={"/menu"} component={Menu} />

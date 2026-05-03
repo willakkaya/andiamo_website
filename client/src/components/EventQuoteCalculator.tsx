@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Calculator, Users, Wine, ChevronDown, ChevronUp, ArrowRight, Check } from "lucide-react";
 import { submitForm } from "@/lib/formspree";
+import { trackQuoteSubmit } from "@/lib/analytics";
 import { toast } from "sonner";
 
 type MenuTier = "lunch35" | "dinner65" | "dinner80" | "dinner120";
@@ -105,6 +106,7 @@ export default function EventQuoteCalculator() {
     const ok = await submitForm(quoteDetails);
     if (ok) {
       setSubmitted(true);
+      trackQuoteSubmit({ guestCount, menuTier: tier.label, estimatedTotal: grandTotal });
       toast.success("Quote request sent! We'll follow up within 24 hours.");
     } else {
       toast.error("Something went wrong. Please call us at (650) 745-8811.");

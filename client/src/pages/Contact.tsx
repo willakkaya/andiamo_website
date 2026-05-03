@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { MapPin, Phone, Mail, Clock, Instagram, Car, Train, ArrowRight, Check } from "lucide-react";
 import { Link } from "wouter";
 import { submitForm } from "@/lib/formspree";
+import { trackContactSubmit, trackPhoneClick, trackReservationClick } from "@/lib/analytics";
 import { toast } from "sonner";
 
 const fadeUp = {
@@ -27,6 +28,7 @@ function ContactForm() {
     const ok = await submitForm({ ...formData, _subject: "Website Inquiry", source: "contact" });
     if (ok) {
       setSubmitted(true);
+      trackContactSubmit("contact-page");
       toast.success("Message sent! We'll get back to you soon.");
     } else {
       toast.error("Something went wrong. Please call us at (650) 745-8811.");
@@ -238,6 +240,7 @@ export default function Contact() {
                 <div className="space-y-5">
                   <a
                     href="tel:+16507458811"
+                    onClick={() => trackPhoneClick("contact-page")}
                     className="flex items-center gap-3 font-display text-xl text-charcoal hover:text-gold transition-colors"
                   >
                     {LINKS.phone}
@@ -274,6 +277,7 @@ export default function Contact() {
               >
                 <a
                   href={LINKS.opentable}
+                  onClick={() => trackReservationClick("contact-page")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center px-10 py-4 bg-charcoal text-cream font-body text-[12px] tracking-[0.2em] uppercase hover:bg-espresso transition-all duration-300"

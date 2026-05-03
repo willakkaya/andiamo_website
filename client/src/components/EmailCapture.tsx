@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, ArrowRight, Check } from "lucide-react";
 import { submitForm } from "@/lib/formspree";
+import { trackEmailCapture } from "@/lib/analytics";
 import { toast } from "sonner";
 
 export default function EmailCapture() {
@@ -21,6 +22,7 @@ export default function EmailCapture() {
     });
     if (ok) {
       setSubmitted(true);
+      trackEmailCapture("event-planning-guide");
       toast.success("We'll send your guide shortly!");
     } else {
       toast.error("Something went wrong. Please try again.");
