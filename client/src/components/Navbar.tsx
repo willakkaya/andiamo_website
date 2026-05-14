@@ -9,7 +9,7 @@ const NAV_LINKS = [
   { label: "Our Story", href: "/our-story" },
   { label: "The Vault", href: "/the-vault" },
   { label: "Private Events", href: "/banquet-catering" },
-  { label: "Corporate", href: "/corporate-dining" },
+  { label: "Private Dining", href: "/private-dining" },
   { label: "Gallery", href: "/gallery" },
   { label: "Contact", href: "/contact" },
 ];

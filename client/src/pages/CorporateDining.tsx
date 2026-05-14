@@ -1,7 +1,7 @@
 import PageLayout from "@/components/PageLayout";
 import { IMAGES, LINKS } from "@/lib/images";
 import { motion } from "framer-motion";
-import { Building2, Users, Clock, MapPin, ArrowRight, Check, Plane, Briefcase, Wine, Star } from "lucide-react";
+import { Building2, Users, Clock, MapPin, ArrowRight, Check, Plane, Briefcase, PartyPopper, Star } from "lucide-react";
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { submitForm } from "@/lib/formspree";
@@ -21,10 +21,10 @@ const fadeUp = {
 
 export default function CorporateDining() {
   useEffect(() => {
-    document.title = "Corporate Dining in a 1920s Bank Vault | South SF | Andiamo in Banca";
+    document.title = "Private Dining Room in South San Francisco | The Vault at Andiamo in Banca";
     document.querySelector('meta[name="description"]')?.setAttribute(
       "content",
-      "Host clients, candidates, and board members in a meticulously restored 1920s bank vault. Walking distance from Genentech, Amgen, and the SSF biotech corridor. 10 minutes from SFO."
+      "South San Francisco's most distinctive private dining room. Host corporate dinners, board meetings, and private events in a meticulously restored 1920s bank vault. Walking distance from Genentech, Amgen, and the SSF biotech corridor. 10 minutes from SFO."
     );
   }, []);
 
@@ -72,14 +72,14 @@ export default function CorporateDining() {
         <div className="relative z-10 text-center px-6 max-w-4xl">
           <div className="ornament-line !bg-white/20 mx-auto mb-6" />
           <p className="font-accent text-sm tracking-[0.3em] uppercase text-gold-light/80 mb-5">
-            Corporate Dining
+            Private Dining & Events
           </p>
           <h1 className="font-display text-4xl md:text-6xl lg:text-7xl text-white tracking-wide leading-tight mb-6">
             Host Clients in a<br />1920s Bank Vault
           </h1>
           <p className="font-accent text-base md:text-lg text-white/80 max-w-2xl mx-auto leading-relaxed mb-10">
-            5 minutes from Genentech, Amgen, and the South San Francisco biotech corridor.
-            10 minutes from SFO. The Peninsula's most distinctive private dining experience.
+            South San Francisco's most distinctive private dining room. 5 minutes from Genentech, Amgen, and the biotech corridor.
+            10 minutes from SFO.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
@@ -147,7 +147,7 @@ export default function CorporateDining() {
               { icon: Building2, title: "Board Meetings", desc: "Dignified, private, and unforgettable. Perfect for board dinners, partner meetings, and investor entertainment." },
               { icon: Users, title: "Candidate Recruiting", desc: "Close your top hire over a multi-course tasting menu. Many of our regulars use The Vault to seal the deal." },
               { icon: Plane, title: "Visiting Executives", desc: "Pick up your VIPs from SFO and have them dining 10 minutes later. Perfect for inbound C-suite visits." },
-              { icon: Wine, title: "Holiday Parties", desc: "Reserve The Vault or buy out the entire restaurant for company holiday celebrations. Custom menus and full bar service." },
+              { icon: PartyPopper, title: "Holiday Parties", desc: "Reserve The Vault or buy out the entire restaurant for company holiday celebrations. Custom menus and full-service hosting." },
               { icon: Star, title: "JPM Healthcare Conference", desc: "Reserve well in advance for JPM week. Private dining minutes from SFO — book by November to lock in your dates." },
             ].map((feat, i) => (
               <motion.div
@@ -251,12 +251,12 @@ export default function CorporateDining() {
               {
                 title: "Client Dinner",
                 price: "From $65/person",
-                desc: "Multi-course dinner in our main dining room or The Vault. Optional sommelier-curated wine pairings. Standard dinner service that scales from a 4-top to a 30-person dinner.",
+                desc: "Multi-course dinner in our main dining room or The Vault. Personalized service for VIPs and key clients. Scales from a 4-top to a 30-person dinner.",
               },
               {
                 title: "The Vault Buyout",
                 price: "From $80/person",
-                desc: "Reserve The Vault exclusively — our restored 1920s bank vault private room. Up to 60 guests. Custom menus, sommelier, and personalized service.",
+                desc: "Reserve The Vault exclusively — our restored 1920s bank vault private room. Up to 60 guests. Custom menus, dedicated event captain, and personalized service.",
               },
               {
                 title: "Full Restaurant Buyout",

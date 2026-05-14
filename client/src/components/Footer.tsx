@@ -116,8 +116,8 @@ export default function Footer() {
                 <Link href="/the-vault" className="block text-cream/65 hover:text-cream/80 transition-colors">
                   The Vault &mdash; Private Dining
                 </Link>
-                <Link href="/corporate-dining" className="block text-cream/65 hover:text-cream/80 transition-colors">
-                  Corporate Events
+                <Link href="/private-dining" className="block text-cream/65 hover:text-cream/80 transition-colors">
+                  Private Dining & Events
                 </Link>
                 <Link href="/banquet-catering" className="block text-cream/65 hover:text-cream/80 transition-colors">
                   Banquet & Catering
