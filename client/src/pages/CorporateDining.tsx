@@ -21,7 +21,7 @@ const fadeUp = {
 
 export default function CorporateDining() {
   useEffect(() => {
-    document.title = "Private Dining Room in South San Francisco | The Vault at Andiamo in Banca";
+    document.title = "Private Dining & Events | Andiamo in Banca South San Francisco";
     document.querySelector('meta[name="description"]')?.setAttribute(
       "content",
       "South San Francisco's most distinctive private dining room. Host corporate dinners, board meetings, and private events in a meticulously restored 1920s bank vault. Walking distance from Genentech, Amgen, and the SSF biotech corridor. 10 minutes from SFO."
