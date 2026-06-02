@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { usePageMeta } from "@/hooks/usePageMeta";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import PageLayout from "@/components/PageLayout";
@@ -261,10 +262,11 @@ const cateringMenu = [
 ];
 
 export default function BanquetCatering() {
-  useEffect(() => {
-    document.title = "Banquet & Catering | Andiamo in Banca";
-    document.querySelector('meta[name="description"]')?.setAttribute("content", "Banquet menus and catering packages for your next event. Andiamo in Banca, South San Francisco.");
-  }, []);
+  usePageMeta({
+    title: "Banquet & Catering | Andiamo in Banca",
+    description:
+      "Banquet menus and catering packages for your next event. Andiamo in Banca, South San Francisco.",
+  });
 
   const [activeTab, setActiveTab] = useState<TabKey>("banquet");
 

@@ -1,6 +1,7 @@
 import PageLayout from "@/components/PageLayout";
 import { IMAGES, LINKS } from "@/lib/images";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { usePageMeta } from "@/hooks/usePageMeta";
 import { motion } from "framer-motion";
 import { ShoppingBag } from "lucide-react";
 import { Link } from "wouter";
@@ -247,10 +248,11 @@ function MenuSection({ title, subtitle, note, items }: { title: string; subtitle
 }
 
 export default function Menu() {
-  useEffect(() => {
-    document.title = "Menu | Andiamo in Banca";
-    document.querySelector('meta[name="description"]')?.setAttribute("content", "Explore our menu of handmade pasta, fresh seafood, and Italian classics. Andiamo in Banca — South San Francisco.");
-  }, []);
+  usePageMeta({
+    title: "Menu | Andiamo in Banca",
+    description:
+      "Explore our menu of handmade pasta, fresh seafood, and Italian classics. Andiamo in Banca — South San Francisco.",
+  });
 
   const [active, setActive] = useState<MenuTab>("dinner");
 

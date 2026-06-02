@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { usePageMeta } from "@/hooks/usePageMeta";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import PageLayout from "@/components/PageLayout";
@@ -53,15 +53,11 @@ const PACKAGES = [
 ];
 
 export default function HolidayParties() {
-  useEffect(() => {
-    document.title = "Holiday Party Packages | Andiamo in Banca";
-    document
-      .querySelector('meta[name="description"]')
-      ?.setAttribute(
-        "content",
-        "Book your holiday party at Andiamo in Banca. Corporate holiday dinners, team celebrations, and private events in The Vault. South San Francisco."
-      );
-  }, []);
+  usePageMeta({
+    title: "Holiday Party Packages | Andiamo in Banca",
+    description:
+      "Book your holiday party at Andiamo in Banca. Corporate holiday dinners, team celebrations, and private events in The Vault. South San Francisco.",
+  });
 
   return (
     <PageLayout>

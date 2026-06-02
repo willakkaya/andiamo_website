@@ -2,7 +2,8 @@ import PageLayout from "@/components/PageLayout";
 import { IMAGES, LINKS } from "@/lib/images";
 import { motion } from "framer-motion";
 import { Users, Utensils, Monitor, Wine, Check } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { usePageMeta } from "@/hooks/usePageMeta";
 import { toast } from "sonner";
 import { submitForm } from "@/lib/formspree";
 
@@ -16,10 +17,11 @@ const fadeUp = {
 };
 
 export default function TheVault() {
-  useEffect(() => {
-    document.title = "The Vault Private Dining | Andiamo in Banca";
-    document.querySelector('meta[name="description"]')?.setAttribute("content", "Host your private event in The Vault — our exclusive dining room inside a restored bank vault. Andiamo in Banca, South San Francisco.");
-  }, []);
+  usePageMeta({
+    title: "The Vault Private Dining | Andiamo in Banca",
+    description:
+      "Host your private event in The Vault — our exclusive dining room inside a restored bank vault. Andiamo in Banca, South San Francisco.",
+  });
 
   const [formData, setFormData] = useState({
     name: "", email: "", phone: "", company: "",

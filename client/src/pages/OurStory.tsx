@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { usePageMeta } from "@/hooks/usePageMeta";
 import PageLayout from "@/components/PageLayout";
 import { IMAGES } from "@/lib/images";
 import { motion } from "framer-motion";
@@ -14,10 +14,11 @@ const fadeUp = {
 };
 
 export default function OurStory() {
-  useEffect(() => {
-    document.title = "Our Story | Andiamo in Banca";
-    document.querySelector('meta[name="description"]')?.setAttribute("content", "From Cafe Figaro in 1989 to Andiamo in Banca — the Akkaya family has been feeding the Bay Area for over 35 years. Discover our story.");
-  }, []);
+  usePageMeta({
+    title: "Our Story | Andiamo in Banca",
+    description:
+      "From Cafe Figaro in 1989 to Andiamo in Banca — the Akkaya family has been feeding the Bay Area for over 35 years. Discover our story.",
+  });
 
   return (
     <PageLayout>

@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { usePageMeta } from "@/hooks/usePageMeta";
 import PageLayout from "@/components/PageLayout";
 import { IMAGES, LINKS } from "@/lib/images";
 import { motion } from "framer-motion";
@@ -158,10 +159,11 @@ function ContactForm() {
 }
 
 export default function Contact() {
-  useEffect(() => {
-    document.title = "Contact & Hours | Andiamo in Banca";
-    document.querySelector('meta[name="description"]')?.setAttribute("content", "Visit us at 301 Linden Ave, South San Francisco. Reservations, hours, and directions for Andiamo in Banca.");
-  }, []);
+  usePageMeta({
+    title: "Contact & Hours | Andiamo in Banca",
+    description:
+      "Visit us at 301 Linden Ave, South San Francisco. Reservations, hours, and directions for Andiamo in Banca.",
+  });
 
   return (
     <PageLayout>

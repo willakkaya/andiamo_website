@@ -3,7 +3,7 @@ import { IMAGES, LINKS } from "@/lib/images";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { Star, ArrowRight, ChevronDown, ShoppingBag, MapPin } from "lucide-react";
-import { useEffect } from "react";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -39,10 +39,11 @@ const REVIEWS = [
 ];
 
 export default function Home() {
-  useEffect(() => {
-    document.title = "Andiamo in Banca | Italian Dining in SSF";
-    document.querySelector('meta[name="description"]')?.setAttribute("content", "South San Francisco's premier Italian restaurant in a restored 1920s bank building. Handmade pasta, curated wines, and The Vault private dining.");
-  }, []);
+  usePageMeta({
+    title: "Andiamo in Banca | Italian Dining in SSF",
+    description:
+      "South San Francisco's premier Italian restaurant in a restored 1920s bank building. Handmade pasta, curated wines, and The Vault private dining.",
+  });
 
   return (
     <PageLayout>

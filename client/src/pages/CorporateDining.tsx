@@ -2,7 +2,8 @@ import PageLayout from "@/components/PageLayout";
 import { IMAGES, LINKS } from "@/lib/images";
 import { motion } from "framer-motion";
 import { Building2, Users, Clock, MapPin, ArrowRight, Check, Plane, Briefcase, PartyPopper, Star } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { usePageMeta } from "@/hooks/usePageMeta";
 import { toast } from "sonner";
 import { submitForm } from "@/lib/formspree";
 import { trackContactSubmit, trackPhoneClick } from "@/lib/analytics";
@@ -20,13 +21,11 @@ const fadeUp = {
 };
 
 export default function CorporateDining() {
-  useEffect(() => {
-    document.title = "Private Dining & Events | Andiamo in Banca South San Francisco";
-    document.querySelector('meta[name="description"]')?.setAttribute(
-      "content",
-      "South San Francisco's most distinctive private dining room. Host corporate dinners, board meetings, and private events in a meticulously restored 1920s bank vault. Walking distance from Genentech, Amgen, and the SSF biotech corridor. 10 minutes from SFO."
-    );
-  }, []);
+  usePageMeta({
+    title: "Private Dining & Events | Andiamo in Banca South San Francisco",
+    description:
+      "South San Francisco's most distinctive private dining room. Host corporate dinners, board meetings, and private events in a meticulously restored 1920s bank vault. Walking distance from Genentech, Amgen, and the SSF biotech corridor. 10 minutes from SFO.",
+  });
 
   const [formData, setFormData] = useState({
     name: "",

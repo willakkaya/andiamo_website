@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { usePageMeta } from "@/hooks/usePageMeta";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import PageLayout from "@/components/PageLayout";
@@ -16,15 +16,11 @@ const fadeUp = {
 };
 
 export default function RehearsalDinners() {
-  useEffect(() => {
-    document.title = "Rehearsal Dinners | Andiamo in Banca";
-    document
-      .querySelector('meta[name="description"]')
-      ?.setAttribute(
-        "content",
-        "Host your rehearsal dinner at Andiamo in Banca. Private dining in The Vault, custom menus, and an unforgettable setting. South San Francisco."
-      );
-  }, []);
+  usePageMeta({
+    title: "Rehearsal Dinners | Andiamo in Banca",
+    description:
+      "Host your rehearsal dinner at Andiamo in Banca. Private dining in The Vault, custom menus, and an unforgettable setting. South San Francisco.",
+  });
 
   return (
     <PageLayout>
