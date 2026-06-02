@@ -53,11 +53,7 @@ const PACKAGES = [
 ];
 
 export default function HolidayParties() {
-  usePageMeta({
-    title: "Holiday Party Packages | Andiamo in Banca",
-    description:
-      "Book your holiday party at Andiamo in Banca. Corporate holiday dinners, team celebrations, and private events in The Vault. South San Francisco.",
-  });
+  usePageMeta("/holiday-parties");
 
   return (
     <PageLayout>

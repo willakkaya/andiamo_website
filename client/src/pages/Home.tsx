@@ -39,11 +39,7 @@ const REVIEWS = [
 ];
 
 export default function Home() {
-  usePageMeta({
-    title: "Andiamo in Banca | Italian Dining in SSF",
-    description:
-      "South San Francisco's premier Italian restaurant in a restored 1920s bank building. Handmade pasta, curated wines, and The Vault private dining.",
-  });
+  usePageMeta("/");
 
   return (
     <PageLayout>

@@ -1,13 +1,10 @@
 import { useEffect } from "react";
+import pageMeta from "@/lib/pageMeta.json";
 
 const BASE_URL = "https://www.andiamoinbanca.com";
 
-type PageMeta = {
-  title: string;
-  description: string;
-  /** Absolute URL for the social share image. Falls back to the site default. */
-  image?: string;
-};
+type PageMetaEntry = { title: string; description: string; image?: string };
+const META = pageMeta as Record<string, PageMetaEntry>;
 
 function setAttr(selector: string, attr: string, value: string) {
   document.querySelector(selector)?.setAttribute(attr, value);
@@ -15,28 +12,35 @@ function setAttr(selector: string, attr: string, value: string) {
 
 /**
  * Keeps title, description, OpenGraph, Twitter, and canonical tags in sync per
- * page. Needed because this is a client-rendered SPA — without this, shared
- * links fall back to the static homepage tags in index.html.
+ * page at runtime. Reads from the same pageMeta.json that the build-time
+ * prerender step uses (scripts/prerender.mjs), so the tags a real browser sees
+ * always match the static tags baked in for social/link-preview crawlers.
  */
-export function usePageMeta({ title, description, image }: PageMeta) {
+export function usePageMeta(route: keyof typeof pageMeta) {
   useEffect(() => {
-    const url = `${BASE_URL}${window.location.pathname}`;
+    const meta = META[route];
+    if (!meta) return;
 
-    document.title = title;
-    setAttr('meta[name="description"]', "content", description);
+    const url = `${BASE_URL}${route}`;
 
-    setAttr('meta[property="og:title"]', "content", title);
-    setAttr('meta[property="og:description"]', "content", description);
+    document.title = meta.title;
+    setAttr('meta[name="description"]', "content", meta.description);
+
+    setAttr('meta[property="og:title"]', "content", meta.title);
+    setAttr('meta[property="og:description"]', "content", meta.description);
     setAttr('meta[property="og:url"]', "content", url);
 
-    setAttr('meta[name="twitter:title"]', "content", title);
-    setAttr('meta[name="twitter:description"]', "content", description);
+    setAttr('meta[name="twitter:title"]', "content", meta.title);
+    setAttr('meta[name="twitter:description"]', "content", meta.description);
 
-    if (image) {
-      setAttr('meta[property="og:image"]', "content", image);
-      setAttr('meta[name="twitter:image"]', "content", image);
+    if (meta.image) {
+      const img = meta.image.startsWith("http")
+        ? meta.image
+        : `${BASE_URL}${meta.image}`;
+      setAttr('meta[property="og:image"]', "content", img);
+      setAttr('meta[name="twitter:image"]', "content", img);
     }
 
     setAttr('link[rel="canonical"]', "href", url);
-  }, [title, description, image]);
+  }, [route]);
 }

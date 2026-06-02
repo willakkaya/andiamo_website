@@ -21,11 +21,7 @@ const fadeUp = {
 };
 
 export default function CorporateDining() {
-  usePageMeta({
-    title: "Private Dining & Events | Andiamo in Banca South San Francisco",
-    description:
-      "South San Francisco's most distinctive private dining room. Host corporate dinners, board meetings, and private events in a meticulously restored 1920s bank vault. Walking distance from Genentech, Amgen, and the SSF biotech corridor. 10 minutes from SFO.",
-  });
+  usePageMeta("/private-dining");
 
   const [formData, setFormData] = useState({
     name: "",

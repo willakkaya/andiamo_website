@@ -14,11 +14,7 @@ const fadeUp = {
 };
 
 export default function OurStory() {
-  usePageMeta({
-    title: "Our Story | Andiamo in Banca",
-    description:
-      "From Cafe Figaro in 1989 to Andiamo in Banca — the Akkaya family has been feeding the Bay Area for over 35 years. Discover our story.",
-  });
+  usePageMeta("/our-story");
 
   return (
     <PageLayout>

@@ -16,11 +16,7 @@ const fadeUp = {
 };
 
 export default function RehearsalDinners() {
-  usePageMeta({
-    title: "Rehearsal Dinners | Andiamo in Banca",
-    description:
-      "Host your rehearsal dinner at Andiamo in Banca. Private dining in The Vault, custom menus, and an unforgettable setting. South San Francisco.",
-  });
+  usePageMeta("/rehearsal-dinners");
 
   return (
     <PageLayout>

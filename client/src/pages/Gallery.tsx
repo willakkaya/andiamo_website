@@ -28,11 +28,7 @@ const fadeUp = {
 };
 
 export default function Gallery() {
-  usePageMeta({
-    title: "Gallery | Andiamo in Banca",
-    description:
-      "Photos of our dining room, dishes, and historic bank building. Andiamo in Banca — South San Francisco.",
-  });
+  usePageMeta("/gallery");
 
   const [activeCategory, setActiveCategory] = useState<Category>("All");
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);

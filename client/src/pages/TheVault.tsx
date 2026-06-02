@@ -17,11 +17,7 @@ const fadeUp = {
 };
 
 export default function TheVault() {
-  usePageMeta({
-    title: "The Vault Private Dining | Andiamo in Banca",
-    description:
-      "Host your private event in The Vault — our exclusive dining room inside a restored bank vault. Andiamo in Banca, South San Francisco.",
-  });
+  usePageMeta("/the-vault");
 
   const [formData, setFormData] = useState({
     name: "", email: "", phone: "", company: "",

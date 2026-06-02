@@ -159,11 +159,7 @@ function ContactForm() {
 }
 
 export default function Contact() {
-  usePageMeta({
-    title: "Contact & Hours | Andiamo in Banca",
-    description:
-      "Visit us at 301 Linden Ave, South San Francisco. Reservations, hours, and directions for Andiamo in Banca.",
-  });
+  usePageMeta("/contact");
 
   return (
     <PageLayout>

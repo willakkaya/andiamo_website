@@ -262,11 +262,7 @@ const cateringMenu = [
 ];
 
 export default function BanquetCatering() {
-  usePageMeta({
-    title: "Banquet & Catering | Andiamo in Banca",
-    description:
-      "Banquet menus and catering packages for your next event. Andiamo in Banca, South San Francisco.",
-  });
+  usePageMeta("/banquet-catering");
 
   const [activeTab, setActiveTab] = useState<TabKey>("banquet");
 

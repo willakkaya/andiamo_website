@@ -1,0 +1,42 @@
+{
+  "/": {
+    "title": "Andiamo in Banca | Italian Dining in SSF",
+    "description": "South San Francisco's premier Italian restaurant in a restored 1920s bank building. Handmade pasta, curated wines, and The Vault private dining."
+  },
+  "/menu": {
+    "title": "Menu | Andiamo in Banca",
+    "description": "Explore our menu of handmade pasta, fresh seafood, and Italian classics. Andiamo in Banca — South San Francisco."
+  },
+  "/our-story": {
+    "title": "Our Story | Andiamo in Banca",
+    "description": "From Cafe Figaro in 1989 to Andiamo in Banca — the Akkaya family has been feeding the Bay Area for over 35 years. Discover our story."
+  },
+  "/the-vault": {
+    "title": "The Vault Private Dining | Andiamo in Banca",
+    "description": "Host your private event in The Vault — our exclusive dining room inside a restored bank vault. Andiamo in Banca, South San Francisco."
+  },
+  "/private-dining": {
+    "title": "Private Dining & Events | Andiamo in Banca South San Francisco",
+    "description": "South San Francisco's most distinctive private dining room. Host corporate dinners, board meetings, and private events in a meticulously restored 1920s bank vault. Walking distance from Genentech, Amgen, and the SSF biotech corridor. 10 minutes from SFO."
+  },
+  "/contact": {
+    "title": "Contact & Hours | Andiamo in Banca",
+    "description": "Visit us at 301 Linden Ave, South San Francisco. Reservations, hours, and directions for Andiamo in Banca."
+  },
+  "/gallery": {
+    "title": "Gallery | Andiamo in Banca",
+    "description": "Photos of our dining room, dishes, and historic bank building. Andiamo in Banca — South San Francisco."
+  },
+  "/banquet-catering": {
+    "title": "Banquet & Catering | Andiamo in Banca",
+    "description": "Banquet menus and catering packages for your next event. Andiamo in Banca, South San Francisco."
+  },
+  "/holiday-parties": {
+    "title": "Holiday Party Packages | Andiamo in Banca",
+    "description": "Book your holiday party at Andiamo in Banca. Corporate holiday dinners, team celebrations, and private events in The Vault. South San Francisco."
+  },
+  "/rehearsal-dinners": {
+    "title": "Rehearsal Dinners | Andiamo in Banca",
+    "description": "Host your rehearsal dinner at Andiamo in Banca. Private dining in The Vault, custom menus, and an unforgettable setting. South San Francisco."
+  }
+}
