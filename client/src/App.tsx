@@ -14,6 +14,10 @@ import Gallery from "./pages/Gallery";
 import BanquetCatering from "./pages/BanquetCatering";
 import HolidayParties from "./pages/HolidayParties";
 import RehearsalDinners from "./pages/RehearsalDinners";
+import Training from "./pages/Training";
+import TrainingModuleView from "./pages/TrainingModuleView";
+import TrainingAdmin from "./pages/TrainingAdmin";
+import { TrainingProvider } from "./contexts/TrainingContext";
 
 function ScrollToTop() {
   const [location] = useLocation();
@@ -53,6 +57,9 @@ function Router() {
         <Route path={"/banquet-catering"} component={BanquetCatering} />
         <Route path={"/holiday-parties"} component={HolidayParties} />
         <Route path={"/rehearsal-dinners"} component={RehearsalDinners} />
+        <Route path={"/training"} component={Training} />
+        <Route path={"/training/module/:id"} component={TrainingModuleView} />
+        <Route path={"/training/admin"} component={TrainingAdmin} />
         <Route path={"/404"} component={NotFound} />
         <Route component={NotFound} />
       </Switch>
@@ -65,7 +72,9 @@ function App() {
     <ErrorBoundary>
       <TooltipProvider>
         <Toaster />
-        <Router />
+        <TrainingProvider>
+          <Router />
+        </TrainingProvider>
       </TooltipProvider>
     </ErrorBoundary>
   );
