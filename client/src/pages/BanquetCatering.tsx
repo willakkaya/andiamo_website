@@ -23,27 +23,23 @@ const banquetMenus = [
     subtitle: "Lunch Only",
     sections: [
       {
-        heading: "Salad — Choice of One Per Guest",
+        heading: "Salad — All Guests",
         items: [
-          { name: "Mixed Green Salad", desc: "Organic spring mixed, shaved carrots, and shaved Parmigiano Regiano in balsamic vinaigrette" },
+          { name: "Verde Mista", desc: "Organic spring greens and shaved heirloom carrots, tossed in a house-made balsamic vinaigrette" },
         ],
       },
       {
-        heading: "Entrée — Choice of One",
+        heading: "Main Course — Choice of One Per Guest",
         items: [
-          { name: "Rigatoni alla Carcerata", desc: "Tube shape pasta with mild Italian sausage, red bell peppers and peas in a creamy tomato sauce" },
-          { name: "Fish of the Day", desc: "Served with starch and seasonal vegetables" },
-          { name: "Orecchiette alle Verdure", desc: "Orecchiette pasta with a light marinara sauce and seasonal vegetables" },
-          { name: "Chicken Marsala", desc: "Chicken breast in Marsala wine and mushrooms, served with starch and seasonal vegetables" },
-          { name: "Rigatoni alle Verdure", desc: "Orecchiette pasta tossed with seasonal vegetables in house made tomato sauce" },
-          { name: "Spaghetti with Meatballs", desc: "Spaghetti pasta with marinara and homemade meatballs" },
-          { name: "Salmon Piccata", desc: "Pan-seared salmon filet with capers and lemon butter white wine sauce, served with starch and seasonal vegetables" },
-          { name: "Pollo Parmigiana", desc: "Breaded free range chicken breast topped with marinara sauce and fresh mozzarella cheese" },
-          { name: "Pork Chop", desc: "Pork chop served with mashed potato and seasonal vegetables" },
+          { name: "Spaghetti & Meatballs", desc: "Spaghetti pasta with marinara and homemade meatballs" },
+          { name: "Salmon Piccata", desc: "Salmon filet with capers and lemon butter white wine sauce" },
+          { name: "Rigatoni alle Verdure", desc: "Rigatoni pasta with a light marinara sauce and seasonal vegetables" },
+          { name: "Chicken Parmesan", desc: "Breaded free-range chicken breast topped with marinara sauce and fresh mozzarella cheese" },
+          { name: "Pork Chop", desc: "Grilled bone-in pork chop with a mushroom cream reduction" },
         ],
       },
       {
-        heading: "Dessert — Choice of One Per Guest",
+        heading: "Dessert — All Guests",
         items: [
           { name: "Chocolate Mousse", desc: "Velvety rich mousse served with fresh berries" },
         ],
