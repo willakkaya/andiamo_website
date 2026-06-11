@@ -1,6 +1,13 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { CheckCircle2, Circle, RotateCcw, ArrowRight } from "lucide-react";
+import {
+  CheckCircle2,
+  Circle,
+  RotateCcw,
+  ArrowRight,
+  LayoutDashboard,
+  BookOpen,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -25,6 +32,7 @@ import {
   ROLES,
   LOCATIONS,
   overallCompletion,
+  weakAreas,
   type Role,
   type Location,
 } from "@/contexts/TrainingContext";
@@ -103,6 +111,91 @@ function SignIn() {
           </p>
         </CardContent>
       </Card>
+    </div>
+  );
+}
+
+function ManagerHome() {
+  const { currentEmployee, allEmployees } = useTraining();
+  const trainees = allEmployees.filter((e) => e.role !== "Manager");
+  const needsAttention = trainees.filter(
+    (e) => weakAreas(e).length > 0,
+  ).length;
+
+  return (
+    <div>
+      <div className="mb-8">
+        <h1 className="font-display text-3xl mb-1">
+          Ciao, {currentEmployee?.name.split(" ")[0]} 👋
+        </h1>
+        <p className="text-muted-foreground">
+          Manage your team's training and review the curriculum below.
+        </p>
+      </div>
+
+      {/* Primary manager CTA */}
+      <Card className="mb-8 border-gold/40 bg-gradient-to-br from-gold/5 to-transparent">
+        <CardContent className="pt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="flex items-start gap-3">
+            <div className="rounded-lg bg-gold/10 p-2.5 shrink-0">
+              <LayoutDashboard className="w-5 h-5 text-gold" />
+            </div>
+            <div>
+              <h2 className="font-display text-xl leading-tight">Team Dashboard</h2>
+              <p className="text-sm text-muted-foreground mt-0.5">
+                {trainees.length === 0
+                  ? "Track each employee's progress once staff start training."
+                  : `${trainees.length} team ${trainees.length === 1 ? "member" : "members"}` +
+                    (needsAttention > 0
+                      ? ` · ${needsAttention} need${needsAttention === 1 ? "s" : ""} attention`
+                      : " · everyone on track")}
+              </p>
+            </div>
+          </div>
+          <Link href="/training/admin">
+            <Button className="gap-1 shrink-0">
+              Open dashboard <ArrowRight className="w-4 h-4" />
+            </Button>
+          </Link>
+        </CardContent>
+      </Card>
+
+      {/* Curriculum as reference */}
+      <div className="flex items-center gap-2 mb-4">
+        <BookOpen className="w-4 h-4 text-muted-foreground" />
+        <h2 className="font-display text-xl">The curriculum</h2>
+        <span className="text-sm text-muted-foreground">
+          · {MODULES.length} modules your staff complete
+        </span>
+      </div>
+      <div className="grid gap-4 sm:grid-cols-2">
+        {MODULES.map((m) => (
+          <Card key={m.id} className="flex flex-col">
+            <CardHeader>
+              <Badge variant="outline" className="mb-2 text-gold border-gold/40 w-fit">
+                {m.section}
+              </Badge>
+              <CardTitle className="font-display text-xl flex items-center gap-2">
+                <span className="text-muted-foreground text-sm">
+                  {String(m.order).padStart(2, "0")}
+                </span>
+                {m.title}
+              </CardTitle>
+              <CardDescription className="mt-1">{m.summary}</CardDescription>
+            </CardHeader>
+            <CardContent className="mt-auto flex items-center justify-between">
+              <span className="text-xs text-muted-foreground">
+                {m.minutes} min · {m.quiz.length} questions
+              </span>
+              <Link href={`/training/module/${m.id}`}>
+                <Button size="sm" variant="outline" className="gap-1">
+                  <BookOpen className="w-3.5 h-3.5" /> Review
+                </Button>
+              </Link>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
     </div>
   );
 }
@@ -199,5 +292,15 @@ function Dashboard() {
 
 export default function Training() {
   const { currentEmployee } = useTraining();
-  return <TrainingShell>{currentEmployee ? <Dashboard /> : <SignIn />}</TrainingShell>;
+  return (
+    <TrainingShell>
+      {!currentEmployee ? (
+        <SignIn />
+      ) : currentEmployee.role === "Manager" ? (
+        <ManagerHome />
+      ) : (
+        <Dashboard />
+      )}
+    </TrainingShell>
+  );
 }
