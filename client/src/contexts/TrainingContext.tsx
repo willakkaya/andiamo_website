@@ -17,17 +17,16 @@ import {
 import {
   PASS_THRESHOLD,
   ROLES,
+  LOCATIONS,
   electiveModulesFor,
   requiredModulesFor,
   type Role,
+  type Location,
 } from "@/lib/training/content";
 
 // Re-exported so UI components keep a single import surface for training state.
-export { ROLES };
-export type { Role };
-
-export const LOCATIONS = ["Andiamo", "Cafe Figaro", "Don Giovanni"] as const;
-export type Location = (typeof LOCATIONS)[number];
+export { ROLES, LOCATIONS };
+export type { Role, Location };
 
 export type ModuleProgress = {
   bestPct: number; // 0..1
@@ -81,7 +80,7 @@ const normalizeKey = (name: string) => name.trim().toLowerCase();
 /** Completion against the modules *required for the employee's role*. */
 export function overallCompletion(emp: EmployeeRecord | undefined): number {
   if (!emp) return 0;
-  const required = requiredModulesFor(emp.role);
+  const required = requiredModulesFor(emp.role, emp.location);
   if (required.length === 0) return 0;
   const passed = required.filter((m) => emp.modules[m.id]?.passed).length;
   return passed / required.length;
@@ -90,7 +89,7 @@ export function overallCompletion(emp: EmployeeRecord | undefined): number {
 /** Required modules the employee has attempted but not yet passed. */
 export function weakAreas(emp: EmployeeRecord | undefined): string[] {
   if (!emp) return [];
-  return requiredModulesFor(emp.role)
+  return requiredModulesFor(emp.role, emp.location)
     .filter((m) => {
       const p = emp.modules[m.id];
       return p && p.attempts > 0 && !p.passed;
@@ -101,14 +100,15 @@ export function weakAreas(emp: EmployeeRecord | undefined): string[] {
 /** Passed modules beyond the role's requirements (studied voluntarily). */
 export function electivePassCount(emp: EmployeeRecord | undefined): number {
   if (!emp) return 0;
-  return electiveModulesFor(emp.role).filter((m) => emp.modules[m.id]?.passed)
-    .length;
+  return electiveModulesFor(emp.role, emp.location).filter(
+    (m) => emp.modules[m.id]?.passed,
+  ).length;
 }
 
 /** True once every module required for the employee's role is passed. */
 export function isFullyTrained(emp: EmployeeRecord | undefined): boolean {
   if (!emp) return false;
-  const required = requiredModulesFor(emp.role);
+  const required = requiredModulesFor(emp.role, emp.location);
   return required.length > 0 && required.every((m) => emp.modules[m.id]?.passed);
 }
 

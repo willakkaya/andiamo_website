@@ -14,6 +14,9 @@ export const ROLES = [
 ] as const;
 export type Role = (typeof ROLES)[number];
 
+export const LOCATIONS = ["Andiamo", "Cafe Figaro", "Don Giovanni"] as const;
+export type Location = (typeof LOCATIONS)[number];
+
 export type QuizQuestion = {
   id: string;
   question: string;
@@ -44,6 +47,8 @@ export type TrainingModule = {
   minutes: number;
   /** Roles that must pass this module; everyone else sees it as an elective. */
   requiredFor: Role[];
+  /** Restaurant this module belongs to. Undefined = group-wide (all restaurants). */
+  location?: Location;
   lessons: Lesson[];
   quiz: QuizQuestion[];
 };
@@ -354,6 +359,7 @@ export const MODULES: TrainingModule[] = [
     summary: "Getting lighting, bar, dining room, and stations fully ready before doors.",
     minutes: 7,
     requiredFor: EVERYONE,
+    location: "Andiamo",
     lessons: [
       {
         heading: "Lighting & Atmosphere",
@@ -448,6 +454,7 @@ export const MODULES: TrainingModule[] = [
     summary: "Closing the bar, dining room, and stations so we're ready to open.",
     minutes: 6,
     requiredFor: EVERYONE,
+    location: "Andiamo",
     lessons: [
       {
         heading: "The Closing Standard",
@@ -738,6 +745,7 @@ export const MODULES: TrainingModule[] = [
     summary: "By-the-glass list, what to suggest when, and how to upsell with confidence.",
     minutes: 8,
     requiredFor: BEVERAGE_TEAM,
+    location: "Andiamo",
     lessons: [
       {
         heading: "White Wines (By the Glass)",
@@ -829,6 +837,7 @@ export const MODULES: TrainingModule[] = [
     summary: "Build standards, the cocktail cheat sheet, signature recipes, and batches.",
     minutes: 9,
     requiredFor: BEVERAGE_TEAM,
+    location: "Andiamo",
     lessons: [
       {
         heading: "Build Standards",
@@ -991,6 +1000,225 @@ export const MODULES: TrainingModule[] = [
       },
     ],
   },
+  {
+    id: "figaro-wine",
+    order: 11,
+    section: "Bar Reference",
+    title: "Café Figaro: Wine by the Glass",
+    summary: "Figaro's by-the-glass list — what to pour for whom, and how to guide an upsell.",
+    minutes: 10,
+    requiredFor: BEVERAGE_TEAM,
+    location: "Cafe Figaro",
+    lessons: [
+      {
+        heading: "The Service Philosophy",
+        intro:
+          "When a guest asks about wine, they're not asking for a fact — they're asking for help.",
+        points: [
+          "Listen first — ask one clarifying question before recommending.",
+          "Educate without lecturing — give one memorable detail, not a Wikipedia entry.",
+          "Present, don't prescribe — offer two options, give a recommendation, let the guest choose.",
+          "The upsell is an act of generosity — guiding a guest to a better wine gives them a better experience.",
+        ],
+      },
+      {
+        heading: "Whites & Sparkling",
+        points: [
+          "Bisol 'Jeio' Prosecco ($12) — crisp apple & pear bubbles; the approachable welcome glass.",
+          "Mas de Daumas Gassac Brut Rosé ($15) — strawberry, brioche, more structured; the step-up sparkler.",
+          "De Forville Chardonnay, Piedmont ($16) — UNoaked, light, floral; win back the 'I don't like Chardonnay' guest.",
+          "Hartford Court Chardonnay ($18, from magnum) — ripe, buttery, oaked; for the full California lover.",
+          "Te Mata Sauvignon Blanc, NZ ($16) — zesty citrus; the Sancerre ($20) is also Sauvignon Blanc, more mineral and refined.",
+          "Elena Walch Pinot Grigio ($16) & Ronchi di Cialla Ribolla Gialla ($16) — same price; Ribolla is a rare indigenous Italian grape worth suggesting.",
+        ],
+      },
+      {
+        heading: "Reds",
+        points: [
+          "Big Reds: Routestock Napa Cab ($17, entry) → Chappellet Mountain Cuvée ($25, concentrated mountain fruit) → Château Margaux 'Margaux du Margaux' ($65), the second wine of a Bordeaux First Growth.",
+          "Pinot Noir: Faila, Oregon ($17, silky & easy) → Occidental, Sonoma Coast ($35), benchmark California Pinot by Steve Kistler.",
+          "Italian Red: Frescobaldi 'Nipozzano' Chianti Rufina Riserva ($16) → Le Macchiole Super Tuscan, Bolgheri ($23) → Oddero 'Convento' Barolo ($25), the 'King of Italian Wine'.",
+        ],
+      },
+      {
+        heading: "Guiding the Upsell",
+        points: [
+          "Never default to the cheapest — when a guest says 'a Chardonnay,' ask: 'lighter and crisp, or fuller with a bit of oak?'",
+          "Sancerre sells itself — 'same grape, but a completely different, more special experience.'",
+          "'I would' is your most powerful phrase — confide a recommendation, don't pitch.",
+          "Same-price suggestions like the Ribolla Gialla are pure generosity — an experience guests can't get elsewhere.",
+        ],
+      },
+    ],
+    quiz: [
+      {
+        id: "figaro-wine-1",
+        question:
+          "A guest says they don't like Chardonnay because it's too oaky/buttery. Pour the:",
+        options: [
+          "Hartford Court (ripe, buttery, oaked)",
+          "De Forville Piedmont (unoaked, light, floral)",
+          "Routestock Cabernet",
+          "Bisol Prosecco",
+        ],
+        answer: 1,
+        explanation:
+          "The unoaked De Forville wins those guests back — light and floral with bright acidity.",
+      },
+      {
+        id: "figaro-wine-2",
+        question: "Sancerre is made from which grape?",
+        options: ["Pinot Grigio", "Chardonnay", "Sauvignon Blanc", "Nebbiolo"],
+        answer: 2,
+        explanation:
+          "Sancerre is Sauvignon Blanc from the Loire Valley — most guests don't realize it.",
+      },
+      {
+        id: "figaro-wine-3",
+        question: "Which red is known as 'the King of Italian Wine'?",
+        options: [
+          "Chianti Rufina Riserva",
+          "Super Tuscan",
+          "Oddero 'Convento' Barolo",
+          "Routestock Cabernet",
+        ],
+        answer: 2,
+        explanation:
+          "Barolo (Nebbiolo, Piedmont) — our Oddero 'Convento' is an accessibly priced example.",
+      },
+      {
+        id: "figaro-wine-4",
+        question: "A guest just says 'give me a Chardonnay.' The best move is to:",
+        options: [
+          "Pour the cheapest one by default",
+          "Pour the most expensive one",
+          "Ask whether they prefer lighter and crisp, or fuller with oak",
+          "Tell them all three taste the same",
+        ],
+        answer: 2,
+        explanation:
+          "One question matches them perfectly and naturally guides toward the right wine — a service move, not a sales move.",
+      },
+      {
+        id: "figaro-wine-5",
+        question: "The Château Margaux 'Margaux du Margaux' on our list is:",
+        options: [
+          "A California Cabernet",
+          "The second wine of a Bordeaux First Growth estate",
+          "A sweet dessert wine",
+          "An Italian Barolo",
+        ],
+        answer: 1,
+        explanation:
+          "It's the second wine of Château Margaux — one of only five Bordeaux First Growths. Know that story cold.",
+      },
+      {
+        id: "figaro-wine-6",
+        question: "A guest is having fish and wants a white. A great pick is:",
+        options: [
+          "Hartford Court oaked Chardonnay",
+          "Sancerre or the NZ Sauvignon Blanc",
+          "Routestock Cabernet",
+          "Oddero Barolo",
+        ],
+        answer: 1,
+        explanation:
+          "Citrus-bright Sauvignon Blanc (Sancerre or Te Mata) is beautiful with seafood.",
+      },
+    ],
+  },
+  {
+    id: "figaro-cocktails",
+    order: 12,
+    section: "Bar Reference",
+    title: "Café Figaro: Cocktails",
+    summary: "Figaro's cocktail list — ingredients and how to describe each. All $16.",
+    minutes: 6,
+    requiredFor: BEVERAGE_TEAM,
+    location: "Cafe Figaro",
+    lessons: [
+      {
+        heading: "The Cocktail List ($16 each)",
+        points: [
+          "Aperol Spritz — Aperol, Prosecco, soda water, orange peel.",
+          "Old Fashioned — Uncle Nearest Bourbon, sugar, bitters, orange twist.",
+          "Elderflower Gin & Tonic — Botanist Gin, elderflower tonic, orange.",
+          "Pomegranate Limoncello Martini — Tito's vodka, pomegranate, lemon juice, limoncello.",
+          "Hibiscus Mule — Noble Oak Bourbon, Q Hibiscus Ginger Beer, lemon.",
+          "Figaro Manhattan — Sazerac Rye, Antica vermouth, bitters, Luxardo cherry.",
+          "Broadway Boulevardier — Highland Park 12yr, Campari, Antica vermouth.",
+        ],
+      },
+      {
+        heading: "How to Sell Them",
+        points: [
+          "Aperol Spritz & Elderflower G&T — light, refreshing aperitivo options for early or warm evenings.",
+          "Old Fashioned & Figaro Manhattan — the classics for whiskey drinkers; the Manhattan is rye-forward and stirred.",
+          "Broadway Boulevardier — a whiskey lover's Negroni (Campari + vermouth); recommend to Negroni fans.",
+          "Pomegranate Limoncello Martini & Hibiscus Mule — bright, fruit-forward house signatures for guests who want something different.",
+        ],
+      },
+    ],
+    quiz: [
+      {
+        id: "figaro-cocktails-1",
+        question: "What is the base spirit of the Figaro Manhattan?",
+        options: [
+          "Uncle Nearest Bourbon",
+          "Sazerac Rye whiskey",
+          "Botanist Gin",
+          "Tito's vodka",
+        ],
+        answer: 1,
+        explanation: "Sazerac Rye, with Antica vermouth, bitters, and a Luxardo cherry.",
+      },
+      {
+        id: "figaro-cocktails-2",
+        question: "Which cocktail is built with Botanist Gin?",
+        options: [
+          "Aperol Spritz",
+          "Elderflower Gin & Tonic",
+          "Hibiscus Mule",
+          "Broadway Boulevardier",
+        ],
+        answer: 1,
+        explanation: "The Elderflower Gin & Tonic — Botanist Gin, elderflower tonic, orange.",
+      },
+      {
+        id: "figaro-cocktails-3",
+        question: "The Broadway Boulevardier is made with:",
+        options: [
+          "Vodka, pomegranate, limoncello",
+          "Highland Park 12, Campari, Antica vermouth",
+          "Bourbon, ginger beer, lemon",
+          "Aperol, Prosecco, soda",
+        ],
+        answer: 1,
+        explanation:
+          "It's a whiskey lover's Negroni — Highland Park 12, Campari, and Antica vermouth.",
+      },
+      {
+        id: "figaro-cocktails-4",
+        question: "How are the cocktails on Figaro's list priced?",
+        options: ["$12 each", "$14 each", "$16 each", "They vary"],
+        answer: 2,
+        explanation: "Every cocktail on the list is $16.",
+      },
+      {
+        id: "figaro-cocktails-5",
+        question: "A Negroni fan asks for a recommendation. Steer them to the:",
+        options: [
+          "Aperol Spritz",
+          "Pomegranate Limoncello Martini",
+          "Broadway Boulevardier",
+          "Hibiscus Mule",
+        ],
+        answer: 2,
+        explanation:
+          "The Boulevardier is a whiskey-based Negroni (Campari + vermouth) — a natural fit for Negroni lovers.",
+      },
+    ],
+  },
 ];
 
 export const TOTAL_MODULES = MODULES.length;
@@ -1003,12 +1231,17 @@ export function getModule(id: string): TrainingModule | undefined {
   return MODULES.find((m) => m.id === id);
 }
 
-/** Modules this role must pass to be considered fully trained. */
-export function requiredModulesFor(role: Role): TrainingModule[] {
-  return MODULES.filter((m) => m.requiredFor.includes(role));
+/** A module applies to an employee if it's group-wide or at their restaurant. */
+function atLocation(m: TrainingModule, location: Location): boolean {
+  return m.location === undefined || m.location === location;
 }
 
-/** Modules outside the role's requirements — open to study, not counted. */
-export function electiveModulesFor(role: Role): TrainingModule[] {
-  return MODULES.filter((m) => !m.requiredFor.includes(role));
+/** Modules this role at this restaurant must pass to be fully trained. */
+export function requiredModulesFor(role: Role, location: Location): TrainingModule[] {
+  return MODULES.filter((m) => atLocation(m, location) && m.requiredFor.includes(role));
+}
+
+/** In-scope modules outside the role's requirements — open to study, not counted. */
+export function electiveModulesFor(role: Role, location: Location): TrainingModule[] {
+  return MODULES.filter((m) => atLocation(m, location) && !m.requiredFor.includes(role));
 }

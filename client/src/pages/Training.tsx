@@ -183,9 +183,14 @@ function ManagerHome() {
         {MODULES.map((m) => (
           <Card key={m.id} className="flex flex-col">
             <CardHeader>
-              <Badge variant="outline" className="mb-2 text-gold border-gold/40 w-fit">
-                {m.section}
-              </Badge>
+              <div className="flex flex-wrap items-center gap-2 mb-2">
+                <Badge variant="outline" className="text-gold border-gold/40 w-fit">
+                  {m.section}
+                </Badge>
+                <Badge variant="secondary" className="text-xs">
+                  {m.location ?? "All restaurants"}
+                </Badge>
+              </div>
               <CardTitle className="font-display text-xl flex items-center gap-2">
                 <span className="text-muted-foreground text-sm">
                   {String(m.order).padStart(2, "0")}
@@ -369,8 +374,8 @@ function Dashboard() {
   const { currentEmployee } = useTraining();
   if (!currentEmployee) return null;
 
-  const required = requiredModulesFor(currentEmployee.role);
-  const electives = electiveModulesFor(currentEmployee.role);
+  const required = requiredModulesFor(currentEmployee.role, currentEmployee.location);
+  const electives = electiveModulesFor(currentEmployee.role, currentEmployee.location);
   const passedCount = required.filter(
     (m) => currentEmployee.modules[m.id]?.passed,
   ).length;

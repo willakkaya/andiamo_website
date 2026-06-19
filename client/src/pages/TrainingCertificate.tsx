@@ -39,7 +39,7 @@ export default function TrainingCertificate() {
     );
   }
 
-  const required = requiredModulesFor(currentEmployee.role);
+  const required = requiredModulesFor(currentEmployee.role, currentEmployee.location);
   const signedDate = new Date(
     currentEmployee.acknowledgedAt as string,
   ).toLocaleDateString(undefined, {

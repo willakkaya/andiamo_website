@@ -67,7 +67,11 @@ export default function TrainingAdmin() {
 
   // Org-wide weak spots: pass rate per module among the staff who require it.
   const moduleStats = MODULES.map((m) => {
-    const needed = trainees.filter((e) => m.requiredFor.includes(e.role));
+    const needed = trainees.filter(
+      (e) =>
+        (m.location === undefined || m.location === e.location) &&
+        m.requiredFor.includes(e.role),
+    );
     const passed = needed.filter((e) => e.modules[m.id]?.passed).length;
     return { module: m, passed, total: needed.length };
   })
@@ -131,7 +135,7 @@ export default function TrainingAdmin() {
             {trainees.map((emp) => {
               const completion = overallCompletion(emp);
               const weak = weakAreas(emp);
-              const required = requiredModulesFor(emp.role);
+              const required = requiredModulesFor(emp.role, emp.location);
               const passedCount = required.filter((m) => emp.modules[m.id]?.passed).length;
               const electives = electivePassCount(emp);
               return (
