@@ -9,7 +9,7 @@ export default function TrainingShell({ children }: { children: ReactNode }) {
   const { currentEmployee, signOut } = useTraining();
 
   useEffect(() => {
-    document.title = "Team Training · Andiamo";
+    document.title = "Team Training · Akkaya Hospitality Group";
   }, []);
 
   return (
@@ -19,7 +19,7 @@ export default function TrainingShell({ children }: { children: ReactNode }) {
           <Link href="/training" className="flex items-center gap-2 min-w-0 shrink">
             <GraduationCap className="w-5 h-5 text-gold shrink-0" />
             <span className="font-display text-lg tracking-wide whitespace-nowrap truncate">
-              ANDIAMO{" "}
+              Akkaya Hospitality Group{" "}
               <span className="text-gold hidden sm:inline">· Team Training</span>
             </span>
           </Link>
@@ -52,7 +52,7 @@ export default function TrainingShell({ children }: { children: ReactNode }) {
       <main className="max-w-5xl mx-auto px-4 py-8">{children}</main>
 
       <footer className="max-w-5xl mx-auto px-4 py-6 text-center text-xs text-muted-foreground">
-        Andiamo · Confidential — For Team Use Only
+        Akkaya Hospitality Group · Confidential — For Team Use Only
       </footer>
     </div>
   );

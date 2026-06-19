@@ -14,16 +14,17 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { MODULES, PASS_THRESHOLD } from "@/lib/training/content";
+import {
+  PASS_THRESHOLD,
+  ROLES,
+  electiveModulesFor,
+  requiredModulesFor,
+  type Role,
+} from "@/lib/training/content";
 
-export const ROLES = [
-  "Server",
-  "Host",
-  "Bartender",
-  "Busser/Runner",
-  "Manager",
-] as const;
-export type Role = (typeof ROLES)[number];
+// Re-exported so UI components keep a single import surface for training state.
+export { ROLES };
+export type { Role };
 
 export const LOCATIONS = ["Andiamo", "Cafe Figaro", "Don Giovanni"] as const;
 export type Location = (typeof LOCATIONS)[number];
@@ -42,6 +43,10 @@ export type EmployeeRecord = {
   location: Location;
   createdAt: string;
   modules: Record<string, ModuleProgress>;
+  /** Set when the employee signs the standards acknowledgment. */
+  acknowledgedAt?: string;
+  /** The full name the employee typed as their signature. */
+  signatureName?: string;
 };
 
 type TrainingData = { employees: Record<string, EmployeeRecord> };
@@ -73,18 +78,43 @@ const normalizeKey = (name: string) => name.trim().toLowerCase();
 // ---------------------------------------------------------------------------
 // Derived helpers (pure)
 // ---------------------------------------------------------------------------
+/** Completion against the modules *required for the employee's role*. */
 export function overallCompletion(emp: EmployeeRecord | undefined): number {
   if (!emp) return 0;
-  const passed = MODULES.filter((m) => emp.modules[m.id]?.passed).length;
-  return passed / MODULES.length;
+  const required = requiredModulesFor(emp.role);
+  if (required.length === 0) return 0;
+  const passed = required.filter((m) => emp.modules[m.id]?.passed).length;
+  return passed / required.length;
 }
 
+/** Required modules the employee has attempted but not yet passed. */
 export function weakAreas(emp: EmployeeRecord | undefined): string[] {
   if (!emp) return [];
-  return MODULES.filter((m) => {
-    const p = emp.modules[m.id];
-    return p && p.attempts > 0 && !p.passed;
-  }).map((m) => m.title);
+  return requiredModulesFor(emp.role)
+    .filter((m) => {
+      const p = emp.modules[m.id];
+      return p && p.attempts > 0 && !p.passed;
+    })
+    .map((m) => m.title);
+}
+
+/** Passed modules beyond the role's requirements (studied voluntarily). */
+export function electivePassCount(emp: EmployeeRecord | undefined): number {
+  if (!emp) return 0;
+  return electiveModulesFor(emp.role).filter((m) => emp.modules[m.id]?.passed)
+    .length;
+}
+
+/** True once every module required for the employee's role is passed. */
+export function isFullyTrained(emp: EmployeeRecord | undefined): boolean {
+  if (!emp) return false;
+  const required = requiredModulesFor(emp.role);
+  return required.length > 0 && required.every((m) => emp.modules[m.id]?.passed);
+}
+
+/** Fully trained AND has signed the standards acknowledgment. */
+export function isCertified(emp: EmployeeRecord | undefined): boolean {
+  return isFullyTrained(emp) && !!emp?.acknowledgedAt;
 }
 
 // ---------------------------------------------------------------------------
@@ -96,6 +126,7 @@ type TrainingContextValue = {
   signIn: (name: string, role: Role, location: Location) => void;
   signOut: () => void;
   recordAttempt: (moduleId: string, answers: AttemptAnswer[]) => number;
+  recordAcknowledgment: (signatureName: string) => void;
   resetAllData: () => void;
 };
 
@@ -183,6 +214,26 @@ export function TrainingProvider({ children }: { children: ReactNode }) {
     [currentKey],
   );
 
+  const recordAcknowledgment = useCallback(
+    (signatureName: string) => {
+      setData((prev) => {
+        if (!currentKey || !prev.employees[currentKey]) return prev;
+        const emp = prev.employees[currentKey];
+        return {
+          employees: {
+            ...prev.employees,
+            [currentKey]: {
+              ...emp,
+              acknowledgedAt: new Date().toISOString(),
+              signatureName: signatureName.trim(),
+            },
+          },
+        };
+      });
+    },
+    [currentKey],
+  );
+
   const resetAllData = useCallback(() => {
     setData({ employees: {} });
     localStorage.removeItem(USER_KEY);
@@ -196,9 +247,10 @@ export function TrainingProvider({ children }: { children: ReactNode }) {
       signIn,
       signOut,
       recordAttempt,
+      recordAcknowledgment,
       resetAllData,
     }),
-    [currentKey, data, signIn, signOut, recordAttempt, resetAllData],
+    [currentKey, data, signIn, signOut, recordAttempt, recordAcknowledgment, resetAllData],
   );
 
   return (

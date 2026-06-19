@@ -17,6 +17,7 @@ import RehearsalDinners from "./pages/RehearsalDinners";
 import Training from "./pages/Training";
 import TrainingModuleView from "./pages/TrainingModuleView";
 import TrainingAdmin from "./pages/TrainingAdmin";
+import TrainingCertificate from "./pages/TrainingCertificate";
 import { TrainingProvider } from "./contexts/TrainingContext";
 
 function ScrollToTop() {
@@ -60,6 +61,7 @@ function Router() {
         <Route path={"/training"} component={Training} />
         <Route path={"/training/module/:id"} component={TrainingModuleView} />
         <Route path={"/training/admin"} component={TrainingAdmin} />
+        <Route path={"/training/certificate"} component={TrainingCertificate} />
         <Route path={"/404"} component={NotFound} />
         <Route component={NotFound} />
       </Switch>

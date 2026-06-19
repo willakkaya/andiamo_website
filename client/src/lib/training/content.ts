@@ -5,6 +5,15 @@
 // This file is intentionally plain data so it can later seed a database when
 // the app moves to a shared backend (Phase 2).
 
+export const ROLES = [
+  "Server",
+  "Host",
+  "Bartender",
+  "Busser/Runner",
+  "Manager",
+] as const;
+export type Role = (typeof ROLES)[number];
+
 export type QuizQuestion = {
   id: string;
   question: string;
@@ -33,9 +42,17 @@ export type TrainingModule = {
   summary: string;
   /** Estimated minutes to read + quiz. */
   minutes: number;
+  /** Roles that must pass this module; everyone else sees it as an elective. */
+  requiredFor: Role[];
   lessons: Lesson[];
   quiz: QuizQuestion[];
 };
+
+// Role groups for module requirements. To change who must complete what,
+// tweak these or any individual module's requiredFor below.
+const EVERYONE: Role[] = [...ROLES];
+const SERVICE_TEAM: Role[] = ["Server", "Bartender", "Busser/Runner", "Manager"];
+const BEVERAGE_TEAM: Role[] = ["Server", "Bartender", "Manager"];
 
 export const MODULES: TrainingModule[] = [
   {
@@ -45,6 +62,7 @@ export const MODULES: TrainingModule[] = [
     title: "The Andiamo Standard & Culture",
     summary: "Our four values, our hospitality philosophy, and why we serve.",
     minutes: 8,
+    requiredFor: EVERYONE,
     lessons: [
       {
         heading: "Our Four Values",
@@ -135,6 +153,7 @@ export const MODULES: TrainingModule[] = [
     title: "Arrival, Readiness & Appearance",
     summary: "Clock-in standards, uniform, dress code, and professional language.",
     minutes: 7,
+    requiredFor: EVERYONE,
     lessons: [
       {
         heading: "Arrival & Readiness",
@@ -232,6 +251,7 @@ export const MODULES: TrainingModule[] = [
     title: "Roles & Responsibilities",
     summary: "Core duties for Host, Server, Bartender, and Busser/Runner.",
     minutes: 8,
+    requiredFor: EVERYONE,
     lessons: [
       {
         heading: "Host / Hostess",
@@ -333,6 +353,7 @@ export const MODULES: TrainingModule[] = [
     title: "Opening SOP",
     summary: "Getting lighting, bar, dining room, and stations fully ready before doors.",
     minutes: 7,
+    requiredFor: EVERYONE,
     lessons: [
       {
         heading: "Lighting & Atmosphere",
@@ -426,6 +447,7 @@ export const MODULES: TrainingModule[] = [
     title: "Closing SOP",
     summary: "Closing the bar, dining room, and stations so we're ready to open.",
     minutes: 6,
+    requiredFor: EVERYONE,
     lessons: [
       {
         heading: "The Closing Standard",
@@ -508,6 +530,7 @@ export const MODULES: TrainingModule[] = [
     title: "Steps of Service",
     summary: "The 10 steps, language & tone, presence on the floor, and check timing.",
     minutes: 9,
+    requiredFor: SERVICE_TEAM,
     lessons: [
       {
         heading: "The 10 Steps of Service",
@@ -624,6 +647,7 @@ export const MODULES: TrainingModule[] = [
     title: "Handling Complaints",
     summary: "The LEARN method and how to handle common difficult situations.",
     minutes: 6,
+    requiredFor: EVERYONE,
     lessons: [
       {
         heading: "The LEARN Method",
@@ -713,6 +737,7 @@ export const MODULES: TrainingModule[] = [
     title: "Wine & Upselling",
     summary: "By-the-glass list, what to suggest when, and how to upsell with confidence.",
     minutes: 8,
+    requiredFor: BEVERAGE_TEAM,
     lessons: [
       {
         heading: "White Wines (By the Glass)",
@@ -803,6 +828,7 @@ export const MODULES: TrainingModule[] = [
     title: "Cocktails & Bar Builds",
     summary: "Build standards, the cocktail cheat sheet, signature recipes, and batches.",
     minutes: 9,
+    requiredFor: BEVERAGE_TEAM,
     lessons: [
       {
         heading: "Build Standards",
@@ -906,6 +932,7 @@ export const MODULES: TrainingModule[] = [
     title: "Tasting Notes: Spirits & Amaro",
     summary: "Describe spirits and digestifs in vivid, accurate language to build trust.",
     minutes: 6,
+    requiredFor: BEVERAGE_TEAM,
     lessons: [
       {
         heading: "Spirits",
@@ -974,4 +1001,14 @@ export const PASS_THRESHOLD = 0.8;
 
 export function getModule(id: string): TrainingModule | undefined {
   return MODULES.find((m) => m.id === id);
+}
+
+/** Modules this role must pass to be considered fully trained. */
+export function requiredModulesFor(role: Role): TrainingModule[] {
+  return MODULES.filter((m) => m.requiredFor.includes(role));
+}
+
+/** Modules outside the role's requirements — open to study, not counted. */
+export function electiveModulesFor(role: Role): TrainingModule[] {
+  return MODULES.filter((m) => !m.requiredFor.includes(role));
 }

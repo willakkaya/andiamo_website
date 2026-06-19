@@ -64,6 +64,9 @@ export default function TrainingModuleView() {
     );
   }
 
+  const isElective =
+    !!currentEmployee && !module.requiredFor.includes(currentEmployee.role);
+
   const startQuiz = () => {
     setAnswers({});
     setCurrent(0);
@@ -88,9 +91,16 @@ export default function TrainingModuleView() {
             <ArrowLeft className="w-4 h-4" /> All modules
           </Button>
         </Link>
-        <Badge variant="outline" className="mb-2 text-gold border-gold/40">
-          {module.section}
-        </Badge>
+        <div className="flex items-center gap-2 mb-2">
+          <Badge variant="outline" className="text-gold border-gold/40">
+            {module.section}
+          </Badge>
+          {isElective && (
+            <Badge variant="secondary" className="text-xs">
+              Elective for your role
+            </Badge>
+          )}
+        </div>
         <h1 className="font-display text-3xl mb-2">{module.title}</h1>
         <p className="text-muted-foreground mb-8">{module.summary}</p>
 

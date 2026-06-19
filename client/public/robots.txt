@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+# Internal staff training — never index
+Disallow: /training
 
 Sitemap: https://www.andiamoinbanca.com/sitemap.xml

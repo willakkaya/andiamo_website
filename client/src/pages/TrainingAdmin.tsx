@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Link, useLocation } from "wouter";
-import { ArrowLeft, AlertTriangle, Users, Trash2 } from "lucide-react";
+import { ArrowLeft, AlertTriangle, Users, Trash2, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -15,9 +15,12 @@ import {
   useTraining,
   overallCompletion,
   weakAreas,
+  electivePassCount,
+  isFullyTrained,
+  isCertified,
   type EmployeeRecord,
 } from "@/contexts/TrainingContext";
-import { MODULES } from "@/lib/training/content";
+import { MODULES, requiredModulesFor } from "@/lib/training/content";
 
 function lastActivity(emp: EmployeeRecord): string {
   const times = Object.values(emp.modules)
@@ -62,11 +65,14 @@ export default function TrainingAdmin() {
       ? trainees.reduce((sum, e) => sum + overallCompletion(e), 0) / trainees.length
       : 0;
 
-  // Org-wide weak spots: modules with the most trainees not yet passing.
+  // Org-wide weak spots: pass rate per module among the staff who require it.
   const moduleStats = MODULES.map((m) => {
-    const passed = trainees.filter((e) => e.modules[m.id]?.passed).length;
-    return { module: m, passed, total: trainees.length };
-  }).sort((a, b) => a.passed / (a.total || 1) - b.passed / (b.total || 1));
+    const needed = trainees.filter((e) => m.requiredFor.includes(e.role));
+    const passed = needed.filter((e) => e.modules[m.id]?.passed).length;
+    return { module: m, passed, total: needed.length };
+  })
+    .filter((s) => s.total > 0)
+    .sort((a, b) => a.passed / a.total - b.passed / b.total);
 
   return (
     <TrainingShell>
@@ -85,27 +91,27 @@ export default function TrainingAdmin() {
       </div>
 
       {/* Summary */}
-      <div className="grid gap-4 sm:grid-cols-3 mb-8">
+      <div className="grid grid-cols-3 gap-3 sm:gap-4 mb-8">
         <Card>
-          <CardContent className="pt-6">
-            <div className="flex items-center gap-2 text-muted-foreground text-sm mb-1">
-              <Users className="w-4 h-4" /> Team members
+          <CardContent className="p-4 sm:pt-6">
+            <div className="flex items-center gap-1.5 text-muted-foreground text-xs sm:text-sm mb-1">
+              <Users className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" /> Team
             </div>
-            <div className="text-3xl font-display">{trainees.length}</div>
+            <div className="text-2xl sm:text-3xl font-display">{trainees.length}</div>
           </CardContent>
         </Card>
         <Card>
-          <CardContent className="pt-6">
-            <div className="text-muted-foreground text-sm mb-1">Avg. completion</div>
-            <div className="text-3xl font-display">
+          <CardContent className="p-4 sm:pt-6">
+            <div className="text-muted-foreground text-xs sm:text-sm mb-1">Avg. done</div>
+            <div className="text-2xl sm:text-3xl font-display">
               {Math.round(avgCompletion * 100)}%
             </div>
           </CardContent>
         </Card>
         <Card>
-          <CardContent className="pt-6">
-            <div className="text-muted-foreground text-sm mb-1">Modules</div>
-            <div className="text-3xl font-display">{MODULES.length}</div>
+          <CardContent className="p-4 sm:pt-6">
+            <div className="text-muted-foreground text-xs sm:text-sm mb-1">Modules</div>
+            <div className="text-2xl sm:text-3xl font-display">{MODULES.length}</div>
           </CardContent>
         </Card>
       </div>
@@ -125,7 +131,9 @@ export default function TrainingAdmin() {
             {trainees.map((emp) => {
               const completion = overallCompletion(emp);
               const weak = weakAreas(emp);
-              const passedCount = MODULES.filter((m) => emp.modules[m.id]?.passed).length;
+              const required = requiredModulesFor(emp.role);
+              const passedCount = required.filter((m) => emp.modules[m.id]?.passed).length;
+              const electives = electivePassCount(emp);
               return (
                 <Card key={emp.name}>
                   <CardContent className="pt-5">
@@ -137,14 +145,26 @@ export default function TrainingAdmin() {
                           · {emp.role} · {emp.location}
                         </span>
                       </div>
-                      <span className="text-xs text-muted-foreground">
-                        Last active: {lastActivity(emp)}
-                      </span>
+                      <div className="flex items-center gap-2">
+                        {isCertified(emp) ? (
+                          <Badge className="bg-green-600/15 text-green-700 border-green-600/30 gap-1">
+                            <CheckCircle2 className="w-3 h-3" /> Signed off
+                          </Badge>
+                        ) : isFullyTrained(emp) ? (
+                          <Badge className="bg-amber-500/15 text-amber-700 border-amber-500/30 gap-1">
+                            <AlertTriangle className="w-3 h-3" /> Awaiting sign-off
+                          </Badge>
+                        ) : null}
+                        <span className="text-xs text-muted-foreground">
+                          Last active: {lastActivity(emp)}
+                        </span>
+                      </div>
                     </div>
                     <div className="flex items-center gap-3 mb-3">
                       <Progress value={completion * 100} className="flex-1" />
                       <span className="text-sm text-muted-foreground whitespace-nowrap">
-                        {passedCount}/{MODULES.length} passed
+                        {passedCount}/{required.length} required
+                        {electives > 0 ? ` · +${electives} elective` : ""}
                       </span>
                     </div>
                     {weak.length > 0 ? (
@@ -159,9 +179,9 @@ export default function TrainingAdmin() {
                           </Badge>
                         ))}
                       </div>
-                    ) : passedCount === MODULES.length ? (
+                    ) : passedCount === required.length ? (
                       <p className="text-xs text-green-700">
-                        All modules complete ✓
+                        All required modules complete ✓
                       </p>
                     ) : (
                       <p className="text-xs text-muted-foreground">
@@ -179,17 +199,25 @@ export default function TrainingAdmin() {
           <Card>
             <CardHeader>
               <CardTitle className="text-sm text-muted-foreground font-normal">
-                Modules ranked by how many team members have passed
+                Ranked by pass rate among the staff who require each module
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
               {moduleStats.map(({ module, passed, total }) => (
-                <div key={module.id} className="flex items-center gap-3">
-                  <span className="text-sm flex-1 truncate">{module.title}</span>
-                  <Progress value={total ? (passed / total) * 100 : 0} className="w-32" />
-                  <span className="text-xs text-muted-foreground whitespace-nowrap w-16 text-right">
-                    {passed}/{total} passed
-                  </span>
+                <div
+                  key={module.id}
+                  className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-3"
+                >
+                  <span className="text-sm sm:flex-1 sm:truncate">{module.title}</span>
+                  <div className="flex items-center gap-2 sm:gap-3">
+                    <Progress
+                      value={total ? (passed / total) * 100 : 0}
+                      className="flex-1 sm:w-32 sm:flex-none"
+                    />
+                    <span className="text-xs text-muted-foreground whitespace-nowrap sm:w-16 sm:text-right">
+                      {passed}/{total} passed
+                    </span>
+                  </div>
                 </div>
               ))}
             </CardContent>
