@@ -1,6 +1,7 @@
-// Andiamo FOH training content — derived from the Ambience Notebook
-// (Operations & Hospitality Reference, v1.0). Single source of truth for the
-// training app: modules -> lessons (concise) + quiz questions.
+// Akkaya Hospitality Group FOH training content. Group-wide modules and the
+// Andiamo modules derive from the Ambience Notebook (Operations & Hospitality
+// Reference, v1.0); Café Figaro modules from its wine/cocktail training docs.
+// Single source of truth for the training app: modules -> lessons + quiz.
 //
 // This file is intentionally plain data so it can later seed a database when
 // the app moves to a shared backend (Phase 2).
@@ -64,7 +65,7 @@ export const MODULES: TrainingModule[] = [
     id: "culture",
     order: 1,
     section: "Who We Are",
-    title: "The Andiamo Standard & Culture",
+    title: "The Akkaya Standard & Culture",
     summary: "Our four values, our hospitality philosophy, and why we serve.",
     minutes: 8,
     requiredFor: EVERYONE,
@@ -77,7 +78,7 @@ export const MODULES: TrainingModule[] = [
           "Warmth — every guest deserves to feel genuinely welcome.",
           "Precision — every detail matters, every time.",
           "Passion — love what you do; it shows.",
-          "Pride — represent Andiamo like it's your name on the door.",
+          "Pride — represent us like it's your name on the door.",
         ],
       },
       {
@@ -105,7 +106,7 @@ export const MODULES: TrainingModule[] = [
     quiz: [
       {
         id: "culture-1",
-        question: "What are Andiamo's four core values?",
+        question: "What are our four core values?",
         options: [
           "Speed, Volume, Profit, Growth",
           "Warmth, Precision, Passion, Pride",
@@ -180,7 +181,7 @@ export const MODULES: TrainingModule[] = [
       },
       {
         heading: "Dress Code & Appearance",
-        intro: "There are no casual days at Andiamo.",
+        intro: "There are no casual days here.",
         points: [
           "Clean, pressed uniform — no wrinkles, no stains.",
           "Closed-toe, non-slip shoes — black preferred.",
@@ -260,7 +261,7 @@ export const MODULES: TrainingModule[] = [
     lessons: [
       {
         heading: "Host / Hostess",
-        intro: "You are the first and last impression of Andiamo.",
+        intro: "You are the first and last impression of the restaurant.",
         points: [
           "Greet every guest within 30 seconds — eye contact, warm smile, genuine welcome.",
           "Manage the reservation book and waitlist accurately; know the floor at all times.",
@@ -558,7 +559,7 @@ export const MODULES: TrainingModule[] = [
       {
         heading: "Language & Tone at the Table",
         points: [
-          "Say: 'Welcome to Andiamo — wonderful to have you with us.'",
+          "Say: 'Welcome — it's wonderful to have you with us.'",
           "Say: 'How is everything tasting this evening?' (not 'Is everything OK?').",
           "Offer, don't ask: 'Can I bring over our dessert menu?' (not 'Do you want dessert?').",
           "Avoid 'No problem' — it implies it could have been a problem.",
