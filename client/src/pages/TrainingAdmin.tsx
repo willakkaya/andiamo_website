@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { ArrowLeft, AlertTriangle, Users, Trash2, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -18,7 +18,9 @@ import {
   electivePassCount,
   isFullyTrained,
   isCertified,
+  LOCATIONS,
   type EmployeeRecord,
+  type Location,
 } from "@/contexts/TrainingContext";
 import { MODULES, requiredModulesFor } from "@/lib/training/content";
 
@@ -34,6 +36,7 @@ function lastActivity(emp: EmployeeRecord): string {
 export default function TrainingAdmin() {
   const { currentEmployee, allEmployees, resetAllData } = useTraining();
   const [, navigate] = useLocation();
+  const [locationFilter, setLocationFilter] = useState<"All" | Location>("All");
 
   useEffect(() => {
     if (!currentEmployee) navigate("/training");
@@ -59,7 +62,11 @@ export default function TrainingAdmin() {
     );
   }
 
-  const trainees = allEmployees.filter((e) => e.role !== "Manager");
+  const allTrainees = allEmployees.filter((e) => e.role !== "Manager");
+  const trainees =
+    locationFilter === "All"
+      ? allTrainees
+      : allTrainees.filter((e) => e.location === locationFilter);
   const avgCompletion =
     trainees.length > 0
       ? trainees.reduce((sum, e) => sum + overallCompletion(e), 0) / trainees.length
@@ -94,6 +101,29 @@ export default function TrainingAdmin() {
         </Link>
       </div>
 
+      {allTrainees.length > 0 && (
+        <div className="flex flex-wrap gap-2 mb-6">
+          {(["All", ...LOCATIONS] as const).map((loc) => {
+            const count =
+              loc === "All"
+                ? allTrainees.length
+                : allTrainees.filter((e) => e.location === loc).length;
+            return (
+              <Button
+                key={loc}
+                size="sm"
+                variant={locationFilter === loc ? "default" : "outline"}
+                onClick={() => setLocationFilter(loc)}
+                className="gap-1"
+              >
+                {loc}
+                <span className="opacity-70">({count})</span>
+              </Button>
+            );
+          })}
+        </div>
+      )}
+
       {/* Summary */}
       <div className="grid grid-cols-3 gap-3 sm:gap-4 mb-8">
         <Card>
@@ -123,8 +153,9 @@ export default function TrainingAdmin() {
       {trainees.length === 0 ? (
         <Card>
           <CardContent className="py-12 text-center text-muted-foreground">
-            No team members have signed in yet. Once staff start training, their
-            progress appears here.
+            {allTrainees.length === 0
+              ? "No team members have signed in yet. Once staff start training, their progress appears here."
+              : `No team members at ${locationFilter} yet.`}
           </CardContent>
         </Card>
       ) : (
