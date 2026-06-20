@@ -21,9 +21,46 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import TrainingShell from "@/components/training/TrainingShell";
 import { useTraining } from "@/contexts/TrainingContext";
-import { getModule, PASS_THRESHOLD } from "@/lib/training/content";
+import {
+  getModule,
+  PASS_THRESHOLD,
+  type QuizQuestion,
+} from "@/lib/training/content";
 
 type Mode = "learn" | "quiz" | "results";
+
+type RunQuestion = {
+  id: string;
+  question: string;
+  options: string[];
+  correctIndex: number;
+  explanation: string;
+};
+
+function shuffle<T>(arr: T[]): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+// Each attempt gets a fresh shuffle of question order and answer options, so
+// staff learn the content rather than memorizing answer positions.
+function buildRun(quiz: QuizQuestion[]): RunQuestion[] {
+  return shuffle(quiz).map((q) => {
+    const correctText = q.options[q.answer];
+    const options = shuffle(q.options);
+    return {
+      id: q.id,
+      question: q.question,
+      options,
+      correctIndex: options.indexOf(correctText),
+      explanation: q.explanation,
+    };
+  });
+}
 
 export default function TrainingModuleView() {
   const [, params] = useRoute("/training/module/:id");
@@ -36,20 +73,22 @@ export default function TrainingModuleView() {
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState<Record<string, number>>({});
   const [finalPct, setFinalPct] = useState(0);
+  const [run, setRun] = useState<RunQuestion[]>([]);
 
   // Must be signed in.
   useEffect(() => {
     if (!currentEmployee) navigate("/training");
   }, [currentEmployee, navigate]);
 
-  const scored = useMemo(() => {
-    if (!module) return [];
-    return module.quiz.map((q) => ({
-      q,
-      selected: answers[q.id],
-      correct: answers[q.id] === q.answer,
-    }));
-  }, [module, answers]);
+  const scored = useMemo(
+    () =>
+      run.map((rq) => ({
+        rq,
+        selected: answers[rq.id],
+        correct: answers[rq.id] === rq.correctIndex,
+      })),
+    [run, answers],
+  );
 
   if (!module) {
     return (
@@ -68,6 +107,7 @@ export default function TrainingModuleView() {
     !!currentEmployee && !module.requiredFor.includes(currentEmployee.role);
 
   const startQuiz = () => {
+    setRun(buildRun(module.quiz));
     setAnswers({});
     setCurrent(0);
     setMode("quiz");
@@ -76,7 +116,7 @@ export default function TrainingModuleView() {
   const submit = () => {
     const pct = recordAttempt(
       module.id,
-      module.quiz.map((q) => ({ questionId: q.id, correct: answers[q.id] === q.answer })),
+      run.map((rq) => ({ questionId: rq.id, correct: answers[rq.id] === rq.correctIndex })),
     );
     setFinalPct(pct);
     setMode("results");
@@ -141,19 +181,19 @@ export default function TrainingModuleView() {
 
   // ---- QUIZ ----
   if (mode === "quiz") {
-    const q = module.quiz[current];
+    const q = run[current];
     const selected = answers[q.id];
-    const isLast = current === module.quiz.length - 1;
+    const isLast = current === run.length - 1;
     return (
       <TrainingShell>
         <div className="max-w-2xl mx-auto">
           <div className="flex items-center justify-between mb-2 text-sm text-muted-foreground">
             <span>{module.title}</span>
             <span>
-              Question {current + 1} of {module.quiz.length}
+              Question {current + 1} of {run.length}
             </span>
           </div>
-          <Progress value={((current + 1) / module.quiz.length) * 100} className="mb-6" />
+          <Progress value={((current + 1) / run.length) * 100} className="mb-6" />
 
           <Card>
             <CardHeader>
@@ -226,7 +266,7 @@ export default function TrainingModuleView() {
               {passed ? "Module passed!" : "Almost there"}
             </h1>
             <p className="text-muted-foreground mb-4">
-              You scored {correctCount} of {module.quiz.length} (
+              You scored {correctCount} of {run.length} (
               {Math.round(finalPct * 100)}%).{" "}
               {passed
                 ? "Great work."
@@ -245,8 +285,8 @@ export default function TrainingModuleView() {
 
         <h2 className="font-display text-xl mt-8 mb-3">Review</h2>
         <div className="space-y-3">
-          {scored.map(({ q, selected, correct }) => (
-            <Card key={q.id}>
+          {scored.map(({ rq, selected, correct }) => (
+            <Card key={rq.id}>
               <CardContent className="pt-5">
                 <div className="flex gap-2">
                   {correct ? (
@@ -255,17 +295,17 @@ export default function TrainingModuleView() {
                     <XCircle className="w-5 h-5 text-destructive shrink-0 mt-0.5" />
                   )}
                   <div className="space-y-1">
-                    <p className="font-medium text-sm">{q.question}</p>
+                    <p className="font-medium text-sm">{rq.question}</p>
                     {!correct && selected !== undefined && (
                       <p className="text-sm text-destructive">
-                        Your answer: {q.options[selected]}
+                        Your answer: {rq.options[selected]}
                       </p>
                     )}
                     <p className="text-sm text-green-700">
-                      Correct: {q.options[q.answer]}
+                      Correct: {rq.options[rq.correctIndex]}
                     </p>
                     <p className="text-sm text-muted-foreground italic">
-                      {q.explanation}
+                      {rq.explanation}
                     </p>
                   </div>
                 </div>
