@@ -1023,31 +1023,44 @@ export const MODULES: TrainingModule[] = [
         ],
       },
       {
+        heading: "Reserve Wines by the Glass",
+        intro:
+          "Our prestige pours — for special occasions and guests who love wine. Tell their stories.",
+        points: [
+          "Domaine Leflaive, Mâcon-Verzé, White Burgundy ($50) — Burgundy's most iconic biodynamic estate; limestone minerality, white peach, toasted almond, long saline finish.",
+          "Elvio Cogno 'Cascina Nuova', Barolo ($45) — old-vine Nebbiolo; rose, dried cherry, iron-edged earth, silky tannins; one of Barolo's most elegant expressions.",
+          "Domaine Duroché, Gevrey-Chambertin, Red Burgundy ($65) — wild cherry, crushed violet, forest floor; Gevrey's iron backbone in pure, silky fruit.",
+          "Jean Louis Chave Selections 'Offerus', St. Joseph, Syrah ($30) — 100% Syrah from the family behind Hermitage; violets, black pepper, smoked meat; Northern Rhône elegance.",
+          "Our list earned the Wine Spectator Award of Excellence and a Star Wine List spot — worth mentioning to wine lovers.",
+        ],
+      },
+      {
         heading: "Whites & Sparkling",
         points: [
           "Bisol 'Jeio' Prosecco ($12) — crisp apple & pear bubbles; the approachable welcome glass.",
-          "Mas de Daumas Gassac Brut Rosé ($15) — strawberry, brioche, more structured; the step-up sparkler.",
-          "De Forville Chardonnay, Piedmont ($16) — UNoaked, light, floral; win back the 'I don't like Chardonnay' guest.",
-          "Hartford Court Chardonnay ($18, from magnum) — ripe, buttery, oaked; for the full California lover.",
-          "Te Mata Sauvignon Blanc, NZ ($16) — zesty citrus; the Sancerre ($20) is also Sauvignon Blanc, more mineral and refined.",
-          "Elena Walch Pinot Grigio ($16) & Ronchi di Cialla Ribolla Gialla ($16) — same price; Ribolla is a rare indigenous Italian grape worth suggesting.",
+          "Sommariva 'Il Rosa' Brut Rosé ($15) — the step-up sparkler; elegant and celebratory.",
+          "De Forville Chardonnay, Piedmont ($16) — UNoaked; wildflowers, cream, bright acidity; win back the 'I don't like Chardonnay' guest.",
+          "Ramey Chardonnay, Russian River ($25) — ripe apple, melon, buttery with a kiss of oak; for the full California lover.",
+          "Domaine Bitouzet-Prieur, Bourgogne Blanc, White Burgundy ($25) — orchard blossom, chalky lift, silken texture; Burgundy finesse by the glass.",
+          "Te Mata Sauvignon Blanc, NZ ($16) — zesty citrus; the Sancerre (Domaine Sylvain Bailly, $20) is also Sauvignon Blanc, more mineral and refined.",
+          "Elena Walch Pinot Grigio ($16) & Ronchi di Cialla Ribolla Gialla ($16) — same price; Ribolla is the elevated alternative, more texture and depth.",
         ],
       },
       {
         heading: "Reds",
         points: [
-          "Big Reds: Routestock Napa Cab ($17, entry) → Chappellet Mountain Cuvée ($25, concentrated mountain fruit) → Château Margaux 'Margaux du Margaux' ($65), the second wine of a Bordeaux First Growth.",
-          "Pinot Noir: Faila, Oregon ($17, silky & easy) → Occidental, Sonoma Coast ($35), benchmark California Pinot by Steve Kistler.",
-          "Italian Red: Frescobaldi 'Nipozzano' Chianti Rufina Riserva ($16) → Le Macchiole Super Tuscan, Bolgheri ($23) → Oddero 'Convento' Barolo ($25), the 'King of Italian Wine'.",
+          "Big Reds: Routestock Napa Cab ($17, entry) → Chappellet Mountain Cuvée ($25, polished mountain fruit) → Duckhorn Napa Cab ($28), quintessential Napa elegance.",
+          "Pinot Noir: Failla, Oregon ($17, silky & easy) → Occidental, Sonoma Coast ($35), benchmark California Pinot by Steve Kistler.",
+          "Italian Red: Villa Sant'Anna Chianti Colli Senesi ($16) → Montepeloso 'A Quo' Super Tuscan ($20) → Tintero Barbaresco ($25) — Nebbiolo: cherry, rose, truffle, earth.",
         ],
       },
       {
         heading: "Guiding the Upsell",
         points: [
-          "Never default to the cheapest — when a guest says 'a Chardonnay,' ask: 'lighter and crisp, or fuller with a bit of oak?'",
-          "Sancerre sells itself — 'same grape, but a completely different, more special experience.'",
+          "Never default to the cheapest — when a guest says 'a Chardonnay,' ask: 'lighter and crisp, or fuller with a bit of oak?' (De Forville vs. Ramey).",
+          "Sancerre sells itself — 'same grape as our New Zealand, but a more mineral, special experience.'",
+          "For a celebration, guide to the Reserve list — the Leflaive or the Duroché Burgundy is an experience, not just a glass.",
           "'I would' is your most powerful phrase — confide a recommendation, don't pitch.",
-          "Same-price suggestions like the Ribolla Gialla are pure generosity — an experience guests can't get elsewhere.",
         ],
       },
     ],
@@ -1057,14 +1070,14 @@ export const MODULES: TrainingModule[] = [
         question:
           "A guest says they don't like Chardonnay because it's too oaky/buttery. Pour the:",
         options: [
-          "Hartford Court (ripe, buttery, oaked)",
+          "Ramey (ripe, buttery, kiss of oak)",
           "De Forville Piedmont (unoaked, light, floral)",
           "Routestock Cabernet",
           "Bisol Prosecco",
         ],
         answer: 1,
         explanation:
-          "The unoaked De Forville wins those guests back — light and floral with bright acidity.",
+          "The unoaked De Forville wins those guests back — wildflowers, cream, and bright acidity.",
       },
       {
         id: "figaro-wine-2",
@@ -1076,51 +1089,47 @@ export const MODULES: TrainingModule[] = [
       },
       {
         id: "figaro-wine-3",
-        question: "Which red is known as 'the King of Italian Wine'?",
+        question:
+          "Which reserve wine is from 'Burgundy's most iconic biodynamic estate'?",
         options: [
-          "Chianti Rufina Riserva",
-          "Super Tuscan",
-          "Oddero 'Convento' Barolo",
-          "Routestock Cabernet",
-        ],
-        answer: 2,
-        explanation:
-          "Barolo (Nebbiolo, Piedmont) — our Oddero 'Convento' is an accessibly priced example.",
-      },
-      {
-        id: "figaro-wine-4",
-        question: "A guest just says 'give me a Chardonnay.' The best move is to:",
-        options: [
-          "Pour the cheapest one by default",
-          "Pour the most expensive one",
-          "Ask whether they prefer lighter and crisp, or fuller with oak",
-          "Tell them all three taste the same",
-        ],
-        answer: 2,
-        explanation:
-          "One question matches them perfectly and naturally guides toward the right wine — a service move, not a sales move.",
-      },
-      {
-        id: "figaro-wine-5",
-        question: "The Château Margaux 'Margaux du Margaux' on our list is:",
-        options: [
-          "A California Cabernet",
-          "The second wine of a Bordeaux First Growth estate",
-          "A sweet dessert wine",
-          "An Italian Barolo",
+          "Ramey Chardonnay",
+          "Domaine Leflaive, Mâcon-Verzé",
+          "Bisol Prosecco",
+          "Te Mata Sauvignon Blanc",
         ],
         answer: 1,
         explanation:
-          "It's the second wine of Château Margaux — one of only five Bordeaux First Growths. Know that story cold.",
+          "Domaine Leflaive — limestone minerality, white peach, toasted almond, long saline finish.",
+      },
+      {
+        id: "figaro-wine-4",
+        question: "A guest wants a fuller, buttery California Chardonnay. Pour the:",
+        options: [
+          "De Forville (unoaked Piedmont)",
+          "Ramey, Russian River",
+          "Bitouzet-Prieur (White Burgundy)",
+          "Sancerre",
+        ],
+        answer: 1,
+        explanation:
+          "Ramey from Russian River — ripe apple, melon, buttery with a kiss of oak.",
+      },
+      {
+        id: "figaro-wine-5",
+        question: "The Tintero Barbaresco is made from which grape?",
+        options: ["Sangiovese", "Nebbiolo", "Cabernet Sauvignon", "Syrah"],
+        answer: 1,
+        explanation:
+          "Barbaresco (like Barolo) is Nebbiolo from Piedmont — cherry, rose, truffle, earth.",
       },
       {
         id: "figaro-wine-6",
         question: "A guest is having fish and wants a white. A great pick is:",
         options: [
-          "Hartford Court oaked Chardonnay",
+          "Ramey oaked Chardonnay",
           "Sancerre or the NZ Sauvignon Blanc",
-          "Routestock Cabernet",
-          "Oddero Barolo",
+          "Duckhorn Cabernet",
+          "Tintero Barbaresco",
         ],
         answer: 1,
         explanation:
@@ -1133,30 +1142,38 @@ export const MODULES: TrainingModule[] = [
     order: 12,
     section: "Bar Reference",
     title: "Café Figaro: Cocktails",
-    summary: "Figaro's cocktail list — ingredients and how to describe each. All $16.",
-    minutes: 6,
+    summary: "Figaro's cocktails and zero-proof mocktails — ingredients and how to describe each. Cocktails $16.",
+    minutes: 7,
     requiredFor: BEVERAGE_TEAM,
     location: "Cafe Figaro",
     lessons: [
       {
-        heading: "The Cocktail List ($16 each)",
+        heading: "Cocktails ($16 each)",
         points: [
-          "Aperol Spritz — Aperol, Prosecco, soda water, orange peel.",
-          "Old Fashioned — Uncle Nearest Bourbon, sugar, bitters, orange twist.",
-          "Elderflower Gin & Tonic — Botanist Gin, elderflower tonic, orange.",
-          "Pomegranate Limoncello Martini — Tito's vodka, pomegranate, lemon juice, limoncello.",
-          "Hibiscus Mule — Noble Oak Bourbon, Q Hibiscus Ginger Beer, lemon.",
-          "Figaro Manhattan — Sazerac Rye, Antica vermouth, bitters, Luxardo cherry.",
-          "Broadway Boulevardier — Highland Park 12yr, Campari, Antica vermouth.",
+          "Figaro Manhattan — Knob Creek Rye, Antica vermouth, Angostura bitters, Luxardo cherry.",
+          "Old Fashioned — Buffalo Trace, sugar, orange bitters, orange twist, Luxardo cherry.",
+          "Figaro Reserve — Bar Agricole Brandy, Gran Classico, Antica vermouth, orange bitters; a bartender's favorite, deep and balanced.",
+          "Espresso Martini — vodka, coffee liqueur, espresso, sugar.",
+          "The Burlingame Martini — Gin, Cocchi Americano, lemon bitters; our house martini, crisp and elegant.",
+          "Aperol Spritz — Prosecco, Aperol, soda water, orange garnish.",
+          "Hugo Rosé Spritz — Brut Rosé, St. Germain, soda water, mint garnish.",
+        ],
+      },
+      {
+        heading: "Zero-Proof Mocktails",
+        points: [
+          "The Peninsula — Ghia Le Spritz, Fever Tree Tonic, fresh lemon.",
+          "La Dolce Vita — Limonata, Fever Tree Elderflower Tonic, soda, fresh mint.",
         ],
       },
       {
         heading: "How to Sell Them",
         points: [
-          "Aperol Spritz & Elderflower G&T — light, refreshing aperitivo options for early or warm evenings.",
-          "Old Fashioned & Figaro Manhattan — the classics for whiskey drinkers; the Manhattan is rye-forward and stirred.",
-          "Broadway Boulevardier — a whiskey lover's Negroni (Campari + vermouth); recommend to Negroni fans.",
-          "Pomegranate Limoncello Martini & Hibiscus Mule — bright, fruit-forward house signatures for guests who want something different.",
+          "Figaro Reserve — the bartender's favorite; brandy-based, deep and balanced. Offer to the curious, spirit-forward guest.",
+          "The Burlingame Martini — our house signature; steer gin and martini drinkers here.",
+          "Figaro Manhattan & Old Fashioned — the whiskey classics; the Espresso Martini is the after-dinner pick-me-up.",
+          "Aperol & Hugo Rosé Spritz — light, refreshing aperitivos for early or warm evenings.",
+          "Always offer the zero-proof mocktails enthusiastically to guests not drinking — they deserve a great drink too.",
         ],
       },
     ],
@@ -1165,38 +1182,35 @@ export const MODULES: TrainingModule[] = [
         id: "figaro-cocktails-1",
         question: "What is the base spirit of the Figaro Manhattan?",
         options: [
-          "Uncle Nearest Bourbon",
-          "Sazerac Rye whiskey",
-          "Botanist Gin",
-          "Tito's vodka",
-        ],
-        answer: 1,
-        explanation: "Sazerac Rye, with Antica vermouth, bitters, and a Luxardo cherry.",
-      },
-      {
-        id: "figaro-cocktails-2",
-        question: "Which cocktail is built with Botanist Gin?",
-        options: [
-          "Aperol Spritz",
-          "Elderflower Gin & Tonic",
-          "Hibiscus Mule",
-          "Broadway Boulevardier",
-        ],
-        answer: 1,
-        explanation: "The Elderflower Gin & Tonic — Botanist Gin, elderflower tonic, orange.",
-      },
-      {
-        id: "figaro-cocktails-3",
-        question: "The Broadway Boulevardier is made with:",
-        options: [
-          "Vodka, pomegranate, limoncello",
-          "Highland Park 12, Campari, Antica vermouth",
-          "Bourbon, ginger beer, lemon",
-          "Aperol, Prosecco, soda",
+          "Buffalo Trace bourbon",
+          "Knob Creek Rye whiskey",
+          "Bar Agricole Brandy",
+          "Gin",
         ],
         answer: 1,
         explanation:
-          "It's a whiskey lover's Negroni — Highland Park 12, Campari, and Antica vermouth.",
+          "Knob Creek Rye, with Antica vermouth, Angostura bitters, and a Luxardo cherry.",
+      },
+      {
+        id: "figaro-cocktails-2",
+        question: "Which drink is Figaro's house martini?",
+        options: [
+          "Espresso Martini",
+          "The Burlingame Martini",
+          "Figaro Reserve",
+          "Aperol Spritz",
+        ],
+        answer: 1,
+        explanation:
+          "The Burlingame Martini — Gin, Cocchi Americano, lemon bitters; crisp, elegant, unmistakably Figaro.",
+      },
+      {
+        id: "figaro-cocktails-3",
+        question: "The Figaro Reserve is built on which base spirit?",
+        options: ["Rye whiskey", "Vodka", "Bar Agricole Brandy", "Gin"],
+        answer: 2,
+        explanation:
+          "Bar Agricole Brandy with Gran Classico, Antica vermouth, and orange bitters — a bartender's favorite.",
       },
       {
         id: "figaro-cocktails-4",
@@ -1207,16 +1221,24 @@ export const MODULES: TrainingModule[] = [
       },
       {
         id: "figaro-cocktails-5",
-        question: "A Negroni fan asks for a recommendation. Steer them to the:",
+        question: "A guest isn't drinking alcohol tonight. Offer the:",
         options: [
           "Aperol Spritz",
-          "Pomegranate Limoncello Martini",
-          "Broadway Boulevardier",
-          "Hibiscus Mule",
+          "The Peninsula or La Dolce Vita",
+          "Espresso Martini",
+          "Old Fashioned",
         ],
-        answer: 2,
+        answer: 1,
         explanation:
-          "The Boulevardier is a whiskey-based Negroni (Campari + vermouth) — a natural fit for Negroni lovers.",
+          "Our zero-proof mocktails — The Peninsula and La Dolce Vita. Offer them enthusiastically.",
+      },
+      {
+        id: "figaro-cocktails-6",
+        question: "The Old Fashioned is made with which base spirit?",
+        options: ["Knob Creek Rye", "Buffalo Trace bourbon", "Bar Agricole Brandy", "Vodka"],
+        answer: 1,
+        explanation:
+          "Buffalo Trace, with sugar, orange bitters, an orange twist, and a Luxardo cherry.",
       },
     ],
   },
