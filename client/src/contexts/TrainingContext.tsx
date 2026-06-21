@@ -1,9 +1,11 @@
 // Training progress store + React context.
 //
-// PHASE 1: persistence is localStorage on a single device. All read/write goes
-// through the functions in the "STORAGE LAYER" block below. In Phase 2, replace
-// the bodies of loadData / saveData (and signIn) with API calls — the rest of
-// the app (and this context's surface) does not change.
+// PHASE 2: persistence is a shared Postgres database, reached through the
+// /api/training/* serverless functions. Auth is name + 4-digit PIN; a session
+// token (returned by sign-in) is kept in localStorage and sent as a bearer
+// token on every request. All network access goes through the API LAYER block
+// below, so the rest of the app only depends on this context's surface and the
+// pure derived helpers.
 
 import {
   createContext,
@@ -15,7 +17,6 @@ import {
   type ReactNode,
 } from "react";
 import {
-  PASS_THRESHOLD,
   ROLES,
   LOCATIONS,
   electiveModulesFor,
@@ -36,46 +37,64 @@ export type ModuleProgress = {
   wrongQuestionIds: string[]; // from the best attempt
 };
 
+// Mirrors the server's EmployeeDTO.
 export type EmployeeRecord = {
+  id: string;
   name: string;
   role: Role;
   location: Location;
+  isManager: boolean;
   createdAt: string;
   modules: Record<string, ModuleProgress>;
   /** Set when the employee signs the standards acknowledgment. */
-  acknowledgedAt?: string;
+  acknowledgedAt?: string | null;
   /** The full name the employee typed as their signature. */
-  signatureName?: string;
+  signatureName?: string | null;
 };
-
-type TrainingData = { employees: Record<string, EmployeeRecord> };
 
 export type AttemptAnswer = { questionId: string; correct: boolean };
 
 // ---------------------------------------------------------------------------
-// STORAGE LAYER (swap this for an API in Phase 2)
+// API LAYER (the only place that talks to the network)
 // ---------------------------------------------------------------------------
-const DATA_KEY = "andiamo_training_v1";
-const USER_KEY = "andiamo_training_user";
+const TOKEN_KEY = "andiamo_training_token";
 
-function loadData(): TrainingData {
-  try {
-    const raw = localStorage.getItem(DATA_KEY);
-    if (raw) return JSON.parse(raw) as TrainingData;
-  } catch {
-    // ignore corrupt data
+const getToken = () => localStorage.getItem(TOKEN_KEY);
+const setToken = (t: string) => localStorage.setItem(TOKEN_KEY, t);
+const clearToken = () => localStorage.removeItem(TOKEN_KEY);
+
+type ApiResult<T> =
+  | { ok: true; data: T }
+  | { ok: false; error: string; status: number };
+
+async function api<T>(
+  path: string,
+  options: { method?: string; body?: unknown; auth?: boolean } = {},
+): Promise<ApiResult<T>> {
+  const headers: Record<string, string> = {};
+  if (options.body) headers["Content-Type"] = "application/json";
+  if (options.auth !== false) {
+    const token = getToken();
+    if (token) headers["Authorization"] = `Bearer ${token}`;
   }
-  return { employees: {} };
+  try {
+    const res = await fetch(`/api/training/${path}`, {
+      method: options.method ?? "GET",
+      headers,
+      body: options.body ? JSON.stringify(options.body) : undefined,
+    });
+    const json = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      return { ok: false, error: json.error ?? "Something went wrong", status: res.status };
+    }
+    return { ok: true, data: json as T };
+  } catch {
+    return { ok: false, error: "Network error — please try again", status: 0 };
+  }
 }
-
-function saveData(data: TrainingData) {
-  localStorage.setItem(DATA_KEY, JSON.stringify(data));
-}
-
-const normalizeKey = (name: string) => name.trim().toLowerCase();
 
 // ---------------------------------------------------------------------------
-// Derived helpers (pure)
+// Derived helpers (pure) — unchanged surface from Phase 1
 // ---------------------------------------------------------------------------
 /** Completion against the modules *required for the employee's role*. */
 export function overallCompletion(emp: EmployeeRecord | undefined): number {
@@ -120,137 +139,133 @@ export function isCertified(emp: EmployeeRecord | undefined): boolean {
 // ---------------------------------------------------------------------------
 // Context
 // ---------------------------------------------------------------------------
+export type SignInArgs = {
+  name: string;
+  role: Role;
+  location: Location;
+  pin: string;
+  managerCode?: string;
+};
+
+export type Result = { ok: boolean; error?: string };
+
 type TrainingContextValue = {
+  /** "loading" until the saved session (if any) is restored. */
+  status: "loading" | "ready";
   currentEmployee: EmployeeRecord | undefined;
   allEmployees: EmployeeRecord[];
-  signIn: (name: string, role: Role, location: Location) => void;
+  signIn: (args: SignInArgs) => Promise<Result>;
   signOut: () => void;
-  recordAttempt: (moduleId: string, answers: AttemptAnswer[]) => number;
-  recordAcknowledgment: (signatureName: string) => void;
-  resetAllData: () => void;
+  recordAttempt: (moduleId: string, answers: AttemptAnswer[]) => Promise<number>;
+  recordAcknowledgment: (signatureName: string) => Promise<Result>;
+  /** Manager-only: load every employee's progress from the server. */
+  refreshTeam: () => Promise<void>;
 };
 
 const TrainingContext = createContext<TrainingContextValue | null>(null);
 
 export function TrainingProvider({ children }: { children: ReactNode }) {
-  // Initialize synchronously from localStorage so currentEmployee is correct on
-  // the first render — otherwise pages that redirect when signed-out (module,
-  // admin) bounce the user on refresh/deep-link before hydration completes.
-  const [data, setData] = useState<TrainingData>(() => loadData());
-  const [currentKey, setCurrentKey] = useState<string | null>(() =>
-    localStorage.getItem(USER_KEY),
-  );
+  const [status, setStatus] = useState<"loading" | "ready">("loading");
+  const [currentEmployee, setCurrentEmployee] = useState<EmployeeRecord | undefined>();
+  const [allEmployees, setAllEmployees] = useState<EmployeeRecord[]>([]);
 
-  // Persist data whenever it changes.
+  // Restore the session on load: if a token exists, fetch the employee.
   useEffect(() => {
-    saveData(data);
-  }, [data]);
+    let cancelled = false;
+    (async () => {
+      if (!getToken()) {
+        setStatus("ready");
+        return;
+      }
+      const res = await api<{ employee: EmployeeRecord }>("me");
+      if (cancelled) return;
+      if (res.ok) {
+        setCurrentEmployee(res.data.employee);
+      } else if (res.status === 401 || res.status === 404) {
+        clearToken();
+      }
+      setStatus("ready");
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
-  const signIn = useCallback(
-    (name: string, role: Role, location: Location) => {
-      const key = normalizeKey(name);
-      setData((prev) => {
-        if (prev.employees[key]) {
-          // Update role/location in case they changed; keep progress.
-          return {
-            employees: {
-              ...prev.employees,
-              [key]: { ...prev.employees[key], role, location, name: name.trim() },
-            },
-          };
-        }
-        const record: EmployeeRecord = {
-          name: name.trim(),
-          role,
-          location,
-          createdAt: new Date().toISOString(),
-          modules: {},
-        };
-        return { employees: { ...prev.employees, [key]: record } };
+  const signIn = useCallback(async (args: SignInArgs): Promise<Result> => {
+    const res = await api<{ employee: EmployeeRecord; token: string }>("signin", {
+      method: "POST",
+      body: args,
+      auth: false,
+    });
+    if (!res.ok) return { ok: false, error: res.error };
+    setToken(res.data.token);
+    setCurrentEmployee(res.data.employee);
+    return { ok: true };
+  }, []);
+
+  const signOut = useCallback(() => {
+    clearToken();
+    setCurrentEmployee(undefined);
+    setAllEmployees([]);
+  }, []);
+
+  const recordAttempt = useCallback(
+    async (moduleId: string, answers: AttemptAnswer[]): Promise<number> => {
+      const res = await api<{ pct: number; module: ModuleProgress }>("attempt", {
+        method: "POST",
+        body: { moduleId, answers },
       });
-      localStorage.setItem(USER_KEY, key);
-      setCurrentKey(key);
+      if (!res.ok) return 0;
+      // Reflect the saved progress locally without a full refetch.
+      setCurrentEmployee((prev) =>
+        prev
+          ? { ...prev, modules: { ...prev.modules, [moduleId]: res.data.module } }
+          : prev,
+      );
+      return res.data.pct;
     },
     [],
   );
 
-  const signOut = useCallback(() => {
-    localStorage.removeItem(USER_KEY);
-    setCurrentKey(null);
-  }, []);
-
-  const recordAttempt = useCallback(
-    (moduleId: string, answers: AttemptAnswer[]): number => {
-      const correct = answers.filter((a) => a.correct).length;
-      const pct = answers.length ? correct / answers.length : 0;
-      const passed = pct >= PASS_THRESHOLD;
-      const wrong = answers.filter((a) => !a.correct).map((a) => a.questionId);
-
-      setData((prev) => {
-        if (!currentKey || !prev.employees[currentKey]) return prev;
-        const emp = prev.employees[currentKey];
-        const existing = emp.modules[moduleId];
-        const isBest = !existing || pct >= existing.bestPct;
-        const nextModule: ModuleProgress = {
-          bestPct: existing ? Math.max(existing.bestPct, pct) : pct,
-          passed: existing ? existing.passed || passed : passed,
-          attempts: (existing?.attempts ?? 0) + 1,
-          lastAttemptAt: new Date().toISOString(),
-          wrongQuestionIds: isBest ? wrong : existing.wrongQuestionIds,
-        };
-        return {
-          employees: {
-            ...prev.employees,
-            [currentKey]: {
-              ...emp,
-              modules: { ...emp.modules, [moduleId]: nextModule },
-            },
-          },
-        };
-      });
-
-      return pct;
-    },
-    [currentKey],
-  );
-
   const recordAcknowledgment = useCallback(
-    (signatureName: string) => {
-      setData((prev) => {
-        if (!currentKey || !prev.employees[currentKey]) return prev;
-        const emp = prev.employees[currentKey];
-        return {
-          employees: {
-            ...prev.employees,
-            [currentKey]: {
-              ...emp,
-              acknowledgedAt: new Date().toISOString(),
-              signatureName: signatureName.trim(),
-            },
-          },
-        };
+    async (signatureName: string): Promise<Result> => {
+      const res = await api<{ employee: EmployeeRecord }>("acknowledge", {
+        method: "POST",
+        body: { signatureName },
       });
+      if (!res.ok) return { ok: false, error: res.error };
+      setCurrentEmployee(res.data.employee);
+      return { ok: true };
     },
-    [currentKey],
+    [],
   );
 
-  const resetAllData = useCallback(() => {
-    setData({ employees: {} });
-    localStorage.removeItem(USER_KEY);
-    setCurrentKey(null);
+  const refreshTeam = useCallback(async () => {
+    const res = await api<{ employees: EmployeeRecord[] }>("employees");
+    if (res.ok) setAllEmployees(res.data.employees);
   }, []);
 
   const value = useMemo<TrainingContextValue>(
     () => ({
-      currentEmployee: currentKey ? data.employees[currentKey] : undefined,
-      allEmployees: Object.values(data.employees),
+      status,
+      currentEmployee,
+      allEmployees,
       signIn,
       signOut,
       recordAttempt,
       recordAcknowledgment,
-      resetAllData,
+      refreshTeam,
     }),
-    [currentKey, data, signIn, signOut, recordAttempt, recordAcknowledgment, resetAllData],
+    [
+      status,
+      currentEmployee,
+      allEmployees,
+      signIn,
+      signOut,
+      recordAttempt,
+      recordAcknowledgment,
+      refreshTeam,
+    ],
   );
 
   return (

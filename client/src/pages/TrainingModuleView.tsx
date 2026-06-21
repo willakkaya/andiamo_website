@@ -65,7 +65,7 @@ function buildRun(quiz: QuizQuestion[]): RunQuestion[] {
 export default function TrainingModuleView() {
   const [, params] = useRoute("/training/module/:id");
   const [, navigate] = useLocation();
-  const { currentEmployee, recordAttempt } = useTraining();
+  const { status, currentEmployee, recordAttempt } = useTraining();
   const moduleId = params?.id ?? "";
   const module = getModule(moduleId);
 
@@ -75,10 +75,10 @@ export default function TrainingModuleView() {
   const [finalPct, setFinalPct] = useState(0);
   const [run, setRun] = useState<RunQuestion[]>([]);
 
-  // Must be signed in.
+  // Must be signed in (wait for the session to finish restoring first).
   useEffect(() => {
-    if (!currentEmployee) navigate("/training");
-  }, [currentEmployee, navigate]);
+    if (status === "ready" && !currentEmployee) navigate("/training");
+  }, [status, currentEmployee, navigate]);
 
   const scored = useMemo(
     () =>
@@ -113,13 +113,17 @@ export default function TrainingModuleView() {
     setMode("quiz");
   };
 
-  const submit = () => {
-    const pct = recordAttempt(
+  const [submitting, setSubmitting] = useState(false);
+  const submit = async () => {
+    if (submitting) return;
+    setSubmitting(true);
+    const pct = await recordAttempt(
       module.id,
       run.map((rq) => ({ questionId: rq.id, correct: answers[rq.id] === rq.correctIndex })),
     );
     setFinalPct(pct);
     setMode("results");
+    setSubmitting(false);
   };
 
   // ---- LEARN ----

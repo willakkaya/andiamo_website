@@ -55,8 +55,33 @@ function SignIn() {
   const [name, setName] = useState("");
   const [role, setRole] = useState<Role | "">("");
   const [location, setLocation] = useState<Location | "">("");
+  const [pin, setPin] = useState("");
+  const [managerCode, setManagerCode] = useState("");
+  const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
-  const canStart = name.trim().length > 1 && role && location;
+  const pinValid = /^\d{4}$/.test(pin);
+  const canStart =
+    name.trim().length > 1 &&
+    role &&
+    location &&
+    pinValid &&
+    (role !== "Manager" || managerCode.length > 0);
+
+  const handleSignIn = async () => {
+    if (!canStart || submitting) return;
+    setSubmitting(true);
+    setError("");
+    const res = await signIn({
+      name,
+      role: role as Role,
+      location: location as Location,
+      pin,
+      managerCode: role === "Manager" ? managerCode : undefined,
+    });
+    if (!res.ok) setError(res.error ?? "Could not sign in");
+    setSubmitting(false);
+  };
 
   return (
     <div className="max-w-md mx-auto">
@@ -110,15 +135,48 @@ function SignIn() {
               </SelectContent>
             </Select>
           </div>
+          <div className="space-y-2">
+            <Label htmlFor="pin">4-digit PIN</Label>
+            <Input
+              id="pin"
+              inputMode="numeric"
+              autoComplete="off"
+              maxLength={4}
+              placeholder="••••"
+              value={pin}
+              onChange={(e) => setPin(e.target.value.replace(/\D/g, "").slice(0, 4))}
+              onKeyDown={(e) => e.key === "Enter" && handleSignIn()}
+            />
+            <p className="text-xs text-muted-foreground">
+              New here? Pick any 4-digit PIN — it'll be yours from now on.
+            </p>
+          </div>
+          {role === "Manager" && (
+            <div className="space-y-2">
+              <Label htmlFor="managerCode">Manager access code</Label>
+              <Input
+                id="managerCode"
+                type="password"
+                autoComplete="off"
+                placeholder="Required for the team dashboard"
+                value={managerCode}
+                onChange={(e) => setManagerCode(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleSignIn()}
+              />
+            </div>
+          )}
+          {error && <p className="text-sm text-destructive">{error}</p>}
           <Button
             className="w-full"
-            disabled={!canStart}
-            onClick={() => canStart && signIn(name, role as Role, location as Location)}
+            disabled={!canStart || submitting}
+            onClick={handleSignIn}
           >
-            Start Training <ArrowRight className="w-4 h-4" />
+            {submitting ? "Signing in…" : "Start Training"}{" "}
+            <ArrowRight className="w-4 h-4" />
           </Button>
           <p className="text-xs text-muted-foreground text-center">
-            Managers: sign in with the role "Manager" to see the team dashboard.
+            Managers: choose the "Manager" role and enter your access code to see
+            the team dashboard.
           </p>
         </CardContent>
       </Card>
@@ -292,6 +350,8 @@ function ModuleCard({
 function SignOffCard() {
   const { currentEmployee, recordAcknowledgment } = useTraining();
   const [signature, setSignature] = useState("");
+  const [signing, setSigning] = useState(false);
+  const [error, setError] = useState("");
   if (!currentEmployee) return null;
 
   // Certified — show the certificate link.
@@ -325,6 +385,14 @@ function SignOffCard() {
   if (!isFullyTrained(currentEmployee)) return null;
 
   const canSign = signature.trim().length > 1;
+  const handleSign = async () => {
+    if (!canSign || signing) return;
+    setSigning(true);
+    setError("");
+    const res = await recordAcknowledgment(signature);
+    if (!res.ok) setError(res.error ?? "Could not save your signature");
+    setSigning(false);
+  };
   return (
     <Card className="mb-8 border-gold/50 bg-gradient-to-br from-gold/5 to-transparent">
       <CardHeader>
@@ -357,13 +425,14 @@ function SignOffCard() {
               className="font-display text-lg"
             />
             <Button
-              disabled={!canSign}
-              onClick={() => canSign && recordAcknowledgment(signature)}
+              disabled={!canSign || signing}
+              onClick={handleSign}
               className="gap-1 shrink-0"
             >
-              <PenLine className="w-4 h-4" /> Sign &amp; agree
+              <PenLine className="w-4 h-4" /> {signing ? "Signing…" : "Sign & agree"}
             </Button>
           </div>
+          {error && <p className="text-sm text-destructive">{error}</p>}
         </div>
       </CardContent>
     </Card>
@@ -452,10 +521,12 @@ function Dashboard() {
 }
 
 export default function Training() {
-  const { currentEmployee } = useTraining();
+  const { status, currentEmployee } = useTraining();
   return (
     <TrainingShell>
-      {!currentEmployee ? (
+      {status === "loading" ? (
+        <p className="text-center text-muted-foreground py-12">Loading…</p>
+      ) : !currentEmployee ? (
         <SignIn />
       ) : currentEmployee.role === "Manager" ? (
         <ManagerHome />

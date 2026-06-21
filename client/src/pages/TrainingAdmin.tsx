@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "wouter";
-import { ArrowLeft, AlertTriangle, Users, Trash2, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, AlertTriangle, Users, RefreshCw, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -34,13 +34,18 @@ function lastActivity(emp: EmployeeRecord): string {
 }
 
 export default function TrainingAdmin() {
-  const { currentEmployee, allEmployees, resetAllData } = useTraining();
+  const { status, currentEmployee, allEmployees, refreshTeam } = useTraining();
   const [, navigate] = useLocation();
   const [locationFilter, setLocationFilter] = useState<"All" | Location>("All");
 
   useEffect(() => {
-    if (!currentEmployee) navigate("/training");
-  }, [currentEmployee, navigate]);
+    if (status === "ready" && !currentEmployee) navigate("/training");
+  }, [status, currentEmployee, navigate]);
+
+  // Load the whole team's progress from the server (managers only).
+  useEffect(() => {
+    if (currentEmployee?.isManager) refreshTeam();
+  }, [currentEmployee?.isManager, refreshTeam]);
 
   if (currentEmployee && currentEmployee.role !== "Manager") {
     return (
@@ -263,11 +268,9 @@ export default function TrainingAdmin() {
               variant="ghost"
               size="sm"
               className="text-muted-foreground gap-1"
-              onClick={() => {
-                if (confirm("Clear all local training data on this device?")) resetAllData();
-              }}
+              onClick={() => refreshTeam()}
             >
-              <Trash2 className="w-4 h-4" /> Reset demo data
+              <RefreshCw className="w-4 h-4" /> Refresh
             </Button>
           </div>
         </>

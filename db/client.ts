@@ -72,6 +72,7 @@ export type EmployeeDTO = {
   location: string;
   isManager: boolean;
   acknowledgedAt: string | null;
+  signatureName: string | null;
   createdAt: string;
   modules: Record<
     string,
@@ -106,6 +107,7 @@ export function toEmployeeDTO(
     location: emp.location,
     isManager: emp.isManager,
     acknowledgedAt: emp.acknowledgedAt ? emp.acknowledgedAt.toISOString() : null,
+    signatureName: emp.signatureName ?? null,
     createdAt: emp.createdAt.toISOString(),
     modules,
   };
