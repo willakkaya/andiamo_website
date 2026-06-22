@@ -131,3 +131,5 @@ client/src/components/DashboardLayoutSkeleton.tsx
 client/src/components/ManusDialog.tsx
 client/src/lib/trpc.ts
 client/src/pages/ComponentShowcase.tsx
+
+.vercel
