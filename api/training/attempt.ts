@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { recordAttempt, verifyToken } from "../../db/client";
-import { configured, getBearer, methodGuard, wrap } from "../../db/http";
+import { recordAttempt, verifyToken } from "../_lib/client";
+import { configured, getBearer, methodGuard, wrap } from "../_lib/http";
 
 type Answer = { questionId: string; correct: boolean };
 

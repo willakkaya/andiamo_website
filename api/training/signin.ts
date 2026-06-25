@@ -8,8 +8,8 @@ import {
   toEmployeeDTO,
   updateEmployeeMeta,
   verifyPin,
-} from "../../db/client";
-import { configured, methodGuard, wrap } from "../../db/http";
+} from "../_lib/client";
+import { configured, methodGuard, wrap } from "../_lib/http";
 
 async function handler(req: VercelRequest, res: VercelResponse) {
   if (!methodGuard(req, res, "POST") || !configured(res)) return;

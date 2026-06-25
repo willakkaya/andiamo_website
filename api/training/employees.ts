@@ -1,8 +1,8 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { eq } from "drizzle-orm";
-import { db, listAllWithProgress, verifyToken } from "../../db/client";
-import { employees } from "../../db/schema";
-import { configured, getBearer, methodGuard, wrap } from "../../db/http";
+import { db, listAllWithProgress, verifyToken } from "../_lib/client";
+import { employees } from "../_lib/schema";
+import { configured, getBearer, methodGuard, wrap } from "../_lib/http";
 
 async function handler(req: VercelRequest, res: VercelResponse) {
   if (!methodGuard(req, res, "GET") || !configured(res)) return;
