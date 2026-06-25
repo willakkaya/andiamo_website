@@ -1,10 +1,10 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { recordAttempt, verifyToken } from "../../db/client";
-import { configured, getBearer, methodGuard } from "../../db/http";
+import { configured, getBearer, methodGuard, wrap } from "../../db/http";
 
 type Answer = { questionId: string; correct: boolean };
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+async function handler(req: VercelRequest, res: VercelResponse) {
   if (!methodGuard(req, res, "POST") || !configured(res)) return;
 
   const session = verifyToken(getBearer(req));
@@ -45,3 +45,5 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     },
   });
 }
+
+export default wrap(handler);

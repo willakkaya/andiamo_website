@@ -28,3 +28,18 @@ export function configured(res: VercelResponse): boolean {
   }
   return true;
 }
+
+// Wrap a handler so any thrown error returns a readable JSON 500 instead of an
+// opaque FUNCTION_INVOCATION_FAILED.
+export function wrap(
+  fn: (req: VercelRequest, res: VercelResponse) => Promise<unknown> | unknown,
+) {
+  return async (req: VercelRequest, res: VercelResponse) => {
+    try {
+      await fn(req, res);
+    } catch (e) {
+      const message = e instanceof Error ? e.message : "Unexpected server error";
+      if (!res.headersSent) res.status(500).json({ error: message });
+    }
+  };
+}

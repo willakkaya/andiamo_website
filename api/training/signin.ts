@@ -9,9 +9,9 @@ import {
   updateEmployeeMeta,
   verifyPin,
 } from "../../db/client";
-import { configured, methodGuard } from "../../db/http";
+import { configured, methodGuard, wrap } from "../../db/http";
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+async function handler(req: VercelRequest, res: VercelResponse) {
   if (!methodGuard(req, res, "POST") || !configured(res)) return;
 
   const { name, role, location, pin, managerCode } = (req.body ?? {}) as Record<
@@ -56,3 +56,5 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const token = signToken({ employeeId: employee.id, isManager });
   return res.status(200).json({ employee: toEmployeeDTO(employee, progress), token });
 }
+
+export default wrap(handler);

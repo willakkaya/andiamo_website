@@ -10,13 +10,47 @@ import {
   timingSafeEqual,
 } from "node:crypto";
 import { drizzle } from "drizzle-orm/vercel-postgres";
-import { sql } from "@vercel/postgres";
+import { createPool } from "@vercel/postgres";
 import { and, eq } from "drizzle-orm";
 import { employees, moduleProgress } from "./schema";
 import type { EmployeeRow, ModuleProgressRow } from "./schema";
 
-// @vercel/postgres reads POSTGRES_URL from the environment automatically.
-export const db = drizzle(sql, { schema: { employees, moduleProgress } });
+// Lazy DB: the pool is created on first use, never at import. Creating it
+// eagerly throws when the connection string is absent, which would crash the
+// whole serverless function at startup (FUNCTION_INVOCATION_FAILED) instead of
+// surfacing a readable error. The Vercel/Neon integration provides POSTGRES_URL;
+// we also accept the common fallbacks.
+function makeDb(connectionString: string) {
+  const pool = createPool({ connectionString });
+  return drizzle(pool, { schema: { employees, moduleProgress } });
+}
+type DrizzleDb = ReturnType<typeof makeDb>;
+let _db: DrizzleDb | null = null;
+
+function realDb(): DrizzleDb {
+  if (!_db) {
+    const connectionString =
+      process.env.POSTGRES_URL ??
+      process.env.POSTGRES_PRISMA_URL ??
+      process.env.DATABASE_URL;
+    if (!connectionString) {
+      throw new Error(
+        "Database connection string missing (set POSTGRES_URL on this deployment)",
+      );
+    }
+    _db = makeDb(connectionString);
+  }
+  return _db;
+}
+
+// A proxy so existing `db.select()/insert()/update()` calls keep working while
+// deferring pool creation to first use. Methods are bound to the real client.
+export const db = new Proxy({} as DrizzleDb, {
+  get(_target, prop) {
+    const value = realDb()[prop as keyof DrizzleDb];
+    return typeof value === "function" ? value.bind(realDb()) : value;
+  },
+});
 
 // ---------------------------------------------------------------------------
 // Auth helpers
