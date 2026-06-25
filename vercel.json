@@ -4,6 +4,7 @@
   "outputDirectory": "dist",
   "framework": "vite",
   "redirects": [
+    { "source": "/", "destination": "/training", "statusCode": 307 },
     { "source": "/dinnermenu", "destination": "/menu", "statusCode": 301 },
     { "source": "/lunchmenu", "destination": "/menu", "statusCode": 301 },
     { "source": "/banquetmenu", "destination": "/banquet-catering", "statusCode": 301 },
