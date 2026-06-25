@@ -19,6 +19,9 @@ export const IMAGES = {
 
   // Hero Video
   heroVideo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663412679184/kqPisyaY2DvmGsDpfntLLc/ee16909b-bdd5-49d3-9717-1ba74a1cd94a_c8d3eb19.mp4",
+
+  // Awards
+  wineSpectatorAward: "/wine-spectator-award-2026.jpg",
 } as const;
 
 // External links
@@ -32,4 +35,5 @@ export const LINKS = {
   email: "willakkaya@gmail.com",
   address: "301 Linden Avenue, South San Francisco, CA 94080",
   addressShort: "301 Linden Ave\nSouth San Francisco, CA 94080",
+  wineSpectatorAwards: "https://www.winespectator.com/articles/about-the-awards",
 } as const;

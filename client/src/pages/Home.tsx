@@ -220,6 +220,72 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ========== WINE SPECTATOR AWARD ========== */}
+      <section className="section-cream py-20 md:py-28">
+        <div className="container max-w-5xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
+            <motion.a
+              href={LINKS.wineSpectatorAwards}
+              target="_blank"
+              rel="noopener noreferrer"
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={0}
+              className="flex justify-center md:justify-end group"
+              aria-label="Wine Spectator Award of Excellence 2026 — learn more"
+            >
+              <img
+                src={IMAGES.wineSpectatorAward}
+                alt="Wine Spectator Award of Excellence 2026"
+                width={195}
+                height={360}
+                className="w-[180px] md:w-[220px] h-auto shadow-[0_20px_50px_-15px_rgba(0,0,0,0.25)] transition-transform duration-700 group-hover:scale-[1.03]"
+                loading="lazy"
+              />
+            </motion.a>
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={1}
+              className="text-center md:text-left"
+            >
+              <div className="ornament-line !mx-auto md:!mx-0 mb-6" />
+              <p className="font-accent text-sm tracking-[0.3em] uppercase text-gold/80 mb-4">
+                Recognition
+              </p>
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-charcoal leading-tight mb-6">
+                Wine Spectator
+                <br />
+                <span className="text-gradient-gold">Award of Excellence</span>
+              </h2>
+              <p className="font-accent text-charcoal/70 text-base md:text-lg leading-relaxed mb-5">
+                We're honored to be recognized by Wine Spectator with the 2026 Award of Excellence —
+                celebrating wine lists with thoughtfully curated selections of quality producers
+                from around the world.
+              </p>
+              <p className="font-accent text-charcoal/60 text-base leading-relaxed">
+                From Italian classics — Brunello, Barolo, Super Tuscans — to California
+                cult favorites and reserve Champagnes, our cellar is built to pair with every dish
+                and every occasion.
+              </p>
+              <div className="mt-8">
+                <Link
+                  href="/menu"
+                  className="inline-flex items-center gap-3 font-body text-[12px] tracking-[0.2em] uppercase text-gold hover:text-gold-light transition-colors duration-500"
+                >
+                  Explore the Wine List
+                  <ArrowRight size={14} />
+                </Link>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* ========== THE VAULT TEASER ========== */}
       <section className="relative overflow-hidden section-dark">
         <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[650px]">

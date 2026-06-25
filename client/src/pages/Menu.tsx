@@ -304,6 +304,47 @@ export default function Menu() {
             ))}
           </div>
 
+          {/* Wine Spectator Award — shown only on Wine tab */}
+          {active === "wine" && (
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="mb-14 bg-burgundy/[0.04] border border-gold/20 px-6 md:px-10 py-8 md:py-10"
+            >
+              <div className="flex flex-col md:flex-row items-center gap-6 md:gap-10">
+                <a
+                  href={LINKS.wineSpectatorAwards}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="shrink-0 group"
+                  aria-label="Wine Spectator Award of Excellence 2026 — learn more"
+                >
+                  <img
+                    src={IMAGES.wineSpectatorAward}
+                    alt="Wine Spectator Award of Excellence 2026"
+                    width={130}
+                    height={240}
+                    className="w-[110px] md:w-[130px] h-auto shadow-[0_10px_30px_-10px_rgba(0,0,0,0.2)] transition-transform duration-500 group-hover:scale-[1.04]"
+                  />
+                </a>
+                <div className="text-center md:text-left">
+                  <p className="font-accent text-xs tracking-[0.3em] uppercase text-gold/80 mb-2">
+                    2026 Recognition
+                  </p>
+                  <h3 className="font-display text-2xl md:text-3xl text-charcoal mb-3">
+                    Wine Spectator Award of Excellence
+                  </h3>
+                  <p className="font-accent text-charcoal/70 text-base md:text-lg leading-relaxed">
+                    Our wine list has been recognized by Wine Spectator for its thoughtful
+                    curation — from Italian classics and California cult bottlings to reserve
+                    Champagnes and trophy wines for special occasions.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          )}
+
           {/* Menu Items */}
           <motion.div
             key={active}

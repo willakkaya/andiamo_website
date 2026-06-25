@@ -212,6 +212,43 @@ export default function CorporateDining() {
         </div>
       </section>
 
+      {/* Wine Spectator award strip — biotech buyer trust signal */}
+      <section className="bg-cream py-14 md:py-16 border-y border-charcoal/8">
+        <div className="container max-w-4xl">
+          <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12 text-center md:text-left">
+            <a
+              href={LINKS.wineSpectatorAwards}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="shrink-0 group"
+              aria-label="Wine Spectator Award of Excellence 2026"
+            >
+              <img
+                src={IMAGES.wineSpectatorAward}
+                alt="Wine Spectator Award of Excellence 2026"
+                width={120}
+                height={222}
+                className="w-[100px] md:w-[120px] h-auto shadow-[0_12px_30px_-10px_rgba(0,0,0,0.2)] transition-transform duration-500 group-hover:scale-[1.03]"
+                loading="lazy"
+              />
+            </a>
+            <div>
+              <p className="font-accent text-xs tracking-[0.3em] uppercase text-gold/80 mb-2">
+                Wine Spectator 2026
+              </p>
+              <h3 className="font-display text-2xl md:text-3xl text-charcoal mb-3">
+                Award of Excellence Wine Program
+              </h3>
+              <p className="font-accent text-charcoal/65 text-base md:text-lg leading-relaxed max-w-2xl">
+                Impress wine-savvy clients with a cellar recognized by Wine Spectator — Italian
+                classics, California cult favorites, and reserve Champagnes ready to pair with
+                any course or close any deal.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Service tiers — kept from previous, simplified */}
       <section className="section-padding section-dark">
         <div className="container max-w-4xl">

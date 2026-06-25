@@ -47,10 +47,30 @@ export default function Footer() {
             {/* Brand */}
             <div>
               <img src={IMAGES.logo} alt="Andiamo in Banca" className="h-14 w-auto mb-5 brightness-0 invert opacity-80" />
-              <p className="text-cream/65 text-sm leading-relaxed font-accent tracking-wide">
+              <p className="text-cream/65 text-sm leading-relaxed font-accent tracking-wide mb-6">
                 Upscale Italian dining in a beautifully restored historic bank building.
                 South San Francisco's most unique culinary destination.
               </p>
+              <a
+                href={LINKS.wineSpectatorAwards}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 group"
+                aria-label="Wine Spectator Award of Excellence 2026"
+              >
+                <img
+                  src={IMAGES.wineSpectatorAward}
+                  alt="Wine Spectator Award of Excellence 2026"
+                  width={60}
+                  height={111}
+                  className="w-[55px] h-auto opacity-90 group-hover:opacity-100 transition-opacity"
+                  loading="lazy"
+                />
+                <span className="text-cream/55 text-[11px] tracking-[0.18em] uppercase font-accent leading-snug">
+                  Wine Spectator<br />Award of Excellence<br />
+                  <span className="text-gold/70">2026</span>
+                </span>
+              </a>
             </div>
 
             {/* Hours */}

@@ -95,7 +95,7 @@ export default function TheVault() {
               { icon: Users, title: "12 \u2013 20 Guests", desc: "Intimate to mid-size gatherings" },
               { icon: Utensils, title: "Custom Menus", desc: "Prix fixe tailored to your event" },
               { icon: Monitor, title: "A/V Ready", desc: "Screen and sound for presentations" },
-              { icon: Wine, title: "Wine Pairings", desc: "Curated selections from our list" },
+              { icon: Wine, title: "Award-Winning Wine", desc: "Wine Spectator Award of Excellence" },
             ].map((feat) => (
               <div
                 key={feat.title}
@@ -232,6 +232,51 @@ export default function TheVault() {
               >
                 Inquire Now
               </a>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Wine Spectator Award callout */}
+      <section className="section-cream py-16 md:py-24">
+        <div className="max-w-4xl mx-auto px-6">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            custom={0}
+            className="flex flex-col md:flex-row items-center gap-8 md:gap-12 text-center md:text-left"
+          >
+            <a
+              href={LINKS.wineSpectatorAwards}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="shrink-0 group"
+              aria-label="Wine Spectator Award of Excellence 2026"
+            >
+              <img
+                src={IMAGES.wineSpectatorAward}
+                alt="Wine Spectator Award of Excellence 2026"
+                width={140}
+                height={258}
+                className="w-[120px] md:w-[140px] h-auto shadow-[0_15px_40px_-12px_rgba(0,0,0,0.25)] transition-transform duration-500 group-hover:scale-[1.03]"
+                loading="lazy"
+              />
+            </a>
+            <div>
+              <p className="font-accent text-xs tracking-[0.3em] uppercase text-gold/80 mb-3">
+                Wine Spectator 2026
+              </p>
+              <h3 className="font-display text-2xl md:text-3xl text-charcoal mb-4">
+                Pair Your Event with an Award-Winning Cellar
+              </h3>
+              <p className="font-accent text-charcoal/70 text-base md:text-lg leading-relaxed">
+                Every event in The Vault has access to our full wine program — recognized by
+                Wine Spectator with the 2026 Award of Excellence. From curated pairings
+                to reserve bottles and trophy wines, our sommelier will tailor a selection
+                to match your menu and occasion.
+              </p>
             </div>
           </motion.div>
         </div>
