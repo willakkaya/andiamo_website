@@ -78,7 +78,7 @@ async function api<T>(
     if (token) headers["Authorization"] = `Bearer ${token}`;
   }
   try {
-    const res = await fetch(`/api/training/${path}`, {
+    const res = await fetch(`/api/training?action=${path}`, {
       method: options.method ?? "GET",
       headers,
       body: options.body ? JSON.stringify(options.body) : undefined,
