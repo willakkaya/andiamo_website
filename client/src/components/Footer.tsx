@@ -7,12 +7,14 @@ export default function Footer() {
     <footer>
       {/* Pre-footer CTA — warm cream background */}
       <div className="section-padding bg-background text-center">
-        <div className="ornament-line mb-8" />
-        <p className="font-accent text-sm tracking-[0.3em] uppercase text-gold/80 mb-4">
-          Experience the Extraordinary
+        <div className="divider-diamond mb-8">
+          <i />
+        </div>
+        <p className="font-accent italic text-xl md:text-2xl text-gold/80 mb-4">
+          Andiamo &mdash; let&rsquo;s go.
         </p>
         <h2 className="font-display text-3xl md:text-5xl text-charcoal mb-8">
-          Reserve Your Table
+          Join us for dinner
         </h2>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
@@ -47,7 +49,7 @@ export default function Footer() {
             {/* Brand */}
             <div>
               <img src={IMAGES.logo} alt="Andiamo in Banca" className="h-14 w-auto mb-5 brightness-0 invert opacity-80" />
-              <p className="text-cream/65 text-sm leading-relaxed font-accent tracking-wide mb-6">
+              <p className="text-cream/65 text-sm leading-relaxed font-accent tracking-wide mb-7">
                 Upscale Italian dining in a beautifully restored historic bank building.
                 South San Francisco's most unique culinary destination.
               </p>
@@ -61,9 +63,9 @@ export default function Footer() {
                 <img
                   src={IMAGES.wineSpectatorAward}
                   alt="Wine Spectator Award of Excellence 2026"
-                  width={60}
-                  height={111}
-                  className="w-[55px] h-auto opacity-90 group-hover:opacity-100 transition-opacity"
+                  width={55}
+                  height={102}
+                  className="w-[52px] h-auto opacity-90 group-hover:opacity-100 transition-opacity"
                   loading="lazy"
                 />
                 <span className="text-cream/55 text-[11px] tracking-[0.18em] uppercase font-accent leading-snug">
@@ -136,11 +138,11 @@ export default function Footer() {
                 <Link href="/the-vault" className="block text-cream/65 hover:text-cream/80 transition-colors">
                   The Vault &mdash; Private Dining
                 </Link>
-                <Link href="/private-dining" className="block text-cream/65 hover:text-cream/80 transition-colors">
-                  Private Dining & Events
+                <Link href="/private-events" className="block text-cream/65 hover:text-cream/80 transition-colors">
+                  Private Events
                 </Link>
                 <Link href="/banquet-catering" className="block text-cream/65 hover:text-cream/80 transition-colors">
-                  Banquet & Catering
+                  Banquet & Catering Menus
                 </Link>
                 <Link href="/gallery" className="block text-cream/65 hover:text-cream/80 transition-colors">
                   Gallery

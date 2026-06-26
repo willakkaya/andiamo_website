@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Calculator, Users, Wine, ChevronDown, ChevronUp, ArrowRight, Check } from "lucide-react";
+import { Users, Wine, ChevronDown, ChevronUp, ArrowRight, Check } from "lucide-react";
 import { submitForm } from "@/lib/formspree";
 import { trackQuoteSubmit } from "@/lib/analytics";
 import { toast } from "sonner";
@@ -118,17 +118,16 @@ export default function EventQuoteCalculator() {
     <section className="section-dark" id="quote-calculator">
       <div className="max-w-4xl mx-auto px-6 py-24 md:py-32">
         <div className="text-center mb-14">
-          <div className="ornament-line mx-auto mb-8 opacity-40" />
-          <p className="font-accent tracking-[0.3em] text-xs uppercase text-gold-light/60 mb-5">
-            <Calculator size={14} className="inline mr-2 -mt-0.5" />
-            Instant Estimate
+          <div className="divider-diamond mb-8 opacity-70"><i /></div>
+          <p className="eyebrow !text-gold-light/70 mb-5">
+            If it helps to see numbers
           </p>
           <h2 className="font-display text-3xl md:text-4xl text-cream mb-4">
-            Build Your Event Quote
+            Sketch an estimate
           </h2>
           <p className="font-accent text-cream/70 text-base max-w-xl mx-auto leading-relaxed">
-            Select your menu, add enhancements, and see your estimated total in real time.
-            No commitment — just a starting point for planning.
+            Choose a menu and a few touches to get a sense of the figures. It&rsquo;s only a
+            starting point &mdash; nothing is fixed until we&rsquo;ve spoken.
           </p>
         </div>
 

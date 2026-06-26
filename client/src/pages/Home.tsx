@@ -6,35 +6,46 @@ import { Star, ArrowRight, ChevronDown, ShoppingBag, MapPin } from "lucide-react
 import { usePageMeta } from "@/hooks/usePageMeta";
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 24 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.12, duration: 0.8, ease: [0.25, 0.1, 0.25, 1] },
+    transition: { delay: i * 0.1, duration: 0.8, ease: [0.25, 0.1, 0.25, 1] },
   }),
 };
 
+const reveal = {
+  hidden: { opacity: 0, scale: 1.04 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 1.2, ease: [0.25, 0.1, 0.25, 1] },
+  },
+};
+
+// The numbers that actually say something about this place.
+const HERITAGE = [
+  { figure: "1989", label: "Cooking for the Peninsula since" },
+  { figure: "Three", label: "Family restaurants, two generations" },
+  { figure: "1,500+", label: "Thanksgiving meals served free, every year" },
+  { figure: "1920", label: "The year our bank was built" },
+];
+
 const REVIEWS = [
   {
-    text: "Everything was wonderful. The freshly made pizza had a light, fluffy crust and was big enough for three people. My pappardelle pasta with prawns was delicious — you can really taste the freshness of the pasta and ingredients.",
-    author: "Yelp Reviewer",
-    rating: 5,
+    text: "The freshly made pizza had a light, fluffy crust, big enough for three. My pappardelle with prawns was delicious — you can really taste the freshness of the pasta and the ingredients.",
     source: "Yelp",
-    sourceUrl: LINKS.yelp,
+    rating: 5,
   },
   {
-    text: "The octopus was tender with a nice chew. The complimentary bread is actually delish here — great for sopping up sauces. They were very sweet and gave my mom a complimentary ice cream dessert for her birthday. Mom and pop fine dining at its best.",
-    author: "Yelp Reviewer",
-    rating: 4,
+    text: "The octopus was tender with a nice chew, and the complimentary bread is actually delish — great for sopping up sauces. They gave my mom a complimentary dessert for her birthday. Mom-and-pop fine dining at its best.",
     source: "Yelp",
-    sourceUrl: LINKS.yelp,
+    rating: 5,
   },
   {
-    text: "We hosted a corporate dinner in The Vault and it was perfect. The staff was attentive, the food was exceptional, and our clients were thoroughly impressed. The historic bank setting is unlike anything else on the Peninsula.",
-    author: "Yelp Reviewer",
-    rating: 5,
+    text: "We hosted a corporate dinner in The Vault and it was perfect. Attentive staff, exceptional food, and clients who were genuinely impressed. The historic bank setting is unlike anything else on the Peninsula.",
     source: "Yelp",
-    sourceUrl: LINKS.yelp,
+    rating: 5,
   },
 ];
 
@@ -43,57 +54,40 @@ export default function Home() {
 
   return (
     <PageLayout>
-      {/* ========== HERO WITH VIDEO ========== */}
+      {/* ========== HERO ========== */}
       <section
         className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden"
         style={{ backgroundImage: `url(${IMAGES.exterior})`, backgroundSize: "cover", backgroundPosition: "center" }}
       >
         <div className="absolute inset-0">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="w-full h-full object-cover"
-            poster={IMAGES.exterior}
-          >
+          <video autoPlay muted loop playsInline className="w-full h-full object-cover" poster={IMAGES.exterior}>
             <source src={IMAGES.heroVideo} type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/50" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/25 to-black/60" />
         </div>
 
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
-            className="mb-8"
           >
-            <p className="font-accent text-sm md:text-base tracking-[0.4em] uppercase text-white/50 mb-4">
-              Est. 2018 &middot; South San Francisco
-            </p>
-            <h1 className="font-display text-5xl md:text-7xl lg:text-8xl text-white tracking-[0.03em] leading-[0.9]">
+            <p className="eyebrow !text-white/55 mb-6">Handmade Italian &middot; South San Francisco</p>
+            <h1 className="font-display text-[5rem] leading-[0.82] md:text-[8rem] lg:text-[10rem] text-white tracking-[0.01em]">
               Andiamo
             </h1>
-            <p className="font-accent text-xl md:text-2xl tracking-[0.3em] uppercase text-white/60 mt-3">
+            <p className="font-accent italic text-2xl md:text-4xl text-white/65 mt-2 tracking-[0.18em]">
               in Banca
             </p>
           </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.7, duration: 1 }}
-            className="ornament-line mb-8 !bg-white/30"
-          />
 
           <motion.p
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.8 }}
-            className="font-accent text-white/70 text-lg md:text-xl max-w-xl mx-auto mb-12 leading-relaxed tracking-wide"
+            className="font-accent text-white/80 text-lg md:text-2xl max-w-2xl mx-auto mt-9 mb-11 leading-relaxed"
           >
-            Upscale Italian dining in a beautifully restored historic bank building
+            A restored 1920s bank. Handmade pasta. A steel vault you can dine in.
           </motion.p>
 
           <motion.div
@@ -106,7 +100,7 @@ export default function Home() {
               href={LINKS.opentable}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center px-12 py-4 bg-white text-charcoal font-body text-[12px] tracking-[0.2em] uppercase font-semibold hover:bg-white/90 transition-all duration-500"
+              className="inline-flex items-center px-12 py-4 bg-white text-charcoal font-body text-[12px] tracking-[0.2em] uppercase font-semibold hover:bg-gold hover:text-white transition-all duration-500"
             >
               Reserve a Table
             </a>
@@ -114,7 +108,7 @@ export default function Home() {
               href={LINKS.onlineOrdering}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-12 py-4 border border-white/30 text-white font-body text-[12px] tracking-[0.2em] uppercase hover:bg-white/10 transition-all duration-500"
+              className="inline-flex items-center gap-2 px-12 py-4 border border-white/35 text-white font-body text-[12px] tracking-[0.2em] uppercase hover:bg-white/10 transition-all duration-500"
             >
               Order Online <ShoppingBag size={13} />
             </a>
@@ -127,14 +121,12 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.3, duration: 0.8 }}
-            className="mt-14 inline-flex items-center justify-center gap-1 hover:opacity-80 transition-opacity"
+            className="mt-12 inline-flex items-center justify-center gap-1 hover:opacity-80 transition-opacity"
           >
             {[...Array(5)].map((_, i) => (
               <Star key={i} size={14} className={i < 4 ? "text-gold-light fill-gold-light" : "text-white/20 fill-white/20"} />
             ))}
-            <span className="text-white/50 text-xs ml-2 font-body tracking-wider">
-              4.2 on Yelp &middot; 348 Reviews
-            </span>
+            <span className="text-white/55 text-xs ml-2 font-body tracking-wider">4.2 on Yelp &middot; 348 reviews</span>
           </motion.a>
         </div>
 
@@ -148,149 +140,140 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* ========== INTRO ========== */}
-      <section className="section-padding bg-background">
+      {/* ========== I — THE NAME ========== */}
+      <section className="section-padding bg-background overflow-hidden">
         <div className="container">
-          <div className="max-w-3xl mx-auto text-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-10 lg:gap-x-16 items-start">
             <motion.div
               variants={fadeUp}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               custom={0}
-              className="ornament-line mb-8"
-            />
-            <motion.h2
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={1}
-              className="font-display text-3xl md:text-5xl text-charcoal mb-8 leading-tight"
+              className="lg:col-span-7"
             >
-              Where History Meets
-              <br />
-              <span className="text-gradient-gold">Culinary Art</span>
-            </motion.h2>
-            <motion.p
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={2}
-              className="text-muted-foreground leading-relaxed text-base md:text-lg font-accent tracking-wide"
-            >
-              Housed in a meticulously restored 1920s bank building on Linden Avenue,
-              Andiamo in Banca transforms a piece of South San Francisco's architectural
-              heritage into the Peninsula's most distinctive Italian dining destination.
-            </motion.p>
-            <motion.p
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={3}
-              className="text-charcoal/60 text-sm mt-8 flex items-center justify-center gap-2 font-accent tracking-wide"
-            >
-              <MapPin size={14} className="text-gold" />
-              301 Linden Avenue, South San Francisco, CA 94080
-            </motion.p>
-          </div>
-        </div>
-      </section>
-
-      {/* ========== FULL-BLEED IMAGE BREAK ========== */}
-      <section className="relative h-[50vh] min-h-[400px] overflow-hidden">
-        <img
-          src={IMAGES.exterior}
-          alt="Andiamo in Banca exterior — restored 1920s bank building"
-          className="w-full h-full object-cover"
-          loading="lazy"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20" />
-        <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12">
-          <div className="container">
-            <p className="font-accent text-sm tracking-[0.3em] uppercase text-white/50">
-              301 Linden Avenue
-            </p>
-            <p className="font-display text-2xl md:text-3xl text-white mt-1">
-              A Restored 1920s Bank Building
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* ========== WINE SPECTATOR AWARD ========== */}
-      <section className="section-cream py-20 md:py-28">
-        <div className="container max-w-5xl">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
-            <motion.a
-              href={LINKS.wineSpectatorAwards}
-              target="_blank"
-              rel="noopener noreferrer"
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={0}
-              className="flex justify-center md:justify-end group"
-              aria-label="Wine Spectator Award of Excellence 2026 — learn more"
-            >
-              <img
-                src={IMAGES.wineSpectatorAward}
-                alt="Wine Spectator Award of Excellence 2026"
-                width={195}
-                height={360}
-                className="w-[180px] md:w-[220px] h-auto shadow-[0_20px_50px_-15px_rgba(0,0,0,0.25)] transition-transform duration-700 group-hover:scale-[1.03]"
-                loading="lazy"
-              />
-            </motion.a>
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={1}
-              className="text-center md:text-left"
-            >
-              <div className="ornament-line !mx-auto md:!mx-0 mb-6" />
-              <p className="font-accent text-sm tracking-[0.3em] uppercase text-gold/80 mb-4">
-                Recognition
-              </p>
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-charcoal leading-tight mb-6">
-                Wine Spectator
+              <span className="chapter mb-8">I &mdash; In Banca</span>
+              <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-charcoal leading-[1.08] mt-7">
+                <span className="italic text-gradient-gold">Andiamo in Banca</span> &mdash;
                 <br />
-                <span className="text-gradient-gold">Award of Excellence</span>
+                Italian for &ldquo;let&rsquo;s go to the bank.&rdquo;
               </h2>
-              <p className="font-accent text-charcoal/70 text-base md:text-lg leading-relaxed mb-5">
-                We're honored to be recognized by Wine Spectator with the 2026 Award of Excellence —
-                celebrating wine lists with thoughtfully curated selections of quality producers
-                from around the world.
+            </motion.div>
+
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={1}
+              className="lg:col-span-5 lg:pt-4"
+            >
+              <p className="font-accent text-charcoal/75 leading-[1.85] text-lg mb-6">
+                The bank itself closed long ago. These days, &ldquo;let&rsquo;s go to the bank&rdquo;
+                means something better &mdash; a landmark 1920s building on Linden Avenue, marble
+                and columns and a steel vault still intact, filled with the food a Bay Area
+                family has cooked since 1989.
               </p>
-              <p className="font-accent text-charcoal/60 text-base leading-relaxed">
-                From Italian classics — Brunello, Barolo, Super Tuscans — to California
-                cult favorites and reserve Champagnes, our cellar is built to pair with every dish
-                and every occasion.
+              <p className="font-accent text-charcoal/75 leading-[1.85] text-lg mb-8">
+                Three restaurants. Two generations. One idea passed from father to son:
+                treat every guest like family, and pour them something extraordinary.
               </p>
-              <div className="mt-8">
-                <Link
-                  href="/menu"
-                  className="inline-flex items-center gap-3 font-body text-[12px] tracking-[0.2em] uppercase text-gold hover:text-gold-light transition-colors duration-500"
-                >
-                  Explore the Wine List
-                  <ArrowRight size={14} />
-                </Link>
-              </div>
+              <Link
+                href="/our-story"
+                className="link-line inline-flex items-center gap-3 text-gold font-body text-[12px] tracking-[0.2em] uppercase"
+              >
+                Read our story
+                <ArrowRight size={14} />
+              </Link>
+              <p className="text-charcoal/45 text-sm mt-10 flex items-center gap-2 font-accent tracking-wide">
+                <MapPin size={14} className="text-gold" />
+                301 Linden Avenue, South San Francisco
+              </p>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* ========== THE VAULT TEASER ========== */}
-      <section className="relative overflow-hidden section-dark">
-        <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[650px]">
-          <div className="relative h-[450px] lg:h-auto">
-            <img
+      {/* ========== HERITAGE STRIP ========== */}
+      <section className="section-dark grain">
+        <div className="container relative z-[2] py-20 md:py-24">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
+            {HERITAGE.map((stat, i) => (
+              <motion.div
+                key={stat.figure}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                custom={i}
+                className="text-center lg:text-left lg:border-l lg:border-cream/12 lg:pl-7"
+              >
+                <p className="font-display text-4xl md:text-5xl text-gold-light mb-3">{stat.figure}</p>
+                <p className="font-accent text-cream/55 text-sm leading-snug tracking-wide">{stat.label}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ========== THE ROOM — main dining room ========== */}
+      <section className="section-padding bg-background overflow-hidden">
+        <div className="container">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={0}
+              className="order-2 lg:order-1"
+            >
+              <span className="chapter mb-7">The Room</span>
+              <h2 className="font-display text-4xl md:text-5xl text-charcoal leading-[1.08] mt-7 mb-7">
+                Twenty-foot ceilings,
+                <br />
+                <span className="italic text-gradient-gold">marble columns,</span> dinner.
+              </h2>
+              <p className="font-accent text-charcoal/75 leading-[1.85] text-lg mb-8">
+                The grand columns and soaring ceilings of the old bank were preserved, not
+                papered over. You dine beneath them &mdash; in a room that still feels like it
+                holds something valuable, because it once did.
+              </p>
+              <Link
+                href="/gallery"
+                className="link-line inline-flex items-center gap-3 text-gold font-body text-[12px] tracking-[0.2em] uppercase"
+              >
+                See the room
+                <ArrowRight size={14} />
+              </Link>
+            </motion.div>
+            <motion.div
+              variants={reveal}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="order-1 lg:order-2 aspect-[3/4] overflow-hidden"
+            >
+              <img
+                src={IMAGES.diningRoom}
+                alt="The main dining room at Andiamo in Banca — restored 1920s bank with marble columns and soaring ceilings"
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ========== II — THE VAULT ========== */}
+      <section className="relative overflow-hidden section-dark grain">
+        <div className="relative z-[2] grid grid-cols-1 lg:grid-cols-2 min-h-[650px]">
+          <div className="relative h-[450px] lg:h-auto overflow-hidden">
+            <motion.img
+              variants={reveal}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
               src={IMAGES.vault}
               alt="The Vault private dining room at Andiamo in Banca"
               className="w-full h-full object-cover"
@@ -300,31 +283,23 @@ export default function Home() {
 
           <div className="flex items-center px-8 lg:px-20 py-16 lg:py-0">
             <div className="max-w-lg">
-              <motion.div
+              <motion.span
                 variants={fadeUp}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
                 custom={0}
-                className="ornament-line !mx-0 mb-6"
-              />
-              <motion.p
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                custom={1}
-                className="font-accent text-sm tracking-[0.3em] uppercase text-gold-light/60 mb-4"
+                className="chapter chapter-light mb-7"
               >
-                Private Dining
-              </motion.p>
+                II &mdash; Private Dining
+              </motion.span>
               <motion.h2
                 variants={fadeUp}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                custom={2}
-                className="font-display text-3xl md:text-5xl text-cream mb-6"
+                custom={1}
+                className="font-display text-4xl md:text-6xl text-cream mb-6 mt-2"
               >
                 The Vault
               </motion.h2>
@@ -333,24 +308,24 @@ export default function Home() {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                custom={3}
-                className="text-cream/60 leading-relaxed mb-6 font-accent text-lg tracking-wide"
+                custom={2}
+                className="text-cream/65 leading-[1.85] mb-8 font-accent text-lg"
               >
-                Once a secure bank vault, now the Peninsula's most exclusive
-                private dining room. Host your next corporate dinner, celebration,
-                or intimate gathering where history and luxury converge.
+                Where the bank once kept its safe-deposit boxes, we now seat your most
+                important dinners &mdash; the original steel door swung open behind you.
+                It is, as far as we know, the only dining room of its kind on the Peninsula.
               </motion.p>
               <motion.ul
                 variants={fadeUp}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                custom={4}
-                className="space-y-3 mb-10 text-sm text-cream/50"
+                custom={3}
+                className="space-y-3 mb-10 text-sm text-cream/55 font-accent tracking-wide"
               >
-                {["Seats 12–20 guests", "Custom prix fixe menus", "Perfect for corporate dinners & celebrations"].map((item) => (
+                {["Seats 12 to 20 guests", "Custom prix-fixe menus & wine pairings", "Built for corporate dinners and celebrations"].map((item) => (
                   <li key={item} className="flex items-center gap-3">
-                    <span className="w-1.5 h-px bg-gold" />
+                    <span className="w-4 h-px bg-gold" />
                     {item}
                   </li>
                 ))}
@@ -360,13 +335,13 @@ export default function Home() {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                custom={5}
+                custom={4}
               >
                 <Link
                   href="/the-vault"
-                  className="inline-flex items-center gap-3 font-body text-[12px] tracking-[0.2em] uppercase text-gold-light hover:text-gold transition-colors duration-500"
+                  className="link-line inline-flex items-center gap-3 font-body text-[12px] tracking-[0.2em] uppercase text-gold-light"
                 >
-                  Explore The Vault
+                  Step inside The Vault
                   <ArrowRight size={14} />
                 </Link>
               </motion.div>
@@ -375,34 +350,29 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ========== FROM OUR KITCHEN ========== */}
-      <section className="section-padding bg-background">
+      {/* ========== III — THE TABLE ========== */}
+      <section className="section-padding bg-background overflow-hidden">
         <div className="container">
-          <div className="text-center mb-16">
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={0}
-              className="ornament-line mb-6"
-            />
-            <motion.h2
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={1}
-              className="font-display text-3xl md:text-5xl text-charcoal"
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
+            <div>
+              <span className="chapter mb-6">III &mdash; The Table</span>
+              <h2 className="font-display text-4xl md:text-5xl text-charcoal mt-5">
+                Made by hand, every day
+              </h2>
+            </div>
+            <Link
+              href="/menu"
+              className="link-line inline-flex items-center gap-3 text-gold font-body text-[12px] tracking-[0.2em] uppercase shrink-0 md:mb-2"
             >
-              From Our Kitchen
-            </motion.h2>
+              View the full menu
+              <ArrowRight size={14} />
+            </Link>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {[
-              { img: IMAGES.petraleSole, title: "Petrale Sole", subtitle: "Signature Dish" },
-              { img: IMAGES.lambChops, title: "Lamb Chops", subtitle: "From the Grill" },
+              { img: IMAGES.alfredo, title: "Fettuccine Alfredo", subtitle: "Ribbons of fresh pasta, Parmesan cream" },
+              { img: IMAGES.mushroomAgnolotti, title: "Wild Mushroom Agnolotti", subtitle: "Hand-folded, black truffle cream" },
             ].map((item, i) => (
               <motion.div
                 key={item.title}
@@ -419,52 +389,96 @@ export default function Home() {
                   className="w-full h-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-105"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/5 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-8">
-                  <p className="font-accent text-xs tracking-[0.25em] uppercase text-white/50 mb-1">
-                    {item.subtitle}
-                  </p>
-                  <h3 className="font-display text-2xl text-white">{item.title}</h3>
+                  <p className="eyebrow !text-white/55 mb-1">{item.subtitle}</p>
+                  <h3 className="font-display text-2xl md:text-3xl text-white">{item.title}</h3>
                 </div>
               </motion.div>
             ))}
           </div>
 
-          <div className="text-center mt-12">
-            <Link
-              href="/menu"
-              className="inline-flex items-center gap-3 text-gold font-body text-[12px] tracking-[0.2em] uppercase hover:text-gold-light transition-colors duration-500"
+        </div>
+      </section>
+
+      {/* ========== WINE SPECTATOR — AWARD OF EXCELLENCE ========== */}
+      <section className="section-cream py-20 md:py-28 overflow-hidden">
+        <div className="container max-w-5xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
+            <motion.a
+              href={LINKS.wineSpectatorAwards}
+              target="_blank"
+              rel="noopener noreferrer"
+              variants={reveal}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="flex justify-center md:justify-end group"
+              aria-label="Wine Spectator Award of Excellence 2026 — learn more"
             >
-              View Full Menu
-              <ArrowRight size={14} />
-            </Link>
+              <img
+                src={IMAGES.wineSpectatorAward}
+                alt="Wine Spectator Award of Excellence 2026"
+                width={210}
+                height={388}
+                className="w-[175px] md:w-[210px] h-auto shadow-[0_25px_60px_-20px_rgba(60,40,10,0.4)] transition-transform duration-700 group-hover:scale-[1.03]"
+                loading="lazy"
+              />
+            </motion.a>
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={1}
+              className="text-center md:text-left"
+            >
+              <span className="chapter mb-6">Recognition</span>
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-charcoal leading-tight mb-6 mt-2">
+                Wine Spectator
+                <br />
+                <span className="text-gradient-gold">Award of Excellence</span>
+              </h2>
+              <p className="font-accent text-charcoal/75 text-lg leading-relaxed mb-6">
+                In 2026 our cellar earned Wine Spectator&rsquo;s Award of Excellence &mdash;
+                recognition for a list of quality producers chosen to pair, in price and style,
+                with every plate we send out. From Brunello, Barolo, and Super Tuscans to
+                California cult cabernets and reserve Champagne.
+              </p>
+              <p className="font-accent text-charcoal/70 text-lg italic leading-relaxed">
+                &ldquo;Whoever wrote the rule that a little caf&eacute; can&rsquo;t have the best
+                wines in the world?&rdquo;
+              </p>
+              <p className="eyebrow !text-gold/60 mt-3">&mdash; Will Akkaya</p>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* ========== HAPPY HOUR BANNER ========== */}
-      <section className="section-burgundy py-14">
-        <div className="container text-center">
-          <p className="font-accent text-sm tracking-[0.3em] uppercase text-white/60 mb-2">
-            Tuesday – Friday &middot; 4:00 – 5:00 PM
-          </p>
-          <h2 className="font-display text-2xl md:text-3xl text-white">
-            Happy Hour
-          </h2>
-          <p className="text-white/60 text-base mt-3 font-accent tracking-wide">
-            Specially priced wines, cocktails, and appetizers
-          </p>
+      {/* ========== HAPPY HOUR ========== */}
+      <section className="section-burgundy py-16">
+        <div className="container">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-x-10 gap-y-3 text-center md:text-left">
+            <h2 className="font-display text-3xl md:text-4xl text-white">Happy Hour</h2>
+            <span className="hidden md:block w-px h-10 bg-white/25" />
+            <div>
+              <p className="eyebrow !text-white/65 mb-1">Tuesday &ndash; Friday &middot; 4:00 &ndash; 5:00 PM</p>
+              <p className="text-white/70 font-accent tracking-wide">
+                Specially priced wines, cocktails, and antipasti at the bar
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* ========== REVIEWS + SOCIAL ========== */}
+      {/* ========== REVIEWS ========== */}
       <section className="section-padding bg-background">
         <div className="container">
           <div className="text-center mb-16">
-            <div className="ornament-line mb-6" />
-            <h2 className="font-display text-3xl md:text-4xl text-charcoal mb-3">
-              What Our Guests Say
-            </h2>
+            <div className="divider-diamond mb-6">
+              <i />
+            </div>
+            <h2 className="font-display text-3xl md:text-5xl text-charcoal mb-4">Word of mouth</h2>
             <a
               href={LINKS.yelp}
               target="_blank"
@@ -474,14 +488,14 @@ export default function Home() {
               {[...Array(5)].map((_, i) => (
                 <Star key={i} size={13} className={i < 4 ? "text-gold fill-gold" : "text-gold/20 fill-gold/20"} />
               ))}
-              <span className="ml-2 font-accent tracking-wider">4.2 stars &middot; 348 reviews on Yelp</span>
+              <span className="ml-2 font-accent tracking-wider">4.2 &middot; 348 reviews on Yelp</span>
             </a>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-charcoal/8 max-w-5xl mx-auto border border-charcoal/8">
             {REVIEWS.map((review, i) => (
               <motion.a
                 key={i}
-                href={review.sourceUrl}
+                href={LINKS.yelp}
                 target="_blank"
                 rel="noopener noreferrer"
                 variants={fadeUp}
@@ -489,33 +503,32 @@ export default function Home() {
                 whileInView="visible"
                 viewport={{ once: true }}
                 custom={i}
-                className="block p-8 bg-card border border-charcoal/5 hover:border-gold/15 transition-all duration-500"
+                className="group block p-9 bg-background hover:bg-card transition-colors duration-500"
               >
-                <div className="flex gap-1 mb-5">
-                  {[...Array(5)].map((_, j) => (
-                    <Star key={j} size={12} className={j < review.rating ? "text-gold fill-gold" : "text-charcoal/10 fill-charcoal/10"} />
-                  ))}
-                </div>
-                <p className="text-charcoal/70 text-base leading-relaxed mb-6 font-accent italic tracking-wide">
-                  "{review.text}"
+                <span className="font-display text-5xl text-gold/25 leading-none group-hover:text-gold/40 transition-colors">
+                  &ldquo;
+                </span>
+                <p className="text-charcoal/75 text-base leading-[1.8] mt-2 mb-7 font-accent italic tracking-wide">
+                  {review.text}
                 </p>
-                <div className="flex items-center justify-between">
-                  <span className="text-charcoal/65 text-xs font-body tracking-wider uppercase">{review.author}</span>
-                  <span className="text-charcoal/30 text-xs">{review.source}</span>
+                <div className="flex items-center gap-2">
+                  {[...Array(review.rating)].map((_, j) => (
+                    <Star key={j} size={12} className="text-gold fill-gold" />
+                  ))}
+                  <span className="text-charcoal/40 text-xs ml-1 tracking-wider uppercase">via {review.source}</span>
                 </div>
               </motion.a>
             ))}
           </div>
 
-          {/* Social follow */}
-          <div className="text-center mt-16 pt-12 border-t border-charcoal/5">
+          <div className="text-center mt-16 pt-12 border-t border-charcoal/8">
             <a
               href={LINKS.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 text-charcoal/60 hover:text-gold font-accent text-sm tracking-[0.2em] uppercase transition-colors duration-500"
+              className="link-line inline-flex items-center gap-3 text-charcoal/60 hover:text-gold font-accent text-sm tracking-[0.2em] uppercase transition-colors duration-500"
             >
-              Follow @andiamoinbanca on Instagram
+              Follow @andiamoinbanca
               <ArrowRight size={14} />
             </a>
           </div>

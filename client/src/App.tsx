@@ -12,6 +12,7 @@ import CorporateDining from "./pages/CorporateDining";
 import Contact from "./pages/Contact";
 import Gallery from "./pages/Gallery";
 import BanquetCatering from "./pages/BanquetCatering";
+import PrivateEvents from "./pages/PrivateEvents";
 import HolidayParties from "./pages/HolidayParties";
 import RehearsalDinners from "./pages/RehearsalDinners";
 
@@ -50,6 +51,7 @@ function Router() {
         <Route path={"/private-dining"} component={CorporateDining} />
         <Route path={"/contact"} component={Contact} />
         <Route path={"/gallery"} component={Gallery} />
+        <Route path={"/private-events"} component={PrivateEvents} />
         <Route path={"/banquet-catering"} component={BanquetCatering} />
         <Route path={"/holiday-parties"} component={HolidayParties} />
         <Route path={"/rehearsal-dinners"} component={RehearsalDinners} />

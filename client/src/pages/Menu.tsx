@@ -6,16 +6,120 @@ import { motion } from "framer-motion";
 import { ShoppingBag } from "lucide-react";
 import { Link } from "wouter";
 
-type MenuTab = "lunch" | "dinner" | "pizza" | "wine" | "happyhour";
+type MenuTab = "dinner" | "lunch" | "wine" | "happyhour";
+type Tag = "GF" | "V";
+type Item = { name: string; desc: string; price: string; tags?: Tag[]; signature?: boolean };
+type Section = { title: string; subtitle?: string; note?: string; items: Item[] };
+
+/* ── DINNER MENU (current — updated 2026) ── */
+const DINNER: Record<string, Section> = {
+  antipasti: {
+    title: "Antipasti",
+    subtitle: "Starters",
+    items: [
+      { name: "Calamari Fritti", desc: "Fresh squid, garlic, lemon, chipotle aioli", price: "20" },
+      { name: "Sautéed Prawns", desc: "Lemon butter, garlic, white wine", price: "25", tags: ["GF"] },
+      { name: "Bruschetta al Pomodoro", desc: "Tomato, garlic, parmesan, basil, olive oil", price: "11", tags: ["V"] },
+      { name: "Polpette di Manzo", desc: "Snake River Farms wagyu meatballs", price: "16" },
+      { name: "Burrata Caprese", desc: "Burrata, Roma tomato, olive oil, aged balsamico", price: "17", tags: ["GF", "V"] },
+      { name: "Brussels Sprouts & Pancetta", desc: "Roasted, pancetta, balsamic glaze", price: "15", tags: ["GF"] },
+      { name: "Octopus “Pulpo”", desc: "Grilled Spanish octopus, arugula, red onion, cannellini", price: "19", tags: ["GF"] },
+      { name: "Steamed Mussels", desc: "White wine garlic broth, tomato, herbs, crostini", price: "21" },
+    ],
+  },
+  insalate: {
+    title: "Insalate",
+    subtitle: "Salads",
+    note: "Add — chicken 6 · prawns 9 · salmon 16",
+    items: [
+      { name: "Cesare", desc: "Romaine, parmigiano, house caesar", price: "12 / 17" },
+      { name: "Watermelon Salad", desc: "Watermelon, feta, candied walnut, lemon-mint vinaigrette", price: "15", tags: ["GF", "V"] },
+      { name: "Rucola", desc: "Arugula, cherry tomato, pecorino, champagne vinaigrette", price: "14", tags: ["GF", "V"] },
+    ],
+  },
+  pizza: {
+    title: "Pizza",
+    items: [
+      { name: "Margherita", desc: "Tomato, fresh mozzarella, basil", price: "22", tags: ["V"] },
+      { name: "Diavola", desc: "Tomato, mozzarella, spicy Italian sausage, mushroom", price: "23" },
+      { name: "Vegetariana", desc: "Tomato, mozzarella, seasonal vegetables", price: "23", tags: ["V"] },
+      { name: "Bianca con Prosciutto", desc: "Mozzarella, crimini, arugula, prosciutto, parmigiano, truffle oil", price: "25" },
+      { name: "Pepperoni", desc: "Pepperoni, mozzarella, tomato", price: "23", signature: true },
+      { name: "Pinsa Mele e Brie", desc: "Caramelized apple, onion, brie, arugula, honey, truffle oil", price: "17", tags: ["V"] },
+    ],
+  },
+  pasta: {
+    title: "Pasta",
+    items: [
+      { name: "Rigatoni alla Norma", desc: "Roasted eggplant, San Marzano, basil, ricotta", price: "28", tags: ["V"], signature: true },
+      { name: "Pappardelle alla Bolognese", desc: "Homemade all-beef meat sauce", price: "28" },
+      { name: "Spaghetti & Meatballs", desc: "Marinara, two wagyu meatballs", price: "29" },
+      { name: "Gnocchi alla Gorgonzola", desc: "Potato dumplings, gorgonzola cream", price: "27", tags: ["V"] },
+      { name: "Bucatini alla Calabrese", desc: "Calabrese sausage, San Marzano, Calabrian chili, pecorino", price: "29" },
+      { name: "Rigatoni alla Vodka", desc: "Spicy tomato vodka cream", price: "26", tags: ["V"] },
+      { name: "Fettuccine Alfredo", desc: "Classic creamy alfredo", price: "23", tags: ["V"] },
+      { name: "Linguine al Pesto", desc: "Basil pesto, pine nuts, garlic, olive oil", price: "25", tags: ["V"] },
+      { name: "Tortellini alla Michelangelo", desc: "Chicken & veal, cream, pancetta, peas", price: "28" },
+      { name: "Wild Mushroom Agnolotti", desc: "Truffle tartufata cream, roasted cherry tomato", price: "31", tags: ["V"] },
+      { name: "Pappardelle al Filetto", desc: "Filet mignon, cherry tomato, mushroom, marsala", price: "33" },
+    ],
+  },
+  pastaPesce: {
+    title: "Pasta Pesce",
+    subtitle: "Seafood Pasta",
+    items: [
+      { name: "Lobster Ravioli", desc: "Lemon butter cream, tiger prawns", price: "35", signature: true },
+      { name: "Fettuccine alla Adriatica", desc: "Garlic, sun-dried tomato, white wine cream, rock shrimp, scallop", price: "30" },
+      { name: "Linguine con Vongole", desc: "Manila clams, garlic, white wine, chili", price: "30" },
+      { name: "Linguine Frutti di Mare", desc: "Mixed seafood, tomato saffron", price: "36" },
+    ],
+  },
+  pollo: {
+    title: "Pollo",
+    subtitle: "Chicken",
+    items: [
+      { name: "Pollo Parmigiana", desc: "Breaded chicken, marinara, mozzarella, linguini", price: "31" },
+      { name: "Pollo Piccata", desc: "Chicken scallopini, caper, lemon, butter", price: "30" },
+      { name: "Pollo Marsala", desc: "Chicken scallopini, marsala", price: "30" },
+    ],
+  },
+  vitello: {
+    title: "Vitello",
+    subtitle: "Veal",
+    items: [
+      { name: "Veal Marsala", desc: "Veal scallopini, marsala", price: "34" },
+      { name: "Veal Piccata", desc: "Veal scallopini, lemon butter caper", price: "34" },
+      { name: "Veal Saltimbocca", desc: "Prosciutto, sage, mozzarella, demi-glace", price: "35" },
+    ],
+  },
+  pesce: {
+    title: "Pesce",
+    subtitle: "Seafood",
+    items: [
+      { name: "Branzino", desc: "Cherry tomato, olives, capers, lemon, white wine, orzo", price: "38", tags: ["GF"], signature: true },
+      { name: "Frutti di Mare “Cioppino”", desc: "Clams, mussels, shrimp & fish, tomato-saffron broth, crostini", price: "36", tags: ["GF"] },
+      { name: "Salmon Piccata", desc: "Pan-seared salmon, lemon butter caper", price: "36", tags: ["GF"] },
+    ],
+  },
+  griglia: {
+    title: "Griglia",
+    subtitle: "Grill",
+    items: [
+      { name: "Rack of Lamb", desc: "Garlic, rosemary, balsamic reduction", price: "45", tags: ["GF"], signature: true },
+      { name: "New York Steak", desc: "12oz USDA choice, peppercorn brandy", price: "43", tags: ["GF"] },
+      { name: "Skirt Steak", desc: "Chimichurri, onion rings, vegetables, mashed potato", price: "43", tags: ["GF"] },
+    ],
+  },
+};
 
 /* ── LUNCH MENU ── */
-const LUNCH = {
+const LUNCH: Record<string, Section> = {
   appetizers: {
     title: "Appetizers",
     items: [
       { name: "Calamari Fritti", desc: "Fried calamari with chipotle aioli", price: "14.95" },
       { name: "Brussels Sprouts", desc: "Roasted brussels sprouts with seared pancetta and shaved parmesan", price: "12.95" },
-      { name: 'Polpette "Meatballs"', desc: "Homemade all beef Wagyu meatballs with marinara and parmesan", price: "13.95" },
+      { name: "Polpette “Meatballs”", desc: "Homemade all beef Wagyu meatballs with marinara and parmesan", price: "13.95" },
       { name: "Burrata Caprese", desc: "Burrata cheese with sliced Roma tomatoes, olive oil, basil and balsamic", price: "12.95" },
       { name: "Crab Cakes", desc: "Golden crab cakes served with a black truffle aioli", price: "15.95" },
     ],
@@ -34,7 +138,7 @@ const LUNCH = {
       { name: "Linguine Vongole", desc: "Linguine pasta with fresh Manila clams in a light garlic white wine sauce", price: "22.95" },
       { name: "Pappardelle Bolognese", desc: "Flat long pasta with our signature all beef meat sauce", price: "20.95" },
       { name: "Mushroom Ravioli", desc: "Pasta stuffed with mushrooms with a black truffle cream reduction", price: "23.95" },
-      { name: 'Linguini Frutti di Mare "Cioppino"', desc: "Cioppino pasta with mixed seafood in tomato saffron sauce", price: "26.95" },
+      { name: "Linguini Frutti di Mare “Cioppino”", desc: "Cioppino pasta with mixed seafood in tomato saffron sauce", price: "26.95" },
       { name: "Gemelli allo Zafferano", desc: "Twisted gemelli pasta with shrimp and zucchini in a light saffron cream", price: "24.95" },
     ],
   },
@@ -60,82 +164,8 @@ const LUNCH = {
   },
 };
 
-/* ── DINNER MENU ── */
-const DINNER = {
-  antipasti: {
-    title: "Antipasti",
-    items: [
-      { name: "Calamari Fritti", desc: "Fresh squid breaded, fried and tossed in a garlic lemon sauce with chipotle aioli", price: "19.95" },
-      { name: "Truffle-Finished Crab Cakes", desc: "Golden-crusted crab cakes, black truffle aioli", price: "22.95" },
-      { name: "Bruschetta al Pomodoro", desc: "Toasted bread topped with tomato cubes marinated with olive oil, garlic, parmesan, basil (4 per order)", price: "10.95" },
-      { name: 'Polpette di Manzo "Meatballs"', desc: "Three house made Snake River Farms wagyu beef meatballs", price: "15.95" },
-      { name: "Roasted Peppers & Stracciatella", desc: "Fire-roasted sweet peppers, cherry tomatoes with creamy Stracciatella cheese, aged balsamic and paprika", price: "16.95" },
-      { name: "Brussels Sprouts with Pancetta", desc: "Roasted Brussels sprouts with Italian pancetta, balsamic glaze", price: "14.95" },
-      { name: "Burrata Caprese", desc: "Burrata cheese topped with olive oil, balsamic glaze and sliced Roma tomatoes. Add prosciutto +$6", price: "16.95" },
-      { name: 'Octopus "Pulpo"', desc: "Grilled Spanish octopus salad with arugula, red onions, and cannelloni beans", price: "18.95" },
-      { name: "Steamed Mussels", desc: "Fresh mussels in a white wine and garlic broth with fresh tomatoes, herbs, and grilled crostini", price: "20.95" },
-    ],
-  },
-  pasta: {
-    title: "Pasta",
-    items: [
-      { name: "Pappardelle alla Bolognese", desc: "Pasta in our homemade all beef meat sauce", price: "27.95" },
-      { name: "Spaghetti Meatballs", desc: "Pasta served in marinara sauce topped with 2 homemade meatballs", price: "28.95" },
-      { name: "Gnocchi alla Rosa", desc: "Potato dumplings in a silky tomato-cream (pink) sauce with Parmigiano-Reggiano", price: "26.95" },
-      { name: "Bucatini all'Amatriciana", desc: "Fresh bucatini, guanciale, San Marzano tomatoes, Calabrian chili, Pecorino Romano", price: "28.95" },
-      { name: "Rigatoni alla Norma", desc: "Bronze-cut rigatoni with roasted Sicilian eggplant, San Marzano tomato sauce, basil, and ricotta", price: "27.95" },
-      { name: "Wild Mushroom Agnolotti", desc: "Pasta stuffed with wild mushroom topped with a truffle tartufata cream and roasted cherry tomatoes", price: "30.95" },
-      { name: "Rigatoni alla Vodka", desc: "Rigatoni pasta in a mildly spicy tomato red vodka cream sauce", price: "25.95" },
-      { name: "Fettuccine Alfredo", desc: "Fettuccine pasta in our classic creamy Alfredo sauce. Add chicken +$6", price: "22.95" },
-      { name: "Linguine al Pesto", desc: "Linguini pasta with our house-made pesto sauce (garlic, basil, pine-nuts, olive oil). Add shrimp +$9", price: "24.95" },
-      { name: "Tortellini alla Michelangelo", desc: "Pasta stuffed with chicken and veal in a creamy sauce with pancetta and peas", price: "27.95" },
-      { name: "Fiocchi & Pear", desc: "Hand-stuffed pasta in a silky Gorgonzola cream with green onions", price: "27.95" },
-    ],
-  },
-  pastaSeafood: {
-    title: "Pasta Pesce",
-    subtitle: "Seafood Pasta",
-    items: [
-      { name: "Fettuccine alla Adriatica", desc: "Flat pasta in a creamy garlic, sun dried tomato, and white wine sauce topped with rock shrimp and scallops", price: "29.95" },
-      { name: "Linguine con Vongole", desc: "Linguini pasta with fresh Manila clams in a light spicy garlic, white wine sauce", price: "29.95" },
-      { name: 'Linguini Frutti di Mare "Cioppino Pasta"', desc: "Linguine pasta with mixed seafood in a tomato saffron sauce", price: "35.95" },
-    ],
-  },
-  entrees: {
-    title: "Secondi Piatti",
-    subtitle: "Entrees",
-    items: [
-      { name: 'Bistecca di Manzo "New York Steak"', desc: "12 oz. USDA choice N.Y. steak grilled with our signature peppercorn brandy sauce", price: "42.95" },
-      { name: "Cotolette di Agnello Grigliate", desc: "Grilled rack of lamb with garlic, rosemary and balsamic reduction sauce", price: "44.95" },
-      { name: "Costoletta di Maiale", desc: "Grilled bone-in pork chop with mushroom cream reduction", price: "30.95" },
-      { name: "Pollo Parmigiana", desc: "Chicken breast breaded and topped with marinara sauce and mozzarella cheese, on a bed of linguini marinara", price: "30.95" },
-      { name: "Pollo ai Capperi", desc: "Chicken scallopini served with capers, lemon and butter sauce", price: "29.95" },
-      { name: "Pollo Marsala", desc: "Chicken scallopini topped with marsala wine sauce", price: "29.95" },
-      { name: "Veal Marsala", desc: "Veal scallopini with our signature marsala wine sauce", price: "33.95" },
-      { name: "Veal Piccata", desc: "Veal scallopini with our signature lemon butter caper sauce", price: "33.95" },
-      { name: "Veal Saltimbocca", desc: "Veal scallopini with prosciutto, sage, melted mozzarella cheese with a demi-glace sauce", price: "34.95" },
-      { name: 'Gamberi alla Limone "Shrimp Scampi"', desc: "Sautéed prawns in a lemon-butter sauce with garlic, white wine, red pepper, fresh parsley and lemon zest", price: "32.95" },
-      { name: "Salmon Piccata", desc: "Pan seared Atlantic salmon filet with our signature lemon butter caper sauce", price: "35.95" },
-    ],
-  },
-};
-
-/* ── PIZZA ── */
-const PIZZA = {
-  pizza: {
-    title: "Pizza",
-    items: [
-      { name: "Margherita", desc: "Tomato sauce, fresh mozzarella, and fresh basil", price: "21.95" },
-      { name: "Diavola", desc: "Tomato sauce, fresh mozzarella, spicy Italian sausage & mushrooms", price: "22.95" },
-      { name: "Pizza Vegetariana", desc: "Tomato sauce, fresh mozzarella, and seasonal vegetables", price: "22.95" },
-      { name: "Pizza Bianca con Prosciutto", desc: "Fresh mozzarella, crimini mushrooms, arugula, prosciutto di Parma, shaved Parmigiano Reggiano, truffle oil", price: "24.95" },
-      { name: "Pepperoni Pizza", desc: "Pepperoni with mozzarella cheese and tomato sauce", price: "22.95" },
-    ],
-  },
-};
-
 /* ── WINE HIGHLIGHTS ── */
-const WINE = {
+const WINE: Record<string, Section> = {
   byGlass: {
     title: "Wines by the Glass",
     note: "Glass | Carafe",
@@ -199,48 +229,72 @@ const WINE = {
 };
 
 /* ── HAPPY HOUR ── */
-const HAPPY_HOUR = {
+const HAPPY_HOUR: Record<string, Section> = {
   info: {
     title: "Happy Hour",
+    subtitle: "Tuesday – Friday · 4:00 – 5:00 PM",
     items: [
-      { name: "Tuesday – Friday, 4:00 PM – 5:00 PM", desc: "Join us for specially priced wines, cocktails, and appetizers at the bar", price: "" },
+      { name: "At the bar", desc: "Specially priced wines, cocktails, and antipasti — a quiet hour before the evening begins.", price: "" },
     ],
   },
 };
 
+const MENUS: Record<MenuTab, Record<string, Section>> = {
+  dinner: DINNER,
+  lunch: LUNCH,
+  wine: WINE,
+  happyhour: HAPPY_HOUR,
+};
+
 const TABS: { key: MenuTab; label: string }[] = [
-  { key: "lunch", label: "Lunch" },
   { key: "dinner", label: "Dinner" },
-  { key: "pizza", label: "Pizza" },
+  { key: "lunch", label: "Lunch" },
   { key: "wine", label: "Wine & Beer" },
   { key: "happyhour", label: "Happy Hour" },
 ];
 
-function MenuSection({ title, subtitle, note, items }: { title: string; subtitle?: string; note?: string; items: { name: string; desc: string; price: string }[] }) {
+function MenuItem({ item }: { item: Item }) {
   return (
-    <div className="mb-16">
-      <div className="mb-8">
-        <h3 className="font-display text-2xl md:text-3xl text-charcoal">{title}</h3>
-        {subtitle && <p className="font-accent text-base md:text-lg text-muted-foreground tracking-wider mt-1">{subtitle}</p>}
-        {note && <p className="font-accent text-sm md:text-base text-gold tracking-wider mt-2">{note}</p>}
-        <div className="w-12 h-px bg-gold/30 mt-4" />
+    <div className="break-inside-avoid mb-5">
+      <div className="flex items-baseline justify-between gap-4">
+        <h4 className="font-display text-lg md:text-xl text-charcoal leading-snug">
+          {item.signature && <span className="text-gold/70 mr-1.5" aria-hidden>&#10022;</span>}
+          {item.name}
+          {item.tags && item.tags.length > 0 && (
+            <span className="ml-2 font-body text-[10px] tracking-[0.15em] text-gold/60 uppercase align-[0.15em]">
+              {item.tags.join(" · ")}
+            </span>
+          )}
+        </h4>
+        {item.price && (
+          <span className="font-accent text-gold text-base md:text-lg tracking-wide shrink-0">{item.price}</span>
+        )}
       </div>
-      <div className="space-y-5">
-        {items.map((item) => (
-          <div key={item.name} className="group">
-            <div className="flex items-baseline justify-between gap-3">
-              <h4 className="font-display text-lg md:text-2xl text-charcoal group-hover:text-gold transition-colors duration-500">
-                {item.name}
-              </h4>
-              <div className="flex-1 border-b border-dotted border-charcoal/20 mb-1.5 min-w-[20px]" />
-              {item.price && (
-                <span className="font-accent text-gold text-base md:text-xl tracking-wide shrink-0">{item.price}</span>
-              )}
-            </div>
-            {item.desc && (
-              <p className="text-muted-foreground text-base md:text-lg mt-1.5 font-accent italic tracking-wide leading-relaxed">{item.desc}</p>
-            )}
-          </div>
+      {item.desc && (
+        <p className="text-muted-foreground text-sm md:text-base mt-1 font-accent italic tracking-wide leading-snug pr-6">
+          {item.desc}
+        </p>
+      )}
+    </div>
+  );
+}
+
+function MenuSection({ section }: { section: Section }) {
+  return (
+    <div className="break-inside-avoid mb-12">
+      <div className="mb-6">
+        <h3 className="font-display text-2xl md:text-3xl text-charcoal">{section.title}</h3>
+        {section.subtitle && (
+          <p className="font-accent italic text-gold/70 text-sm md:text-base tracking-wide mt-0.5">{section.subtitle}</p>
+        )}
+        <div className="w-10 h-px bg-gold/30 mt-3" />
+        {section.note && (
+          <p className="font-accent text-charcoal/45 text-xs md:text-sm tracking-wide mt-3">{section.note}</p>
+        )}
+      </div>
+      <div>
+        {section.items.map((item) => (
+          <MenuItem key={item.name} item={item} />
         ))}
       </div>
     </div>
@@ -251,52 +305,34 @@ export default function Menu() {
   usePageMeta("/menu");
 
   const [active, setActive] = useState<MenuTab>("dinner");
-
-  const getMenuSections = () => {
-    switch (active) {
-      case "lunch":
-        return Object.values(LUNCH).map(s => ({ ...s, subtitle: undefined, note: undefined }));
-      case "dinner":
-        return Object.values(DINNER).map(s => ({ ...s, note: undefined }));
-      case "pizza":
-        return Object.values(PIZZA).map(s => ({ ...s, subtitle: undefined, note: undefined }));
-      case "wine":
-        return Object.values(WINE).map(s => ({ ...s, subtitle: undefined }));
-      case "happyhour":
-        return Object.values(HAPPY_HOUR).map(s => ({ ...s, subtitle: undefined, note: undefined }));
-    }
-  };
+  const sections = Object.values(MENUS[active]);
 
   return (
     <PageLayout>
       {/* Hero */}
       <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
-          <img src={IMAGES.petraleSole} alt="Signature dish at Andiamo in Banca" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/50" />
+          <img src={IMAGES.lambChops} alt="Grilled rack of lamb at Andiamo in Banca" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/55" />
         </div>
         <div className="relative z-10 text-center">
-          <div className="ornament-line !bg-white/20 mb-6" />
-          <h1 className="font-display text-5xl md:text-7xl text-white tracking-wide">Our Menu</h1>
-          <p className="font-accent text-sm tracking-[0.3em] uppercase text-white/50 mt-4">
-            Simply Delicious
-          </p>
+          <p className="eyebrow !text-white/55 mb-4">Handmade pasta &middot; Wood grill &middot; Award-winning cellar</p>
+          <h1 className="font-display text-5xl md:text-7xl text-white tracking-wide">The Menu</h1>
+          <p className="font-accent italic text-white/60 text-lg md:text-xl mt-3">Simply delicious.</p>
         </div>
       </section>
 
       {/* Menu Content */}
       <section className="section-padding bg-background">
-        <div className="container max-w-4xl">
-          {/* Tab Navigation — understated, elegant */}
-          <div className="flex flex-wrap justify-center gap-1 mb-16 border-b border-charcoal/8 pb-6">
+        <div className="container max-w-5xl">
+          {/* Tab Navigation */}
+          <div className="flex flex-wrap justify-center gap-x-2 gap-y-1 mb-16 border-b border-charcoal/8 pb-6">
             {TABS.map((tab) => (
               <button
                 key={tab.key}
                 onClick={() => setActive(tab.key)}
                 className={`px-6 py-2.5 font-accent text-base md:text-lg tracking-[0.15em] transition-all duration-500 ${
-                  active === tab.key
-                    ? "text-gold border-b-2 border-gold"
-                    : "text-charcoal/70 hover:text-charcoal"
+                  active === tab.key ? "text-gold border-b-2 border-gold" : "text-charcoal/60 hover:text-charcoal"
                 }`}
               >
                 {tab.label}
@@ -304,67 +340,33 @@ export default function Menu() {
             ))}
           </div>
 
-          {/* Wine Spectator Award — shown only on Wine tab */}
-          {active === "wine" && (
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="mb-14 bg-burgundy/[0.04] border border-gold/20 px-6 md:px-10 py-8 md:py-10"
-            >
-              <div className="flex flex-col md:flex-row items-center gap-6 md:gap-10">
-                <a
-                  href={LINKS.wineSpectatorAwards}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="shrink-0 group"
-                  aria-label="Wine Spectator Award of Excellence 2026 — learn more"
-                >
-                  <img
-                    src={IMAGES.wineSpectatorAward}
-                    alt="Wine Spectator Award of Excellence 2026"
-                    width={130}
-                    height={240}
-                    className="w-[110px] md:w-[130px] h-auto shadow-[0_10px_30px_-10px_rgba(0,0,0,0.2)] transition-transform duration-500 group-hover:scale-[1.04]"
-                  />
-                </a>
-                <div className="text-center md:text-left">
-                  <p className="font-accent text-xs tracking-[0.3em] uppercase text-gold/80 mb-2">
-                    2026 Recognition
-                  </p>
-                  <h3 className="font-display text-2xl md:text-3xl text-charcoal mb-3">
-                    Wine Spectator Award of Excellence
-                  </h3>
-                  <p className="font-accent text-charcoal/70 text-base md:text-lg leading-relaxed">
-                    Our wine list has been recognized by Wine Spectator for its thoughtful
-                    curation — from Italian classics and California cult bottlings to reserve
-                    Champagnes and trophy wines for special occasions.
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          )}
-
-          {/* Menu Items */}
+          {/* Menu Items — two-column on desktop, like the printed menu */}
           <motion.div
             key={active}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
+            className="md:columns-2 md:gap-x-14 lg:gap-x-20 [column-rule:1px_solid_oklch(0.20_0.01_50_/_8%)]"
           >
-            {getMenuSections().map((section) => (
-              <MenuSection
-                key={section.title}
-                title={section.title}
-                subtitle={"subtitle" in section ? (section as any).subtitle : undefined}
-                note={"note" in section ? (section as any).note : undefined}
-                items={section.items}
-              />
+            {sections.map((section) => (
+              <MenuSection key={section.title} section={section} />
             ))}
           </motion.div>
 
+          {/* Legend */}
+          <div className="mt-6 border-t border-charcoal/8 pt-8 text-center">
+            <p className="font-accent text-charcoal/55 text-sm md:text-base tracking-wide">
+              <span className="text-gold/70">&#10022;</span> signature &nbsp;·&nbsp;
+              <span className="text-gold/70 font-medium">GF</span> gluten-free &nbsp;·&nbsp;
+              <span className="text-gold/70 font-medium">V</span> vegetarian
+            </p>
+            <p className="font-accent text-charcoal/45 text-xs md:text-sm mt-2 tracking-wide">
+              Gluten-free &amp; vegan lentil pasta available for any pasta dish. Please inform your server of any allergies or intolerances.
+            </p>
+          </div>
+
           {/* Online Ordering CTA */}
-          <div className="mt-4 text-center border-t border-charcoal/8 pt-12">
+          <div className="mt-12 text-center">
             <a
               href={LINKS.onlineOrdering}
               target="_blank"
@@ -375,24 +377,20 @@ export default function Menu() {
             </a>
           </div>
 
-          {/* Note */}
-          <div className="mt-12 text-center">
-            <p className="text-muted-foreground text-base md:text-lg italic font-accent tracking-wide">
-              Menu items and prices are subject to change. Please inform your server of any allergies or dietary restrictions.
+          {/* Family line + links */}
+          <div className="mt-14 text-center">
+            <p className="font-accent italic text-charcoal/40 text-sm tracking-wide">
+              Andiamo in Banca, South San Francisco &nbsp;·&nbsp; Caf&eacute; Figaro, Burlingame &nbsp;·&nbsp; Don Giovanni&rsquo;s, Mountain View
             </p>
-            <p className="text-muted-foreground text-sm md:text-base mt-3 font-accent tracking-wide">
-              Vegan & gluten free lentil pasta available as a substitution for all pasta dishes.
-              A 20% gratuity will be added for parties of 6 or more.
-            </p>
-            <div className="flex flex-wrap justify-center gap-6 mt-8">
-              <Link href="/banquet-catering" className="font-accent text-gold/80 hover:text-gold text-base md:text-lg tracking-wide transition-colors duration-300">
-                Banquet & Catering Menus
+            <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 mt-8">
+              <Link href="/private-events" className="link-line font-body text-[12px] tracking-[0.2em] uppercase text-gold">
+                Private events &amp; banquets
               </Link>
-              <Link href="/the-vault" className="font-accent text-gold/80 hover:text-gold text-base md:text-lg tracking-wide transition-colors duration-300">
-                Private Dining
+              <Link href="/the-vault" className="link-line font-body text-[12px] tracking-[0.2em] uppercase text-gold">
+                Private dining
               </Link>
-              <Link href="/contact" className="font-accent text-gold/80 hover:text-gold text-base md:text-lg tracking-wide transition-colors duration-300">
-                Contact Us
+              <Link href="/contact" className="link-line font-body text-[12px] tracking-[0.2em] uppercase text-gold">
+                Contact us
               </Link>
             </div>
           </div>

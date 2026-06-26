@@ -9,11 +9,16 @@ import { Link } from "wouter";
 type Category = "All" | "The Building" | "Private Dining" | "Cuisine";
 
 const GALLERY_ITEMS: { src: string; alt: string; category: Exclude<Category, "All"> }[] = [
+  { src: IMAGES.diningRoom, alt: "The main dining room — restored 1920s bank with marble columns and soaring ceilings", category: "The Building" },
   { src: IMAGES.exterior, alt: "Andiamo in Banca — historic bank building exterior with grand columns", category: "The Building" },
-  { src: IMAGES.vault, alt: "The Vault — private dining room with rich red walls and white tablecloths", category: "Private Dining" },
-  { src: IMAGES.petraleSole, alt: "Petrale Sole — signature dish with micro greens", category: "Cuisine" },
-  { src: IMAGES.lambChops, alt: "Grilled lamb chops with rosemary and balsamic reduction", category: "Cuisine" },
-  { src: IMAGES.happyHour, alt: "Happy Hour — Tuesday through Friday, 4:00 PM to 5:00 PM", category: "The Building" },
+  { src: IMAGES.vault, alt: "The Vault — private dining room with rich red walls and white linen", category: "Private Dining" },
+  { src: IMAGES.vaultAlt, alt: "The Vault — historic Linden Avenue photographs line the red walls", category: "Private Dining" },
+  { src: IMAGES.lambChops, alt: "Grilled rack of lamb with rosemary and a red wine reduction", category: "Cuisine" },
+  { src: IMAGES.alfredo, alt: "Fettuccine Alfredo with chicken and fresh microgreens", category: "Cuisine" },
+  { src: IMAGES.mushroomAgnolotti, alt: "Wild mushroom agnolotti in a black truffle cream", category: "Cuisine" },
+  { src: IMAGES.oysters, alt: "Oysters Rockefeller — baked with spinach, herbs, and breadcrumbs", category: "Cuisine" },
+  { src: IMAGES.steak, alt: "Grilled steak with chimichurri over truffle mashed potatoes", category: "Cuisine" },
+  { src: IMAGES.petraleSole, alt: "Petrale sole — a signature dish, with microgreens", category: "Cuisine" },
 ];
 
 const CATEGORIES: Category[] = ["All", "The Building", "Private Dining", "Cuisine"];
@@ -64,8 +69,8 @@ export default function Gallery() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/70" />
         </div>
         <div className="relative z-10 text-center px-6">
-          <p className="font-accent text-sm tracking-[0.3em] uppercase text-cream/60 mb-5">
-            A Visual Tour
+          <p className="eyebrow !text-cream/60 mb-5">
+            The room, the vault, the table
           </p>
           <h1 className="font-display text-5xl md:text-7xl lg:text-8xl text-cream">
             Gallery
@@ -78,7 +83,7 @@ export default function Gallery() {
         <div className="container py-20 md:py-28">
           {/* Ornament + heading */}
           <div className="text-center mb-16">
-            <div className="ornament-line mx-auto mb-6 opacity-40" />
+            <div className="divider-diamond mb-6 opacity-60"><i /></div>
             <p className="font-accent text-[11px] tracking-[0.3em] uppercase text-gold/80 mb-2">
               Browse by Category
             </p>
@@ -143,7 +148,7 @@ export default function Gallery() {
 
           {/* Description + Internal Links */}
           <div className="text-center mt-20 max-w-2xl mx-auto">
-            <div className="ornament-line mx-auto mb-6 opacity-30" />
+            <div className="divider-diamond mb-6 opacity-50"><i /></div>
             <p className="font-accent text-cream/65 text-base leading-relaxed mb-6">
               Andiamo in Banca occupies a beautifully restored 1920s bank building at the heart of South San Francisco.
               From the grand marble columns and original vault door to the intimate private dining room, every detail

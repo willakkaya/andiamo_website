@@ -8,8 +8,7 @@ const NAV_LINKS = [
   { label: "Menu", href: "/menu" },
   { label: "Our Story", href: "/our-story" },
   { label: "The Vault", href: "/the-vault" },
-  { label: "Private Events", href: "/banquet-catering" },
-  { label: "Private Dining", href: "/private-dining" },
+  { label: "Private Events", href: "/private-events" },
   { label: "Gallery", href: "/gallery" },
   { label: "Contact", href: "/contact" },
 ];

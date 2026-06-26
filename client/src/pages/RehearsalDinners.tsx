@@ -52,9 +52,9 @@ export default function RehearsalDinners() {
               viewport={{ once: true }}
               custom={0}
             >
-              <div className="ornament-line !mx-0 mb-6" />
-              <h2 className="font-display text-3xl md:text-4xl text-charcoal mb-6">
-                The Perfect Prelude
+              <span className="chapter mb-6">Where it begins</span>
+              <h2 className="font-display text-3xl md:text-4xl text-charcoal mb-6 mt-2">
+                The perfect prelude
               </h2>
               <p className="font-accent text-charcoal/65 text-base leading-[1.8] mb-6">
                 The Vault at Andiamo in Banca is the Peninsula's most intimate private
@@ -105,7 +105,7 @@ export default function RehearsalDinners() {
       <section className="section-dark">
         <div className="max-w-4xl mx-auto px-6 py-24 md:py-28">
           <div className="text-center mb-16">
-            <div className="ornament-line mx-auto mb-8 opacity-40" />
+            <div className="divider-diamond mb-8 opacity-60"><i /></div>
             <h2 className="font-display text-3xl md:text-4xl text-cream mb-4">
               Rehearsal Dinner Menus
             </h2>
@@ -158,7 +158,7 @@ export default function RehearsalDinners() {
       {/* Testimonial */}
       <section className="section-cream">
         <div className="max-w-3xl mx-auto px-6 py-20 md:py-24 text-center">
-          <div className="ornament-line mx-auto mb-8" />
+          <div className="divider-diamond mb-8"><i /></div>
           <div className="flex justify-center gap-1 mb-6">
             {[...Array(5)].map((_, i) => (
               <Star key={i} size={16} className="text-gold fill-gold" />

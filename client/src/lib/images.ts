@@ -7,12 +7,20 @@ export const IMAGES = {
   // Exterior / Building
   exterior: "https://d2xsxph8kpxj0f.cloudfront.net/310519663412679184/kqPisyaY2DvmGsDpfntLLc/andiamo_9501c21c.webp",
 
-  // The Vault - Private Dining (red walls, white tablecloths)
-  vault: "https://d2xsxph8kpxj0f.cloudfront.net/310519663412679184/kqPisyaY2DvmGsDpfntLLc/VaultPicture_57689916.webp",
+  // The Vault — private dining, repainted red (new on-site photos in /public)
+  vault: "/vault-red.jpg",
+  vaultAlt: "/vault-red-2.jpg",
 
-  // Food Photography
+  // Main dining room — restored 1920s bank, grand columns
+  diningRoom: "/dining-room.jpg",
+
+  // Food Photography — new on-site dishes in /public
   petraleSole: "https://d2xsxph8kpxj0f.cloudfront.net/310519663412679184/kqPisyaY2DvmGsDpfntLLc/DSC02097_Original_49a88565.webp",
-  lambChops: "https://d2xsxph8kpxj0f.cloudfront.net/310519663412679184/kqPisyaY2DvmGsDpfntLLc/DSC02088_Original_a37c55a7.webp",
+  lambChops: "/lamb-chops.jpg",
+  alfredo: "/fettuccine-alfredo.jpg",
+  mushroomAgnolotti: "/mushroom-agnolotti.jpg",
+  oysters: "/oysters-rockefeller.jpg",
+  steak: "/skirt-steak.jpg",
 
   // Happy Hour Flyer
   happyHour: "https://d2xsxph8kpxj0f.cloudfront.net/310519663412679184/kqPisyaY2DvmGsDpfntLLc/Andiamo_HappyHour_1a3bd2fd.jpeg",
@@ -22,6 +30,10 @@ export const IMAGES = {
 
   // Awards
   wineSpectatorAward: "/wine-spectator-award-2026.jpg",
+
+  // Legacy family-restaurant logos (black on transparent, in /public)
+  figaroLogo: "/figaro-logo.png",
+  donGiovanniLogo: "/dg-logo.png",
 } as const;
 
 // External links

@@ -156,9 +156,9 @@
     }
   }
 
-  /* Gold gradient text */
+  /* Warm gold foil — restrained vertical sheen, not a rainbow sweep */
   .text-gradient-gold {
-    background: linear-gradient(135deg, oklch(0.68 0.12 68), oklch(0.58 0.14 60), oklch(0.48 0.12 52));
+    background: linear-gradient(180deg, oklch(0.66 0.12 66), oklch(0.52 0.13 56));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -224,6 +224,121 @@
   .section-warm {
     background-color: oklch(0.97 0.008 75);
     color: oklch(0.20 0.01 50);
+  }
+
+  /* ============================================================
+     Editorial identity layer
+     A small, restrained vocabulary that gives the site an
+     editorial spine instead of one repeated centered ornament.
+     ============================================================ */
+
+  /* Small-caps kicker */
+  .eyebrow {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.6875rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  /* Chapter marker — a roman numeral with a trailing hairline.
+     Lets the homepage read like a numbered story. */
+  .chapter {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.1rem;
+    font-family: var(--font-accent);
+    font-style: italic;
+    font-size: 1.05rem;
+    letter-spacing: 0.02em;
+    color: var(--gold);
+    white-space: nowrap;
+  }
+  .chapter::after {
+    content: "";
+    display: block;
+    width: 3.5rem;
+    height: 1px;
+    background: oklch(0.58 0.14 60 / 45%);
+  }
+  .chapter-light { color: var(--gold-light); }
+  .chapter-light::after { background: oklch(0.68 0.12 68 / 40%); }
+
+  /* House monogram — a fine ring echoing a bank seal */
+  .monogram {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    border: 1px solid oklch(0.58 0.14 60 / 45%);
+    border-radius: 9999px;
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    line-height: 1;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+
+  /* Oversized faint backdrop numeral */
+  .chapter-ghost {
+    font-family: var(--font-display);
+    font-size: clamp(6rem, 14vw, 12rem);
+    line-height: 0.8;
+    color: oklch(0.58 0.14 60 / 8%);
+    user-select: none;
+    pointer-events: none;
+  }
+
+  /* Diamond divider — a richer alternative to the plain hairline */
+  .divider-diamond {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.85rem;
+  }
+  .divider-diamond::before,
+  .divider-diamond::after {
+    content: "";
+    height: 1px;
+    width: 2.75rem;
+    background: oklch(0.58 0.14 60 / 35%);
+  }
+  .divider-diamond i {
+    width: 5px;
+    height: 5px;
+    transform: rotate(45deg);
+    background: var(--gold);
+    display: block;
+  }
+
+  /* Intentional animated underline for text links */
+  .link-line {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+  .link-line:hover {
+    background-size: 100% 1px;
+  }
+
+  /* Filmic grain — barely-there texture so flat dark fields feel like film, not vector */
+  .grain {
+    position: relative;
+    isolation: isolate;
+  }
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.5;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
   }
 }
 

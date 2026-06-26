@@ -1,7 +1,7 @@
 # Andiamo in Banca
 
 ## About
-Andiamo in Banca is an upscale Italian restaurant in South San Francisco, California, located inside a meticulously restored 1920s bank building at 301 Linden Avenue. The restaurant is owned and operated by the Akkaya family. The signature private dining room, called The Vault, is housed inside the original bank vault — one of the most distinctive private dining rooms on the San Francisco Peninsula.
+Andiamo in Banca is an upscale Italian restaurant in South San Francisco, California, located inside a meticulously restored 1920s bank building at 301 Linden Avenue. The name "Andiamo in Banca" is Italian for "let's go to the bank" — a play on the building's past life as a bank. The restaurant is owned and operated by the Akkaya family. The signature private dining room, called The Vault, is housed inside the original bank vault — one of the most distinctive private dining rooms on the San Francisco Peninsula.
 
 ## Awards & Recognition
 - **2026 Wine Spectator Award of Excellence** — Andiamo in Banca received the Wine Spectator Award of Excellence in 2026. This award recognizes restaurants with wine lists offering a well-chosen selection of quality producers paired with the menu in both price and style. Source: Wine Spectator (https://www.winespectator.com/articles/about-the-awards)
@@ -21,9 +21,10 @@ Andiamo in Banca is an upscale Italian restaurant in South San Francisco, Califo
 - [Home](https://www.andiamoinbanca.com/)
 - [Menu](https://www.andiamoinbanca.com/menu) — Lunch, dinner, pizza, award-winning wine & beer, happy hour
 - [Our Story](https://www.andiamoinbanca.com/our-story) — The Akkaya family's Bay Area restaurant history
+- [Private Events](https://www.andiamoinbanca.com/private-events) — Hub for hosting private events; links to The Vault, corporate dinners, holiday parties, rehearsal dinners, the banquet & catering menus, and off-site catering
 - [The Vault](https://www.andiamoinbanca.com/the-vault) — Private dining in the restored 1920s bank vault
 - [Private Dining & Corporate Events](https://www.andiamoinbanca.com/private-dining) — Built for biotech corporate clients in South San Francisco
-- [Banquet & Catering](https://www.andiamoinbanca.com/banquet-catering) — Prix fixe banquet menus and offsite catering
+- [Banquet & Catering Menus](https://www.andiamoinbanca.com/banquet-catering) — Prix-fixe banquet menus ($35–$120/guest) for hosted events, plus an off-site catering menu (ordered online via ezCater)
 - [Holiday Parties](https://www.andiamoinbanca.com/holiday-parties) — Corporate and group holiday celebrations
 - [Rehearsal Dinners](https://www.andiamoinbanca.com/rehearsal-dinners) — Wedding rehearsal dinners in The Vault
 - [Gallery](https://www.andiamoinbanca.com/gallery) — Photography of the restaurant, food, and events
@@ -44,7 +45,7 @@ Andiamo in Banca's wine program received the **2026 Wine Spectator Award of Exce
 - **Private Dining in The Vault:** Seats 12–20 guests intimately, up to 60 guests for receptions
 - **Banquet Prix Fixe Menus:** $35/person (lunch), $65/person (dinner), $80/person (Vault buyout)
 - **Full Restaurant Buyout:** Custom pricing for up to 100+ guests
-- **Catering:** Available via ezCater for delivery
+- **Two catering paths:** (1) *Hosted events* on-site (The Vault, dining room, buyouts) are arranged with the events team via inquiry/quote; (2) *Off-site catering* — drop-off and delivered office lunches, trays, and family-style platters for 10 or 20 — is ordered online through ezCater
 
 ## Location & Proximity
 Located in downtown South San Francisco, two blocks from Grand Avenue. Walking distance from the South San Francisco biotech corridor:
