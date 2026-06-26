@@ -13,7 +13,6 @@
     { "source": "/menus", "destination": "/menu", "statusCode": 301 },
     { "source": "/corporate-dining", "destination": "/private-dining", "statusCode": 301 },
     { "source": "/bay-area-private-dining", "destination": "/private-dining", "statusCode": 301 },
-    { "source": "/private-events", "destination": "/private-dining", "statusCode": 301 },
     { "source": "/private-dining-events", "destination": "/private-dining", "statusCode": 301 },
     { "source": "/private-dining-room", "destination": "/private-dining", "statusCode": 301 },
     { "source": "/reviews", "destination": "/#reviews", "statusCode": 301 },

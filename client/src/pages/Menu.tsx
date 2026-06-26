@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { ShoppingBag } from "lucide-react";
 import { Link } from "wouter";
 
-type MenuTab = "dinner" | "lunch" | "wine" | "happyhour";
+type MenuTab = "dinner" | "lunch" | "catering" | "wine" | "happyhour";
 type Tag = "GF" | "V";
 type Item = { name: string; desc: string; price: string; tags?: Tag[]; signature?: boolean };
 type Section = { title: string; subtitle?: string; note?: string; items: Item[] };
@@ -239,9 +239,68 @@ const HAPPY_HOUR: Record<string, Section> = {
   },
 };
 
+/* ── CATERING — family-style trays, delivered (order via ezCater) ── */
+const CATERING: Record<string, Section> = {
+  salads: {
+    title: "Salads",
+    note: "Serves 10 / Serves 20",
+    items: [
+      { name: "Organic Mixed Greens", desc: "Shredded vegetables, housemade balsamic vinaigrette", price: "50 / 90" },
+      { name: "Arugula", desc: "Red onion, cherry tomato, shaved Parmigiano, champagne vinaigrette", price: "55 / 95" },
+      { name: "Caesar", desc: "Romaine, garlic croutons, Parmigiano-Reggiano, classic caesar", price: "60 / 100" },
+      { name: "Caprese", desc: "Ripe tomato, fresh mozzarella, basil, balsamic, extra-virgin olive oil", price: "55 / 95" },
+    ],
+  },
+  appetizers: {
+    title: "Appetizers",
+    note: "Serves 10 / Serves 20",
+    items: [
+      { name: "Bruschetta Classica", desc: "Crostini, marinated tomato, garlic, basil, olive oil", price: "55 / 95" },
+      { name: "Garlic Bread", desc: "Warm sourdough, garlic butter, baked golden", price: "45 / 75" },
+      { name: "Brussels Sprouts con Pancetta", desc: "Oven-roasted, crispy pancetta, balsamic reduction", price: "60 / 100" },
+      { name: "Seasonal Grilled Vegetables", desc: "Mesquite-grilled, olive oil, sea salt", price: "80 / 115" },
+      { name: "Mini Meatballs Marinara", desc: "Housemade beef meatballs, signature marinara", price: "110 / 190" },
+    ],
+  },
+  pasta: {
+    title: "Pasta",
+    subtitle: "Housemade, fresh daily",
+    note: "Priced by guest count — request a quote",
+    items: [
+      { name: "Lasagne Bolognese", desc: "All-beef ragù, ricotta, mozzarella, Parmigiano-Reggiano", price: "" },
+      { name: "Rigatoni alla Salsiccia", desc: "Roasted bell pepper, tomato, grilled Italian sausage", price: "" },
+      { name: "Rigatoni al Funghi e Tartufo", desc: "Wild mushroom, thyme, garlic, truffle cream", price: "" },
+      { name: "Rigatoni alla Vodka", desc: "Shallot, chili, Parmigiano, silky cream", price: "" },
+      { name: "Rigatoni alla Norma", desc: "Roasted eggplant, tomato, basil, ricotta salata", price: "" },
+      { name: "Penne Alfredo", desc: "Creamy Parmesan alfredo", price: "" },
+      { name: "Penne al Pesto Genovese", desc: "Basil pesto, Parmigiano, pine nuts", price: "" },
+      { name: "Penne Arrabbiata", desc: "Bold, spicy marinara, chili, garlic", price: "" },
+      { name: "Penne Pomodoro", desc: "Tomato, garlic, basil, olive oil", price: "" },
+      { name: "Spinach & Ricotta Ravioli", desc: "Choice of marinara or bolognese", price: "" },
+      { name: "Chicken Alfredo", desc: "Penne, grilled chicken, rich alfredo", price: "" },
+      { name: "Vegetarian Lasagna", desc: "Grilled vegetables, ricotta, mozzarella, marinara", price: "" },
+      { name: "Pasta Bolognese", desc: "Slow-cooked beef ragù — penne, spaghetti, or GF penne", price: "" },
+    ],
+  },
+  entrees: {
+    title: "Entrées",
+    subtitle: "Chef-crafted mains",
+    note: "Priced by guest count — request a quote",
+    items: [
+      { name: "Chicken Marsala", desc: "Cremini mushrooms, rich marsala reduction", price: "" },
+      { name: "Chicken Parmesan", desc: "Crispy chicken, marinara, mozzarella, Parmigiano", price: "" },
+      { name: "Chicken Piccata", desc: "Caper, lemon, white wine butter", price: "" },
+      { name: "Grilled Salmon Fillet", desc: "Delicate lemon butter sauce", price: "" },
+      { name: "Beef Brasato al Barolo", desc: "Short ribs braised in Barolo, aromatics, herbs", price: "" },
+      { name: "Eggplant Parmesan", desc: "Breaded eggplant, marinara, mozzarella, baked", price: "" },
+    ],
+  },
+};
+
 const MENUS: Record<MenuTab, Record<string, Section>> = {
   dinner: DINNER,
   lunch: LUNCH,
+  catering: CATERING,
   wine: WINE,
   happyhour: HAPPY_HOUR,
 };
@@ -249,6 +308,7 @@ const MENUS: Record<MenuTab, Record<string, Section>> = {
 const TABS: { key: MenuTab; label: string }[] = [
   { key: "dinner", label: "Dinner" },
   { key: "lunch", label: "Lunch" },
+  { key: "catering", label: "Catering" },
   { key: "wine", label: "Wine & Beer" },
   { key: "happyhour", label: "Happy Hour" },
 ];
@@ -340,6 +400,16 @@ export default function Menu() {
             ))}
           </div>
 
+          {/* Catering intro */}
+          {active === "catering" && (
+            <div className="max-w-2xl mx-auto text-center -mt-4 mb-14">
+              <p className="font-accent text-charcoal/70 text-base md:text-lg leading-relaxed">
+                Family-style trays for office lunches, meetings, and gatherings &mdash; delivered.
+                Browse below, then order online through ezCater &mdash; or ask us about a custom spread.
+              </p>
+            </div>
+          )}
+
           {/* Menu Items — two-column on desktop, like the printed menu */}
           <motion.div
             key={active}
@@ -353,29 +423,49 @@ export default function Menu() {
             ))}
           </motion.div>
 
-          {/* Legend */}
-          <div className="mt-6 border-t border-charcoal/8 pt-8 text-center">
-            <p className="font-accent text-charcoal/55 text-sm md:text-base tracking-wide">
-              <span className="text-gold/70">&#10022;</span> signature &nbsp;·&nbsp;
-              <span className="text-gold/70 font-medium">GF</span> gluten-free &nbsp;·&nbsp;
-              <span className="text-gold/70 font-medium">V</span> vegetarian
-            </p>
-            <p className="font-accent text-charcoal/45 text-xs md:text-sm mt-2 tracking-wide">
-              Gluten-free &amp; vegan lentil pasta available for any pasta dish. Please inform your server of any allergies or intolerances.
-            </p>
-          </div>
+          {/* Legend — dinner & lunch */}
+          {(active === "dinner" || active === "lunch") && (
+            <div className="mt-6 border-t border-charcoal/8 pt-8 text-center">
+              <p className="font-accent text-charcoal/55 text-sm md:text-base tracking-wide">
+                <span className="text-gold/70">&#10022;</span> signature &nbsp;·&nbsp;
+                <span className="text-gold/70 font-medium">GF</span> gluten-free &nbsp;·&nbsp;
+                <span className="text-gold/70 font-medium">V</span> vegetarian
+              </p>
+              <p className="font-accent text-charcoal/45 text-xs md:text-sm mt-2 tracking-wide">
+                Gluten-free &amp; vegan lentil pasta available for any pasta dish. Please inform your server of any allergies or intolerances.
+              </p>
+            </div>
+          )}
 
-          {/* Online Ordering CTA */}
-          <div className="mt-12 text-center">
-            <a
-              href={LINKS.onlineOrdering}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-12 py-4 bg-charcoal text-white font-body text-[12px] tracking-[0.2em] uppercase font-semibold hover:bg-espresso transition-all duration-500"
-            >
-              Order Online <ShoppingBag size={13} />
-            </a>
-          </div>
+          {/* Order CTA — tab-aware: takeout (Slice) for food, ezCater for catering */}
+          {(active === "dinner" || active === "lunch") && (
+            <div className="mt-12 text-center">
+              <a
+                href={LINKS.onlineOrdering}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-12 py-4 bg-charcoal text-white font-body text-[12px] tracking-[0.2em] uppercase font-semibold hover:bg-espresso transition-all duration-500"
+              >
+                Order Online <ShoppingBag size={13} />
+              </a>
+            </div>
+          )}
+          {active === "catering" && (
+            <div className="mt-12 text-center">
+              <a
+                href={LINKS.ezcater}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-12 py-4 bg-charcoal text-white font-body text-[12px] tracking-[0.2em] uppercase font-semibold hover:bg-espresso transition-all duration-500"
+              >
+                Order Catering Online <ShoppingBag size={13} />
+              </a>
+              <p className="font-accent text-charcoal/50 text-sm mt-5 tracking-wide">
+                Delivered through ezCater. Planning a hosted event?{" "}
+                <Link href="/private-events" className="text-gold hover:text-gold-light transition-colors">See Private Events</Link>.
+              </p>
+            </div>
+          )}
 
           {/* Family line + links */}
           <div className="mt-14 text-center">
