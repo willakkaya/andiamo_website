@@ -51,11 +51,11 @@ function ContactForm() {
           custom={0}
         >
           <div className="text-center mb-14">
-            <div className="ornament-line mb-6" />
-            <p className="font-accent text-sm tracking-[0.3em] uppercase text-gold/70 mb-4">
-              Get in Touch
+            <div className="divider-diamond mb-6"><i /></div>
+            <p className="eyebrow mb-4">
+              We read every note
             </p>
-            <h2 className="font-display text-3xl md:text-4xl text-charcoal mb-4">Send Us a Message</h2>
+            <h2 className="font-display text-3xl md:text-4xl text-charcoal mb-4">Send us a message</h2>
             <p className="font-accent text-charcoal/65 text-base tracking-wide">
               Questions, feedback, or special requests — we'd love to hear from you.
             </p>
@@ -170,8 +170,8 @@ export default function Contact() {
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
         </div>
         <div className="relative z-10 text-center pb-14">
-          <p className="font-accent tracking-[0.3em] text-xs uppercase text-cream/60 mb-4">
-            Visit Us
+          <p className="eyebrow !text-cream/60 mb-4">
+            301 Linden Avenue &middot; South San Francisco
           </p>
           <h1 className="font-display text-5xl md:text-7xl text-cream">Contact</h1>
         </div>
@@ -326,9 +326,9 @@ export default function Contact() {
             custom={0}
             className="text-center mb-14"
           >
-            <div className="ornament-line mx-auto mb-8" />
-            <p className="font-accent tracking-[0.3em] text-xs uppercase text-gold-light/60 mb-5">
-              When to Visit
+            <div className="divider-diamond mb-8 opacity-70"><i /></div>
+            <p className="eyebrow !text-gold-light/70 mb-5">
+              Lunch &amp; dinner, Tuesday through Sunday
             </p>
             <h2 className="font-display text-3xl md:text-4xl text-cream">Hours</h2>
           </motion.div>
@@ -360,7 +360,7 @@ export default function Contact() {
               ))}
             </div>
             <p className="font-accent text-cream/45 text-xs mt-8 text-center italic leading-relaxed">
-              Happy Hour: Tuesday \u2013 Friday, 4:00 PM \u2013 5:00 PM. Holiday hours may vary.
+              Happy Hour: Tuesday &ndash; Friday, 4:00 PM &ndash; 5:00 PM. Holiday hours may vary.
             </p>
             <div className="flex flex-wrap justify-center gap-6 mt-10">
               <Link href="/menu" className="font-accent text-gold/70 hover:text-gold text-sm tracking-wide transition-colors duration-300">

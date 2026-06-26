@@ -48,12 +48,12 @@ export default function TheVault() {
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
         </div>
         <div className="relative z-10 text-center max-w-3xl mx-auto px-6 pb-16">
-          <p className="font-accent tracking-[0.3em] text-xs uppercase text-cream/60 mb-5">
+          <p className="eyebrow !text-cream/60 mb-5">
             Private Dining
           </p>
           <h1 className="font-display text-5xl md:text-7xl lg:text-8xl text-cream mb-5">The Vault</h1>
-          <p className="font-accent text-cream/50 text-lg md:text-xl max-w-lg mx-auto leading-relaxed">
-            Once a secure bank vault, now South San Francisco's most exclusive private dining experience.
+          <p className="font-accent italic text-cream/60 text-lg md:text-xl max-w-xl mx-auto leading-relaxed">
+            A working bank vault until 2019. Now the only private dining room of its kind on the Peninsula.
           </p>
         </div>
       </section>
@@ -69,16 +69,17 @@ export default function TheVault() {
             custom={0}
             className="text-center mb-20"
           >
-            <div className="ornament-line mx-auto mb-8" />
-            <p className="font-accent tracking-[0.3em] text-xs uppercase text-gold/80 mb-5">
-              An Unforgettable Setting
+            <div className="divider-diamond mb-8"><i /></div>
+            <p className="eyebrow mb-5">
+              Behind a two-ton steel door
             </p>
             <h2 className="font-display text-3xl md:text-5xl text-charcoal mb-8">
-              History You Can Touch
+              History you can touch
             </h2>
-            <p className="font-accent text-charcoal/60 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
-              Step through the original vault door into a space that blends the gravitas
-              of a historic bank vault with the warmth of Italian hospitality.
+            <p className="font-accent text-charcoal/65 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
+              For nearly a century this room held the neighborhood&rsquo;s savings. Step through
+              the original vault door and you&rsquo;ll find candlelight, white linen, and the
+              warmth of an Italian table where the safe-deposit boxes used to be.
             </p>
           </motion.div>
 
@@ -151,8 +152,8 @@ export default function TheVault() {
               className="aspect-[4/5] overflow-hidden"
             >
               <img
-                src={IMAGES.vault}
-                alt="The Vault dining setup with red walls and white tablecloths"
+                src={IMAGES.vaultAlt}
+                alt="The Vault dining setup with red walls and historic Linden Avenue photographs"
                 className="w-full h-full object-cover"
               />
             </motion.div>
@@ -171,9 +172,9 @@ export default function TheVault() {
             custom={0}
             className="text-center mb-16"
           >
-            <div className="ornament-line mx-auto mb-8" />
-            <p className="font-accent tracking-[0.3em] text-xs uppercase text-gold-light/60 mb-5">
-              Your Event, Your Way
+            <div className="divider-diamond mb-8 opacity-70"><i /></div>
+            <p className="eyebrow !text-gold-light/70 mb-5">
+              No two events alike
             </p>
             <h2 className="font-display text-3xl md:text-4xl text-cream mb-6">Dining Options</h2>
             <p className="font-accent text-cream/60 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
@@ -248,11 +249,11 @@ export default function TheVault() {
             custom={0}
             className="text-center mb-14"
           >
-            <div className="ornament-line mx-auto mb-8" />
-            <p className="font-accent tracking-[0.3em] text-xs uppercase text-gold/80 mb-5">
+            <div className="divider-diamond mb-8"><i /></div>
+            <p className="eyebrow mb-5">
               Book The Vault
             </p>
-            <h2 className="font-display text-3xl md:text-4xl text-charcoal mb-4">Inquire About Your Event</h2>
+            <h2 className="font-display text-3xl md:text-4xl text-charcoal mb-4">Inquire about your event</h2>
             <p className="font-accent text-charcoal/65 text-base">
               Fill out the form below and our events team will respond within 24 hours.
             </p>

@@ -9,7 +9,7 @@ const fadeUp = {
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.12, duration: 0.8, ease: "easeOut" },
+    transition: { delay: i * 0.1, duration: 0.8, ease: "easeOut" },
   }),
 };
 
@@ -29,104 +29,126 @@ export default function OurStory() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/70" />
         </div>
         <div className="relative z-10 text-center px-6">
-          <p className="font-accent text-sm tracking-[0.3em] uppercase text-cream/60 mb-5">
-            Three Decades &middot; Three Restaurants &middot; One Family
+          <p className="eyebrow !text-cream/60 mb-5">
+            Three decades &middot; Three restaurants &middot; One family
           </p>
           <h1 className="font-display text-5xl md:text-7xl lg:text-8xl text-cream">
             Our Story
           </h1>
+          <p className="font-accent italic text-cream/55 text-lg md:text-xl mt-5 max-w-xl mx-auto">
+            It starts with a sixteen-year-old who arrived with nothing but a willingness to work.
+          </p>
         </div>
       </section>
 
-      {/* The Beginning — Cafe Figaro */}
+      {/* Chapter I — Cafe Figaro */}
       <section className="section-cream">
-        <div className="container max-w-3xl py-24 md:py-32">
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            custom={0}
-            className="text-center"
-          >
-            <div className="ornament-line mx-auto mb-6" />
-            <p className="font-accent text-[11px] tracking-[0.3em] uppercase text-gold mb-4">
-              Where It All Began
-            </p>
-            <h2 className="font-display text-3xl md:text-5xl text-charcoal mb-10">
-              Cafe Figaro, 1989
-            </h2>
-            <p className="font-accent text-charcoal/70 leading-[1.9] text-base md:text-lg mb-8">
-              John Akkaya left Turkey at sixteen years old with nothing but determination
-              and a willingness to work. After years in the hospitality industry learning
-              his craft, he opened Cafe Figaro on Broadway in Burlingame in 1989 — a small
-              Italian cafe that would become a beloved neighborhood institution for over
-              35 years.
-            </p>
-            <p className="font-accent text-charcoal/70 leading-[1.9] text-base md:text-lg">
-              From the very first year, John began a tradition that would define the family's
-              approach to the restaurant business: every Thanksgiving, he opened the doors
-              and served free meals to anyone who walked in — no questions asked. That tradition
-              has continued for over three decades, serving more than 1,500 people each year.
-            </p>
-          </motion.div>
+        <div className="container max-w-5xl py-24 md:py-32">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-8 lg:gap-x-14 items-start">
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={0}
+              className="lg:col-span-4"
+            >
+              <span className="chapter mb-7">I &mdash; The Beginning</span>
+              <p className="font-display text-7xl md:text-8xl text-gradient-gold leading-none mt-7">1989</p>
+              <h2 className="mt-5">
+                <img src={IMAGES.figaroLogo} alt="Cafe Figaro" className="h-16 md:h-20 w-auto" loading="lazy" />
+              </h2>
+              <p className="font-accent text-charcoal/45 text-sm tracking-wide mt-3">Broadway, Burlingame</p>
+            </motion.div>
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={1}
+              className="lg:col-span-8 lg:pt-3"
+            >
+              <p className="font-accent text-charcoal/75 leading-[1.9] text-lg md:text-xl mb-7">
+                John Akkaya left Turkey at sixteen years old with nothing but determination
+                and a willingness to work. After years in the hospitality industry learning
+                his craft, he opened Cafe Figaro on Broadway in Burlingame in 1989 &mdash; a small
+                Italian cafe that would become a beloved neighborhood institution for over
+                35 years.
+              </p>
+              <p className="font-accent text-charcoal/75 leading-[1.9] text-lg md:text-xl">
+                From the very first year, John began a tradition that would define the family&rsquo;s
+                approach to the business: every Thanksgiving, he opened the doors
+                and served free meals to anyone who walked in &mdash; no questions asked. That tradition
+                has continued for over three decades, serving more than 1,500 people each year.
+              </p>
+            </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* Quote */}
-      <section className="section-dark">
-        <div className="container max-w-3xl py-20 md:py-28">
+      {/* Founder quote */}
+      <section className="section-dark grain">
+        <div className="container max-w-3xl relative z-[2] py-20 md:py-28 text-center">
           <motion.div
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             custom={0}
-            className="text-center"
           >
-            <div className="ornament-line mx-auto mb-10 opacity-40" />
+            <div className="divider-diamond mb-10 opacity-70">
+              <i />
+            </div>
             <p className="font-display text-2xl md:text-4xl text-cream/90 italic leading-relaxed">
-              "Things you have, you share. And things you don't have, you work for."
+              &ldquo;Things you have, you share. And things you don&rsquo;t have, you work for.&rdquo;
             </p>
-            <p className="font-accent text-[11px] tracking-[0.3em] uppercase text-gold/80 mt-6">
-              — John Akkaya, Founder
-            </p>
+            <p className="eyebrow !text-gold/80 mt-7">&mdash; John Akkaya, Founder</p>
           </motion.div>
         </div>
       </section>
 
-      {/* Don Giovanni & Growth */}
+      {/* Chapter II — Don Giovanni */}
       <section className="section-warm">
-        <div className="container max-w-3xl py-24 md:py-32">
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            custom={0}
-            className="text-center"
-          >
-            <div className="ornament-line mx-auto mb-6" />
-            <p className="font-accent text-[11px] tracking-[0.3em] uppercase text-gold mb-4">
-              Growing the Family
-            </p>
-            <h2 className="font-display text-3xl md:text-5xl text-charcoal mb-10">
-              Ristorante Don Giovanni
-            </h2>
-            <p className="font-accent text-charcoal/70 leading-[1.9] text-base md:text-lg mb-8">
-              In 1997, John expanded the family's footprint with Ristorante Don Giovanni
-              on Castro Street in Mountain View. Set inside the old California Bakery
-              building with its soaring ceilings and warm atmosphere, Don Giovanni quickly
-              became a neighborhood favorite for fine Italian dining in the heart of
-              Silicon Valley.
-            </p>
-            <p className="font-accent text-charcoal/70 leading-[1.9] text-base md:text-lg">
-              The Thanksgiving tradition grew with it — 150 turkeys, a volunteer army
-              of family and friends, and full sit-down meals for anyone who showed up.
-              It wasn't charity. It was family. That's how the Akkayas have always
-              done things.
-            </p>
-          </motion.div>
+        <div className="container max-w-5xl py-24 md:py-32">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-8 lg:gap-x-14 items-start">
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={1}
+              className="lg:col-span-8 lg:pt-3 order-2 lg:order-1"
+            >
+              <p className="font-accent text-charcoal/75 leading-[1.9] text-lg md:text-xl mb-7">
+                In 1997, John expanded the family&rsquo;s footprint with Ristorante Don Giovanni
+                on Castro Street in Mountain View. Set inside the old California Bakery
+                building with its soaring ceilings and warm atmosphere, Don Giovanni quickly
+                became a neighborhood favorite for fine Italian dining in the heart of
+                Silicon Valley.
+              </p>
+              <p className="font-accent text-charcoal/75 leading-[1.9] text-lg md:text-xl">
+                The Thanksgiving tradition grew with it &mdash; 150 turkeys, a volunteer army
+                of family and friends, and full sit-down meals for anyone who showed up.
+                It wasn&rsquo;t charity. It was family. That&rsquo;s how the Akkayas have always
+                done things.
+              </p>
+            </motion.div>
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={0}
+              className="lg:col-span-4 order-1 lg:order-2 lg:text-right"
+            >
+              <span className="chapter mb-7">II &mdash; Growing</span>
+              <p className="font-display text-7xl md:text-8xl text-gradient-gold leading-none mt-7">1997</p>
+              <h2 className="mt-5">
+                <img src={IMAGES.donGiovanniLogo} alt="Ristorante Don Giovanni" className="h-14 md:h-[4.5rem] w-auto inline-block" loading="lazy" />
+              </h2>
+              <p className="font-accent text-charcoal/45 text-sm tracking-wide mt-3">Castro Street, Mountain View</p>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -155,32 +177,29 @@ export default function OurStory() {
               viewport={{ once: true }}
               custom={1}
             >
-              <div className="ornament-line !mx-0 mb-6" />
-              <p className="font-accent text-[11px] tracking-[0.3em] uppercase text-gold mb-4">
-                Second Generation
-              </p>
-              <h2 className="font-display text-3xl md:text-4xl text-charcoal mb-8">
-                Father & Son
+              <span className="chapter mb-7">The Second Generation</span>
+              <h2 className="font-display text-3xl md:text-4xl text-charcoal mb-8 mt-2">
+                Father &amp; Son
               </h2>
-              <p className="font-accent text-charcoal/70 leading-[1.9] text-base md:text-lg mb-6">
-                Will Akkaya grew up in the restaurants — bussing tables, watching his
+              <p className="font-accent text-charcoal/75 leading-[1.9] text-lg mb-6">
+                Will Akkaya grew up in the restaurants &mdash; bussing tables, watching his
                 father treat every guest like family, and learning that hospitality
-                isn't a business, it's a way of life.
+                isn&rsquo;t a business, it&rsquo;s a way of life.
               </p>
-              <p className="font-accent text-charcoal/70 leading-[1.9] text-base md:text-lg mb-6">
-                Now running the family's restaurants, Will has brought his own passion to
+              <p className="font-accent text-charcoal/75 leading-[1.9] text-lg mb-8">
+                Now running the family&rsquo;s restaurants, Will has brought his own passion to
                 the table: an award-winning wine program recognized by Wine Spectator
                 and Star Wine List, a commitment to sourcing the finest ingredients,
-                and the same belief his father instilled — that a great restaurant
+                and the same belief his father instilled &mdash; that a great restaurant
                 is built on generosity.
               </p>
-              <p className="font-accent text-charcoal/65 text-base italic leading-relaxed">
-                "Whoever wrote the rule that a little cafe can't have the best wines
-                in the world?"
-              </p>
-              <p className="font-accent text-[11px] tracking-[0.2em] uppercase text-gold/50 mt-2">
-                — Will Akkaya
-              </p>
+              <blockquote className="border-l-2 border-gold/40 pl-5">
+                <p className="font-accent text-charcoal/70 text-lg italic leading-relaxed">
+                  &ldquo;Whoever wrote the rule that a little cafe can&rsquo;t have the best wines
+                  in the world?&rdquo;
+                </p>
+                <p className="eyebrow !text-gold/60 mt-3">&mdash; Will Akkaya</p>
+              </blockquote>
             </motion.div>
           </div>
         </div>
@@ -206,67 +225,76 @@ export default function OurStory() {
         </div>
       </section>
 
-      {/* Andiamo in Banca */}
-      <section className="section-dark">
-        <div className="container max-w-3xl py-24 md:py-32">
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            custom={0}
-            className="text-center"
-          >
-            <div className="ornament-line mx-auto mb-6 opacity-40" />
-            <p className="font-accent text-[11px] tracking-[0.3em] uppercase text-gold-light/60 mb-4">
-              The Next Chapter
-            </p>
-            <h2 className="font-display text-3xl md:text-5xl text-cream mb-10">
-              Andiamo in Banca
-            </h2>
-            <p className="font-accent text-cream/60 leading-[1.9] text-base md:text-lg mb-8">
-              In 2019, the Akkaya family opened the doors to their most ambitious project
-              yet: Andiamo in Banca, housed in a beautifully restored historic bank building
-              at 301 Linden Avenue in downtown South San Francisco. The name says it all —
-              "Andiamo" means "let's go" in Italian, and "in Banca" honors the building
-              that houses us.
-            </p>
-            <p className="font-accent text-cream/60 leading-[1.9] text-base md:text-lg mb-8">
-              The grand columns and soaring ceilings were preserved. The original bank vault
-              was transformed into the Peninsula's most exclusive private dining room — the
-              massive vault door still intact, a stunning portal between the building's
-              past and its future.
-            </p>
-            <p className="font-accent text-cream/60 leading-[1.9] text-base md:text-lg">
-              Three restaurants. Over 35 years. One family's unwavering belief that great
-              food, great wine, and genuine hospitality can make any night extraordinary.
-            </p>
-          </motion.div>
+      {/* Chapter III — Andiamo in Banca */}
+      <section className="section-dark grain">
+        <div className="container max-w-5xl relative z-[2] py-24 md:py-32">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-8 lg:gap-x-14 items-start">
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={0}
+              className="lg:col-span-4"
+            >
+              <span className="chapter chapter-light mb-7">III &mdash; The Next Chapter</span>
+              <p className="font-display text-7xl md:text-8xl text-gradient-gold leading-none mt-7">2019</p>
+              <h2 className="mt-5">
+                <img src={IMAGES.logo} alt="Andiamo in Banca" className="h-14 md:h-16 w-auto brightness-0 invert opacity-90" loading="lazy" />
+              </h2>
+              <p className="font-accent text-cream/40 text-sm tracking-wide mt-3">301 Linden Avenue, South San Francisco</p>
+            </motion.div>
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={1}
+              className="lg:col-span-8 lg:pt-3"
+            >
+              <p className="font-accent text-cream/65 leading-[1.9] text-lg md:text-xl mb-7">
+                In 2019, the Akkaya family opened the doors to their most ambitious project
+                yet: Andiamo in Banca, housed in a beautifully restored historic bank building
+                in downtown South San Francisco. The name says it all &mdash;
+                &ldquo;Andiamo in Banca&rdquo; is Italian for &ldquo;let&rsquo;s go to the bank,&rdquo; which is exactly
+                what the place once was.
+              </p>
+              <p className="font-accent text-cream/65 leading-[1.9] text-lg md:text-xl mb-7">
+                The grand columns and soaring ceilings were preserved. The original bank vault
+                was transformed into the Peninsula&rsquo;s most exclusive private dining room &mdash; the
+                massive vault door still intact, a stunning portal between the building&rsquo;s
+                past and its future.
+              </p>
+              <p className="font-accent text-cream/65 leading-[1.9] text-lg md:text-xl">
+                Three restaurants. Over 35 years. One family&rsquo;s unwavering belief that great
+                food, great wine, and genuine hospitality can make any night extraordinary.
+              </p>
+            </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Simply Delicious */}
       <section className="section-cream">
-        <div className="container max-w-3xl py-20 md:py-28">
+        <div className="container max-w-3xl py-20 md:py-28 text-center">
           <motion.div
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             custom={0}
-            className="text-center"
           >
             <p className="font-display text-3xl md:text-5xl text-charcoal italic mb-10">
               Simply Delicious.
             </p>
-            <div className="flex flex-wrap justify-center gap-6">
-              <Link href="/menu" className="font-accent text-gold/70 hover:text-gold text-sm tracking-wide transition-colors duration-300">
-                Explore Our Menu
+            <div className="flex flex-wrap justify-center gap-x-8 gap-y-4">
+              <Link href="/menu" className="link-line font-body text-[12px] tracking-[0.2em] uppercase text-gold">
+                Explore the menu
               </Link>
-              <Link href="/the-vault" className="font-accent text-gold/70 hover:text-gold text-sm tracking-wide transition-colors duration-300">
+              <Link href="/the-vault" className="link-line font-body text-[12px] tracking-[0.2em] uppercase text-gold">
                 The Vault
               </Link>
-              <Link href="/gallery" className="font-accent text-gold/70 hover:text-gold text-sm tracking-wide transition-colors duration-300">
+              <Link href="/gallery" className="link-line font-body text-[12px] tracking-[0.2em] uppercase text-gold">
                 Gallery
               </Link>
             </div>

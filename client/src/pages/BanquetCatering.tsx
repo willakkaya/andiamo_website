@@ -23,27 +23,23 @@ const banquetMenus = [
     subtitle: "Lunch Only",
     sections: [
       {
-        heading: "Salad — Choice of One Per Guest",
+        heading: "Salad — All Guests",
         items: [
-          { name: "Mixed Green Salad", desc: "Organic spring mixed, shaved carrots, and shaved Parmigiano Regiano in balsamic vinaigrette" },
+          { name: "Verde Mista", desc: "Organic spring greens and shaved heirloom carrots, tossed in a house-made balsamic vinaigrette" },
         ],
       },
       {
-        heading: "Entrée — Choice of One",
+        heading: "Main Course — Choice of One Per Guest",
         items: [
-          { name: "Rigatoni alla Carcerata", desc: "Tube shape pasta with mild Italian sausage, red bell peppers and peas in a creamy tomato sauce" },
-          { name: "Fish of the Day", desc: "Served with starch and seasonal vegetables" },
-          { name: "Orecchiette alle Verdure", desc: "Orecchiette pasta with a light marinara sauce and seasonal vegetables" },
-          { name: "Chicken Marsala", desc: "Chicken breast in Marsala wine and mushrooms, served with starch and seasonal vegetables" },
-          { name: "Rigatoni alle Verdure", desc: "Orecchiette pasta tossed with seasonal vegetables in house made tomato sauce" },
-          { name: "Spaghetti with Meatballs", desc: "Spaghetti pasta with marinara and homemade meatballs" },
-          { name: "Salmon Piccata", desc: "Pan-seared salmon filet with capers and lemon butter white wine sauce, served with starch and seasonal vegetables" },
-          { name: "Pollo Parmigiana", desc: "Breaded free range chicken breast topped with marinara sauce and fresh mozzarella cheese" },
-          { name: "Pork Chop", desc: "Pork chop served with mashed potato and seasonal vegetables" },
+          { name: "Spaghetti & Meatballs", desc: "Spaghetti pasta with marinara and homemade meatballs" },
+          { name: "Salmon Piccata", desc: "Salmon filet with capers and lemon butter white wine sauce" },
+          { name: "Rigatoni alle Verdure", desc: "Rigatoni pasta with a light marinara sauce and seasonal vegetables" },
+          { name: "Chicken Parmesan", desc: "Breaded free-range chicken breast topped with marinara sauce and fresh mozzarella cheese" },
+          { name: "Pork Chop", desc: "Grilled bone-in pork chop with a mushroom cream reduction" },
         ],
       },
       {
-        heading: "Dessert — Choice of One Per Guest",
+        heading: "Dessert — All Guests",
         items: [
           { name: "Chocolate Mousse", desc: "Velvety rich mousse served with fresh berries" },
         ],
@@ -274,13 +270,13 @@ export default function BanquetCatering() {
           <img src={IMAGES.vault} alt="Private dining at Andiamo in Banca" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60" />
         </div>
-        <div className="relative z-10 text-center">
-          <div className="ornament-line !bg-white/20 mb-6" />
+        <div className="relative z-10 text-center px-6">
+          <p className="eyebrow !text-white/55 mb-4">From a dinner in The Vault to a buyout for 100</p>
           <h1 className="font-display text-4xl md:text-6xl text-white tracking-wide">
-            Banquet & Catering
+            Banquet &amp; Catering
           </h1>
-          <p className="font-accent text-sm tracking-[0.3em] uppercase text-white/50 mt-4">
-            Private Events & Catering
+          <p className="font-accent italic text-white/60 text-lg md:text-xl mt-3">
+            Your event, our table.
           </p>
         </div>
       </section>
@@ -296,19 +292,16 @@ export default function BanquetCatering() {
             variants={fadeUp}
             className="text-center mb-14"
           >
-            <p className="font-accent text-charcoal/65 text-lg leading-relaxed max-w-2xl mx-auto tracking-wide mb-8">
-              From intimate private dinners in The Vault to large-scale catered events,
-              we bring Andiamo's flavors to your celebration.
+            <p className="font-accent text-charcoal/70 text-lg leading-relaxed max-w-2xl mx-auto tracking-wide">
+              Two ways to bring Andiamo to your event: a <span className="text-charcoal">hosted banquet</span> in
+              The Vault or the dining room &mdash; prix-fixe and served, with a coordinator &mdash; or
+              <span className="text-charcoal"> catering to-go</span>, delivered to your office or venue.
+              Pick a menu below.
             </p>
-            <a
-              href={LINKS.ezcater}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-10 py-4 bg-charcoal text-white font-body text-[12px] tracking-[0.2em] uppercase font-semibold hover:bg-espresso transition-all duration-500"
-            >
-              <ShoppingBag size={14} />
-              Order Catering Online
-            </a>
+            <p className="font-accent text-charcoal/50 text-sm mt-5">
+              Planning a hosted event?{" "}
+              <a href="/private-events" className="text-gold hover:text-gold-light transition-colors">Start with Private Events</a>.
+            </p>
           </motion.div>
 
           {/* Tab Navigation — matches Menu page style */}
@@ -337,7 +330,7 @@ export default function BanquetCatering() {
               transition={{ duration: 0.5 }}
             >
               <div className="text-center mb-14">
-                <div className="ornament-line mb-6" />
+                <div className="divider-diamond mb-6"><i /></div>
                 <h2 className="font-display text-3xl md:text-4xl text-charcoal mb-3">Banquet Dining</h2>
                 <p className="font-accent text-charcoal/65 max-w-2xl mx-auto tracking-wide">
                   Perfect for private events in The Vault or our main dining room. Choose from our curated prix fixe options.
@@ -428,7 +421,7 @@ export default function BanquetCatering() {
               {/* Event Enhancements */}
               <div className="mt-20">
                 <div className="text-center mb-10">
-                  <div className="ornament-line mb-6" />
+                  <div className="divider-diamond mb-6"><i /></div>
                   <h3 className="font-display text-2xl md:text-3xl text-charcoal">Event Enhancements</h3>
                   <p className="font-accent text-sm text-charcoal/40 tracking-wider mt-2">
                     Elevate any banquet menu with these add-ons
@@ -500,7 +493,7 @@ export default function BanquetCatering() {
               transition={{ duration: 0.5 }}
             >
               <div className="text-center mb-14">
-                <div className="ornament-line mb-6" />
+                <div className="divider-diamond mb-6"><i /></div>
                 <h2 className="font-display text-3xl md:text-4xl text-charcoal mb-3">Catering Menu</h2>
                 <p className="font-accent text-charcoal/65 max-w-2xl mx-auto tracking-wide">
                   Bring Andiamo's flavors to your office, home, or event venue. Family-style trays available for 10 or 20 guests.
@@ -583,8 +576,8 @@ export default function BanquetCatering() {
       <section className="section-cream">
         <div className="max-w-5xl mx-auto px-6 py-20 md:py-24">
           <div className="text-center mb-12">
-            <div className="ornament-line mx-auto mb-6" />
-            <h2 className="font-display text-2xl md:text-3xl text-charcoal mb-3">What Event Hosts Say</h2>
+            <div className="divider-diamond mb-6"><i /></div>
+            <h2 className="font-display text-2xl md:text-3xl text-charcoal mb-3">What event hosts say</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {[
@@ -674,8 +667,8 @@ export default function BanquetCatering() {
           viewport={{ once: true }}
           variants={fadeUp}
         >
-          <div className="ornament-line !bg-white/20 mb-8" />
-          <h2 className="font-display text-3xl md:text-4xl text-cream mb-4">Ready to Plan Your Event?</h2>
+          <div className="divider-diamond mb-8"><i /></div>
+          <h2 className="font-display text-3xl md:text-4xl text-cream mb-4">Ready to plan your event?</h2>
           <p className="font-accent text-white/45 tracking-wide leading-relaxed mb-10">
             Whether it's a private dinner in The Vault or catering for your next corporate gathering,
             our team is here to help create an unforgettable experience.

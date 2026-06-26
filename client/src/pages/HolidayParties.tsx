@@ -89,7 +89,7 @@ export default function HolidayParties() {
             custom={0}
             className="text-center mb-16"
           >
-            <div className="ornament-line mx-auto mb-8" />
+            <div className="divider-diamond mb-8"><i /></div>
             <h2 className="font-display text-3xl md:text-4xl text-charcoal mb-6">
               Why Companies Choose Andiamo
             </h2>
@@ -128,7 +128,7 @@ export default function HolidayParties() {
       <section className="section-dark">
         <div className="max-w-5xl mx-auto px-6 py-24 md:py-28">
           <div className="text-center mb-16">
-            <div className="ornament-line mx-auto mb-8 opacity-40" />
+            <div className="divider-diamond mb-8 opacity-60"><i /></div>
             <h2 className="font-display text-3xl md:text-4xl text-cream mb-4">Holiday Packages</h2>
             <p className="font-accent text-cream/45 text-base max-w-xl mx-auto">
               Three tiers to match every budget. All include dedicated event coordination and customizable options.
