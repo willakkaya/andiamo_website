@@ -410,6 +410,32 @@ export default function Menu() {
             </div>
           )}
 
+          {/* Wine tab — Wine Spectator Award of Excellence badge */}
+          {active === "wine" && (
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 max-w-3xl mx-auto -mt-4 mb-14 text-center sm:text-left">
+              <a
+                href={LINKS.wineSpectatorAwards}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="shrink-0 group"
+                aria-label="Wine Spectator Award of Excellence 2026"
+              >
+                <img
+                  src={IMAGES.wineSpectatorAward}
+                  alt="Wine Spectator Award of Excellence 2026"
+                  width={66}
+                  height={122}
+                  className="w-[62px] h-auto opacity-95 group-hover:opacity-100 transition-opacity"
+                  loading="lazy"
+                />
+              </a>
+              <p className="font-accent text-charcoal/70 text-base md:text-lg leading-relaxed">
+                Our cellar earned the <span className="text-charcoal">2026 Wine Spectator Award of Excellence</span> &mdash;
+                Italian classics, California cult bottles, and reserve Champagne, chosen to pair with every plate.
+              </p>
+            </div>
+          )}
+
           {/* Menu Items — two-column on desktop, like the printed menu */}
           <motion.div
             key={active}
