@@ -18,5 +18,9 @@ export default defineConfig({
   },
   server: {
     host: true,
+    // Local stand-in for Vercel functions: `pnpm run dev:api` (scripts/dev-api.ts)
+    proxy: {
+      "/api": "http://localhost:3001",
+    },
   },
 });

@@ -292,14 +292,27 @@ async function attempt(req: VercelRequest, res: VercelResponse) {
   });
 }
 
-async function listEmployees(req: VercelRequest, res: VercelResponse) {
-  if (req.method !== "GET") return res.status(405).json({ error: "Method not allowed" });
+/** Verifies the session AND re-checks isManager in the DB. Returns the manager
+ *  row, or null after writing the error response. */
+async function requireManager(req: VercelRequest, res: VercelResponse) {
   const session = verifyToken(bearer(req));
-  if (!session) return res.status(401).json({ error: "Not signed in" });
+  if (!session) {
+    res.status(401).json({ error: "Not signed in" });
+    return null;
+  }
   const me_ = (
     await db().select().from(employees).where(eq(employees.id, session.employeeId)).limit(1)
   )[0];
-  if (!me_ || !me_.isManager) return res.status(403).json({ error: "Managers only" });
+  if (!me_ || !me_.isManager) {
+    res.status(403).json({ error: "Managers only" });
+    return null;
+  }
+  return me_;
+}
+
+async function listEmployees(req: VercelRequest, res: VercelResponse) {
+  if (req.method !== "GET") return res.status(405).json({ error: "Method not allowed" });
+  if (!(await requireManager(req, res))) return;
 
   const emps = await db().select().from(employees);
   const allProgress = await db().select().from(moduleProgress);
@@ -310,6 +323,37 @@ async function listEmployees(req: VercelRequest, res: VercelResponse) {
     byEmp.set(p.employeeId, arr);
   }
   return res.status(200).json({ employees: emps.map((e) => toDTO(e, byEmp.get(e.id) ?? [])) });
+}
+
+async function resetPin(req: VercelRequest, res: VercelResponse) {
+  if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
+  if (!(await requireManager(req, res))) return;
+  const { employeeId, newPin } = (req.body ?? {}) as { employeeId?: string; newPin?: string };
+  if (!employeeId) return res.status(400).json({ error: "employeeId is required" });
+  if (!/^\d{4}$/.test(newPin ?? ""))
+    return res.status(400).json({ error: "New PIN must be 4 digits" });
+  const target = (
+    await db().select().from(employees).where(eq(employees.id, employeeId)).limit(1)
+  )[0];
+  if (!target) return res.status(404).json({ error: "Employee not found" });
+  await db()
+    .update(employees)
+    .set({ pinHash: hashPin(newPin!) })
+    .where(eq(employees.id, employeeId));
+  return res.status(200).json({ ok: true });
+}
+
+async function removeEmployee(req: VercelRequest, res: VercelResponse) {
+  if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
+  const manager = await requireManager(req, res);
+  if (!manager) return;
+  const { employeeId } = (req.body ?? {}) as { employeeId?: string };
+  if (!employeeId) return res.status(400).json({ error: "employeeId is required" });
+  if (employeeId === manager.id)
+    return res.status(400).json({ error: "You can't remove your own account" });
+  // module_progress rows cascade-delete with the employee.
+  await db().delete(employees).where(eq(employees.id, employeeId));
+  return res.status(200).json({ ok: true });
 }
 
 async function acknowledge(req: VercelRequest, res: VercelResponse) {
@@ -347,6 +391,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         return await attempt(req, res);
       case "employees":
         return await listEmployees(req, res);
+      case "reset-pin":
+        return await resetPin(req, res);
+      case "remove-employee":
+        return await removeEmployee(req, res);
       case "acknowledge":
         return await acknowledge(req, res);
       default:

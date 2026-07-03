@@ -160,6 +160,10 @@ type TrainingContextValue = {
   recordAcknowledgment: (signatureName: string) => Promise<Result>;
   /** Manager-only: load every employee's progress from the server. */
   refreshTeam: () => Promise<void>;
+  /** Manager-only: set a new 4-digit PIN for an employee who forgot theirs. */
+  resetEmployeePin: (employeeId: string, newPin: string) => Promise<Result>;
+  /** Manager-only: remove an employee and all their progress. */
+  removeEmployee: (employeeId: string) => Promise<Result>;
 };
 
 const TrainingContext = createContext<TrainingContextValue | null>(null);
@@ -245,6 +249,30 @@ export function TrainingProvider({ children }: { children: ReactNode }) {
     if (res.ok) setAllEmployees(res.data.employees);
   }, []);
 
+  const resetEmployeePin = useCallback(
+    async (employeeId: string, newPin: string): Promise<Result> => {
+      const res = await api<{ ok: true }>("reset-pin", {
+        method: "POST",
+        body: { employeeId, newPin },
+      });
+      return res.ok ? { ok: true } : { ok: false, error: res.error };
+    },
+    [],
+  );
+
+  const removeEmployee = useCallback(
+    async (employeeId: string): Promise<Result> => {
+      const res = await api<{ ok: true }>("remove-employee", {
+        method: "POST",
+        body: { employeeId },
+      });
+      if (!res.ok) return { ok: false, error: res.error };
+      setAllEmployees((prev) => prev.filter((e) => e.id !== employeeId));
+      return { ok: true };
+    },
+    [],
+  );
+
   const value = useMemo<TrainingContextValue>(
     () => ({
       status,
@@ -255,6 +283,8 @@ export function TrainingProvider({ children }: { children: ReactNode }) {
       recordAttempt,
       recordAcknowledgment,
       refreshTeam,
+      resetEmployeePin,
+      removeEmployee,
     }),
     [
       status,
@@ -265,6 +295,8 @@ export function TrainingProvider({ children }: { children: ReactNode }) {
       recordAttempt,
       recordAcknowledgment,
       refreshTeam,
+      resetEmployeePin,
+      removeEmployee,
     ],
   );
 

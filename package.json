@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite",
+    "dev:api": "tsx watch scripts/dev-api.ts",
     "build": "vite build && node scripts/prerender.mjs",
     "preview": "vite preview",
     "check": "tsc --noEmit",
