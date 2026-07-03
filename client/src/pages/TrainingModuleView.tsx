@@ -24,6 +24,7 @@ import { useTraining } from "@/contexts/TrainingContext";
 import {
   getModule,
   PASS_THRESHOLD,
+  QUIZ_DRAW,
   type QuizQuestion,
 } from "@/lib/training/content";
 
@@ -46,10 +47,11 @@ function shuffle<T>(arr: T[]): T[] {
   return a;
 }
 
-// Each attempt gets a fresh shuffle of question order and answer options, so
-// staff learn the content rather than memorizing answer positions.
+// Each attempt draws a random subset of the question bank (QUIZ_DRAW) and gets
+// a fresh shuffle of question order and answer options, so staff learn the
+// content rather than memorizing answers or positions.
 function buildRun(quiz: QuizQuestion[]): RunQuestion[] {
-  return shuffle(quiz).map((q) => {
+  return shuffle(quiz).slice(0, QUIZ_DRAW).map((q) => {
     const correctText = q.options[q.answer];
     const options = shuffle(q.options);
     return {
@@ -175,7 +177,8 @@ export default function TrainingModuleView() {
 
         <div className="mt-8 flex justify-end">
           <Button onClick={startQuiz} className="gap-1">
-            Start the quiz ({module.quiz.length} questions){" "}
+            Start the quiz ({Math.min(QUIZ_DRAW, module.quiz.length)} of{" "}
+            {module.quiz.length} questions, drawn at random){" "}
             <ArrowRight className="w-4 h-4" />
           </Button>
         </div>

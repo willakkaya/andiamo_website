@@ -150,6 +150,87 @@ export const MODULES: TrainingModule[] = [
         explanation:
           "We serve people. Every interaction is a chance to make someone's day better.",
       },
+      {
+        id: "culture-5",
+        question: "The value of Precision means:",
+        options: [
+          "Working as fast as possible",
+          "Every detail matters, every time",
+          "Following the POS exactly",
+          "Never changing anything",
+        ],
+        answer: 1,
+        explanation: "Precision — every detail matters, every time.",
+      },
+      {
+        id: "culture-6",
+        question:
+          "A guest keeps checking their watch and glancing toward the kitchen. This is:",
+        options: [
+          "None of your business until they wave",
+          "A guest cue — read it and act before they have to ask",
+          "A reason to avoid the table",
+          "Something only the manager should handle",
+        ],
+        answer: 1,
+        explanation:
+          "Notice guest cues — body language, tone, and pacing — and anticipate the need before being asked.",
+      },
+      {
+        id: "culture-7",
+        question:
+          "\"People will forget what you said and did, but never ____.\"",
+        options: [
+          "what they ordered",
+          "how much they paid",
+          "how you made them feel",
+          "who served them",
+        ],
+        answer: 2,
+        explanation:
+          "…how you made them feel. That feeling is the product we actually sell.",
+      },
+      {
+        id: "culture-8",
+        question: "A returning guest sits in your section. Our standard is to:",
+        options: [
+          "Treat them exactly like a first-timer",
+          "Use their name and remember what they enjoyed last time",
+          "Give them free items so they come back",
+          "Send the manager to the table instead",
+        ],
+        answer: 1,
+        explanation:
+          "Personalize every interaction — use names and remember returning guests.",
+      },
+      {
+        id: "culture-9",
+        question:
+          "A table looks like they 'won't spend much.' How should that change your service?",
+        options: [
+          "Spend less time on them",
+          "Skip the specials and wine suggestions",
+          "Not at all — every guest gets our best",
+          "Move them to a smaller table",
+        ],
+        answer: 2,
+        explanation:
+          "Never pass judgment — every guest gets our best, every time.",
+      },
+      {
+        id: "culture-10",
+        question:
+          "Why does the binder say your kindness matters more than you know?",
+        options: [
+          "Because kindness increases tips",
+          "Because we never know what battles a guest is fighting",
+          "Because managers are always watching",
+          "Because reviews mention it",
+        ],
+        answer: 1,
+        explanation:
+          "We never know what battles a guest is fighting — your kindness may be the brightest part of their day.",
+      },
     ],
   },
   {
@@ -247,6 +328,81 @@ export const MODULES: TrainingModule[] = [
         answer: 3,
         explanation:
           "Clean, pressed uniform and closed-toe non-slip shoes. No slides, no heavy scents, no wrinkles.",
+      },
+      {
+        id: "arrival-5",
+        question: "Why can't prep be done in street clothes?",
+        options: [
+          "It looks bad on camera",
+          "Street clothes carry bacteria into prep and service areas",
+          "Street clothes are too comfortable",
+          "It's fine as long as you're fast",
+        ],
+        answer: 1,
+        explanation:
+          "Sanitation — street clothes carry bacteria into prep and service areas. Uniform from arrival, always.",
+      },
+      {
+        id: "arrival-6",
+        question: "The first thing to do when you arrive for a shift is:",
+        options: [
+          "Start your side work quietly",
+          "Get a coffee and settle in",
+          "Check in with the shift lead or manager",
+          "Check the tip pool from last night",
+        ],
+        answer: 2,
+        explanation: "Check in with the shift lead or manager on arrival.",
+      },
+      {
+        id: "arrival-7",
+        question: "During service, your phone must be:",
+        options: [
+          "On vibrate in your pocket",
+          "On silent and out of sight",
+          "Face down at the server station",
+          "Available for urgent texts",
+        ],
+        answer: 1,
+        explanation: "Phones on silent and out of sight during service — no exceptions.",
+      },
+      {
+        id: "arrival-8",
+        question: "The hair standard is:",
+        options: [
+          "Any style as long as it's clean",
+          "Neat, and tied back if longer than collar length",
+          "Hats are required",
+          "Only buns are allowed",
+        ],
+        answer: 1,
+        explanation:
+          "Hair neat and tied back if longer than collar length; clean, trimmed nails.",
+      },
+      {
+        id: "arrival-9",
+        question: "Which of these is on the never-say list?",
+        options: [
+          "\"Certainly.\"",
+          "\"Right away.\"",
+          "\"You guys\"",
+          "\"My pleasure.\"",
+        ],
+        answer: 2,
+        explanation:
+          "Never 'you guys', 'hun', 'sweetie', 'bro', or 'dude'. Address each guest individually, with polish.",
+      },
+      {
+        id: "arrival-10",
+        question: "Instead of \"to be honest with you…\", say:",
+        options: [
+          "\"Honestly…\"",
+          "\"I would be happy to…\"",
+          "\"Look, between us…\"",
+          "\"No problem.\"",
+        ],
+        answer: 1,
+        explanation: "Say 'I would be happy to…' — polished, positive, professional.",
       },
     ],
   },
@@ -350,6 +506,83 @@ export const MODULES: TrainingModule[] = [
         answer: 0,
         explanation: "Within 60 seconds — even if mid-build. The bar sets the room's energy.",
       },
+      {
+        id: "roles-6",
+        question: "When showing guests to their table, a host should:",
+        options: [
+          "Point them toward it so they can settle in",
+          "Escort them — never point, always lead",
+          "Hand them menus and let them pick a table",
+          "Ask a busser to walk them over",
+        ],
+        answer: 1,
+        explanation: "Escort guests to the table — never point, always lead.",
+      },
+      {
+        id: "roles-7",
+        question:
+          "A caller mentions it's their anniversary when booking. The host should:",
+        options: [
+          "Remember it mentally",
+          "Note it in the system with any dietary needs or VIP flags",
+          "Tell the kitchen verbally at some point",
+          "Do nothing — it's just small talk",
+        ],
+        answer: 1,
+        explanation:
+          "Special occasions, dietary needs, and VIP flags get noted in the system so the whole team can deliver.",
+      },
+      {
+        id: "roles-8",
+        question: "Silverware between courses should be replaced:",
+        options: [
+          "When the guest asks",
+          "Only for tasting menus",
+          "Without being asked",
+          "Only if it was used",
+        ],
+        answer: 2,
+        explanation:
+          "Replace silverware between courses without being asked; keep water filled.",
+      },
+      {
+        id: "roles-9",
+        question: "A cocktail is delayed and two dishes just got 86'd. The bartender should:",
+        options: [
+          "Focus on drinks — servers will figure it out",
+          "Proactively communicate timing, 86's, and delays to the servers",
+          "Tell only the manager",
+          "Post a note at the end of the night",
+        ],
+        answer: 1,
+        explanation:
+          "Communicate proactively with servers on timing, 86's, and delays — before they get surprised at a table.",
+      },
+      {
+        id: "roles-10",
+        question: "A bar guest seems to have had too much. The standard is:",
+        options: [
+          "Serve one last round, then stop",
+          "Never over-serve — involve management when needed",
+          "Water down their next drink quietly",
+          "Ask their friends what to do",
+        ],
+        answer: 1,
+        explanation: "Never over-serve — involve management when needed.",
+      },
+      {
+        id: "roles-11",
+        question: "After running food, a runner should:",
+        options: [
+          "Wait in the kitchen for the next tray",
+          "Take a short break",
+          "Return to the floor — never linger in the kitchen",
+          "Help the dishwasher",
+        ],
+        answer: 2,
+        explanation:
+          "Deliver with a brief description — 'This is your [dish], enjoy' — then return to the floor.",
+      },
     ],
   },
   {
@@ -445,6 +678,83 @@ export const MODULES: TrainingModule[] = [
         answer: 0,
         explanation: "Take trash out before opening. Nothing should feel 'in progress' when guests arrive.",
       },
+      {
+        id: "opening-5",
+        question: "Music and candles at opening:",
+        options: [
+          "Music once the first table sits; candles at dusk",
+          "Music ON at correct volume the moment doors open; candles lit",
+          "Music optional on slow nights",
+          "Candles only in the back section",
+        ],
+        answer: 1,
+        explanation:
+          "The room must be fully alive the moment doors open — music at correct volume, candles lit.",
+      },
+      {
+        id: "opening-6",
+        question: "Wine buckets and flutes before service:",
+        options: [
+          "Set up on request",
+          "Buckets prepped with clean linens; flutes polished",
+          "Buckets stored away until a bottle sells",
+          "Flutes polished only for reservations",
+        ],
+        answer: 1,
+        explanation:
+          "Wine buckets prepped with clean linens, flutes polished — before doors, not after.",
+      },
+      {
+        id: "opening-7",
+        question: "Menus going to the floor must be:",
+        options: [
+          "Mostly clean",
+          "Clean — no grease, no curled edges",
+          "New every single day",
+          "Laminated",
+        ],
+        answer: 1,
+        explanation: "Menus clean with no grease or curled edges — they're in every guest's hands.",
+      },
+      {
+        id: "opening-8",
+        question: "A ready server station means:",
+        options: [
+          "POS terminals on and nothing else",
+          "Silverware stocked, napkins folded, printer paper full, POS signed in",
+          "Whatever the last shift left",
+          "Just rollups and pens",
+        ],
+        answer: 1,
+        explanation:
+          "Silverware, napkins, printer paper, POS signed in — and zero clutter on counters.",
+      },
+      {
+        id: "opening-9",
+        question: "Pre-shift alignment covers:",
+        options: [
+          "Only who's on which section",
+          "Specials, 86'd items, large parties & VIP notes, section assignments",
+          "Just the specials",
+          "Gossip and schedule requests",
+        ],
+        answer: 1,
+        explanation:
+          "Specials confirmed, 86's verified, large parties and VIPs reviewed, sections confirmed — aligned and calm.",
+      },
+      {
+        id: "opening-10",
+        question: "The dining room standard before doors is:",
+        options: [
+          "Tables roughly in place",
+          "Tables leveled and aligned, chairs in, no clutter or bussing trays in sight",
+          "Chairs stacked until guests arrive",
+          "Bussing trays staged on empty tables",
+        ],
+        answer: 1,
+        explanation:
+          "Tables leveled and aligned, chairs pushed in, nothing in sight that says 'still setting up'.",
+      },
     ],
   },
   {
@@ -528,6 +838,93 @@ export const MODULES: TrainingModule[] = [
         ],
         answer: 1,
         explanation: "BTG wines sealed and refrigerated; garnishes wrapped and labeled; batches sealed.",
+      },
+      {
+        id: "closing-4",
+        question: "Garnishes at bar close are:",
+        options: [
+          "Thrown away every night",
+          "Wrapped and labeled",
+          "Left covered on the bar",
+          "Moved to the kitchen walk-in unlabeled",
+        ],
+        answer: 1,
+        explanation: "Garnishes wrapped and labeled; batches sealed; ice dumped.",
+      },
+      {
+        id: "closing-5",
+        question: "The ice in the bins at close is:",
+        options: [
+          "Left for the morning",
+          "Dumped",
+          "Topped off for tomorrow",
+          "Bagged and stored",
+        ],
+        answer: 1,
+        explanation: "Ice dumped at close — fresh ice every service.",
+      },
+      {
+        id: "closing-6",
+        question: "The under-bar lights at the end of the night:",
+        options: [
+          "Stay on for security",
+          "OFF — and rechargeable lights go on the charging station",
+          "Are the opener's responsibility",
+          "Are left however they are",
+        ],
+        answer: 1,
+        explanation:
+          "Under-bar lights off (switch by the trash can); every rechargeable light on the charging station.",
+      },
+      {
+        id: "closing-7",
+        question: "Dining room floors at close:",
+        options: [
+          "Swept only",
+          "Swept and mopped",
+          "Mopped weekly",
+          "Left for the morning crew",
+        ],
+        answer: 1,
+        explanation: "All tables reset, chairs aligned, floors swept AND mopped.",
+      },
+      {
+        id: "closing-8",
+        question: "Menus and candles at close:",
+        options: [
+          "Menus stacked as-is; candles burn out on their own",
+          "Menus wiped; candles extinguished",
+          "Menus recycled nightly",
+          "Candles left lit for ambiance",
+        ],
+        answer: 1,
+        explanation: "Menus wiped clean; every candle extinguished before you leave.",
+      },
+      {
+        id: "closing-9",
+        question: "On the final walkthrough, the two light switches to check are:",
+        options: [
+          "Kitchen and office",
+          "Far-side (by the bathroom) and under-bar (by the trash can)",
+          "Patio and entry",
+          "There's only one master switch",
+        ],
+        answer: 1,
+        explanation:
+          "Far-side lights — switch by the bathroom; under-bar lights — switch by the trash can. Same two as opening.",
+      },
+      {
+        id: "closing-10",
+        question: "Before leaving, stations must have:",
+        options: [
+          "Whatever's left from service",
+          "Silverware and napkins restocked, counters sanitized",
+          "Just the POS logged out",
+          "A note for the openers",
+        ],
+        answer: 1,
+        explanation:
+          "Restock silverware and napkins, sanitize counters — the opener should walk into a ready room.",
       },
     ],
   },
@@ -646,6 +1043,88 @@ export const MODULES: TrainingModule[] = [
         answer: 1,
         explanation: "'If there is time to lean, there is time to clean.' Idle standing is never permitted.",
       },
+      {
+        id: "service-6",
+        question: "When taking the order, the standard is:",
+        options: [
+          "Write fast and confirm later",
+          "Listen fully, repeat it back, enter into the POS immediately",
+          "Memorize everything — pads look unprofessional",
+          "Enter it after greeting your next table",
+        ],
+        answer: 1,
+        explanation:
+          "Listen fully, repeat the order back, and enter it into the POS immediately.",
+      },
+      {
+        id: "service-7",
+        question: "Water at the table should be:",
+        options: [
+          "Offered after the food order",
+          "Poured immediately",
+          "Brought only if asked",
+          "Served with entrées",
+        ],
+        answer: 1,
+        explanation: "Step 2: offer water and beverages — pour water immediately.",
+      },
+      {
+        id: "service-8",
+        question: "Dessert and digestifs are offered:",
+        options: [
+          "Before the guest asks for the check",
+          "Only if the table lingers",
+          "With the check",
+          "Only on weekends",
+        ],
+        answer: 0,
+        explanation: "Offer dessert and digestifs before they ask for the check — never after.",
+      },
+      {
+        id: "service-9",
+        question: "When a table signals for the check, it should be ready within:",
+        options: ["30 seconds", "2 minutes", "5 minutes", "10 minutes"],
+        answer: 1,
+        explanation: "The check is presented within 2 minutes of the signal.",
+      },
+      {
+        id: "service-10",
+        question: "Why do we avoid saying \"No problem\"?",
+        options: [
+          "It's too casual for fine dining",
+          "It implies the request could have been a problem",
+          "It's fine — we don't avoid it",
+          "It takes too long to say",
+        ],
+        answer: 1,
+        explanation:
+          "'No problem' implies it might have been one. Say 'Of course' or 'My pleasure.'",
+      },
+      {
+        id: "service-11",
+        question: "Movement in the dining room should be:",
+        options: [
+          "As fast as possible — hustle shows effort",
+          "Quiet confidence — never rush or run",
+          "Slow and deliberate at all times",
+          "Whatever gets the food out",
+        ],
+        answer: 1,
+        explanation:
+          "Move with quiet confidence. Never rush, never run, never let visible stress reach the floor.",
+      },
+      {
+        id: "service-12",
+        question: "Side work on a regular night may begin:",
+        options: [
+          "Whenever your section is empty",
+          "Not before 8:30 PM unless the shift lead approves",
+          "At 7:00 PM",
+          "Only after close",
+        ],
+        answer: 1,
+        explanation: "No side work before 8:30 PM unless approved by the shift lead.",
+      },
     ],
   },
   {
@@ -735,6 +1214,83 @@ export const MODULES: TrainingModule[] = [
         ],
         answer: 2,
         explanation: "Stay calm, lower your voice, de-escalate. 'Let me get a manager' is always an acceptable exit.",
+      },
+      {
+        id: "complaints-5",
+        question: "The 'E' in LEARN stands for:",
+        options: [
+          "Explain what went wrong",
+          "Empathize — acknowledge the feeling first",
+          "Escalate to a manager",
+          "Excuse the kitchen",
+        ],
+        answer: 1,
+        explanation:
+          "Empathize first: 'I completely understand, and I'm so sorry' — feelings before fixes.",
+      },
+      {
+        id: "complaints-6",
+        question: "A dish comes out wrong. The full play is:",
+        options: [
+          "Apologize and offer a discount",
+          "Apologize, remove the dish, alert the kitchen, re-fire, check back",
+          "Explain that the kitchen is slammed",
+          "Replace it silently without telling anyone",
+        ],
+        answer: 1,
+        explanation:
+          "Apologize, remove it, alert the kitchen, re-fire, and check back once the new dish lands.",
+      },
+      {
+        id: "complaints-7",
+        question: "The kitchen is backed up and a table's food is delayed. You should:",
+        options: [
+          "Stay away from the table until food is ready",
+          "Communicate proactively before they ask — and offer bread or a small something",
+          "Blame the kitchen when they ask",
+          "Drop the check to speed things up",
+        ],
+        answer: 1,
+        explanation:
+          "Get ahead of it — tell them before they have to ask, and offer a small something for the wait.",
+      },
+      {
+        id: "complaints-8",
+        question: "A table has been waiting more than 15 minutes. The rule is:",
+        options: [
+          "Give them more bread and hope",
+          "Notify management",
+          "Comp the meal on your own",
+          "Nothing — some waits are normal",
+        ],
+        answer: 1,
+        explanation: "Any table waiting more than 15 minutes: management gets notified.",
+      },
+      {
+        id: "complaints-9",
+        question: "While a guest is voicing a complaint, you should:",
+        options: [
+          "Interrupt to correct the facts",
+          "Explain the restaurant's side first",
+          "Give full attention — don't interrupt, don't defend",
+          "Wave the manager over immediately without listening",
+        ],
+        answer: 2,
+        explanation:
+          "L — Listen: full attention, no interrupting, no defending. The guest needs to be heard first.",
+      },
+      {
+        id: "complaints-10",
+        question: "The golden rule of complaints is:",
+        options: [
+          "The customer is always right",
+          "Never let a guest leave unhappy without management knowing",
+          "Always comp something",
+          "Handle everything yourself",
+        ],
+        answer: 1,
+        explanation:
+          "A problem management doesn't know about is a problem that can't be fixed — notify in real time.",
       },
     ],
   },
@@ -827,6 +1383,82 @@ export const MODULES: TrainingModule[] = [
         answer: 2,
         explanation:
           "Specific and guest-friendly — framing value without sounding like a pitch. Guide, don't push.",
+      },
+      {
+        id: "wine-5",
+        question: "The welcome glass / aperitivo to start a table is:",
+        options: [
+          "Flowers Chardonnay",
+          "Lamberti Prosecco",
+          "The Calling Cabernet",
+          "Tintero Nebbiolo",
+        ],
+        answer: 1,
+        explanation: "Lamberti Prosecco — the welcome glass; great to start the table.",
+      },
+      {
+        id: "wine-6",
+        question: "A guest wants an easy, light Italian white. Pour the:",
+        options: [
+          "Donini Pinot Grigio",
+          "Flowers Chardonnay",
+          "Clos Henri Sauvignon Blanc",
+          "La Cala Vermentino",
+        ],
+        answer: 0,
+        explanation: "Donini Pinot Grigio — crisp, light citrus; the easy Italian white.",
+      },
+      {
+        id: "wine-7",
+        question: "A guest asks for a big, bold red. The by-the-glass answer is:",
+        options: [
+          "Routestock Pinot Noir",
+          "The Calling Cabernet",
+          "House Red Nero d'Avola",
+          "Lamberti Prosecco",
+        ],
+        answer: 1,
+        explanation:
+          "The Calling Cabernet — bold, dark fruit, firm tannin; the big full-bodied red.",
+      },
+      {
+        id: "wine-8",
+        question: "The classic pairing for pasta or pizza on our BTG list is:",
+        options: [
+          "Villa Santa Anna Chianti",
+          "Flowers Chardonnay",
+          "Routestock Pinot Noir",
+          "La Cala Vermentino",
+        ],
+        answer: 0,
+        explanation:
+          "Chianti — cherry, leather, bright acidity — is the classic with pasta and pizza.",
+      },
+      {
+        id: "wine-9",
+        question: "Which wine do we describe as a 'baby Barolo'?",
+        options: [
+          "House Red Nero d'Avola",
+          "Villa Santa Anna Chianti",
+          "Tintero Nebbiolo",
+          "The Calling Cabernet",
+        ],
+        answer: 2,
+        explanation:
+          "Tintero Nebbiolo — red fruit, floral — for the Italian and adventurous guest.",
+      },
+      {
+        id: "wine-10",
+        question: "The upsell mindset is:",
+        options: [
+          "Sell the most expensive bottle you can",
+          "You're not selling — you're guiding; a guest who trusts your pick comes back",
+          "Only upsell tables that look wealthy",
+          "Avoid suggesting anything unless asked",
+        ],
+        answer: 1,
+        explanation:
+          "Guide with specific, sensory language. Trust builds regulars — that's the real upsell.",
       },
     ],
   },
@@ -933,6 +1565,77 @@ export const MODULES: TrainingModule[] = [
         answer: 1,
         explanation: "Negroni della Casa and Isola Rosa are our house originals — highlight them.",
       },
+      {
+        id: "cocktails-6",
+        question: "Shaken cocktails are shaken:",
+        options: [
+          "5 seconds, no ice",
+          "12–15 seconds with ice",
+          "30–40 seconds with ice",
+          "Until your arm is tired",
+        ],
+        answer: 1,
+        explanation: "Shake 12–15 seconds with ice; stir spirit-forward drinks instead.",
+      },
+      {
+        id: "cocktails-7",
+        question: "After shaking, the drink is:",
+        options: [
+          "Poured straight into a room-temp glass",
+          "Double strained into a chilled coupe",
+          "Served in the shaker tin",
+          "Strained once over fresh ice, always",
+        ],
+        answer: 1,
+        explanation: "Double strain shaken drinks into a chilled coupe.",
+      },
+      {
+        id: "cocktails-8",
+        question: "Garnish goes on:",
+        options: [
+          "First, so you don't forget it",
+          "Last — it's the guest's first impression; express citrus over the glass",
+          "Whenever there's time",
+          "Only for guests who ask",
+        ],
+        answer: 1,
+        explanation:
+          "Express citrus over the glass, garnish last — it's the first thing the guest sees.",
+      },
+      {
+        id: "cocktails-9",
+        question: "The South City Martini is built from:",
+        options: [
+          "Gin, dry vermouth, olive brine",
+          "Vodka, Cocchi Americano, lemon bitters",
+          "Grey Goose, basil syrup, passion fruit, lime",
+          "Rye, Carpano Antica, bitters",
+        ],
+        answer: 1,
+        explanation:
+          "Vodka, Cocchi Americano, lemon bitters — stirred, in a martini glass.",
+      },
+      {
+        id: "cocktails-10",
+        question: "Vermouth-based batches (Manhattan, Martini) keep for about:",
+        options: ["1 day", "5–7 days", "A month", "Indefinitely"],
+        answer: 1,
+        explanation:
+          "Vermouth is perishable — use vermouth-based batches within ~5–7 days, sealed and refrigerated.",
+      },
+      {
+        id: "cocktails-11",
+        question: "Basil simple syrup for the Isola Rosa:",
+        options: [
+          "Steep as long as possible for flavor",
+          "Don't steep past 35 minutes or it turns bitter; keeps 7–10 days",
+          "Is made fresh per drink",
+          "Uses dried basil",
+        ],
+        answer: 1,
+        explanation:
+          "Past ~35 minutes the basil turns bitter. Shelf life 7–10 days, labeled and refrigerated.",
+      },
     ],
   },
   {
@@ -998,6 +1701,78 @@ export const MODULES: TrainingModule[] = [
         ],
         answer: 1,
         explanation: "Bourbon — vanilla, caramel, toasted oak; warm sweet corn; long, oaky, gentle heat.",
+      },
+      {
+        id: "tasting-5",
+        question: "London Dry Gin tastes of:",
+        options: [
+          "Vanilla and caramel",
+          "Juniper, coriander, citrus — piney and floral with a clean dry finish",
+          "Smoke and roasted agave",
+          "Menthol and saffron",
+        ],
+        answer: 1,
+        explanation:
+          "Juniper-forward with coriander and citrus; piney, floral, clean and dry.",
+      },
+      {
+        id: "tasting-6",
+        question: "Compared to bourbon, rye whiskey is:",
+        options: [
+          "Sweeter and softer",
+          "Spicier and more peppery, with a dry finish",
+          "Smokier",
+          "Identical",
+        ],
+        answer: 1,
+        explanation:
+          "Rye — spice, pepper, dried fruit; bold and peppery where bourbon is sweet and round.",
+      },
+      {
+        id: "tasting-7",
+        question: "Blanco tequila is best described as:",
+        options: [
+          "Oaky and dark",
+          "Fresh agave and citrus — grassy, bright, crisp",
+          "Heavily smoky",
+          "Sweet like a liqueur",
+        ],
+        answer: 1,
+        explanation: "Fresh agave, citrus; grassy and bright with a crisp, clean finish.",
+      },
+      {
+        id: "tasting-8",
+        question: "A guest is bitter-curious but new to amari. Start them on:",
+        options: [
+          "Fernet-Branca",
+          "Aperol — the lighter, approachable bitter",
+          "Straight Campari",
+          "Rye whiskey",
+        ],
+        answer: 1,
+        explanation:
+          "Aperol — lighter bitter, orange, rhubarb — is the most approachable entry point.",
+      },
+      {
+        id: "tasting-9",
+        question: "\"The bartender's handshake\" refers to:",
+        options: ["Limoncello", "Aperol", "Fernet-Branca", "Prosecco"],
+        answer: 2,
+        explanation:
+          "Fernet-Branca — menthol, saffron, myrrh; intensely herbal. The industry's secret handshake.",
+      },
+      {
+        id: "tasting-10",
+        question: "Amaro Nonino is:",
+        options: [
+          "A lemon liqueur served frozen",
+          "Grappa-based with orange and vanilla — silky; lovely neat or in a Paper Plane",
+          "The most bitter amaro we carry",
+          "A sparkling aperitif",
+        ],
+        answer: 1,
+        explanation:
+          "Grappa base, orange, vanilla — silky and elegant, neat or in a Paper Plane.",
       },
     ],
   },
@@ -1135,6 +1910,80 @@ export const MODULES: TrainingModule[] = [
         explanation:
           "Citrus-bright Sauvignon Blanc (Sancerre or Te Mata) is beautiful with seafood.",
       },
+      {
+        id: "figaro-wine-7",
+        question: "A guest asks 'what's a good white?' Your first move is:",
+        options: [
+          "Recite the whole list top to bottom",
+          "Ask one clarifying question — 'lighter and crisp, or fuller with a bit of oak?'",
+          "Pour the cheapest so they can't be disappointed",
+          "Recommend the most expensive glass",
+        ],
+        answer: 1,
+        explanation:
+          "Listen first. One clarifying question turns a guess into a recommendation they'll trust.",
+      },
+      {
+        id: "figaro-wine-8",
+        question: "The Elvio Cogno 'Cascina Nuova' on the Reserve list is:",
+        options: [
+          "A white Burgundy",
+          "A Barolo — old-vine Nebbiolo, one of its most elegant expressions",
+          "A Napa Cabernet",
+          "A Super Tuscan",
+        ],
+        answer: 1,
+        explanation:
+          "Barolo from old-vine Nebbiolo — rose, dried cherry, iron-edged earth, silky tannins.",
+      },
+      {
+        id: "figaro-wine-9",
+        question: "The Chave 'Offerus' St. Joseph is made from:",
+        options: ["Pinot Noir", "Nebbiolo", "100% Syrah", "Cabernet Sauvignon"],
+        answer: 2,
+        explanation:
+          "100% Syrah from the family behind Hermitage — violets, black pepper, smoked meat.",
+      },
+      {
+        id: "figaro-wine-10",
+        question:
+          "A Pinot Grigio drinker wants 'something a little more interesting' at the same price. Pour the:",
+        options: [
+          "Ramey Chardonnay",
+          "Ronchi di Cialla Ribolla Gialla",
+          "Duckhorn Cabernet",
+          "Sommariva Brut Rosé",
+        ],
+        answer: 1,
+        explanation:
+          "Ribolla Gialla — same $16, more texture and depth. The elevated alternative.",
+      },
+      {
+        id: "figaro-wine-11",
+        question: "The benchmark California Pinot Noir on our list is:",
+        options: [
+          "Failla, Oregon",
+          "Occidental, Sonoma Coast — by Steve Kistler",
+          "Routestock, Napa",
+          "Tintero Barbaresco",
+        ],
+        answer: 1,
+        explanation:
+          "Occidental ($35) by Steve Kistler is the benchmark; Failla ($17) is the silky, easy entry.",
+      },
+      {
+        id: "figaro-wine-12",
+        question: "Which recognition can you mention to wine-loving guests?",
+        options: [
+          "A Michelin star",
+          "The Wine Spectator Award of Excellence and a Star Wine List spot",
+          "James Beard nomination",
+          "None — never mention awards",
+        ],
+        answer: 1,
+        explanation:
+          "Our list earned the Wine Spectator Award of Excellence and a Star Wine List spot — worth sharing.",
+      },
     ],
   },
   {
@@ -1240,6 +2089,72 @@ export const MODULES: TrainingModule[] = [
         explanation:
           "Buffalo Trace, with sugar, orange bitters, an orange twist, and a Luxardo cherry.",
       },
+      {
+        id: "figaro-cocktails-7",
+        question: "The after-dinner pick-me-up on the list is:",
+        options: [
+          "Aperol Spritz",
+          "Espresso Martini — vodka, coffee liqueur, espresso",
+          "The Burlingame Martini",
+          "Figaro Manhattan",
+        ],
+        answer: 1,
+        explanation:
+          "The Espresso Martini — vodka, coffee liqueur, espresso, sugar — is the after-dinner pick-me-up.",
+      },
+      {
+        id: "figaro-cocktails-8",
+        question: "The Hugo Rosé Spritz is built with:",
+        options: [
+          "Prosecco, Aperol, soda",
+          "Brut Rosé, St. Germain, soda water, mint",
+          "Gin, Cocchi Americano, lemon bitters",
+          "Limonata and elderflower tonic",
+        ],
+        answer: 1,
+        explanation:
+          "Brut Rosé, St. Germain elderflower, soda water, mint garnish — light and floral.",
+      },
+      {
+        id: "figaro-cocktails-9",
+        question: "The Peninsula (zero-proof) contains:",
+        options: [
+          "Ghia Le Spritz, Fever Tree Tonic, fresh lemon",
+          "Limonata, elderflower tonic, soda, mint",
+          "Non-alcoholic gin and tonic",
+          "Espresso and cream",
+        ],
+        answer: 0,
+        explanation:
+          "Ghia Le Spritz, Fever Tree Tonic, fresh lemon. (La Dolce Vita is the limonata-elderflower one.)",
+      },
+      {
+        id: "figaro-cocktails-10",
+        question:
+          "A curious guest who loves spirit-forward drinks asks what the bartender likes. Offer the:",
+        options: [
+          "Aperol Spritz",
+          "Figaro Reserve — brandy-based, deep and balanced",
+          "La Dolce Vita",
+          "Espresso Martini",
+        ],
+        answer: 1,
+        explanation:
+          "Figaro Reserve — Bar Agricole Brandy, Gran Classico, Antica vermouth — the bartender's favorite.",
+      },
+      {
+        id: "figaro-cocktails-11",
+        question: "For a warm early evening, the light refreshing picks are:",
+        options: [
+          "The two Manhattans",
+          "Aperol Spritz or Hugo Rosé Spritz",
+          "Old Fashioned",
+          "Espresso Martini",
+        ],
+        answer: 1,
+        explanation:
+          "The spritzes are the light aperitivos for early or warm evenings.",
+      },
     ],
   },
 ];
@@ -1249,6 +2164,10 @@ export const TOTAL_QUESTIONS = MODULES.reduce((n, m) => n + m.quiz.length, 0);
 
 /** Pass threshold for a module quiz (percentage of correct answers). */
 export const PASS_THRESHOLD = 0.8;
+
+/** Questions drawn per attempt (random subset, so retakes stay meaningful).
+ *  Modules with fewer questions than this use their full bank. */
+export const QUIZ_DRAW = 8;
 
 export function getModule(id: string): TrainingModule | undefined {
   return MODULES.find((m) => m.id === id);
