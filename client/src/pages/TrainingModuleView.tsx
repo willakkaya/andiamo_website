@@ -9,14 +9,6 @@ import {
   RotateCcw,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import TrainingShell from "@/components/training/TrainingShell";
@@ -97,7 +89,7 @@ export default function TrainingModuleView() {
       <TrainingShell>
         <p className="text-muted-foreground">Module not found.</p>
         <Link href="/training">
-          <Button variant="outline" className="mt-4 gap-1">
+          <Button variant="outline" className="mt-4 gap-1 rounded-none">
             <ArrowLeft className="w-4 h-4" /> Back to modules
           </Button>
         </Link>
@@ -128,59 +120,77 @@ export default function TrainingModuleView() {
     setSubmitting(false);
   };
 
+  const drawCount = Math.min(QUIZ_DRAW, module.quiz.length);
+
   // ---- LEARN ----
   if (mode === "learn") {
     return (
       <TrainingShell>
-        <Link href="/training">
-          <Button variant="ghost" size="sm" className="mb-4 gap-1 -ml-2">
-            <ArrowLeft className="w-4 h-4" /> All modules
-          </Button>
-        </Link>
-        <div className="flex items-center gap-2 mb-2">
-          <Badge variant="outline" className="text-gold border-gold/40">
-            {module.section}
-          </Badge>
-          {isElective && (
-            <Badge variant="secondary" className="text-xs">
-              Elective for your role
-            </Badge>
-          )}
-        </div>
-        <h1 className="font-display text-3xl mb-2">{module.title}</h1>
-        <p className="text-muted-foreground mb-8">{module.summary}</p>
+        <div className="max-w-3xl mx-auto">
+          <Link
+            href="/training"
+            className="link-line inline-flex items-center gap-2 text-muted-foreground hover:text-foreground font-body text-[11px] tracking-[0.18em] uppercase mb-8"
+          >
+            <ArrowLeft className="w-3.5 h-3.5" /> All modules
+          </Link>
 
-        <div className="space-y-5">
-          {module.lessons.map((lesson, i) => (
-            <Card key={i}>
-              <CardHeader>
-                <CardTitle className="font-display text-xl">{lesson.heading}</CardTitle>
-                {lesson.intro && (
-                  <p className="text-sm italic text-muted-foreground mt-1">
-                    {lesson.intro}
-                  </p>
-                )}
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-2">
-                  {lesson.points.map((pt, j) => (
-                    <li key={j} className="flex gap-2 text-sm">
-                      <span className="text-gold mt-1">•</span>
-                      <span>{pt}</span>
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+          <div className="flex items-center gap-3 mb-3">
+            <span className="chapter">{String(module.order).padStart(2, "0")}</span>
+            <p className="eyebrow !text-muted-foreground">
+              {module.section}
+              {module.location ? ` · ${module.location}` : ""}
+              {isElective ? " · Elective for your role" : ""}
+            </p>
+          </div>
+          <h1 className="font-display text-4xl sm:text-5xl leading-[1.05] mb-3">
+            {module.title}
+          </h1>
+          <p className="font-accent italic text-lg text-muted-foreground tracking-wide mb-10">
+            {module.summary}
+          </p>
 
-        <div className="mt-8 flex justify-end">
-          <Button onClick={startQuiz} className="gap-1">
-            Start the quiz ({Math.min(QUIZ_DRAW, module.quiz.length)} of{" "}
-            {module.quiz.length} questions, drawn at random){" "}
-            <ArrowRight className="w-4 h-4" />
-          </Button>
+          <div>
+            {module.lessons.map((lesson, i) => (
+              <section key={i} className="border-t border-border/70 py-7">
+                <div className="grid sm:grid-cols-[3.5rem_1fr] gap-x-4">
+                  <span className="hidden sm:block font-display text-2xl text-gold/40 leading-none pt-1">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div>
+                    <h2 className="font-display text-2xl leading-snug mb-1">
+                      {lesson.heading}
+                    </h2>
+                    {lesson.intro && (
+                      <p className="font-accent italic text-base text-muted-foreground tracking-wide mb-3">
+                        {lesson.intro}
+                      </p>
+                    )}
+                    <ul className="space-y-2.5 mt-3">
+                      {lesson.points.map((pt, j) => (
+                        <li key={j} className="flex gap-3 text-[15px] leading-relaxed">
+                          <span className="text-gold select-none">—</span>
+                          <span>{pt}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </section>
+            ))}
+          </div>
+
+          <div className="border-t border-border/70 pt-8 mt-1 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <p className="text-sm text-muted-foreground">
+              {drawCount} questions, drawn at random from {module.quiz.length} ·
+              pass at {Math.round(PASS_THRESHOLD * 100)}%
+            </p>
+            <Button
+              onClick={startQuiz}
+              className="gap-2 h-12 px-8 rounded-none font-body text-[12px] tracking-[0.2em] uppercase font-semibold"
+            >
+              Start the quiz <ArrowRight className="w-4 h-4" />
+            </Button>
+          </div>
         </div>
       </TrainingShell>
     );
@@ -194,58 +204,66 @@ export default function TrainingModuleView() {
     return (
       <TrainingShell>
         <div className="max-w-2xl mx-auto">
-          <div className="flex items-center justify-between mb-2 text-sm text-muted-foreground">
-            <span>{module.title}</span>
-            <span>
-              Question {current + 1} of {run.length}
+          <div className="flex items-baseline justify-between mb-3">
+            <span className="font-accent italic text-base text-muted-foreground tracking-wide truncate pr-4">
+              {module.title}
+            </span>
+            <span className="font-body text-[11px] tracking-[0.18em] uppercase text-muted-foreground whitespace-nowrap">
+              {current + 1} / {run.length}
             </span>
           </div>
-          <Progress value={((current + 1) / run.length) * 100} className="mb-6" />
+          <div className="h-px bg-border mb-8 relative">
+            <div
+              className="absolute inset-y-0 left-0 bg-gold transition-all duration-300"
+              style={{ width: `${((current + 1) / run.length) * 100}%` }}
+            />
+          </div>
 
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg leading-snug">{q.question}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <RadioGroup
-                value={selected !== undefined ? String(selected) : undefined}
-                onValueChange={(v) =>
-                  setAnswers((prev) => ({ ...prev, [q.id]: parseInt(v, 10) }))
-                }
-                className="space-y-2"
+          <h1 className="font-display text-2xl sm:text-[1.7rem] leading-snug mb-6">
+            {q.question}
+          </h1>
+
+          <RadioGroup
+            value={selected !== undefined ? String(selected) : undefined}
+            onValueChange={(v) =>
+              setAnswers((prev) => ({ ...prev, [q.id]: parseInt(v, 10) }))
+            }
+            className="space-y-2.5"
+          >
+            {q.options.map((opt, i) => (
+              <Label
+                key={i}
+                htmlFor={`${q.id}-${i}`}
+                className="flex items-center gap-3 border border-border p-4 min-h-[3.25rem] cursor-pointer transition-colors hover:bg-accent/50 has-[:checked]:border-gold has-[:checked]:bg-gold/5"
               >
-                {q.options.map((opt, i) => (
-                  <Label
-                    key={i}
-                    htmlFor={`${q.id}-${i}`}
-                    className="flex items-center gap-3 rounded-md border border-border p-3 cursor-pointer hover:bg-accent/50 has-[:checked]:border-gold has-[:checked]:bg-accent/60"
-                  >
-                    <RadioGroupItem id={`${q.id}-${i}`} value={String(i)} />
-                    <span className="text-sm font-normal">{opt}</span>
-                  </Label>
-                ))}
-              </RadioGroup>
-            </CardContent>
-          </Card>
+                <RadioGroupItem id={`${q.id}-${i}`} value={String(i)} />
+                <span className="text-[15px] font-normal leading-snug">{opt}</span>
+              </Label>
+            ))}
+          </RadioGroup>
 
-          <div className="mt-6 flex items-center justify-between">
+          <div className="mt-8 flex items-center justify-between">
             <Button
               variant="ghost"
               disabled={current === 0}
               onClick={() => setCurrent((c) => c - 1)}
-              className="gap-1"
+              className="gap-1 rounded-none text-muted-foreground"
             >
               <ArrowLeft className="w-4 h-4" /> Back
             </Button>
             {isLast ? (
-              <Button disabled={selected === undefined} onClick={submit}>
-                Submit quiz
+              <Button
+                disabled={selected === undefined || submitting}
+                onClick={submit}
+                className="h-11 px-8 rounded-none font-body text-[12px] tracking-[0.2em] uppercase font-semibold"
+              >
+                {submitting ? "Submitting…" : "Submit quiz"}
               </Button>
             ) : (
               <Button
                 disabled={selected === undefined}
                 onClick={() => setCurrent((c) => c + 1)}
-                className="gap-1"
+                className="gap-1 h-11 px-8 rounded-none font-body text-[12px] tracking-[0.2em] uppercase font-semibold"
               >
                 Next <ArrowRight className="w-4 h-4" />
               </Button>
@@ -262,62 +280,73 @@ export default function TrainingModuleView() {
   return (
     <TrainingShell>
       <div className="max-w-2xl mx-auto">
-        <Card className={passed ? "border-green-600/40" : "border-destructive/40"}>
-          <CardContent className="pt-6 text-center">
-            {passed ? (
-              <Trophy className="w-12 h-12 text-gold mx-auto mb-3" />
-            ) : (
-              <RotateCcw className="w-12 h-12 text-muted-foreground mx-auto mb-3" />
-            )}
-            <h1 className="font-display text-3xl mb-1">
-              {passed ? "Module passed!" : "Almost there"}
-            </h1>
-            <p className="text-muted-foreground mb-4">
-              You scored {correctCount} of {run.length} (
-              {Math.round(finalPct * 100)}%).{" "}
-              {passed
-                ? "Great work."
-                : `You need ${Math.round(PASS_THRESHOLD * 100)}% to pass — review and try again.`}
-            </p>
-            <div className="flex gap-3 justify-center">
-              <Button onClick={startQuiz} variant={passed ? "outline" : "default"} className="gap-1">
-                <RotateCcw className="w-4 h-4" /> Retake quiz
+        <div
+          className={`border text-center px-6 py-10 ${
+            passed ? "border-gold/50 bg-gold/[0.04]" : "border-border bg-card"
+          }`}
+        >
+          {passed ? (
+            <Trophy className="w-10 h-10 text-gold mx-auto mb-4" />
+          ) : (
+            <RotateCcw className="w-10 h-10 text-muted-foreground mx-auto mb-4" />
+          )}
+          <p className="eyebrow mb-2">{module.title}</p>
+          <h1 className="font-display text-4xl sm:text-5xl leading-none mb-3">
+            {passed ? "Module passed" : "Almost there"}
+          </h1>
+          <p className="text-muted-foreground mb-1">
+            You scored {correctCount} of {run.length} ({Math.round(finalPct * 100)}%).
+          </p>
+          <p className="font-accent italic text-base text-muted-foreground tracking-wide mb-7">
+            {passed
+              ? "Great work — it shows on the floor."
+              : `You need ${Math.round(PASS_THRESHOLD * 100)}% to pass. Review below and try again — the next draw will mix in fresh questions.`}
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Button
+              onClick={startQuiz}
+              variant={passed ? "outline" : "default"}
+              className="gap-2 h-11 px-7 rounded-none font-body text-[11px] tracking-[0.18em] uppercase font-semibold"
+            >
+              <RotateCcw className="w-4 h-4" /> Retake quiz
+            </Button>
+            <Link href="/training">
+              <Button
+                variant={passed ? "default" : "outline"}
+                className="w-full sm:w-auto h-11 px-7 rounded-none font-body text-[11px] tracking-[0.18em] uppercase font-semibold"
+              >
+                Back to modules
               </Button>
-              <Link href="/training">
-                <Button variant={passed ? "default" : "outline"}>Back to modules</Button>
-              </Link>
-            </div>
-          </CardContent>
-        </Card>
+            </Link>
+          </div>
+        </div>
 
-        <h2 className="font-display text-xl mt-8 mb-3">Review</h2>
-        <div className="space-y-3">
+        <h2 className="font-display text-2xl mt-10 mb-2">Review</h2>
+        <div>
           {scored.map(({ rq, selected, correct }) => (
-            <Card key={rq.id}>
-              <CardContent className="pt-5">
-                <div className="flex gap-2">
-                  {correct ? (
-                    <CheckCircle2 className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
-                  ) : (
-                    <XCircle className="w-5 h-5 text-destructive shrink-0 mt-0.5" />
+            <div key={rq.id} className="border-t border-border/70 py-5">
+              <div className="flex gap-3">
+                {correct ? (
+                  <CheckCircle2 className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
+                ) : (
+                  <XCircle className="w-5 h-5 text-destructive shrink-0 mt-0.5" />
+                )}
+                <div className="space-y-1.5">
+                  <p className="font-medium text-[15px] leading-snug">{rq.question}</p>
+                  {!correct && selected !== undefined && (
+                    <p className="text-sm text-destructive">
+                      Your answer: {rq.options[selected]}
+                    </p>
                   )}
-                  <div className="space-y-1">
-                    <p className="font-medium text-sm">{rq.question}</p>
-                    {!correct && selected !== undefined && (
-                      <p className="text-sm text-destructive">
-                        Your answer: {rq.options[selected]}
-                      </p>
-                    )}
-                    <p className="text-sm text-green-700">
-                      Correct: {rq.options[rq.correctIndex]}
-                    </p>
-                    <p className="text-sm text-muted-foreground italic">
-                      {rq.explanation}
-                    </p>
-                  </div>
+                  <p className="text-sm text-green-700">
+                    Correct: {rq.options[rq.correctIndex]}
+                  </p>
+                  <p className="font-accent italic text-[15px] text-muted-foreground tracking-wide">
+                    {rq.explanation}
+                  </p>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           ))}
         </div>
       </div>

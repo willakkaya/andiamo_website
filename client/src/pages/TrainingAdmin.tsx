@@ -288,17 +288,21 @@ export default function TrainingAdmin() {
 
   return (
     <TrainingShell>
-      <div className="flex items-center justify-between gap-4 mb-6">
+      <div className="flex items-end justify-between gap-4 mb-8">
         <div>
-          <h1 className="font-display text-3xl mb-1">Team Dashboard</h1>
-          <p className="text-muted-foreground">
+          <p className="eyebrow mb-3">Team Training</p>
+          <h1 className="font-display text-4xl sm:text-5xl leading-none mb-2">
+            Team Dashboard
+          </h1>
+          <p className="font-accent italic text-lg text-muted-foreground tracking-wide">
             Track each employee's progress and pinpoint what they need to work on.
           </p>
         </div>
-        <Link href="/training">
-          <Button variant="ghost" size="sm" className="gap-1">
-            <ArrowLeft className="w-4 h-4" /> Training
-          </Button>
+        <Link
+          href="/training"
+          className="link-line inline-flex items-center gap-2 text-muted-foreground hover:text-foreground font-body text-[11px] tracking-[0.18em] uppercase shrink-0 mb-2"
+        >
+          <ArrowLeft className="w-3.5 h-3.5" /> Training
         </Link>
       </div>
 
@@ -325,30 +329,33 @@ export default function TrainingAdmin() {
         </div>
       )}
 
-      {/* Summary */}
-      <div className="grid grid-cols-3 gap-3 sm:gap-4 mb-8">
-        <Card>
-          <CardContent className="p-4 sm:pt-6">
-            <div className="flex items-center gap-1.5 text-muted-foreground text-xs sm:text-sm mb-1">
-              <Users className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" /> Team
-            </div>
-            <div className="text-2xl sm:text-3xl font-display">{trainees.length}</div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="p-4 sm:pt-6">
-            <div className="text-muted-foreground text-xs sm:text-sm mb-1">Avg. done</div>
-            <div className="text-2xl sm:text-3xl font-display">
-              {Math.round(avgCompletion * 100)}%
-            </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="p-4 sm:pt-6">
-            <div className="text-muted-foreground text-xs sm:text-sm mb-1">Modules</div>
-            <div className="text-2xl sm:text-3xl font-display">{MODULES.length}</div>
-          </CardContent>
-        </Card>
+      {/* Summary — editorial stat band */}
+      <div className="grid grid-cols-3 divide-x divide-border/70 border border-border/80 bg-card mb-8">
+        <div className="px-4 py-4 sm:px-6 sm:py-5">
+          <div className="flex items-center gap-1.5 font-body text-[10px] tracking-[0.2em] uppercase text-muted-foreground mb-1">
+            <Users className="w-3.5 h-3.5 shrink-0" /> Team
+          </div>
+          <div className="text-3xl sm:text-4xl font-display leading-none">
+            {trainees.length}
+          </div>
+        </div>
+        <div className="px-4 py-4 sm:px-6 sm:py-5">
+          <div className="font-body text-[10px] tracking-[0.2em] uppercase text-muted-foreground mb-1">
+            Avg. done
+          </div>
+          <div className="text-3xl sm:text-4xl font-display leading-none">
+            {Math.round(avgCompletion * 100)}
+            <span className="text-lg text-gold">%</span>
+          </div>
+        </div>
+        <div className="px-4 py-4 sm:px-6 sm:py-5">
+          <div className="font-body text-[10px] tracking-[0.2em] uppercase text-muted-foreground mb-1">
+            Modules
+          </div>
+          <div className="text-3xl sm:text-4xl font-display leading-none">
+            {MODULES.length}
+          </div>
+        </div>
       </div>
 
       {trainees.length === 0 ? (
@@ -362,7 +369,7 @@ export default function TrainingAdmin() {
       ) : (
         <>
           {/* Per-employee */}
-          <h2 className="font-display text-xl mb-3">By employee</h2>
+          <h2 className="font-display text-2xl mb-3">By employee</h2>
           <div className="space-y-3 mb-10">
             {trainees.map((emp) => {
               const completion = overallCompletion(emp);
@@ -434,7 +441,7 @@ export default function TrainingAdmin() {
           </div>
 
           {/* Org-wide weak spots */}
-          <h2 className="font-display text-xl mb-3">Where the team needs the most work</h2>
+          <h2 className="font-display text-2xl mb-3">Where the team needs the most work</h2>
           <Card>
             <CardHeader>
               <CardTitle className="text-sm text-muted-foreground font-normal">
