@@ -1,7 +1,6 @@
 import { useEffect, type ReactNode } from "react";
 import { Link } from "wouter";
 import { LogOut, LayoutDashboard } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { useTraining } from "@/contexts/TrainingContext";
 
 export default function TrainingShell({ children }: { children: ReactNode }) {
@@ -13,62 +12,67 @@ export default function TrainingShell({ children }: { children: ReactNode }) {
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
-      <header className="border-b border-border/70 bg-background/90 backdrop-blur sticky top-0 z-10">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-3">
-          <Link href="/training" className="flex items-center gap-3 min-w-0 shrink">
-            <span className="monogram !w-9 !h-9 !text-base">A</span>
+      {/* Dark chrome — the app reads as the house manual, not a web page */}
+      <header className="bg-charcoal text-cream grain sticky top-0 z-10">
+        <div className="relative z-[2] max-w-6xl mx-auto px-5 sm:px-8 py-3.5 flex items-center justify-between gap-3">
+          <Link href="/training" className="flex items-center gap-3 min-w-0 shrink group">
+            <span className="monogram !w-9 !h-9 !text-base !text-gold-light !border-gold-light/50">
+              A
+            </span>
             <span className="min-w-0 leading-tight">
-              <span className="block font-body text-[11px] tracking-[0.26em] uppercase font-medium truncate">
+              <span className="block font-body text-[10px] tracking-[0.32em] uppercase text-cream/85 truncate">
                 Akkaya Hospitality Group
               </span>
-              <span className="block font-accent italic text-sm text-gold leading-none mt-0.5">
-                Team Training
+              <span className="block font-accent italic text-[15px] text-gold-light leading-none mt-1">
+                The House Manual
               </span>
             </span>
           </Link>
 
           {currentEmployee && (
-            <div className="flex items-center gap-1.5 sm:gap-4 shrink-0">
+            <div className="flex items-center gap-2 sm:gap-6 shrink-0">
               <div className="hidden md:flex flex-col items-end leading-tight">
-                <span className="text-sm font-medium">{currentEmployee.name}</span>
-                <span className="text-xs text-muted-foreground">
+                <span className="text-sm text-cream/90">{currentEmployee.name}</span>
+                <span className="font-body text-[10px] tracking-[0.18em] uppercase text-cream/45">
                   {currentEmployee.role} · {currentEmployee.location}
                 </span>
               </div>
               {currentEmployee.role === "Manager" && (
                 <Link
                   href="/training/admin"
-                  className="link-line inline-flex items-center gap-1.5 text-gold font-body text-[11px] tracking-[0.18em] uppercase px-1"
+                  className="link-line inline-flex items-center gap-1.5 text-gold-light font-body text-[10px] tracking-[0.22em] uppercase"
                 >
                   <LayoutDashboard className="w-3.5 h-3.5" />
                   <span className="hidden sm:inline">Dashboard</span>
                 </Link>
               )}
-              <Button
-                variant="ghost"
-                size="sm"
+              <button
                 onClick={signOut}
-                className="gap-1 px-2 text-muted-foreground hover:text-foreground"
+                className="inline-flex items-center gap-1.5 text-cream/50 hover:text-cream transition-colors duration-300 font-body text-[10px] tracking-[0.22em] uppercase"
               >
-                <LogOut className="w-4 h-4" />
-                <span className="hidden sm:inline text-xs tracking-wide">Sign out</span>
-              </Button>
+                <LogOut className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Sign out</span>
+              </button>
             </div>
           )}
         </div>
+        {/* gold hairline base */}
+        <div className="relative z-[2] h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
       </header>
 
-      <main className="max-w-5xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-10 flex-1">
-        {children}
-      </main>
+      <main className="w-full flex-1">{children}</main>
 
-      <footer className="max-w-5xl w-full mx-auto px-4 pb-8 pt-4">
-        <div className="divider-diamond mb-4">
-          <i />
+      <footer className="bg-charcoal text-cream grain mt-16">
+        <div className="relative z-[2] max-w-6xl mx-auto px-5 py-7">
+          <div className="flex items-center justify-between gap-4">
+            <span className="font-accent italic text-sm text-cream/40 tracking-wide">
+              Café Figaro · Andiamo in Banca · Don Giovanni
+            </span>
+            <span className="font-body text-[9px] tracking-[0.28em] uppercase text-cream/35 text-right">
+              Confidential — for team use only
+            </span>
+          </div>
         </div>
-        <p className="text-center font-body text-[10px] tracking-[0.24em] uppercase text-muted-foreground/70">
-          Akkaya Hospitality Group · Confidential — For Team Use Only
-        </p>
       </footer>
     </div>
   );

@@ -246,7 +246,7 @@ export default function TrainingAdmin() {
   if (currentEmployee && currentEmployee.role !== "Manager") {
     return (
       <TrainingShell>
-        <div className="text-center py-12">
+        <div className="text-center py-16 max-w-md mx-auto px-5">
           <AlertTriangle className="w-10 h-10 text-gold mx-auto mb-3" />
           <h1 className="font-display text-2xl mb-2">Managers only</h1>
           <p className="text-muted-foreground mb-4">
@@ -288,42 +288,48 @@ export default function TrainingAdmin() {
 
   return (
     <TrainingShell>
-      <div className="flex items-end justify-between gap-4 mb-8">
+      <div className="max-w-6xl mx-auto px-5 sm:px-8 pt-12 sm:pt-16">
+      <div className="flex items-end justify-between gap-4 mb-10">
         <div>
-          <p className="eyebrow mb-3">Team Training</p>
-          <h1 className="font-display text-4xl sm:text-5xl leading-none mb-2">
-            Team Dashboard
+          <p className="eyebrow mb-4">Manager — every restaurant</p>
+          <h1 className="font-display text-[clamp(3rem,6vw,5rem)] leading-[0.95] mb-3">
+            The team.
           </h1>
-          <p className="font-accent italic text-lg text-muted-foreground tracking-wide">
-            Track each employee's progress and pinpoint what they need to work on.
+          <p className="font-accent italic text-lg text-muted-foreground tracking-wide max-w-md">
+            Who's trained, who's stuck, and what to coach next.
           </p>
         </div>
         <Link
           href="/training"
-          className="link-line inline-flex items-center gap-2 text-muted-foreground hover:text-foreground font-body text-[11px] tracking-[0.18em] uppercase shrink-0 mb-2"
+          className="link-line inline-flex items-center gap-2 text-muted-foreground hover:text-foreground font-body text-[10px] tracking-[0.24em] uppercase shrink-0 mb-2"
         >
-          <ArrowLeft className="w-3.5 h-3.5" /> Training
+          <ArrowLeft className="w-3.5 h-3.5" /> The manual
         </Link>
       </div>
 
       {allTrainees.length > 0 && (
-        <div className="flex flex-wrap gap-2 mb-6">
+        <div className="flex flex-wrap gap-x-7 gap-y-2 mb-8 border-b border-foreground/12 pb-4">
           {(["All", ...LOCATIONS] as const).map((loc) => {
             const count =
               loc === "All"
                 ? allTrainees.length
                 : allTrainees.filter((e) => e.location === loc).length;
+            const active = locationFilter === loc;
             return (
-              <Button
+              <button
                 key={loc}
-                size="sm"
-                variant={locationFilter === loc ? "default" : "outline"}
                 onClick={() => setLocationFilter(loc)}
-                className="gap-1"
+                className={`font-body text-[11px] tracking-[0.22em] uppercase transition-colors duration-300 pb-1 border-b-2 -mb-[calc(1rem+2px)] ${
+                  active
+                    ? "text-foreground border-gold"
+                    : "text-muted-foreground border-transparent hover:text-foreground"
+                }`}
               >
                 {loc}
-                <span className="opacity-70">({count})</span>
-              </Button>
+                <span className="text-gold-dark ml-1.5 font-display normal-case tracking-normal">
+                  {count}
+                </span>
+              </button>
             );
           })}
         </div>
@@ -489,6 +495,7 @@ export default function TrainingAdmin() {
           </div>
         </>
       )}
+      </div>
     </TrainingShell>
   );
 }
