@@ -31,6 +31,9 @@ export const IMAGES = {
   // Awards
   wineSpectatorAward: "/wine-spectator-award-2026.jpg",
 
+  // Lunch special promo (regenerate from AndiamoLunchSpecialGBP.html in repo root)
+  lunchSpecial: "/lunch-special-2595.jpg",
+
   // Legacy family-restaurant logos (black on transparent, in /public)
   figaroLogo: "/figaro-logo.png",
   donGiovanniLogo: "/dg-logo.png",

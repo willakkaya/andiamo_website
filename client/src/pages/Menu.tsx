@@ -436,6 +436,30 @@ export default function Menu() {
             </div>
           )}
 
+          {/* Lunch tab — three-course lunch special */}
+          {active === "lunch" && (
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-8 max-w-3xl mx-auto -mt-4 mb-14 text-center sm:text-left">
+              <img
+                src={IMAGES.lunchSpecial}
+                alt="Three-course lunch special, 25.95 per person, Tuesday through Friday 11am to 2pm at Andiamo in Banca"
+                width={1200}
+                height={900}
+                className="w-full max-w-[340px] h-auto border border-charcoal/10 shrink-0"
+                loading="lazy"
+              />
+              <div>
+                <h3 className="font-display text-2xl md:text-3xl text-charcoal">Three-Course Lunch Special</h3>
+                <p className="font-accent text-gold text-base md:text-lg tracking-wide mt-1">
+                  25.95 per person &nbsp;&middot;&nbsp; Tuesday&ndash;Friday, 11am&ndash;2pm
+                </p>
+                <p className="font-accent text-charcoal/70 text-base md:text-lg leading-relaxed mt-3">
+                  Soup or salad, a choice of six mains, and dolce &mdash; add a glass of house wine
+                  or an Aperol Spritz for 8. Parties of up to four.
+                </p>
+              </div>
+            </div>
+          )}
+
           {/* Menu Items — two-column on desktop, like the printed menu */}
           <motion.div
             key={active}
