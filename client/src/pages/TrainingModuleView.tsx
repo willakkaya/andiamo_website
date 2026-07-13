@@ -177,6 +177,24 @@ export default function TrainingModuleView() {
                       </li>
                     ))}
                   </ul>
+                  {lesson.image && (
+                    <figure className="mt-8">
+                      <img
+                        src={lesson.image.src}
+                        alt={lesson.image.alt}
+                        loading="lazy"
+                        className="w-full aspect-[16/10] object-cover"
+                      />
+                      <figcaption className="flex items-baseline gap-3 mt-3">
+                        <span className="font-accent italic text-gold-dark text-sm shrink-0">
+                          fig. {String(i + 1).padStart(2, "0")}
+                        </span>
+                        <span className="font-body text-[10px] tracking-[0.18em] uppercase text-muted-foreground">
+                          {lesson.image.caption ?? lesson.image.alt}
+                        </span>
+                      </figcaption>
+                    </figure>
+                  )}
                 </div>
               </div>
             </section>

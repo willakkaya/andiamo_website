@@ -28,12 +28,22 @@ export type QuizQuestion = {
   explanation: string;
 };
 
+export type LessonImage = {
+  /** Path under /public, e.g. "/images/vault-dining.jpg". */
+  src: string;
+  alt: string;
+  /** Editorial caption shown under the photo ("fig." numbering is automatic). */
+  caption?: string;
+};
+
 export type Lesson = {
   heading: string;
   /** Short intro line, optional. */
   intro?: string;
   /** Bullet points — the teachable standards. */
   points: string[];
+  /** Optional photo shown with the lesson (plating, table set, uniform…). */
+  image?: LessonImage;
 };
 
 export type TrainingModule = {
@@ -100,6 +110,24 @@ export const MODULES: TrainingModule[] = [
           "We serve to make people feel seen and to create comfort.",
           "We never know what battles a guest is fighting — your kindness may be the brightest part of their day.",
           "Every shift is a chance to positively impact someone's life.",
+        ],
+        image: {
+          src: "/akkaya-family.jpg",
+          alt: "The Akkaya family",
+          caption: "This is a family business — you're part of the family now",
+        },
+      },
+      {
+        heading: "Hospitality 101 — The Six Mindsets",
+        intro:
+          "You can know every step of service and still be forgettable. What makes you unforgettable is making people feel something.",
+        points: [
+          "See the guest — every table has a story you don't know: a first date, an anniversary, a hard week. Make it better.",
+          "Anticipate — the best service is invisible. Refill before empty; bring the check when they reach; offer dessert before they ask.",
+          "Recover gracefully — own it, fix it, surprise them with the recovery. They often leave happier than if nothing went wrong.",
+          "Be genuinely curious — guests feel the difference between performed friendliness and real interest. Be real.",
+          "Know your craft — a server who knows the menu, wines, and cocktails is a resource; one who doesn't is a liability.",
+          "Own the room — you set the energy. Engaged and warm, the room feels it. Distracted and flat, it feels that too.",
         ],
       },
     ],
@@ -230,6 +258,19 @@ export const MODULES: TrainingModule[] = [
         answer: 1,
         explanation:
           "We never know what battles a guest is fighting — your kindness may be the brightest part of their day.",
+      },
+      {
+        id: "culture-11",
+        question: "\"The best service is invisible\" means:",
+        options: [
+          "Stay out of the dining room as much as possible",
+          "Anticipate — refill before it's empty, bring the check when they reach, offer dessert before they ask",
+          "Never speak unless spoken to",
+          "Let the food speak for itself",
+        ],
+        answer: 1,
+        explanation:
+          "Anticipation is the mark of a great hospitality professional — needs are met before the guest has to ask.",
       },
     ],
   },
@@ -457,6 +498,11 @@ export const MODULES: TrainingModule[] = [
           "Give a brief description on delivery: 'This is your [dish], enjoy.'",
           "Return to the floor after delivery — never linger in the kitchen.",
         ],
+        image: {
+          src: "/vault-red.jpg",
+          alt: "The Vault private dining room at Andiamo in Banca",
+          caption: "The Vault — where every role works as one team",
+        },
       },
     ],
     quiz: [
@@ -632,6 +678,16 @@ export const MODULES: TrainingModule[] = [
           "Team should feel aligned and calm — not rushed.",
         ],
       },
+      {
+        heading: "Opening Server Checklist",
+        intro: "Your name is on the open. Run it the same way every day.",
+        points: [
+          "Clock in, turn the music on — the room should feel alive immediately.",
+          "Set up outside tables and sweep the outside; water the outside plants.",
+          "Ask the Chef about today's specials before pre-shift — never learn them from a guest's question.",
+          "Make sure the bar is stocked; stock or make silverware roll-ups.",
+        ],
+      },
     ],
     quiz: [
       {
@@ -755,6 +811,19 @@ export const MODULES: TrainingModule[] = [
         explanation:
           "Tables leveled and aligned, chairs pushed in, nothing in sight that says 'still setting up'.",
       },
+      {
+        id: "opening-11",
+        question: "Which of these is part of the opening server checklist?",
+        options: [
+          "Water the outside plants and set up outside tables",
+          "Count the safe",
+          "Prep the garnish tray in the kitchen",
+          "Print the wine list",
+        ],
+        answer: 0,
+        explanation:
+          "Openers turn on music, set up and sweep outside, water the plants, confirm specials with the Chef, and stock roll-ups and the bar.",
+      },
     ],
   },
   {
@@ -798,6 +867,16 @@ export const MODULES: TrainingModule[] = [
           "All lights OFF — far-side switch by bathroom, under-bar switch by trash can.",
           "Charging station 'humming' — every light plugged in.",
           "Floors mopped; no food, drinks, or clutter anywhere; doors locked.",
+        ],
+      },
+      {
+        heading: "Closing Server Checklist",
+        intro: "The closer signs the room over to tomorrow.",
+        points: [
+          "Clean and sanitize the menus; sweep or vacuum the floors.",
+          "Restock the bar, condiment tray, and cold fridge for the next shift.",
+          "Close your cash in the POS system before clocking out.",
+          "Recharge the outside candle lights — place them on the charging station.",
         ],
       },
     ],
@@ -926,6 +1005,19 @@ export const MODULES: TrainingModule[] = [
         explanation:
           "Restock silverware and napkins, sanitize counters — the opener should walk into a ready room.",
       },
+      {
+        id: "closing-11",
+        question: "Before clocking out, the closing server must:",
+        options: [
+          "Leave the cash drawer for the manager",
+          "Close their cash in the POS and put the outside candle lights on charge",
+          "Take the menus home to clean",
+          "Turn the music up for the cleaning crew",
+        ],
+        answer: 1,
+        explanation:
+          "Close your cash in the POS, sanitize menus, restock bar/condiments/cold fridge, and recharge the outside candle lights.",
+      },
     ],
   },
   {
@@ -952,6 +1044,11 @@ export const MODULES: TrainingModule[] = [
           "9. Present the check — ready within 2 minutes when they signal.",
           "10. Farewell — thank them by name if you know it. Mean it.",
         ],
+        image: {
+          src: "/dining-room.jpg",
+          alt: "The dining room, set for service",
+          caption: "The room ready for service — every table a stage",
+        },
       },
       {
         heading: "Language & Tone at the Table",
@@ -976,8 +1073,20 @@ export const MODULES: TrainingModule[] = [
         points: [
           "Present after dessert is offered/declined; watch for cues (napkins down, menus closed).",
           "Never present mid-toast, mid-dessert, or mid-conversation.",
-          "Slow night: 'If there is time to lean, there is time to clean' — polish glasses, restock, check restrooms every 20 minutes.",
-          "Side work may not begin before 8:30 PM unless approved by the shift lead.",
+          "Slow night: 'If there is time to lean, there is time to clean' — polish at least 10 glasses and place them on tables, uniformly aligned.",
+          "Check restrooms every 20 minutes; clean menus and check presenters; refill carafes, caddies, and sanitizer buckets.",
+          "Side work may not begin before 8:30 PM unless approved by the shift lead — stay guest-focused until instructed.",
+        ],
+      },
+      {
+        heading: "Bread Service & Linen Standards",
+        intro: "Bread is the first thing a guest touches — it must be flawless.",
+        points: [
+          "Use tongs at all times when handling bread for guests — never bare hands, even briefly.",
+          "Use gloves when cutting or slicing behind the scenes; cut only on a sanitized cutting board.",
+          "Bread baskets are lined with clean linens; basket presented neat and evenly arranged.",
+          "Bread-basket napkins never touch booths, chairs, or any non-sanitized surface — only sanitized stations, side-work tables, or clean trays.",
+          "Any linen (or bread) that touches an unclean surface gets replaced immediately — no exceptions.",
         ],
       },
     ],
@@ -1124,6 +1233,27 @@ export const MODULES: TrainingModule[] = [
         ],
         answer: 1,
         explanation: "No side work before 8:30 PM unless approved by the shift lead.",
+      },
+      {
+        id: "service-13",
+        question: "When handling bread for guests, you must always use:",
+        options: ["Tongs", "Gloves only", "A clean napkin", "Freshly washed hands"],
+        answer: 0,
+        explanation:
+          "Tongs at all times in front of guests; gloves are for cutting and handling behind the scenes. Bare hands never touch bread — even briefly.",
+      },
+      {
+        id: "service-14",
+        question: "A bread-basket napkin brushes against a booth seat. What happens?",
+        options: [
+          "It's fine if it looks clean",
+          "Flip it to the other side",
+          "Replace it immediately — no exceptions",
+          "Use it for the same table only",
+        ],
+        answer: 2,
+        explanation:
+          "Linens go only on sanitized stations, side-work tables, or clean trays. Any linen that touches an unclean surface is replaced immediately.",
       },
     ],
   },

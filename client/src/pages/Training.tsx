@@ -450,6 +450,10 @@ function Dashboard() {
   ).length;
   const electivesPassed = electivePassCount(currentEmployee);
   const completion = overallCompletion(currentEmployee);
+  const drillCount = Object.values(currentEmployee.modules).reduce(
+    (n, p) => n + p.wrongQuestionIds.length,
+    0,
+  );
 
   return (
     <div className="max-w-6xl mx-auto px-5 sm:px-8 pt-12 sm:pt-16 pb-4">
@@ -491,6 +495,30 @@ function Dashboard() {
       <div className="mt-10">
         <SignOffCard />
       </div>
+
+      {drillCount > 0 && (
+        <Link href="/training/drill" className="block group">
+          <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border border-gold/45 hover:border-gold transition-colors duration-300 px-5 py-4 sm:px-7 sm:py-5">
+            <div className="flex items-baseline gap-4 min-w-0">
+              <span className="font-display text-4xl text-gold leading-none">
+                {drillCount}
+              </span>
+              <span className="min-w-0">
+                <span className="block font-display text-lg leading-tight">
+                  question{drillCount === 1 ? "" : "s"} you've missed, waiting to be drilled
+                </span>
+                <span className="block font-accent italic text-sm text-muted-foreground">
+                  five minutes of practice — no scores, no pressure
+                </span>
+              </span>
+            </div>
+            <span className="inline-flex items-center gap-2 font-body text-[10px] tracking-[0.26em] uppercase text-gold-dark group-hover:text-gold transition-colors">
+              Start the drill
+              <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </span>
+          </div>
+        </Link>
+      )}
 
       <ChapterHeading numeral="I" title={`Required for ${currentEmployee.role}`} />
       <div className="border-b border-foreground/15">
