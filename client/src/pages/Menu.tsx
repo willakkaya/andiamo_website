@@ -166,26 +166,33 @@ const LUNCH: Record<string, Section> = {
 
 /* ── WINE HIGHLIGHTS ── */
 const WINE: Record<string, Section> = {
-  byGlass: {
-    title: "Wines by the Glass",
-    note: "Glass | Carafe",
+  whiteByGlass: {
+    title: "White by the Glass",
+    note: "Glass | Bottle",
     items: [
-      { name: "Donini, Pinot Grigio, Venezia, Italy", desc: "2023", price: "12 | 40" },
-      { name: "Flowers, Chardonnay, Sonoma Coast", desc: "2024", price: "20 | 65" },
-      { name: "De Forville, Chardonnay, Piedmont, Italy", desc: "2024 (Unoaked)", price: "12 | 40" },
-      { name: "Clos Henri, Sauvignon Blanc, Marlborough, NZ", desc: "2025", price: "14 | 45" },
-      { name: "La Cala, Vermentino, Sardegna, Italy", desc: "2022", price: "13 | 45" },
-      { name: "House Red (Rapitala, Nero D'Avola, Sicily)", desc: "2023", price: "12 | 45" },
-      { name: "The Calling, Cabernet Sauvignon, Paso Robles", desc: "2021", price: "17 | 58" },
-      { name: "Routestock, Pinot Noir, Sonoma Coast", desc: "2023", price: "16 | 55" },
-      { name: "Tintero, Nebbiolo Langhe, Italy", desc: "2023", price: "15 | 50" },
-      { name: "Villa Santa Anna, Chianti, Colli Senesi Riserva", desc: "2022", price: "13 | 45" },
+      { name: "House White — Donini, Pinot Grigio", desc: "Venezia, Italy · 2023", price: "12 | 40", signature: true },
+      { name: "De Forville, Chardonnay", desc: "Piedmont, Italy · 2024 · unoaked", price: "12 | 40" },
+      { name: "La Cala, Vermentino", desc: "Sardegna, Italy · 2022", price: "13 | 45" },
+      { name: "Clos Henri, Sauvignon Blanc", desc: "Marlborough, New Zealand · 2025", price: "14 | 45" },
+      { name: "Tyler, Chardonnay", desc: "Santa Barbara County · 2024", price: "18 | 58" },
+    ],
+  },
+  redByGlass: {
+    title: "Red by the Glass",
+    note: "Glass | Bottle",
+    items: [
+      { name: "House Red — Rapitalà, Nero d'Avola", desc: "“Alto Reale” · Sicily · 2023", price: "12 | 45", signature: true },
+      { name: "Villa Santa Anna, Chianti", desc: "Colli Senesi Riserva · 2022", price: "13 | 45" },
+      { name: "Tintero, Nebbiolo Langhe", desc: "Piedmont, Italy · 2023", price: "15 | 50" },
+      { name: "Routestock, Pinot Noir", desc: "Sonoma Coast · 2023", price: "16 | 55" },
+      { name: "Wild Horse, Cabernet Sauvignon", desc: "Paso Robles · 2023", price: "17 | 58" },
     ],
   },
   sparkling: {
     title: "Sparkling & Champagne",
     items: [
-      { name: "Lamberti, Prosecco, N.V. (187ml)", desc: "", price: "12" },
+      { name: "Lamberti, Prosecco", desc: "N.V. · 187ml split, by the glass", price: "12" },
+      { name: "Sommariva “Il Rosa”, Brut Rose", desc: "Italy · N.V. · by the glass", price: "15 | 45" },
       { name: "Nino Franco, Valdobbiadene, Prosecco", desc: "N.V.", price: "45" },
       { name: "Schramsberg, Blanc de Blanc, North Coast", desc: "N.V.", price: "65" },
       { name: "Louis Roederer, Brut Premier, Reims", desc: "N.V.", price: "70" },
@@ -223,7 +230,7 @@ const WINE: Record<string, Section> = {
       { name: "Lagunitas IPA", desc: "", price: "9" },
       { name: "Blue Moon", desc: "", price: "9" },
       { name: "Moretti", desc: "", price: "9" },
-      { name: "Clausthauser (Non Alcoholic)", desc: "", price: "9" },
+      { name: "Clausthaler (Non-Alcoholic)", desc: "", price: "9" },
     ],
   },
 };
@@ -472,6 +479,18 @@ export default function Menu() {
               <MenuSection key={section.title} section={section} />
             ))}
           </motion.div>
+
+          {/* Legend — wine */}
+          {active === "wine" && (
+            <div className="mt-6 border-t border-charcoal/8 pt-8 text-center">
+              <p className="font-accent text-charcoal/55 text-sm md:text-base tracking-wide">
+                <span className="text-gold/70">&#10022;</span> house pour &nbsp;&middot;&nbsp; by-the-glass prices shown glass&nbsp;|&nbsp;bottle
+              </p>
+              <p className="font-accent text-charcoal/45 text-xs md:text-sm mt-2 tracking-wide">
+                A selection from our cellar &mdash; the full wine book is available at the table.
+              </p>
+            </div>
+          )}
 
           {/* Legend — dinner & lunch */}
           {(active === "dinner" || active === "lunch") && (
