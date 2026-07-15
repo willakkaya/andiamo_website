@@ -8,6 +8,7 @@ import { ShoppingBag, ArrowRight, Star } from "lucide-react";
 import EventQuoteCalculator from "@/components/EventQuoteCalculator";
 import StickyEventCTA from "@/components/StickyEventCTA";
 import EmailCapture from "@/components/EmailCapture";
+import { trackPhoneClick } from "@/lib/analytics";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -692,7 +693,7 @@ export default function BanquetCatering() {
           </div>
           <p className="text-white/30 text-sm mt-5 font-accent tracking-wide">
             Or call us at{" "}
-            <a href="tel:+16507458811" className="text-gold/80 hover:text-gold transition-colors">
+            <a href="tel:+16507458811" onClick={() => trackPhoneClick("banquet-catering")} className="text-gold/80 hover:text-gold transition-colors">
               (650) 745-8811
             </a>
           </p>

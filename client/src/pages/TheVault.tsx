@@ -6,6 +6,7 @@ import { useState } from "react";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import { toast } from "sonner";
 import { submitForm } from "@/lib/formspree";
+import { trackContactSubmit } from "@/lib/analytics";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -32,6 +33,7 @@ export default function TheVault() {
     const ok = await submitForm({ ...formData, _subject: "The Vault Inquiry", source: "the-vault" });
     if (ok) {
       setSubmitted(true);
+      trackContactSubmit("the-vault");
       toast.success("Inquiry submitted! We'll be in touch within 24 hours.");
     } else {
       toast.error("Something went wrong. Please call us at (650) 745-8811.");

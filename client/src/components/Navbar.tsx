@@ -3,6 +3,7 @@ import { Link, useLocation } from "wouter";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { IMAGES, LINKS } from "@/lib/images";
+import { trackReservationClick } from "@/lib/analytics";
 
 const NAV_LINKS = [
   { label: "Menu", href: "/menu" },
@@ -88,6 +89,7 @@ export default function Navbar() {
               href={LINKS.opentable}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackReservationClick("navbar")}
               className={`hidden md:inline-flex items-center px-7 py-2.5 font-body text-[11px] tracking-[0.18em] uppercase font-semibold transition-all duration-500 ${
                 showSolid
                   ? "bg-charcoal text-white hover:bg-espresso"
@@ -150,6 +152,7 @@ export default function Navbar() {
                   href={LINKS.opentable}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => trackReservationClick("navbar-mobile")}
                   className="inline-flex items-center px-10 py-3.5 border border-white/20 text-white font-body text-[12px] tracking-[0.2em] uppercase font-semibold hover:bg-white/10 transition-all duration-500"
                 >
                   Reserve a Table

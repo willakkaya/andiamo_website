@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { MapPin, Phone, Mail, Clock, Instagram, ExternalLink } from "lucide-react";
 import { IMAGES, LINKS } from "@/lib/images";
+import { trackPhoneClick } from "@/lib/analytics";
 
 export default function Footer() {
   return (
@@ -36,7 +37,7 @@ export default function Footer() {
         </div>
         <p className="text-charcoal/60 text-sm mt-5 font-accent tracking-wide">
           Or call us at{" "}
-          <a href="tel:+16507458811" className="text-gold hover:text-gold-light transition-colors">
+          <a href="tel:+16507458811" onClick={() => trackPhoneClick("footer-cta")} className="text-gold hover:text-gold-light transition-colors">
             {LINKS.phone}
           </a>
         </p>
@@ -115,7 +116,7 @@ export default function Footer() {
                   <MapPin size={15} className="text-gold/50 mt-0.5 shrink-0" />
                   <span className="font-accent tracking-wide">301 Linden Avenue<br />South San Francisco, CA 94080</span>
                 </a>
-                <a href="tel:+16507458811" className="flex items-center gap-3 text-cream/65 hover:text-cream/80 transition-colors">
+                <a href="tel:+16507458811" onClick={() => trackPhoneClick("footer")} className="flex items-center gap-3 text-cream/65 hover:text-cream/80 transition-colors">
                   <Phone size={15} className="text-gold/50 shrink-0" />
                   <span className="font-accent tracking-wide">{LINKS.phone}</span>
                 </a>

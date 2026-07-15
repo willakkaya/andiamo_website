@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, ShoppingBag } from "lucide-react";
 import { Link } from "wouter";
 import { usePageMeta } from "@/hooks/usePageMeta";
+import { trackPhoneClick } from "@/lib/analytics";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 22 },
@@ -227,6 +228,7 @@ export default function PrivateEvents() {
           </p>
           <a
             href="tel:+16507458811"
+            onClick={() => trackPhoneClick("private-events")}
             className="inline-block font-display text-3xl md:text-4xl text-gold hover:text-gold-light transition-colors"
           >
             (650) 745-8811

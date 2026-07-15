@@ -5,6 +5,7 @@ import PageLayout from "@/components/PageLayout";
 import { IMAGES, LINKS } from "@/lib/images";
 import { Check, ArrowRight, Star, Heart } from "lucide-react";
 import EmailCapture from "@/components/EmailCapture";
+import { trackPhoneClick } from "@/lib/analytics";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -191,6 +192,7 @@ export default function RehearsalDinners() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="tel:+16507458811"
+              onClick={() => trackPhoneClick("rehearsal-dinners")}
               className="inline-flex items-center justify-center px-10 py-4 bg-gold text-charcoal font-body text-[12px] tracking-[0.2em] uppercase font-semibold hover:bg-gold-light transition-all duration-300"
             >
               Call (650) 745-8811
