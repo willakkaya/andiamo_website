@@ -105,17 +105,15 @@ export default function Home() {
               Reserve a Table
             </a>
             <a
-              href={LINKS.onlineOrdering}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/banquet-catering?tab=catering"
               className="inline-flex items-center gap-2 px-12 py-4 border border-white/35 text-white font-body text-[12px] tracking-[0.2em] uppercase hover:bg-white/10 transition-all duration-500"
             >
-              Order Online <ShoppingBag size={13} />
+              Order Catering <ShoppingBag size={13} />
             </a>
           </motion.div>
 
           <motion.a
-            href={LINKS.yelp}
+            href={LINKS.opentable}
             target="_blank"
             rel="noopener noreferrer"
             initial={{ opacity: 0 }}
@@ -124,9 +122,9 @@ export default function Home() {
             className="mt-12 inline-flex items-center justify-center gap-1 hover:opacity-80 transition-opacity"
           >
             {[...Array(5)].map((_, i) => (
-              <Star key={i} size={14} className={i < 4 ? "text-gold-light fill-gold-light" : "text-white/20 fill-white/20"} />
+              <Star key={i} size={14} className="text-gold-light fill-gold-light" />
             ))}
-            <span className="text-white/55 text-xs ml-2 font-body tracking-wider">4.2 on Yelp &middot; 348 reviews</span>
+            <span className="text-white/55 text-xs ml-2 font-body tracking-wider">4.8 on OpenTable &middot; 585 reviews</span>
           </motion.a>
         </div>
 
@@ -480,15 +478,15 @@ export default function Home() {
             </div>
             <h2 className="font-display text-3xl md:text-5xl text-charcoal mb-4">Word of mouth</h2>
             <a
-              href={LINKS.yelp}
+              href={LINKS.opentable}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1 text-muted-foreground text-sm hover:text-gold transition-colors"
             >
               {[...Array(5)].map((_, i) => (
-                <Star key={i} size={13} className={i < 4 ? "text-gold fill-gold" : "text-gold/20 fill-gold/20"} />
+                <Star key={i} size={13} className="text-gold fill-gold" />
               ))}
-              <span className="ml-2 font-accent tracking-wider">4.2 &middot; 348 reviews on Yelp</span>
+              <span className="ml-2 font-accent tracking-wider">4.8 &middot; 585 reviews on OpenTable</span>
             </a>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-charcoal/8 max-w-5xl mx-auto border border-charcoal/8">
