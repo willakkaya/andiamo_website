@@ -10,6 +10,7 @@ const NAV_LINKS = [
   { label: "Our Story", href: "/our-story" },
   { label: "The Vault", href: "/the-vault" },
   { label: "Private Events", href: "/private-events" },
+  { label: "Catering", href: "/banquet-catering?tab=catering" },
   { label: "Gallery", href: "/gallery" },
   { label: "Contact", href: "/contact" },
 ];
@@ -71,7 +72,7 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 className={`font-body text-[11px] tracking-[0.18em] uppercase transition-colors duration-500 ${
-                  location === link.href
+                  location === link.href.split("?")[0]
                     ? showSolid ? "text-gold" : "text-gold-light"
                     : showSolid
                       ? "text-charcoal/60 hover:text-charcoal"
@@ -132,7 +133,7 @@ export default function Navbar() {
                   <Link
                     href={link.href}
                     className={`font-display text-2xl tracking-[0.1em] transition-colors duration-300 ${
-                      location === link.href
+                      location === link.href.split("?")[0]
                         ? "text-gold-light"
                         : "text-white/70 hover:text-white"
                     }`}

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearch } from "wouter";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
@@ -337,6 +338,14 @@ export default function BanquetCatering() {
     }
     return "banquet";
   });
+
+  // Keep the tab in sync when the URL changes while already on this page
+  // (e.g. clicking "Catering" in the nav from the banquet tab)
+  const search = useSearch();
+  useEffect(() => {
+    const tab = new URLSearchParams(search).get("tab");
+    if (tab === "catering" || tab === "banquet") setActiveTab(tab);
+  }, [search]);
 
   return (
     <PageLayout>

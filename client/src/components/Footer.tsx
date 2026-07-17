@@ -145,6 +145,9 @@ export default function Footer() {
                 <Link href="/banquet-catering" className="block text-cream/65 hover:text-cream/80 transition-colors">
                   Banquet & Catering Menus
                 </Link>
+                <Link href="/banquet-catering?tab=catering" className="block text-cream/65 hover:text-cream/80 transition-colors">
+                  Order Catering
+                </Link>
                 <Link href="/gallery" className="block text-cream/65 hover:text-cream/80 transition-colors">
                   Gallery
                 </Link>
