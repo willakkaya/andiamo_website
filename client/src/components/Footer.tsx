@@ -176,12 +176,12 @@ export default function Footer() {
                 <Instagram size={16} />
               </a>
               <a
-                href={LINKS.yelp}
+                href={LINKS.opentable}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[11px] text-cream/60 hover:text-gold transition-colors tracking-wider"
               >
-                <span className="text-gold/80">&#9733;</span> 4.2 on Yelp
+                <span className="text-gold/80">&#9733;</span> 4.8 on OpenTable
               </a>
             </div>
           </div>

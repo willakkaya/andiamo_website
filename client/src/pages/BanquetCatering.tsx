@@ -656,18 +656,19 @@ export default function BanquetCatering() {
                     </a>{" "}
                     and we'll take your order over the phone.
                   </p>
-                  <p className="font-accent text-charcoal/40 text-xs tracking-wide mt-4">
-                    Prefer to order through ezCater?{" "}
+                  <div className="mt-8">
+                    <p className="font-accent text-charcoal/40 text-xs tracking-wide mb-3">Prefer instant checkout?</p>
                     <a
                       href={LINKS.ezcater}
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => trackEzCaterClick("catering-tab")}
-                      className="text-charcoal/60 underline underline-offset-2 hover:text-charcoal transition-colors"
+                      className="inline-flex items-center gap-2 px-8 py-3 border border-charcoal/25 text-charcoal/70 font-body text-[11px] tracking-[0.2em] uppercase hover:border-charcoal/50 hover:text-charcoal transition-all duration-500"
                     >
-                      Order there instead
+                      <ShoppingBag size={13} />
+                      Order on ezCater
                     </a>
-                  </p>
+                  </div>
                 </div>
               </div>
             </motion.div>
