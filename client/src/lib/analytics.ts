@@ -52,3 +52,15 @@ export const trackReservationClick = (location: string) =>
     event_category: "engagement",
     event_label: location,
   });
+
+export const trackCateringInquiry = (headcount: string) =>
+  trackEvent("catering_inquiry", {
+    event_category: "lead",
+    event_label: headcount,
+  });
+
+export const trackEzCaterClick = (location: string) =>
+  trackEvent("ezcater_click", {
+    event_category: "engagement",
+    event_label: location,
+  });

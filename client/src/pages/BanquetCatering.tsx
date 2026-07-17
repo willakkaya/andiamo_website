@@ -4,11 +4,12 @@ import { motion } from "framer-motion";
 import { Link } from "wouter";
 import PageLayout from "@/components/PageLayout";
 import { IMAGES, LINKS } from "@/lib/images";
-import { ShoppingBag, ArrowRight, Star } from "lucide-react";
+import { ShoppingBag, ArrowRight, Star, Clock } from "lucide-react";
 import EventQuoteCalculator from "@/components/EventQuoteCalculator";
 import StickyEventCTA from "@/components/StickyEventCTA";
 import EmailCapture from "@/components/EmailCapture";
-import { trackPhoneClick } from "@/lib/analytics";
+import { trackPhoneClick, trackContactSubmit, trackCateringInquiry, trackEzCaterClick } from "@/lib/analytics";
+import { submitForm } from "@/lib/formspree";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -258,10 +259,84 @@ const cateringMenu = [
   },
 ];
 
+/* ── Direct catering order form ── */
+function CateringOrderForm() {
+  const [form, setForm] = useState({ name: "", phone: "", email: "", date: "", headcount: "", notes: "" });
+  const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitting(true);
+    setError(false);
+    const ok = await submitForm({ ...form, _subject: "Catering Order Inquiry", source: "catering-direct" });
+    setSubmitting(false);
+    if (ok) {
+      setSubmitted(true);
+      trackContactSubmit("catering-direct");
+      trackCateringInquiry(form.headcount || "unspecified");
+    } else {
+      setError(true);
+    }
+  };
+
+  const field =
+    "w-full bg-white/70 border border-charcoal/15 focus:border-gold/60 outline-none px-4 py-3 font-accent text-charcoal text-base tracking-wide placeholder:text-charcoal/35 transition-colors duration-300";
+
+  if (submitted) {
+    return (
+      <div className="text-center py-12">
+        <div className="divider-diamond mb-6"><i /></div>
+        <h3 className="font-display text-2xl text-charcoal mb-3">Grazie — we're on it.</h3>
+        <p className="font-accent text-charcoal/65 tracking-wide max-w-md mx-auto">
+          Your catering request is in. We'll get back to you <span className="text-charcoal">within the hour</span> during
+          business hours to confirm the details.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="max-w-2xl mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <input required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Your name *" className={field} />
+        <input required type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="Phone *" className={field} />
+        <input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="Email (optional)" className={field} />
+        <input required type="date" value={form.date} onChange={(e) => setForm({ ...form, date: e.target.value })} aria-label="Delivery date" className={field} />
+      </div>
+      <div className="mt-4">
+        <input required value={form.headcount} onChange={(e) => setForm({ ...form, headcount: e.target.value })} placeholder="How many people? *" className={field} />
+      </div>
+      <div className="mt-4">
+        <textarea rows={3} value={form.notes} onChange={(e) => setForm({ ...form, notes: e.target.value })} placeholder="Anything else? Tray preferences, dietary needs, delivery address…" className={field} />
+      </div>
+      {error && (
+        <p className="font-accent text-sm text-red-700/80 mt-4">
+          Something went wrong sending your request — please call us at (650) 745-8811 and we'll take care of you.
+        </p>
+      )}
+      <button
+        type="submit"
+        disabled={submitting}
+        className="mt-6 w-full sm:w-auto px-12 py-4 bg-gold text-charcoal font-body text-[12px] tracking-[0.2em] uppercase font-semibold hover:bg-gold-light transition-all duration-500 disabled:opacity-60"
+      >
+        {submitting ? "Sending…" : "Request Catering"}
+      </button>
+    </form>
+  );
+}
+
 export default function BanquetCatering() {
   usePageMeta("/banquet-catering");
 
-  const [activeTab, setActiveTab] = useState<TabKey>("banquet");
+  const [activeTab, setActiveTab] = useState<TabKey>(() => {
+    if (typeof window !== "undefined") {
+      const tab = new URLSearchParams(window.location.search).get("tab");
+      if (tab === "catering") return "catering";
+    }
+    return "banquet";
+  });
 
   return (
     <PageLayout>
@@ -550,20 +625,43 @@ export default function BanquetCatering() {
                 </div>
               ))}
 
-              {/* ezCater CTA — right after browsing the menu */}
-              <div className="text-center mt-16 pt-12 border-t border-charcoal/8">
-                <p className="font-accent text-charcoal/65 text-sm tracking-wide mb-6">
-                  Ready to order? Place your catering order online.
-                </p>
-                <a
-                  href={LINKS.ezcater}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-10 py-4 bg-charcoal text-white font-body text-[12px] tracking-[0.2em] uppercase font-semibold hover:bg-espresso transition-all duration-500"
-                >
-                  <ShoppingBag size={14} />
-                  Order on ezCater
-                </a>
+              {/* Direct order — primary CTA after browsing the menu */}
+              <div id="order-catering" className="mt-16 pt-12 border-t border-charcoal/8">
+                <div className="text-center mb-10">
+                  <div className="divider-diamond mb-6"><i /></div>
+                  <h3 className="font-display text-2xl md:text-3xl text-charcoal mb-3">Order Catering Direct</h3>
+                  <p className="font-accent text-charcoal/65 max-w-xl mx-auto tracking-wide">
+                    Tell us what you need and we'll confirm your order personally &mdash; no middleman, no service fees.
+                  </p>
+                  <p className="inline-flex items-center gap-2 font-accent text-gold text-sm tracking-wide mt-4">
+                    <Clock size={14} />
+                    We respond within the hour during business hours
+                  </p>
+                </div>
+
+                <CateringOrderForm />
+
+                <div className="text-center mt-10">
+                  <p className="font-accent text-charcoal/55 text-sm tracking-wide">
+                    In a hurry? Call{" "}
+                    <a href="tel:+16507458811" onClick={() => trackPhoneClick("catering-order")} className="text-gold hover:text-gold-light transition-colors">
+                      (650) 745-8811
+                    </a>{" "}
+                    and we'll take your order over the phone.
+                  </p>
+                  <p className="font-accent text-charcoal/40 text-xs tracking-wide mt-4">
+                    Prefer to order through ezCater?{" "}
+                    <a
+                      href={LINKS.ezcater}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => trackEzCaterClick("catering-tab")}
+                      className="text-charcoal/60 underline underline-offset-2 hover:text-charcoal transition-colors"
+                    >
+                      Order there instead
+                    </a>
+                  </p>
+                </div>
               </div>
             </motion.div>
           )}
@@ -676,13 +774,17 @@ export default function BanquetCatering() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href={LINKS.ezcater}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/banquet-catering?tab=catering#order-catering"
               className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-white text-charcoal font-body text-[12px] tracking-[0.2em] uppercase font-semibold hover:bg-white/90 transition-all duration-500"
+              onClick={(e) => {
+                e.preventDefault();
+                const el = document.getElementById("order-catering");
+                if (el) el.scrollIntoView({ behavior: "smooth" });
+                else window.location.href = "/banquet-catering?tab=catering#order-catering";
+              }}
             >
               <ShoppingBag size={14} />
-              Order Catering Online
+              Order Catering Direct
             </a>
             <a
               href="/the-vault"
