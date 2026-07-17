@@ -204,58 +204,59 @@ const horsDoeuves = [
   { name: "Garlic Bread", desc: "Warm, toasty bread with garlic butter baked in", price: "$3 / person" },
 ];
 
-/* ── Catering Menu ── */
+/* ── Catering Menu ──
+   Half tray serves ~10 · Full tray serves ~20 */
 const cateringMenu = [
   {
     category: "Salads",
     subtitle: "Fresh, vibrant, and crafted with seasonal ingredients.",
     items: [
-      { name: "Organic Mixed Greens", desc: "Organic mixed greens with shredded vegetables, housemade balsamic vinaigrette", s10: "$50", s20: "$90" },
-      { name: "Arugula Salad", desc: "Organic arugula with red onions, cherry tomatoes, shaved Parmigiano, Champagne vinaigrette", s10: "$55", s20: "$95" },
-      { name: "Caesar Salad", desc: "Crisp romaine lettuce with garlic croutons, shaved Parmigiano-Reggiano, classic Caesar dressing", s10: "$60", s20: "$100" },
-      { name: "Caprese Salad", desc: "Ripe tomatoes, fresh mozzarella, basil with balsamic vinaigrette and extra-virgin olive oil", s10: "$55", s20: "$95" },
+      { name: "Organic Mixed Greens", desc: "Organic mixed greens with shredded vegetables, housemade balsamic vinaigrette", half: "$50", full: "$90" },
+      { name: "Arugula Salad", desc: "Organic arugula with red onions, cherry tomatoes, shaved Parmigiano, Champagne vinaigrette", half: "$55", full: "$95" },
+      { name: "Caesar Salad", desc: "Crisp romaine lettuce with garlic croutons, shaved Parmigiano-Reggiano, classic Caesar dressing", half: "$60", full: "$110" },
+      { name: "Caprese Salad", desc: "Ripe tomatoes, fresh mozzarella, basil with balsamic vinaigrette and extra-virgin olive oil", half: "$55", full: "$95" },
     ],
   },
   {
     category: "Appetizers & Starters",
     subtitle: "Perfect beginnings for your event — vibrant, flavorful, and crafted with care.",
     items: [
-      { name: "Bruschetta Classica", desc: "Toasted crostini topped with marinated chopped tomatoes, garlic, basil, and EVOO", s10: "$55", s20: "$95" },
-      { name: "Garlic Bread", desc: "Warm sourdough bread brushed with garlic butter and baked until golden", s10: "$45", s20: "$75" },
-      { name: "Brussels Sprouts con Pancetta", desc: "Oven-roasted Brussels sprouts tossed with crispy pancetta and balsamic reduction", s10: "$60", s20: "$100" },
-      { name: "Seasonal Grilled Vegetables", desc: "Fresh seasonal vegetables grilled over mesquite fire with olive oil and sea salt", s10: "$80", s20: "$115" },
-      { name: "Mini Meatballs Marinara", desc: "Housemade 100% beef meatballs blended with fresh breadcrumbs and herbs in signature marinara", s10: "$110", s20: "$190" },
+      { name: "Bruschetta Classica", desc: "Toasted crostini topped with marinated chopped tomatoes, garlic, basil, and EVOO", half: "$55", full: "$95" },
+      { name: "Garlic Bread", desc: "Warm sourdough bread brushed with garlic butter and baked until golden", half: "$45", full: "$75" },
+      { name: "Brussels Sprouts con Pancetta", desc: "Oven-roasted Brussels sprouts tossed with crispy pancetta and balsamic reduction", half: "$60", full: "$100" },
+      { name: "Seasonal Grilled Vegetables", desc: "Fresh seasonal vegetables grilled over mesquite fire with olive oil and sea salt", half: "$80", full: "$130" },
+      { name: "Mini Meatballs Marinara", desc: "Housemade 100% beef meatballs blended with fresh breadcrumbs and herbs in signature marinara", half: "$110", full: "$190" },
     ],
   },
   {
     category: "Pasta",
     subtitle: "Authentic housemade pasta made fresh every day.",
     items: [
-      { name: "Rigatoni Alla Salsiccia", desc: "Rigatoni tossed in a spicy roasted bell pepper and tomato sauce with grilled Italian sausage" },
-      { name: "Lasagne Bolognese", desc: "Layered pasta sheets with slow-simmered all-beef ragù, ricotta, mozzarella, and Parmigiano-Reggiano" },
-      { name: "Penne Alfredo", desc: "Creamy Parmesan Alfredo sauce over penne pasta" },
-      { name: "Rigatoni al Funghi e Tartufo", desc: "Rigatoni with wild mushrooms, thyme, garlic, and a touch of truffle cream" },
-      { name: "Spinach & Ricotta Ravioli", desc: "Housemade ravioli filled with spinach and ricotta. Choice of Sauce: Marinara or Bolognese" },
-      { name: "Vegetarian Lasagna", desc: "Grilled seasonal vegetables layered with ricotta, mozzarella, and housemade marinara" },
-      { name: "Chicken Alfredo", desc: "Penne pasta with grilled chicken tenderloins in a rich, creamy Alfredo sauce" },
-      { name: "Rigatoni alla Norma", desc: "Sicilian-style rigatoni with roasted eggplant, tomato, basil, and shaved ricotta salata" },
-      { name: "Rigatoni alla Vodka", desc: "Rigatoni with shallots, chili flakes, Parmigiano, and a silky cream sauce" },
-      { name: "Penne al Pesto Genovese", desc: "Classic basil pesto with Parmigiano, toasted pine nuts, and a touch of cream" },
-      { name: "Penne Arrabbiata", desc: "Penne in a bold, spicy marinara with chili and garlic" },
-      { name: "Penne Pomodoro", desc: "Simple and bright — tomato, garlic, basil, and olive oil" },
-      { name: "Pasta Bolognese", desc: "Slow-cooked beef ragù with aromatic vegetables and herbs. Choice of Penne, Spaghetti, or Gluten-Free Penne" },
+      { name: "Rigatoni Alla Salsiccia", desc: "Rigatoni tossed in a spicy roasted bell pepper and tomato sauce with grilled Italian sausage", half: "$140", full: "$185" },
+      { name: "Lasagne Bolognese", desc: "Layered pasta sheets with slow-simmered all-beef ragù, ricotta, mozzarella, and Parmigiano-Reggiano", half: "$150", full: "$195" },
+      { name: "Penne Alfredo", desc: "Creamy Parmesan Alfredo sauce over penne pasta", half: "$130", full: "$170" },
+      { name: "Rigatoni al Funghi e Tartufo", desc: "Rigatoni with wild mushrooms, thyme, garlic, and a touch of truffle cream", half: "$150", full: "$200" },
+      { name: "Spinach & Ricotta Ravioli", desc: "Housemade ravioli filled with spinach and ricotta. Choice of Sauce: Marinara or Bolognese", half: "$145", full: "$190" },
+      { name: "Vegetarian Lasagna", desc: "Grilled seasonal vegetables layered with ricotta, mozzarella, and housemade marinara", half: "$140", full: "$180" },
+      { name: "Chicken Alfredo", desc: "Penne pasta with grilled chicken tenderloins in a rich, creamy Alfredo sauce", half: "$145", full: "$190" },
+      { name: "Rigatoni alla Norma", desc: "Sicilian-style rigatoni with roasted eggplant, tomato, basil, and shaved ricotta salata", half: "$130", full: "$170" },
+      { name: "Rigatoni alla Vodka", desc: "Rigatoni with shallots, chili flakes, Parmigiano, and a silky cream sauce", half: "$130", full: "$170" },
+      { name: "Penne al Pesto Genovese", desc: "Classic basil pesto with Parmigiano, toasted pine nuts, and a touch of cream", half: "$130", full: "$170" },
+      { name: "Penne Arrabbiata", desc: "Penne in a bold, spicy marinara with chili and garlic", half: "$120", full: "$160" },
+      { name: "Penne Pomodoro", desc: "Simple and bright — tomato, garlic, basil, and olive oil", half: "$115", full: "$150" },
+      { name: "Pasta Bolognese", desc: "Slow-cooked beef ragù with aromatic vegetables and herbs. Choice of Penne, Spaghetti, or Gluten-Free Penne", half: "$130", full: "$170" },
     ],
   },
   {
     category: "Entrées",
     subtitle: "Chef-crafted main courses designed for family-style catering and elegant service.",
     items: [
-      { name: "Chicken Marsala", desc: "Tender chicken breast sautéed with cremini mushrooms and finished in a rich Marsala wine reduction" },
-      { name: "Chicken Parmesan", desc: "Crispy chicken breast topped with marinara, mozzarella, and Parmigiano, baked until golden" },
-      { name: "Chicken Piccata", desc: "Pan-seared chicken breast with capers, lemon, and white wine butter sauce" },
-      { name: "Grilled Salmon Fillet", desc: "Fresh salmon grilled to perfection and served with a delicate lemon butter sauce" },
-      { name: "Beef Brasato al Barolo", desc: "Slow-braised short ribs simmered in Barolo wine, aromatic vegetables, and herbs" },
-      { name: "Eggplant Parmesan", desc: "Breaded eggplant layered with marinara and mozzarella, baked until bubbling" },
+      { name: "Chicken Marsala", desc: "Tender chicken breast sautéed with cremini mushrooms and finished in a rich Marsala wine reduction", half: "$170", full: "$225" },
+      { name: "Chicken Parmesan", desc: "Crispy chicken breast topped with marinara, mozzarella, and Parmigiano, baked until golden", half: "$170", full: "$225" },
+      { name: "Chicken Piccata", desc: "Pan-seared chicken breast with capers, lemon, and white wine butter sauce", half: "$170", full: "$225" },
+      { name: "Grilled Salmon Fillet", desc: "Fresh salmon grilled to perfection and served with a delicate lemon butter sauce", half: "$320", full: "$490" },
+      { name: "Beef Brasato al Barolo", desc: "Slow-braised short ribs simmered in Barolo wine, aromatic vegetables, and herbs", half: "$260", full: "$395" },
+      { name: "Eggplant Parmesan", desc: "Breaded eggplant layered with marinara and mozzarella, baked until bubbling", half: "$140", full: "$185" },
     ],
   },
 ];
@@ -581,7 +582,10 @@ export default function BanquetCatering() {
                 <div className="divider-diamond mb-6"><i /></div>
                 <h2 className="font-display text-3xl md:text-4xl text-charcoal mb-3">Catering Menu</h2>
                 <p className="font-accent text-charcoal/65 max-w-2xl mx-auto tracking-wide">
-                  Bring Andiamo's flavors to your office, home, or event venue. Family-style trays available for 10 or 20 guests.
+                  Bring Andiamo's flavors to your office, home, or event venue.
+                </p>
+                <p className="font-accent text-gold/80 text-sm tracking-wide mt-3">
+                  Half tray serves ~10 &middot; Full tray serves ~20 &middot; House bread and delivery included
                 </p>
               </div>
 
@@ -594,10 +598,10 @@ export default function BanquetCatering() {
                   </div>
 
                   {/* Price column headers for items that have them */}
-                  {cat.items[0] && "s10" in cat.items[0] && (
+                  {cat.items[0] && "half" in cat.items[0] && (
                     <div className="hidden sm:flex justify-end gap-6 mb-3">
-                      <span className="font-body text-[10px] tracking-[0.2em] uppercase text-charcoal/30 w-20 text-center">Serves 10</span>
-                      <span className="font-body text-[10px] tracking-[0.2em] uppercase text-charcoal/30 w-20 text-center">Serves 20</span>
+                      <span className="font-body text-[10px] tracking-[0.2em] uppercase text-charcoal/30 w-20 text-center">Half Tray</span>
+                      <span className="font-body text-[10px] tracking-[0.2em] uppercase text-charcoal/30 w-20 text-center">Full Tray</span>
                     </div>
                   )}
 
@@ -611,10 +615,10 @@ export default function BanquetCatering() {
                             </h4>
                             <div className="flex-1 border-b border-dotted border-charcoal/20 mb-1.5 min-w-[20px]" />
                           </div>
-                          {"s10" in item && (
+                          {"half" in item && (
                             <div className="flex gap-6 shrink-0">
-                              <span className="font-accent text-gold text-sm tracking-wide w-20 text-center">{(item as any).s10}</span>
-                              <span className="font-accent text-gold text-sm tracking-wide w-20 text-center">{(item as any).s20}</span>
+                              <span className="font-accent text-gold text-sm tracking-wide w-20 text-center">{(item as any).half}</span>
+                              <span className="font-accent text-gold text-sm tracking-wide w-20 text-center">{(item as any).full}</span>
                             </div>
                           )}
                         </div>
@@ -625,12 +629,6 @@ export default function BanquetCatering() {
                     ))}
                   </div>
 
-                  {/* Note for items without prices */}
-                  {cat.items[0] && !("s10" in cat.items[0]) && (
-                    <p className="text-center font-accent text-gold/70 text-sm mt-8 italic tracking-wide">
-                      Pricing varies based on guest count and selections. Contact us for a custom quote.
-                    </p>
-                  )}
                 </div>
               ))}
 
