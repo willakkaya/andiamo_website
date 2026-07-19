@@ -1432,38 +1432,68 @@ export const MODULES: TrainingModule[] = [
     order: 8,
     section: "What We Sell",
     title: "Wine & Upselling",
-    summary: "By-the-glass list, what to suggest when, and how to upsell with confidence.",
-    minutes: 8,
+    summary:
+      "Andiamo's by-the-glass program \u2014 the one-question method, every pour's formula, and the five moments that sell.",
+    minutes: 14,
     requiredFor: BEVERAGE_TEAM,
     location: "Andiamo",
     lessons: [
       {
-        heading: "White Wines (By the Glass)",
+        heading: "The One-Question Method",
+        intro:
+          "You don\u2019t need to be a sommelier \u2014 you need one pattern: ask one question \u2192 pick the pour \u2192 say one sentence \u2192 stop talking. And \u2018great question \u2014 let me find out\u2019 is always a professional answer.",
         points: [
-          "Donini Pinot Grigio — crisp, light citrus; for an easy, light, Italian white.",
-          "Flowers Chardonnay (Sonoma Coast) — full, creamy, oaked; the rich crowd-pleaser.",
-          "De Forville Chardonnay (unoaked) — bright, mineral; Chard without the butter.",
-          "Clos Henri Sauvignon Blanc — citrusy, zesty; crisp and refreshing.",
-          "La Cala Vermentino — saline, coastal; for seafood, crudo, or fish.",
+          "THE CHARDONNAY WALKTHROUGH \u2014 guest: \u2018I\u2019ll just have a Chardonnay.\u2019 You: \u2018crisp and bright, or rich and buttery?\u2019 Buttery \u2192 Flowers (Sonoma Coast, full and creamy). Crisp \u2192 De Forville (unoaked, bright, mineral \u2014 \u2018Chard without the butter\u2019). Every answer has a pour waiting.",
+          "Pinot Grigio: \u2018the classic, or something with a coastal twist?\u2019 \u2192 Donini / La Cala Vermentino (saline \u2014 the branzino wine).",
+          "Sauvignon Blanc \u2192 Clos Henri: citrusy, zesty, refreshing. One sentence, done.",
+          "Reds: \u2018smooth and easy, or big and bold?\u2019 \u2192 smooth: House Nero d\u2019Avola or Routestock Pinot Noir; bold: The Calling Cabernet.",
+          "Italian mood: \u2018for the pasta, or something adventurous?\u2019 \u2192 Chianti with red sauce / Tintero Nebbiolo, the \u2018baby Barolo.\u2019",
+          "Why it works: the question does the selling; you sound like an expert by asking, not lecturing; the price comes last, plainly, no apology.",
         ],
       },
       {
-        heading: "Red Wines (By the Glass)",
+        heading: "Price Transparency & Wine Words",
+        intro:
+          "One rule above all: no guest ever learns a price from the check.",
         points: [
-          "House Red — Rapitala Nero d'Avola — juicy, approachable; easy-drinking Italian.",
-          "The Calling Cabernet — bold, dark fruit, firm tannin; the big full-bodied red.",
-          "Routestock Pinot Noir — silky, elegant, lighter; great with salmon or poultry.",
-          "Tintero Nebbiolo — red fruit, floral, 'baby Barolo'; Italian and adventurous.",
-          "Villa Santa Anna Chianti — cherry, leather, bright acidity; classic with pasta or pizza.",
+          "ALWAYS say the price when you recommend \u2014 plainly, at the end, straight off the printed list: \u201cthe Flowers \u2014 [price].\u201d Confidence with numbers reads as honesty.",
+          "Picking for a guest? Confirm pick AND price before you pour: \u201cI\u2019ll bring the Vermentino \u2014 [price] \u2014 perfect with the branzino.\u201d",
+          "DRY = not sweet (nearly everything we pour is dry \u2014 ask \u2018crisp or rich?\u2019 instead). BODY = weight: skim milk \u2192 whole milk \u2192 cream.",
+          "TANNIN = the tea-bag grip in reds (big in the Calling, gentle in Pinot). ACIDITY = mouth-watering brightness (Chianti loves food for this reason). OAK = vanilla/butter from barrels (Flowers yes, De Forville no).",
+          "CORKED = musty wet-cardboard smell from a faulty cork. It happens to good bottles: apologize, replace immediately without debate, tell a manager.",
         ],
       },
       {
-        heading: "Sparkling & The Upsell Mindset",
+        heading: "Whites & Sparkling \u2014 Formula \u00b7 Sentence \u00b7 For",
         points: [
-          "Lamberti Prosecco — the welcome glass / aperitivo; great to start the table.",
-          "Offer a bottle naturally: 'Can I bring a bottle? It works out to about the same as three glasses each.'",
-          "Be specific and sensory: 'The Vermentino is drinking beautifully — saline, coastal, perfect with the branzino.'",
-          "You are not selling — you are guiding. A guest who trusts your pick comes back.",
+          "Lamberti Prosecco: Glera \u00b7 Veneto \u00b7 green apple \u00b7 light, frothy. \u201cThe welcome glass \u2014 dry, crisp, celebratory.\u201d FOR every table at greeting.",
+          "Donini Pinot Grigio: PG \u00b7 Italy \u00b7 light citrus \u00b7 crisp, easy. \u201cThe classic \u2014 crisp and clean.\u201d FOR the PG guest; never talk them out of it.",
+          "Flowers Chardonnay: Chard \u00b7 Sonoma Coast \u00b7 cream & ripe orchard fruit \u00b7 full, rich. \u201cThe rich crowd-pleaser from one of Sonoma\u2019s great coastal names.\u201d FOR the buttery-Chard guest \u2014 their yes.",
+          "De Forville Chardonnay: Chard \u00b7 Piedmont \u00b7 bright minerality \u00b7 zero oak. \u201cChardonnay without the butter.\u201d FOR crisp-white drinkers and the \u2018I don\u2019t like Chardonnay\u2019 guest.",
+          "Clos Henri Sauvignon Blanc: SB \u00b7 Marlborough (founded by Sancerre\u2019s Bourgeois family) \u00b7 citrus & zest \u00b7 crisp. \u201cA Sancerre family making Sauvignon in New Zealand.\u201d FOR the SB-by-default guest.",
+          "La Cala Vermentino: Vermentino \u00b7 Sardinia \u00b7 saline & coastal \u00b7 fresh. \u201cThe seafood wine \u2014 tastes like the coast.\u201d FOR the branzino, crudo, anything from the sea.",
+        ],
+      },
+      {
+        heading: "Reds \u2014 Formula \u00b7 Sentence \u00b7 For",
+        points: [
+          "House Nero d\u2019Avola (Rapital\u00e0): Nero d\u2019Avola \u00b7 Sicily \u00b7 juicy dark fruit \u00b7 smooth, easy. \u201cOur house red \u2014 Sicilian sunshine, smooth and generous.\u201d FOR the \u2018just a red\u2019 guest.",
+          "Routestock Pinot Noir: Pinot \u00b7 California \u00b7 red berries \u00b7 silky, lighter. \u201cSilky and elegant \u2014 the red that loves salmon and chicken.\u201d FOR the easy-red guest; whites crossing over.",
+          "Villa Sant\u2019Anna Chianti: Sangiovese \u00b7 Tuscany \u00b7 cherry & leather \u00b7 bright, food-first. \u201cThe classic with anything red-sauce.\u201d FOR the traditional Italian order.",
+          "Tintero Nebbiolo: Nebbiolo \u00b7 Piedmont \u00b7 red fruit & rose \u00b7 elegant, floral. \u201cA baby Barolo \u2014 the noble grape at a friendly price.\u201d FOR the curious; the step up from Chianti.",
+          "The Calling Cabernet: Cab \u00b7 California \u00b7 dark fruit \u00b7 bold, firm. \u201cThe big one \u2014 dark fruit and structure.\u201d FOR the bold-red guest and the steak.",
+          "The Italian ladder: Nero d\u2019Avola \u2192 Chianti \u2192 Tintero Nebbiolo \u2014 one friendly rung at a time.",
+        ],
+      },
+      {
+        heading: "The Moments That Sell",
+        points: [
+          "THE WELCOME: offer the Lamberti at greeting, with price \u2014 \u201ca glass of Prosecco while you look things over?\u201d An opened table drinks more all night.",
+          "THE SECOND GLASS: offer at a third full, never after empty \u2014 \u201canother Flowers, or should I bring the De Forville so you can taste the two styles side by side?\u201d The compare play turns a glass into a tasting.",
+          "THE BOTTLE MATH: \u201cCan I bring a bottle? It works out to about the same as three glasses each.\u201d Offer BEFORE the third round \u2014 guests never resent being saved money.",
+          "THE DESSERT HANDOFF: when dessert lands, hand the table to the after-dinner round \u2014 amaro, limoncello, or a caff\u00e8 corretto (see the Spirits & Amaro module).",
+          "THE CHECK MOMENT: every price was said out loud earlier, so the check holds zero surprises. No surprises = trust = tips = regulars.",
+          "The mindset under all of it: you are not selling \u2014 you are guiding. Be specific and sensory: \u201cthe Vermentino is drinking beautifully \u2014 saline, coastal, perfect with the branzino.\u201d",
         ],
       },
     ],
@@ -1592,6 +1622,58 @@ export const MODULES: TrainingModule[] = [
         answer: 1,
         explanation:
           "Guide with specific, sensory language. Trust builds regulars — that's the real upsell.",
+      },
+      {
+        id: "wine-11",
+        question: "A guest says \u2018I\u2019ll just have a Chardonnay.\u2019 Your first move:",
+        options: [
+          "Pour the Flowers \u2014 it\u2019s the most popular",
+          "Ask: \u2018crisp and bright, or rich and buttery?\u2019 \u2014 De Forville or Flowers, every answer has a pour",
+          "Recite both Chardonnays with full tasting notes",
+          "Suggest the Prosecco instead",
+        ],
+        answer: 1,
+        explanation:
+          "One question does the selling: buttery \u2192 Flowers; crisp \u2192 De Forville, \u2018Chard without the butter.\u2019",
+      },
+      {
+        id: "wine-12",
+        question: "You\u2019ve picked a wine for a guest who said \u2018you choose.\u2019 Before pouring, you:",
+        options: [
+          "Just bring it \u2014 they said you choose",
+          "Confirm the pick AND the price: \u201cI\u2019ll bring the Vermentino \u2014 [price] \u2014 perfect with the branzino\u201d",
+          "Bring two options",
+          "Ask the manager",
+        ],
+        answer: 1,
+        explanation:
+          "No guest ever learns a price from the check. Pick and price, confirmed before the pour.",
+      },
+      {
+        id: "wine-13",
+        question: "A guest\u2019s glass of Flowers is a third full and they clearly love it. Best line:",
+        options: [
+          "Wait for them to ask",
+          "\u201cAnother Flowers \u2014 or should I bring the De Forville so you can taste the two styles side by side?\u201d",
+          "Drop the check",
+          "Refill without asking",
+        ],
+        answer: 1,
+        explanation:
+          "Offer before empty; the compare play turns one glass into a tasting \u2014 the easiest second sale in the building.",
+      },
+      {
+        id: "wine-14",
+        question: "A guest says the wine smells like wet cardboard. You:",
+        options: [
+          "Explain that\u2019s the terroir",
+          "Apologize, replace it immediately without debate, and tell a manager \u2014 that\u2019s cork taint",
+          "Offer 10% off",
+          "Pour it back and re-serve",
+        ],
+        answer: 1,
+        explanation:
+          "Corked wine happens to good bottles. Never argue \u2014 replace and report.",
       },
     ],
   },
