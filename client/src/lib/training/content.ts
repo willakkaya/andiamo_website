@@ -1775,29 +1775,64 @@ export const MODULES: TrainingModule[] = [
     id: "tasting",
     order: 10,
     section: "Bar Reference",
-    title: "Tasting Notes: Spirits & Amaro",
-    summary: "Describe spirits and digestifs in vivid, accurate language to build trust.",
-    minutes: 6,
+    title: "Spirits & Amaro \u2014 the After-Dinner Round",
+    summary:
+      "Aperitivo and digestivo culture, the amaro ladder, and how to sell the most profitable ten minutes of the night.",
+    minutes: 12,
     requiredFor: BEVERAGE_TEAM,
     lessons: [
       {
-        heading: "Spirits",
+        heading: "Why the After-Dinner Round Matters",
+        intro:
+          "In Italy, dinner doesn\u2019t end with dessert \u2014 it ends with a digestivo. Bringing that ritual to the table is hospitality first and the most profitable ten minutes of the night second.",
         points: [
-          "London Dry Gin — juniper, coriander, citrus; piney, floral; clean dry finish.",
-          "Bourbon — vanilla, caramel, toasted oak; warm sweet corn; long oaky finish.",
-          "Rye Whiskey — spice, pepper, dried fruit; bold and peppery; dry spicy finish.",
-          "Blanco Tequila — fresh agave, citrus; grassy and bright; crisp clean finish.",
-          "Mezcal (Joven) — smoke, roasted agave, earth; complex and smoky.",
+          "The table has already decided to linger \u2014 the after-dinner offer meets them where they are. Nobody ever felt sold a limoncello.",
+          "It is nearly pure margin, it extends the evening, and it is the thing guests remember: \u2018they brought us amaro and told us the story.\u2019",
+          "The offer is one sentence, made when dessert is ordered or the last plates clear: \u201cespresso for the table \u2014 and something to settle the meal? An amaro, or an ice-cold limoncello?\u201d",
+          "Price transparency applies here like everywhere: say the price plainly when you name a pour. No surprises on the check, ever.",
         ],
       },
       {
-        heading: "Amaro & Digestifs",
+        heading: "Aperitivo & Digestivo \u2014 Plain English",
         points: [
-          "Campari — intensely bitter, orange peel, herbal; the gateway bitter (Negroni, Spritz).",
-          "Aperol — lighter bitter, orange, rhubarb; very approachable (Aperol Spritz).",
-          "Amaro Nonino — grappa base, orange, vanilla; silky; neat or in a Paper Plane.",
-          "Fernet-Branca — menthol, saffron, myrrh; intensely herbal; the bartender's handshake.",
-          "Limoncello — lemon zest, sweet and bright; serve ice cold as a dessert pairing.",
+          "APERITIVO = before dinner. Light, bitter, often bubbly \u2014 it wakes up the appetite. Aperol Spritz territory.",
+          "DIGESTIVO = after dinner. Herbal, stronger, sipped slowly \u2014 Italians swear it settles a big meal.",
+          "AMARO = Italian for \u2018bitter\u2019 \u2014 a family of herbal liqueurs made from secret blends of roots, herbs, and citrus peel. Every region has its own.",
+          "GRAPPA = a spirit distilled from grape skins after winemaking \u2014 the vineyard\u2019s nightcap (Amaro Nonino is built on it).",
+          "NEAT = as-is, no ice. ROCKS = over ice. CHILLED = shaken cold. Limoncello lives in the freezer.",
+          "CAFF\u00c8 CORRETTO = an espresso \u2018corrected\u2019 with a splash of spirit \u2014 a very Italian yes for the guest who \u2018shouldn\u2019t have another drink.\u2019",
+        ],
+      },
+      {
+        heading: "Spirits \u2014 Formula \u00b7 Sentence \u00b7 For",
+        points: [
+          "London Dry Gin: juniper & citrus \u00b7 piney, floral \u00b7 clean dry finish. \u201cCrisp and botanical \u2014 the classic martini spirit.\u201d FOR the martini drinker; ties to the Burlingame Martini.",
+          "Bourbon: vanilla, caramel & toasted oak \u00b7 warm and sweet \u00b7 long gentle finish. \u201cAmerica\u2019s whiskey \u2014 round, sweet, comforting.\u201d FOR the Old Fashioned drinker; the sweet side of the whiskey axis.",
+          "Rye: spice, pepper & dried fruit \u00b7 bold \u00b7 dry spicy finish. \u201cBourbon\u2019s spicier sibling \u2014 drier, more pepper.\u201d FOR the Manhattan drinker; ask \u2018sweet and round, or dry and spicy?\u2019 \u2014 that one question picks the whiskey.",
+          "Blanco Tequila: fresh agave & citrus \u00b7 grassy, bright \u00b7 crisp finish. \u201cUnaged and pure \u2014 the plant, not the barrel.\u201d FOR margarita drinkers going neat.",
+          "Mezcal (Joven): smoke, roasted agave & earth \u00b7 complex. \u201cTequila\u2019s wilder cousin \u2014 smoky and earthy.\u201d FOR the adventurer and the peated-Scotch drinker.",
+        ],
+      },
+      {
+        heading: "The Amaro Ladder \u2014 Meet the Guest Where They Are",
+        intro:
+          "Amari run from training wheels to the deep end. Never start a newcomer at the bottom of the list \u2014 walk them down the ladder.",
+        points: [
+          "Rung 1 \u2014 APEROL: light bitter, orange & rhubarb. \u201cThe gentlest bitter there is \u2014 if you like an Aperol Spritz, this is where it comes from.\u201d FOR the amaro-curious.",
+          "Rung 2 \u2014 CAMPARI: firmly bitter, orange peel & herbs. \u201cThe backbone of the Negroni \u2014 bracing, grown-up, iconic.\u201d FOR the guest who liked rung one.",
+          "Rung 3 \u2014 AMARO NONINO: grappa base, orange & vanilla, silky. \u201cThe elegant one \u2014 silky, gently bitter, gorgeous neat.\u201d FOR the wine drinker; the best first AFTER-DINNER amaro on the shelf.",
+          "Rung 4 \u2014 FERNET-BRANCA: menthol, saffron & myrrh, intensely herbal. \u201cThe deep end \u2014 the industry calls it the bartender\u2019s handshake.\u201d FOR the initiated and the brave; watch their face, enjoy it.",
+          "Off the ladder \u2014 LIMONCELLO: lemon zest, sweet, ice-cold from the freezer. \u201cSunshine, frozen.\u201d FOR the sweet finisher and the celebration table \u2014 a round of limoncello ends a birthday properly.",
+        ],
+      },
+      {
+        heading: "The After-Dinner Moments",
+        points: [
+          "THE OFFER: as dessert is ordered \u2014 \u201cespresso \u2014 and something to settle the meal? An amaro, or an ice-cold limoncello?\u201d One sentence, everyone at once.",
+          "THE PAIRING SPLIT: sweet tooth \u2192 limoncello or the Moscato half; savory-curious \u2192 the amaro ladder; coffee lover \u2192 caff\u00e8 corretto or espresso + Fernet on the side.",
+          "THE STORY BEAT: one line makes the pour an event \u2014 \u2018every region of Italy has its own amaro; this one\u2019s built on grappa.\u2019 Story turns a drink into a memory.",
+          "THE CELEBRATION CLOSE: birthdays and anniversaries end with a limoncello round \u2014 offer it to the table, name the price, let them feel the generosity of the ritual.",
+          "THE WHISKEY QUESTION: \u2018sweet and round, or dry and spicy?\u2019 \u2014 bourbon or rye, one question, same method as the wine list.",
         ],
       },
     ],
@@ -1906,6 +1941,57 @@ export const MODULES: TrainingModule[] = [
         answer: 1,
         explanation:
           "Grappa base, orange, vanilla — silky and elegant, neat or in a Paper Plane.",
+      },
+      {
+        id: "tasting-11",
+        question: "When and how do you make the after-dinner offer?",
+        options: [
+          "With the check",
+          "As dessert is ordered or plates clear: \u201cespresso \u2014 and something to settle the meal? An amaro, or an ice-cold limoncello?\u201d",
+          "Only if the guest asks",
+          "At the greeting",
+        ],
+        answer: 1,
+        explanation:
+          "One sentence, to the whole table, at the dessert moment \u2014 hospitality first, margin second.",
+      },
+      {
+        id: "tasting-12",
+        question: "Aperitivo vs. digestivo:",
+        options: [
+          "Both are after-dinner drinks",
+          "Aperitivo = before dinner, light and bitter to wake the appetite; digestivo = after, herbal and sipped to settle the meal",
+          "Aperitivo is always sparkling wine",
+          "They are the same thing in different regions",
+        ],
+        answer: 1,
+        explanation: "Before opens the meal; after closes it \u2014 that\u2019s the whole culture in one line.",
+      },
+      {
+        id: "tasting-13",
+        question: "Walk the amaro ladder for a curious newcomer, gentlest first:",
+        options: [
+          "Fernet \u2192 Campari \u2192 Aperol \u2192 Nonino",
+          "Aperol \u2192 Campari \u2192 Amaro Nonino \u2192 Fernet-Branca",
+          "Campari \u2192 Limoncello \u2192 Fernet",
+          "Nonino \u2192 Aperol \u2192 Fernet",
+        ],
+        answer: 1,
+        explanation:
+          "Training wheels to deep end: Aperol, Campari, Nonino, Fernet. Never start a newcomer at Fernet.",
+      },
+      {
+        id: "tasting-14",
+        question: "A guest says \u2018I shouldn\u2019t have another drink\u2019 but is clearly lingering over coffee. The very Italian answer:",
+        options: [
+          "Drop the check",
+          "A double espresso",
+          "Caff\u00e8 corretto \u2014 \u201can espresso \u2018corrected\u2019 with a small splash \u2014 the Italian nightcap\u201d",
+          "A full amaro pour anyway",
+        ],
+        answer: 2,
+        explanation:
+          "The corretto is the graceful middle path \u2014 ritual, tiny pour, perfect close.",
       },
     ],
   },
