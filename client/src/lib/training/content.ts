@@ -1682,7 +1682,6 @@ export const MODULES: TrainingModule[] = [
         explanation:
           "Cork taint doesn\u2019t blow off and it\u2019s in the whole bottle. Replace, report, never argue.",
       },
-    ]
     ],
   },
   {
@@ -2109,7 +2108,6 @@ export const MODULES: TrainingModule[] = [
         explanation:
           "\u2018Shouldn\u2019t\u2019 while lingering is ambivalence, not refusal \u2014 the corretto is the tiny ritual middle path. Offer once, never push.",
       },
-    ]
     ],
   },
   {
@@ -2498,7 +2496,6 @@ export const MODULES: TrainingModule[] = [
         explanation:
           "Big reds fight dessert and espresso ends the spending. Sweet, sparkling, shareable \u2014 the Moscato half is built for this exact table.",
       },
-    ]
     ],
   },
   {
@@ -2803,7 +2800,6 @@ export const MODULES: TrainingModule[] = [
         explanation:
           "Punish honesty once and the floor starts faking answers \u2014 celebrate it and everyone learns it\u2019s safe.",
       },
-    ]
     ],
   },
 ];
