@@ -1932,7 +1932,7 @@ export const MODULES: TrainingModule[] = [
       {
         heading: "Service Rules \u2014 Non-Negotiables",
         points: [
-          "Standard pour is 5 oz. The Billecart-Salmon ros\u00e9 is a 6 oz pour \u2014 and say so at the table.",
+          "Every pour in the building is 6 oz \u2014 a full ounce more than the industry-standard restaurant pour. Say it when it helps, especially on the Billecart: the Village Pub pours it at the same $40, standard glass.",
           "Reserve reds and whites are poured through the Coravin needle \u2014 the cork NEVER comes out of a reserve bottle for a glass order. Not Coravin-trained? Get a manager.",
           "The Billecart is opened normally; sparkling stopper after every pour; note the open date on the bottle; sell through in 2\u20133 days.",
           "Giacomo Conterno \u201cSensory\u201d stemware is for reserve BOTTLE purchases only, on request \u2014 never for by-the-glass pours.",
@@ -1984,16 +1984,16 @@ export const MODULES: TrainingModule[] = [
     quiz: [
       {
         id: "figaro-btg-1",
-        question: "Which pour is 6 oz, and why do we say so at the table?",
+        question: "How big are our wine pours?",
         options: [
-          "The Margaux \u2014 because it costs the most",
-          "The Billecart-Salmon ros\u00e9 \u2014 the Village Pub charges the same $40 for a standard pour; we over-deliver",
-          "All reserve pours are 6 oz",
-          "The Prosecco \u2014 it is the welcome glass",
+          "5 oz \u2014 the industry standard",
+          "Every pour is 6 oz \u2014 a full ounce over the industry standard",
+          "6 oz for reserve pours only",
+          "It varies by wine",
         ],
         answer: 1,
         explanation:
-          "Billecart is our 6 oz statement pour \u2014 same price as the Village Pub, more in the glass.",
+          "All pours are 6 oz. Best told on the Billecart: the Village Pub charges the same $40 for a standard glass.",
       },
       {
         id: "figaro-btg-2",
