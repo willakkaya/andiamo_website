@@ -183,7 +183,11 @@ export default function TrainingModuleView() {
                         src={lesson.image.src}
                         alt={lesson.image.alt}
                         loading="lazy"
-                        className="w-full aspect-[16/10] object-cover"
+                        className={
+                          lesson.image.portrait
+                            ? "w-full max-w-sm mx-auto aspect-[3/4] object-cover object-top"
+                            : "w-full aspect-[16/10] object-cover"
+                        }
                       />
                       <figcaption className="flex items-baseline gap-3 mt-3">
                         <span className="font-accent italic text-gold-dark text-sm shrink-0">

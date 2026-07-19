@@ -34,6 +34,8 @@ export type LessonImage = {
   alt: string;
   /** Editorial caption shown under the photo ("fig." numbering is automatic). */
   caption?: string;
+  /** Tall photos render in a 3:4 frame, face-safe, instead of the wide 16:10 crop. */
+  portrait?: boolean;
 };
 
 export type Lesson = {
@@ -115,6 +117,7 @@ export const MODULES: TrainingModule[] = [
           src: "/akkaya-family.jpg",
           alt: "The Akkaya family",
           caption: "This is a family business — you're part of the family now",
+          portrait: true,
         },
       },
       {
@@ -1913,10 +1916,23 @@ export const MODULES: TrainingModule[] = [
     title: "Caf\u00e9 Figaro: Wines by the Glass \u2014 Summer 2026",
     summary:
       "The new glass program \u2014 17 everyday pours, 5 reserve pours, the service rules, and how to sell them with one question.",
-    minutes: 16,
+    minutes: 20,
     requiredFor: BEVERAGE_TEAM,
     location: "Cafe Figaro",
     lessons: [
+      {
+        heading: "Start Here \u2014 How to Actually Learn This",
+        intro:
+          "Nobody memorizes 22 wines in a night. The pros learn in passes \u2014 do the same.",
+        points: [
+          "Pass 1 (5 min): skim every Formula line \u2014 grape \u00b7 place \u00b7 flavor \u00b7 feel. Just get the map.",
+          "Pass 2 (10 min): read the stories, and say each Sentence OUT LOUD once. Out loud is the trick \u2014 your mouth remembers what your eyes forget.",
+          "Pass 3: run the Dialogues with a coworker or in the mirror. Sixty seconds each.",
+          "Then taste: wine of the day at pre-shift locks it in. Tasting one wine you\u2019ve already read about beats reading ten.",
+          "Learn YOUR wines first: the five reserve pours + the three you pour most. Own eight, then grow.",
+          "Different brains, different doors: readers \u2014 study the cards; talkers \u2014 role-play; doers \u2014 taste and pour. Use yours.",
+        ],
+      },
       {
         heading: "The Program & the Service Philosophy",
         intro:
@@ -1931,11 +1947,33 @@ export const MODULES: TrainingModule[] = [
         ],
       },
       {
-        heading: "Service Rules \u2014 Non-Negotiables",
+        heading: "Service Rules & Price Transparency",
+        intro:
+          "One rule above all: no guest ever learns a price from the check. Surprise is the enemy of trust \u2014 and trust is what sells the second visit.",
         points: [
-          "Every pour in the building is 6 oz \u2014 a full ounce more than the industry-standard restaurant pour. Say it when it helps, especially on the Billecart: the Village Pub pours it at the same $40, standard glass.",
-          "The Billecart is opened normally; sparkling stopper after every pour; note the open date on the bottle; sell through in 2\u20133 days.",
+          "ALWAYS say the price when you recommend \u2014 plainly, at the end, no apology: \u201cthe Ramey \u2014 twenty-five.\u201d Confidence with numbers reads as honesty.",
+          "Reserve pours: the guest hears or sees the price BEFORE the wine is poured, every time. \u201cThe Margaux is sixty-five a glass \u2014 shall I bring it?\u201d",
+          "Guest says \u2018just a Chardonnay\u2019 and you pick for them? Confirm pick AND price: \u201cI\u2019ll bring the Ramey, twenty-five \u2014 perfect with the Alfredo.\u201d",
+          "Every pour in the building is 6 oz \u2014 a full ounce more than the industry standard. Say it when it helps, especially on the Billecart: the Village Pub pours it at the same $40, standard glass. Generosity is only generous if the guest knows.",
+          "The Billecart is opened normally; sparkling stopper after every pour; note the open date; sell through in 2\u20133 days.",
           "Corkage is $30, waived with each bottle purchased from our list. Say it as generosity: \u201chappy to open that \u2014 and if you grab any bottle from our list, we waive it.\u201d",
+        ],
+      },
+      {
+        heading: "Wine Words in Plain English",
+        intro:
+          "Ten words cover 95% of wine talk at the table. Plain definitions \u2014 use them exactly like this with guests.",
+        points: [
+          "DRY = not sweet. Almost everything we pour is dry. When a guest asks for \u2018dry,\u2019 they usually mean crisp \u2014 ask \u2018crisp and bright, or rich?\u2019",
+          "BODY = weight in your mouth. Skim milk (light) \u2192 whole milk (medium) \u2192 cream (full).",
+          "TANNIN = the tea-bag grip in reds \u2014 that drying feeling on your gums. Softens with food; big in Barolo and Cab, gentle in Pinot.",
+          "ACIDITY = the mouth-watering brightness. High-acid wines (Chianti, Sancerre) love food.",
+          "OAK = vanilla, toast, butter notes from barrel aging. Ramey has it; De Forville has none.",
+          "MINERALITY = stone, chalk, saline notes instead of fruit \u2014 the word for Sancerre and Leflaive.",
+          "VINTAGE = the year the grapes were picked. N.V. = a blend of years (normal for Champagne and Prosecco).",
+          "CRU = a named great vineyard site. Ravera (our Cogno) is a cru of Barolo.",
+          "BRUT = dry, in sparkling-wine language.",
+          "CORKED = a musty, wet-cardboard smell from a faulty cork. It happens to good bottles. Never argue \u2014 apologize, replace the glass immediately, tell a manager.",
         ],
       },
       {
@@ -1943,20 +1981,23 @@ export const MODULES: TrainingModule[] = [
         intro:
           "Five prestige pours. Each has a one-sentence story \u2014 deliver it with confidence.",
         points: [
-          "Billecart-Salmon Brut Ros\u00e9, Champagne ($40 / 6 oz) \u2014 the house that defined ros\u00e9 Champagne, family-owned since 1818; wild strawberry and chalk. The Village Pub pours it at the same $40, standard pour \u2014 we over-deliver on purpose.",
-          "Domaines Leflaive, M\u00e2con-Verz\u00e9 ($50) \u2014 Leflaive is white-Burgundy royalty; this is their biodynamic village M\u00e2con. \u2018Leflaive, by the glass.\u2019",
-          "Elvio Cogno \u2018Cascina Nuova\u2019, Barolo ($45) \u2014 Nebbiolo from the Ravera cru above Novello; rose, dried cherry, silky power. The insider\u2019s Barolo.",
-          "Margaux du Ch\u00e2teau Margaux ($65) \u2014 the THIRD WINE of Ch\u00e2teau Margaux: same estate, same hands, the First Growth\u2019s younger vines. A glass of Margaux without the ceremony.",
-          "Jean-Louis Chave S\u00e9lection \u2018Offerus\u2019, Saint-Joseph ($30) \u2014 the Chave family has farmed these hills since 1481 and makes the Rh\u00f4ne\u2019s greatest Hermitage. The affordable door onto the reserve page.",
+          "Billecart-Salmon Brut Ros\u00e9 ($40 / 6 oz): founded 1818, one of the last great family-owned Champagne houses, and THE benchmark ros\u00e9 \u2014 the pink Champagne every other house measures against. Wild strawberry, blood orange, chalk. PAIR oysters, fritto, salty starters. FOR every celebration. Say the Village Pub line: same $40, standard pour there \u2014 six ounces here.",
+          "Domaines Leflaive, M\u00e2con-Verz\u00e9 ($50): Leflaive of Puligny-Montrachet is the most famous white-wine estate in Burgundy \u2014 grand crus that sell for thousands \u2014 and a biodynamic pioneer. This is their village M\u00e2con: the same farming, same cellar discipline, at a human price. White peach, toasted almond, limestone. PAIR the halibut, chicken, shellfish. FOR the Chardonnay drinker ready for France.",
+          "Elvio Cogno \u2018Cascina Nuova\u2019, Barolo ($45): Nebbiolo from Ravera, one of Barolo\u2019s truly great hillsides, above the village of Novello. Rose petal, dried cherry, iron \u2014 power carried on silk. PAIR the veal, braises, anything truffle or mushroom. FOR the serious red drinker and the Barbaresco fan stepping up. \u2018The insider\u2019s Barolo.\u2019",
+          "Margaux du Ch\u00e2teau Margaux ($65): Ch\u00e2teau Margaux is a First Growth \u2014 ranked at the very top of Bordeaux in the famous 1855 classification and never displaced. This is its third wine: the same estate, same winemaking team, from younger vines \u2014 made to drink now. Cassis, violet, cedar, polish. PAIR the lamb chops, steak, veal chop. FOR the name-driven guest and the special occasion. Price FIRST, always: \u2018sixty-five a glass.\u2019",
+          "Jean-Louis Chave S\u00e9lection \u2018Offerus\u2019 ($30): the Chave family has farmed these Rh\u00f4ne hills since 1481 \u2014 sixteen generations \u2014 and their Hermitage is one of the greatest wines on earth. Offerus is their Saint-Joseph: violets, black pepper, smoked meat. PAIR peppery meats, sausage, mushrooms. FOR the adventurer and the value hunter \u2014 the $30 door onto this page.",
         ],
       },
       {
-        heading: "The Margaux Bottle Math",
-        intro: "The easiest $185 in the building \u2014 if you say it out loud.",
+        heading: "The Moments That Sell",
+        intro:
+          "Wine revenue isn\u2019t one big move \u2014 it\u2019s five small moments, every table, every night.",
         points: [
-          "Three glasses of the Margaux ($65) nearly equals the bottle ($185).",
-          "Two guests having two glasses each? Offer the bottle BEFORE the third glass: \u201cif you\u2019re each having another, the bottle is 185 and the better deal.\u201d",
-          "Guests never resent being saved money \u2014 that offer builds the trust that sells the next visit.",
+          "THE WELCOME: offer a glass at greeting, by name, with price \u2014 \u201ca glass of Prosecco while you look things over? Twelve.\u201d An opened table drinks more all night.",
+          "THE SECOND GLASS: offer when the glass is a third full, never after empty \u2014 \u201canother Ramey, or should I bring the Champy so you can taste them side by side?\u201d The compare play turns a glass into a tasting.",
+          "THE BOTTLE MATH: two guests, two rounds of the same wine \u2192 offer the bottle BEFORE the third glass. On the Margaux: \u201cif you\u2019re each having another, the bottle is 185 and the better deal.\u201d Guests never resent being saved money.",
+          "THE DESSERT MOMENT: when dessert is ordered, offer the La Spinetta Moscato d\u2019Asti half bottle \u2014 \u201ca half of Moscato for the table with dessert? Thirty-two, and it\u2019s gently sparkling.\u201d The easiest add-on in the building.",
+          "THE CHECK MOMENT: because every price was said out loud earlier, the check holds zero surprises. No surprises = trust = tips = regulars. That is the whole system.",
         ],
       },
       {
@@ -2192,6 +2233,58 @@ export const MODULES: TrainingModule[] = [
         answer: 1,
         explanation:
           "Never \u2018everything.\u2019 Pick one white and one red you actually tasted and say why in one sentence.",
+      },
+      {
+        id: "figaro-btg-15",
+        question: "Before a reserve pour like the Margaux reaches the table, what must be true?",
+        options: [
+          "The manager has approved it",
+          "The guest has heard or seen the price \u2014 \u2018sixty-five a glass\u2019 \u2014 before it\u2019s poured",
+          "It has been decanted",
+          "Nothing \u2014 pour on request",
+        ],
+        answer: 1,
+        explanation:
+          "No guest ever learns a price from the check. Price before pour, plainly, every time.",
+      },
+      {
+        id: "figaro-btg-16",
+        question: "A guest says their wine smells like wet cardboard. You:",
+        options: [
+          "Explain that it\u2019s supposed to smell that way",
+          "Offer a discount on the glass",
+          "Apologize, replace it immediately without debate, and tell a manager",
+          "Suggest they add ice",
+        ],
+        answer: 2,
+        explanation:
+          "That\u2019s cork taint \u2014 it happens to good bottles. Never argue; replace and report.",
+      },
+      {
+        id: "figaro-btg-17",
+        question: "A guest asks for \u2018something dry.\u2019 Dry means:",
+        options: [
+          "High in alcohol",
+          "Not sweet \u2014 and since nearly everything we pour is dry, ask \u2018crisp and bright, or rich?\u2019",
+          "Full-bodied",
+          "Expensive",
+        ],
+        answer: 1,
+        explanation:
+          "Dry = not sweet. The useful follow-up question is crisp vs. rich \u2014 that\u2019s what they\u2019re really telling you.",
+      },
+      {
+        id: "figaro-btg-18",
+        question: "The table just ordered two desserts. Your move:",
+        options: [
+          "Drop the check",
+          "Offer espresso only",
+          "\u201cA half bottle of Moscato d\u2019Asti for the table with dessert? Thirty-two, and it\u2019s gently sparkling.\u201d",
+          "Offer another Cabernet",
+        ],
+        answer: 2,
+        explanation:
+          "The dessert moment is the easiest add-on in the building \u2014 sweet, sparkling, made for sharing.",
       },
     ],
   },

@@ -419,6 +419,28 @@ export default function TrainingAdmin() {
                         {electives > 0 ? ` · +${electives} elective` : ""}
                       </span>
                     </div>
+                    <div className="flex flex-wrap gap-1.5 mb-3">
+                      {required.map((m) => {
+                        const prog = emp.modules[m.id];
+                        const pct = prog ? Math.round(prog.bestPct * 100) : null;
+                        const cls = prog?.passed
+                          ? "bg-green-600/10 text-green-700 border-green-600/25"
+                          : prog && prog.attempts > 0
+                            ? "bg-amber-500/10 text-amber-700 border-amber-500/25"
+                            : "bg-muted text-muted-foreground border-transparent";
+                        return (
+                          <span
+                            key={m.id}
+                            className={`text-[10px] leading-none px-2 py-1 rounded-full border ${cls}`}
+                            title={`${m.title} — ${prog ? `best ${pct}% · ${prog.attempts} attempt${prog.attempts === 1 ? "" : "s"}` : "not started"}`}
+                          >
+                            {m.title.replace("Café Figaro: ", "").slice(0, 26)}
+                            {" "}
+                            {prog ? `${pct}%` : "—"}
+                          </span>
+                        );
+                      })}
+                    </div>
                     {weak.length > 0 ? (
                       <div className="flex flex-wrap items-center gap-2">
                         <span className="text-xs text-muted-foreground flex items-center gap-1">
@@ -460,7 +482,12 @@ export default function TrainingAdmin() {
                   key={module.id}
                   className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-3"
                 >
-                  <span className="text-sm sm:flex-1 sm:truncate">{module.title}</span>
+                  <span className="text-sm sm:flex-1 sm:truncate">
+                    <span className="text-[10px] tracking-[0.14em] uppercase text-muted-foreground mr-2">
+                      {module.location ?? "All"}
+                    </span>
+                    {module.title}
+                  </span>
                   <div className="flex items-center gap-2 sm:gap-3">
                     <Progress
                       value={total ? (passed / total) * 100 : 0}
