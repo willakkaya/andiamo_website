@@ -1912,8 +1912,8 @@ export const MODULES: TrainingModule[] = [
     section: "Bar Reference",
     title: "Caf\u00e9 Figaro: Wines by the Glass \u2014 Summer 2026",
     summary:
-      "The new glass program \u2014 17 everyday pours, 5 reserve pours, and the service rules that go with them.",
-    minutes: 12,
+      "The new glass program \u2014 17 everyday pours, 5 reserve pours, the service rules, and how to sell them with one question.",
+    minutes: 14,
     requiredFor: BEVERAGE_TEAM,
     location: "Cafe Figaro",
     lessons: [
@@ -1926,6 +1926,7 @@ export const MODULES: TrainingModule[] = [
           "One memorable detail per wine, not a Wikipedia entry.",
           "Present two options, recommend one, let the guest choose.",
           "The upsell is generosity: guiding a guest to a better wine gives them a better night.",
+          "You don\u2019t need to be a sommelier. The whole skill: ask one question \u2192 pick the pour \u2192 say one sentence \u2192 stop talking. And \u2018great question \u2014 let me find out\u2019 is a professional answer.",
           "Our list holds the Wine Spectator BEST OF Award of Excellence for 2026 and a Star Wine List Award \u2014 worth mentioning to wine lovers.",
         ],
       },
@@ -1933,9 +1934,7 @@ export const MODULES: TrainingModule[] = [
         heading: "Service Rules \u2014 Non-Negotiables",
         points: [
           "Every pour in the building is 6 oz \u2014 a full ounce more than the industry-standard restaurant pour. Say it when it helps, especially on the Billecart: the Village Pub pours it at the same $40, standard glass.",
-          "Reserve reds and whites are poured through the Coravin needle \u2014 the cork NEVER comes out of a reserve bottle for a glass order. Not Coravin-trained? Get a manager.",
           "The Billecart is opened normally; sparkling stopper after every pour; note the open date on the bottle; sell through in 2\u20133 days.",
-          "Giacomo Conterno \u201cSensory\u201d stemware is for reserve BOTTLE purchases only, on request \u2014 never for by-the-glass pours.",
           "Corkage is $30, waived with each bottle purchased from our list. Say it as generosity: \u201chappy to open that \u2014 and if you grab any bottle from our list, we waive it.\u201d",
         ],
       },
@@ -1958,6 +1957,20 @@ export const MODULES: TrainingModule[] = [
           "Three glasses of the Margaux ($65) nearly equals the bottle ($185).",
           "Two guests having two glasses each? Offer the bottle BEFORE the third glass: \u201cif you\u2019re each having another, the bottle is 185 and the better deal.\u201d",
           "Guests never resent being saved money \u2014 that offer builds the trust that sells the next visit.",
+        ],
+      },
+      {
+        heading: "The One-Question Method \u2014 the Chardonnay Walkthrough",
+        intro:
+          "Learn this pattern once and every category on the card works the same way. Guest: \u2018I\u2019ll just have a Chardonnay.\u2019 You: \u2018Love it \u2014 do you like it crisp and bright, or rich and buttery?\u2019",
+        points: [
+          "\u2018Buttery\u2019 \u2192 \u201cThen the Ramey \u2014 classic Russian River, ripe apple, a kiss of oak. Twenty-five.\u201d",
+          "\u2018Crisp\u2019 \u2192 \u201cThe De Forville from Piedmont \u2014 no oak at all, wildflowers and cream. Sixteen.\u201d",
+          "\u2018What do YOU like?\u2019 \u2192 \u201cThe Maison Champy \u2014 real white Burgundy from Burgundy\u2019s oldest house. Twenty-five.\u201d",
+          "Wine-lover energy \u2192 \u201cIf you want to see how far Chardonnay goes, we pour Leflaive on the reserve page. Fifty.\u201d",
+          "Why it works: the question does the selling; every answer has a pour waiting; the price comes last, plainly, no apology.",
+          "The one question per category \u2014 Sauvignon Blanc: \u2018zesty NZ style or the French mineral one?\u2019 (Te Mata 16 / Sancerre 20). Pinot Grigio: \u2018the classic or the more interesting version?\u2019 (Walch 16 / Ribolla 16). Big reds: \u2018smooth and easy or big and bold?\u2019 (Routestock 17 / Chappellet 25 / Duckhorn 28). Pinot Noir: \u2018light and juicy or silky and serious?\u2019 (Presqu\u2019ile 17 / Occidental 35). Italian: \u2018for the pasta or the steak?\u2019 (Chianti 16, A Quo 20 / Barbaresco 25).",
+          "The second glass: offer when the glass is a third full, never after empty \u2014 \u201canother Ramey, or should I bring the Champy so you can taste them side by side?\u201d The compare play is the easiest second sale in the building.",
         ],
       },
       {
@@ -2036,29 +2049,30 @@ export const MODULES: TrainingModule[] = [
       },
       {
         id: "figaro-btg-5",
-        question: "The cork comes out of a reserve bottle for a glass order\u2026",
+        question: "A guest says \u2018I\u2019ll just have a Chardonnay.\u2019 Your first move:",
         options: [
-          "Whenever the Coravin is busy",
-          "Never \u2014 reserve stills are poured through the Coravin needle only; get a manager if untrained",
-          "Only for the Margaux",
-          "Only on weekends",
+          "Pour the cheapest one",
+          "Recite all three Chardonnays with tasting notes",
+          "Ask: \u2018crisp and bright, or rich and buttery?\u2019",
+          "Suggest they try a Sauvignon Blanc instead",
         ],
-        answer: 1,
+        answer: 2,
         explanation:
-          "Coravin only. The one exception is the Billecart, which opens normally and takes the sparkling stopper.",
+          "One question does the selling: buttery \u2192 Ramey 25; crisp \u2192 De Forville 16; \u2018what do you like?\u2019 \u2192 Champy 25; wine lover \u2192 Leflaive 50.",
       },
       {
         id: "figaro-btg-6",
-        question: "Who gets the Giacomo Conterno \u201cSensory\u201d stemware?",
+        question:
+          "A guest is a third from finishing a Ramey they clearly love. The best line:",
         options: [
-          "Every reserve by-the-glass pour",
-          "Reserve BOTTLE purchases only, on request",
-          "Anyone who asks, any order",
-          "Managers only",
+          "Wait until the glass is empty, then ask if they want another",
+          "\u201cAnother Ramey \u2014 or should I bring the Champy so you can taste them side by side?\u201d",
+          "Bring a second Ramey without asking",
+          "Drop the check",
         ],
         answer: 1,
         explanation:
-          "Bottle service on the reserve list only \u2014 never for by-the-glass pours.",
+          "Offer before empty, and offer the compare \u2014 it turns one glass into a tasting and is the easiest second sale in the building.",
       },
       {
         id: "figaro-btg-7",
