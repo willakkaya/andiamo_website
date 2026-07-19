@@ -62,6 +62,8 @@ export type TrainingModule = {
   requiredFor: Role[];
   /** Restaurant this module belongs to. Undefined = group-wide (all restaurants). */
   location?: Location;
+  /** If true, the module never appears as an elective — only roles in requiredFor see it. */
+  hiddenUnlessRequired?: boolean;
   lessons: Lesson[];
   quiz: QuizQuestion[];
 };
@@ -2183,6 +2185,23 @@ export const MODULES: TrainingModule[] = [
         ],
       },
       {
+        heading: "Real Tables \u2014 the Scripts",
+        intro:
+          "The most common order isn\u2019t a question \u2014 it\u2019s a grape. The move is always the same: name BOTH pours, one descriptor each, price each, let them choose. Two options (three max), never the whole list.",
+        points: [
+          "\u201cI\u2019ll have a Pinot Noir.\u201d \u2192 \u201cWe pour two \u2014 the Presqu\u2019ile from Santa Barbara, juicy and smooth, seventeen; or the Occidental from the Sonoma Coast \u2014 Steve Kistler\u2019s project, silky and layered, thirty-five. Which sounds like tonight?\u201d",
+          "\u201cA glass of Cabernet.\u201d \u2192 \u201cThree Napa pours \u2014 Routestock, smooth and classic, seventeen; Chappellet, mountain fruit, twenty-five; or Duckhorn, the velvet one, twenty-eight.\u201d",
+          "\u201cChardonnay.\u201d \u2192 \u201cCrisp or rich? The De Forville is bright with no oak, sixteen \u2014 the Ramey is the classic California style, twenty-five. And there\u2019s a real white Burgundy in between at the same price.\u201d",
+          "\u201cSauvignon Blanc.\u201d \u2192 \u201cTe Mata from New Zealand, zesty and bright, sixteen \u2014 or the Sancerre, the same grape in its French home, more mineral, twenty.\u201d",
+          "\u201cPinot Grigio.\u201d \u2192 \u201cElena Walch from the Alps, sixteen \u2014 and if you ever want its more interesting cousin, the Ribolla Gialla is the same price.\u201d",
+          "\u201cSomething red with my pasta.\u201d \u2192 \u201cThe Chianti \u2014 made for red sauce, sixteen \u2014 or the A Quo, a baby Super Tuscan, rounder, twenty.\u201d",
+          "\u201cDo you have Prosecco?\u201d \u2192 \u201cBisol Jeio \u2014 proper dry Prosecco, twelve. And pink bubbles at fifteen if the table\u2019s celebrating.\u201d",
+          "\u201cChampagne by the glass?\u201d \u2192 \u201cBillecart-Salmon ros\u00e9 \u2014 the house that defined ros\u00e9 Champagne \u2014 forty, and we pour six ounces.\u201d",
+          "\u201cWhat\u2019s your best glass of wine?\u201d \u2192 \u201cDepends what you love \u2014 the reserve page pours Leflaive white Burgundy at fifty, a beautiful Barolo at forty-five, and a glass of Ch\u00e2teau Margaux\u2019s third wine at sixty-five.\u201d",
+          "The pattern, always: both names \u00b7 one descriptor each \u00b7 both prices \u00b7 \u201cwhich sounds like tonight?\u201d Then stop talking.",
+        ],
+      },
+      {
         heading: "Whites & Sparkling \u2014 Formula \u00b7 Sentence \u00b7 Pair \u00b7 For",
         intro:
           "Every wine reduces to four lines: grape \u00b7 place \u00b7 one flavor \u00b7 one feel. Then a pairing and a person. That is all you need.",
@@ -2209,18 +2228,6 @@ export const MODULES: TrainingModule[] = [
           "Villa Sant\u2019Anna Chianti ($16): Sangiovese \u00b7 Tuscany \u00b7 sour cherry & earth \u00b7 bright, food-first. PAIR anything with red sauce. FOR the classic Italian order.",
           "Montepeloso \u2018A Quo\u2019 ($20): Tuscan blend \u00b7 coastal Tuscany \u00b7 plum & spice \u00b7 smooth, medium-full. PAIR the veal, mushroom pasta. FOR the Chianti step-up.",
           "Tintero Barbaresco ($25): Nebbiolo \u00b7 Piedmont \u00b7 cherry, rose & truffle \u00b7 elegant, firm. PAIR braises, truffle anything. FOR the intrigued. Ladder: 16 \u2192 20 \u2192 25 \u2192 Cogno 45.",
-        ],
-      },
-      {
-        heading: "The Sommelier\u2019s Method \u2014 How We Train",
-        intro:
-          "This is how master sommeliers build a floor: a system, not a syllabus.",
-        points: [
-          "Taste in small doses: wine of the day at every pre-shift \u2014 one ounce, ninety seconds, everyone says ONE word out loud. No wrong answers. The whole card in a month, then repeat.",
-          "The four-line formula: grape \u00b7 place \u00b7 one flavor \u00b7 one feel. \u2018Nebbiolo, from Piedmont, cherry and rose, elegant with a firm finish\u2019 is a complete professional answer.",
-          "Say it out loud: role-play in pairs at pre-shift, sixty seconds \u2014 one plays the guest, the other answers in two sentences or fewer. Awkward at first, automatic by week two.",
-          "Read the guest, then pour: Safety Seeker \u2192 the classic (Walch/Ramey/Duckhorn), never challenge. Curious \u2192 same-price swap (Ribolla/Offerus). Celebrator \u2192 Billecart, no hesitation. Collector \u2192 let them talk, mention the reserve page, hand off to Will \u2014 that\u2019s a compliment, not a failure.",
-          "Honesty is the brand: never fake a note; \u2018let me find out\u2019 + coming back builds more trust than any recitation. And recommend ONE wine, not three.",
         ],
       },
     ],
@@ -2627,6 +2634,133 @@ export const MODULES: TrainingModule[] = [
       },
     ],
   },
+  {
+    id: "figaro-somm-method",
+    order: 13,
+    section: "Coaching",
+    title: "The Sommelier\u2019s Method \u2014 Coaching the Floor",
+    summary:
+      "Manager playbook: how to run pre-shift tastings, drills, and guest-reading so the wine program lives on the floor.",
+    minutes: 8,
+    requiredFor: ["Manager"],
+    location: "Cafe Figaro",
+    hiddenUnlessRequired: true,
+    lessons: [
+      {
+        heading: "The System in Five Parts",
+        intro:
+          "Master sommeliers build floors with a system, not a syllabus. Yours to run:",
+        points: [
+          "Taste in small doses \u2014 wine of the day at every pre-shift: one ounce, ninety seconds, one wine.",
+          "The four-line formula \u2014 grape \u00b7 place \u00b7 one flavor \u00b7 one feel \u2014 is the complete floor vocabulary. Hold servers to it; nothing more is required.",
+          "Say it out loud \u2014 knowledge isn\u2019t knowledge until spoken. Drill it (below).",
+          "Read the guest, then pour \u2014 teach the four guest types (below).",
+          "Honesty is the brand \u2014 celebrate \u2018let me find out\u2019 publicly; kill fake tasting notes on sight. And coach: recommend ONE wine, not three.",
+        ],
+      },
+      {
+        heading: "Running Pre-Shift",
+        points: [
+          "WINE OF THE DAY (90 seconds): pour one ounce for everyone \u2192 look, smell, taste \u2192 each person says ONE word out loud \u2192 you read the wine\u2019s Sentence from the module \u2192 done. No wrong words \u2014 the word is theirs forever.",
+          "ROLE-PLAY DRILL (60 seconds, pairs): one plays the guest \u2014 \u2018what\u2019s good?\u2019, \u2018I\u2019ll have a Pinot Noir\u2019, \u2018we\u2019re celebrating\u2019, \u2018something like a Caymus\u2019 \u2014 the other answers in two sentences or fewer, price included. Swap. Awkward week one, automatic week two.",
+          "NEW LIST ROLLOUT: three kickoff pre-shifts \u2014 whites, reds, reserve \u2014 then the daily cadence covers the whole card in about a month, then repeat.",
+          "The quiz is a coaching tool, not a gate \u2014 retakes are unlimited, scores are conversation starters.",
+        ],
+      },
+      {
+        heading: "The Four Guest Types",
+        points: [
+          "SAFETY SEEKER \u2014 wants the familiar. Coach servers to give the classic (Walch, Ramey, Duckhorn) and never challenge. Comfort is hospitality.",
+          "CURIOUS \u2014 wants a nudge. Same-price swaps: Ribolla for Pinot Grigio, Offerus for \u2018surprise me.\u2019 Zero-risk adventure.",
+          "CELEBRATOR \u2014 wants the moment marked. Billecart, six ounces, no hesitation.",
+          "COLLECTOR \u2014 wants to talk. Servers should engage, mention the reserve page and the awards, and hand off to Will when it goes deep \u2014 frame the handoff as a compliment, never a failure.",
+        ],
+      },
+      {
+        heading: "Coaching with the Dashboard",
+        points: [
+          "The admin view shows per-module score chips per employee \u2014 best %, attempts, and untouched modules at a glance.",
+          "Amber chips (attempted, not passed) are your coaching list \u2014 ask what tripped them up at pre-shift, then have them retake.",
+          "Celebrate passes out loud. Public wins make the next person study.",
+          "When the glass list changes, the module regenerates and completions reset by design \u2014 send the team message again and re-run the three kickoff pre-shifts.",
+        ],
+      },
+    ],
+    quiz: [
+      {
+        id: "somm-method-1",
+        question: "The wine-of-the-day pre-shift ritual is:",
+        options: [
+          "A full tasting seminar",
+          "One ounce, ninety seconds, everyone says one word out loud, you read the Sentence",
+          "Optional reading",
+          "A written test",
+        ],
+        answer: 1,
+        explanation: "Small doses, spoken out loud, every pre-shift \u2014 the whole card in a month.",
+      },
+      {
+        id: "somm-method-2",
+        question: "The four-line formula is:",
+        options: [
+          "Producer, importer, price, score",
+          "Grape \u00b7 place \u00b7 one flavor \u00b7 one feel",
+          "Vintage, region, alcohol, oak",
+          "Name, price, pairing, glassware",
+        ],
+        answer: 1,
+        explanation: "That\u2019s the complete floor vocabulary \u2014 hold everyone to it, require nothing more.",
+      },
+      {
+        id: "somm-method-3",
+        question: "The role-play drill format:",
+        options: [
+          "Managers quiz servers publicly",
+          "Pairs, sixty seconds \u2014 one plays the guest, the other answers in two sentences or fewer, price included",
+          "Written flashcards",
+          "Watching a video",
+        ],
+        answer: 1,
+        explanation: "Spoken, short, and priced \u2014 the dining room stops being scary once the words have been said.",
+      },
+      {
+        id: "somm-method-4",
+        question: "A guest is lingering over the reserve page telling stories about Burgundy trips. The coached move is:",
+        options: [
+          "Rush them to order",
+          "Engage, mention the awards and reserve list, and hand off to Will if it goes deep \u2014 a compliment, not a failure",
+          "Leave them alone entirely",
+          "Bring the check",
+        ],
+        answer: 1,
+        explanation: "That\u2019s the Collector \u2014 conversation IS the product; the handoff is hospitality.",
+      },
+      {
+        id: "somm-method-5",
+        question: "An employee\u2019s chip shows amber \u2014 attempted, not passed. You:",
+        options: [
+          "Write them up",
+          "Ask what tripped them up at pre-shift, coach it, have them retake \u2014 the quiz is a tool, not a gate",
+          "Ignore it",
+          "Remove them from the schedule",
+        ],
+        answer: 1,
+        explanation: "Scores are conversation starters. Retakes are unlimited by design.",
+      },
+      {
+        id: "somm-method-6",
+        question: "A server answers a wine question with \u2018great question \u2014 let me find out.\u2019 You:",
+        options: [
+          "Coach them to always have an answer",
+          "Praise it publicly \u2014 honesty plus the follow-up builds more trust than any recitation",
+          "Note it as a knowledge gap",
+          "Take over their tables",
+        ],
+        answer: 1,
+        explanation: "Honesty is the brand \u2014 celebrate it so the whole floor learns it\u2019s safe.",
+      },
+    ],
+  },
 ];
 
 export const TOTAL_MODULES = MODULES.length;
@@ -2655,5 +2789,10 @@ export function requiredModulesFor(role: Role, location: Location): TrainingModu
 
 /** In-scope modules outside the role's requirements — open to study, not counted. */
 export function electiveModulesFor(role: Role, location: Location): TrainingModule[] {
-  return MODULES.filter((m) => atLocation(m, location) && !m.requiredFor.includes(role));
+  return MODULES.filter(
+    (m) =>
+      atLocation(m, location) &&
+      !m.requiredFor.includes(role) &&
+      !m.hiddenUnlessRequired,
+  );
 }
