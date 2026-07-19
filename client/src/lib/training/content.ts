@@ -64,6 +64,8 @@ export type TrainingModule = {
   location?: Location;
   /** If true, the module never appears as an elective — only roles in requiredFor see it. */
   hiddenUnlessRequired?: boolean;
+  /** Per-module quiz draw size; falls back to the global QUIZ_DRAW. */
+  quizDraw?: number;
   lessons: Lesson[];
   quiz: QuizQuestion[];
 };
@@ -2115,6 +2117,7 @@ export const MODULES: TrainingModule[] = [
     order: 11,
     section: "Bar Reference",
     title: "Caf\u00e9 Figaro: Wines by the Glass \u2014 Summer 2026",
+    quizDraw: 12,
     summary:
       "The new glass program \u2014 17 everyday pours, 5 reserve pours, the service rules, and how to sell them with one question.",
     minutes: 20,

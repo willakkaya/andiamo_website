@@ -34,8 +34,8 @@ function shuffle<T>(arr: T[]): T[] {
 // Each attempt draws a random subset of the question bank (QUIZ_DRAW) and gets
 // a fresh shuffle of question order and answer options, so staff learn the
 // content rather than memorizing answers or positions.
-function buildRun(quiz: QuizQuestion[]): RunQuestion[] {
-  return shuffle(quiz).slice(0, QUIZ_DRAW).map((q) => {
+function buildRun(quiz: QuizQuestion[], draw: number): RunQuestion[] {
+  return shuffle(quiz).slice(0, draw).map((q) => {
     const correctText = q.options[q.answer];
     const options = shuffle(q.options);
     return {
@@ -95,10 +95,10 @@ export default function TrainingModuleView() {
 
   const isElective =
     !!currentEmployee && !module.requiredFor.includes(currentEmployee.role);
-  const drawCount = Math.min(QUIZ_DRAW, module.quiz.length);
+  const drawCount = Math.min(module.quizDraw ?? QUIZ_DRAW, module.quiz.length);
 
   const startQuiz = () => {
-    setRun(buildRun(module.quiz));
+    setRun(buildRun(module.quiz, drawCount));
     setAnswers({});
     setCurrent(0);
     setMode("quiz");
