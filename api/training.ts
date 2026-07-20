@@ -66,8 +66,36 @@ const moduleProgress = pgTable(
   }),
 );
 
+const certifications = pgTable(
+  "certifications",
+  {
+    id: text("id").primaryKey(),
+    employeeId: text("employee_id")
+      .notNull()
+      .references(() => employees.id, { onDelete: "cascade" }),
+    certType: text("cert_type").notNull(),
+    issuedAt: timestamp("issued_at", { withTimezone: true }).notNull(),
+    expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
+  },
+  (t) => ({
+    employeeCert: uniqueIndex("certifications_employee_cert_idx").on(
+      t.employeeId,
+      t.certType,
+    ),
+  }),
+);
+
+// Default validity (years) per certification type; the client shows the same
+// values. An explicit expiresAt in the request overrides these.
+const CERT_VALID_YEARS: Record<string, number> = {
+  rbs: 3,
+  "food-handler": 3,
+  harassment: 2,
+};
+
 type EmployeeRow = typeof employees.$inferSelect;
 type ModuleProgressRow = typeof moduleProgress.$inferSelect;
+type CertificationRow = typeof certifications.$inferSelect;
 
 // ---------------------------------------------------------------------------
 // Lazy DB
@@ -135,7 +163,11 @@ function bearer(req: VercelRequest): string | null {
 // ---------------------------------------------------------------------------
 // Serialization
 // ---------------------------------------------------------------------------
-function toDTO(emp: EmployeeRow, progress: ModuleProgressRow[]) {
+function toDTO(
+  emp: EmployeeRow,
+  progress: ModuleProgressRow[],
+  certRows: CertificationRow[] = [],
+) {
   const modules: Record<string, unknown> = {};
   for (const p of progress) {
     modules[p.moduleId] = {
@@ -144,6 +176,13 @@ function toDTO(emp: EmployeeRow, progress: ModuleProgressRow[]) {
       attempts: p.attempts,
       lastAttemptAt: p.lastAttemptAt.toISOString(),
       wrongQuestionIds: p.wrongQuestionIds,
+    };
+  }
+  const certs: Record<string, unknown> = {};
+  for (const c of certRows) {
+    certs[c.certType] = {
+      issuedAt: c.issuedAt.toISOString(),
+      expiresAt: c.expiresAt.toISOString(),
     };
   }
   return {
@@ -156,10 +195,14 @@ function toDTO(emp: EmployeeRow, progress: ModuleProgressRow[]) {
     signatureName: emp.signatureName,
     createdAt: emp.createdAt.toISOString(),
     modules,
+    certs,
   };
 }
 async function getProgress(employeeId: string) {
   return db().select().from(moduleProgress).where(eq(moduleProgress.employeeId, employeeId));
+}
+async function getCerts(employeeId: string) {
+  return db().select().from(certifications).where(eq(certifications.employeeId, employeeId));
 }
 
 // ---------------------------------------------------------------------------
@@ -213,7 +256,9 @@ async function signin(req: VercelRequest, res: VercelResponse) {
 
   const progress = await getProgress(emp.id);
   const token = signToken({ employeeId: emp.id, isManager });
-  return res.status(200).json({ employee: toDTO(emp, progress), token });
+  return res
+    .status(200)
+    .json({ employee: toDTO(emp, progress, await getCerts(emp.id)), token });
 }
 
 async function me(req: VercelRequest, res: VercelResponse) {
@@ -224,7 +269,9 @@ async function me(req: VercelRequest, res: VercelResponse) {
     await db().select().from(employees).where(eq(employees.id, session.employeeId)).limit(1)
   )[0];
   if (!row) return res.status(404).json({ error: "Employee not found" });
-  return res.status(200).json({ employee: toDTO(row, await getProgress(row.id)) });
+  return res.status(200).json({
+    employee: toDTO(row, await getProgress(row.id), await getCerts(row.id)),
+  });
 }
 
 async function attempt(req: VercelRequest, res: VercelResponse) {
@@ -322,7 +369,18 @@ async function listEmployees(req: VercelRequest, res: VercelResponse) {
     arr.push(p);
     byEmp.set(p.employeeId, arr);
   }
-  return res.status(200).json({ employees: emps.map((e) => toDTO(e, byEmp.get(e.id) ?? [])) });
+  const allCerts = await db().select().from(certifications);
+  const certsByEmp = new Map<string, CertificationRow[]>();
+  for (const c of allCerts) {
+    const arr = certsByEmp.get(c.employeeId) ?? [];
+    arr.push(c);
+    certsByEmp.set(c.employeeId, arr);
+  }
+  return res.status(200).json({
+    employees: emps.map((e) =>
+      toDTO(e, byEmp.get(e.id) ?? [], certsByEmp.get(e.id) ?? []),
+    ),
+  });
 }
 
 async function resetPin(req: VercelRequest, res: VercelResponse) {
@@ -371,7 +429,78 @@ async function acknowledge(req: VercelRequest, res: VercelResponse) {
     await db().select().from(employees).where(eq(employees.id, session.employeeId)).limit(1)
   )[0];
   if (!row) return res.status(404).json({ error: "Employee not found" });
-  return res.status(200).json({ employee: toDTO(row, await getProgress(row.id)) });
+  return res.status(200).json({
+    employee: toDTO(row, await getProgress(row.id), await getCerts(row.id)),
+  });
+}
+
+async function setCert(req: VercelRequest, res: VercelResponse) {
+  if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
+  if (!(await requireManager(req, res))) return;
+  const { employeeId, certType, issuedAt, expiresAt } = (req.body ?? {}) as Record<
+    string,
+    string
+  >;
+  if (!employeeId || !certType || !issuedAt)
+    return res.status(400).json({ error: "employeeId, certType, and issuedAt are required" });
+  const validYears = CERT_VALID_YEARS[certType];
+  if (!validYears) return res.status(400).json({ error: `Unknown cert type: ${certType}` });
+  const issued = new Date(issuedAt);
+  if (isNaN(issued.getTime())) return res.status(400).json({ error: "Invalid issuedAt date" });
+  let expires: Date;
+  if (expiresAt) {
+    expires = new Date(expiresAt);
+    if (isNaN(expires.getTime()))
+      return res.status(400).json({ error: "Invalid expiresAt date" });
+  } else {
+    expires = new Date(issued);
+    expires.setFullYear(expires.getFullYear() + validYears);
+  }
+  const target = (
+    await db().select().from(employees).where(eq(employees.id, employeeId)).limit(1)
+  )[0];
+  if (!target) return res.status(404).json({ error: "Employee not found" });
+
+  const existing = (
+    await db()
+      .select()
+      .from(certifications)
+      .where(
+        and(eq(certifications.employeeId, employeeId), eq(certifications.certType, certType)),
+      )
+      .limit(1)
+  )[0];
+  if (existing) {
+    await db()
+      .update(certifications)
+      .set({ issuedAt: issued, expiresAt: expires })
+      .where(eq(certifications.id, existing.id));
+  } else {
+    await db().insert(certifications).values({
+      id: randomUUID(),
+      employeeId,
+      certType,
+      issuedAt: issued,
+      expiresAt: expires,
+    });
+  }
+  return res.status(200).json({
+    employee: toDTO(target, await getProgress(employeeId), await getCerts(employeeId)),
+  });
+}
+
+async function removeCert(req: VercelRequest, res: VercelResponse) {
+  if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
+  if (!(await requireManager(req, res))) return;
+  const { employeeId, certType } = (req.body ?? {}) as Record<string, string>;
+  if (!employeeId || !certType)
+    return res.status(400).json({ error: "employeeId and certType are required" });
+  await db()
+    .delete(certifications)
+    .where(
+      and(eq(certifications.employeeId, employeeId), eq(certifications.certType, certType)),
+    );
+  return res.status(200).json({ ok: true });
 }
 
 // ---------------------------------------------------------------------------
@@ -395,6 +524,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         return await resetPin(req, res);
       case "remove-employee":
         return await removeEmployee(req, res);
+      case "set-cert":
+        return await setCert(req, res);
+      case "remove-cert":
+        return await removeCert(req, res);
       case "acknowledge":
         return await acknowledge(req, res);
       default:

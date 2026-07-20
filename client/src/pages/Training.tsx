@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { Link } from "wouter";
 import { ArrowRight, ArrowUpRight, PenLine } from "lucide-react";
 import {
@@ -17,12 +17,17 @@ import {
   electivePassCount,
   isFullyTrained,
   isCertified,
+  isVeteran,
+  onboardingPlan,
+  certIssues,
+  type PlanPhase,
   type ModuleProgress,
   type Role,
   type Location,
 } from "@/contexts/TrainingContext";
 import {
   MODULES,
+  CERT_TYPES,
   electiveModulesFor,
   requiredModulesFor,
   type TrainingModule,
@@ -327,10 +332,12 @@ function ChapterHeading({
   numeral,
   title,
   note,
+  chip,
 }: {
   numeral: string;
   title: string;
   note?: string;
+  chip?: ReactNode;
 }) {
   return (
     <div className="mt-16 mb-4 flex flex-wrap items-baseline gap-x-4 gap-y-1">
@@ -339,7 +346,34 @@ function ChapterHeading({
       {note && (
         <span className="font-accent italic text-sm text-muted-foreground">{note}</span>
       )}
+      {chip}
     </div>
+  );
+}
+
+/** Due-date chip for an onboarding phase. */
+function PhaseChip({ phase }: { phase: PlanPhase }) {
+  const fmt = phase.dueDate.toLocaleDateString(undefined, {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+  });
+  if (phase.complete)
+    return (
+      <span className="font-body text-[9px] tracking-[0.24em] uppercase text-gold-dark border border-gold/50 px-2 py-0.5">
+        Complete
+      </span>
+    );
+  if (phase.overdue)
+    return (
+      <span className="font-body text-[9px] tracking-[0.24em] uppercase text-destructive border border-destructive/50 px-2 py-0.5">
+        Was due {fmt}
+      </span>
+    );
+  return (
+    <span className="font-body text-[9px] tracking-[0.24em] uppercase text-muted-foreground border border-foreground/25 px-2 py-0.5">
+      Due {fmt}
+    </span>
   );
 }
 
@@ -454,6 +488,7 @@ function Dashboard() {
     (n, p) => n + p.wrongQuestionIds.length,
     0,
   );
+  const plan = onboardingPlan(currentEmployee);
 
   return (
     <div className="max-w-6xl mx-auto px-5 sm:px-8 pt-12 sm:pt-16 pb-4">
@@ -496,6 +531,29 @@ function Dashboard() {
         <SignOffCard />
       </div>
 
+      {certIssues(currentEmployee).length > 0 && (
+        <p className="mb-6 font-body text-[10px] tracking-[0.2em] uppercase text-muted-foreground border-l-2 border-amber-500/70 pl-3 py-1">
+          Compliance —{" "}
+          {certIssues(currentEmployee)
+            .map(({ typeId, status }) => {
+              const t = CERT_TYPES.find((c) => c.id === typeId)!;
+              const cert = currentEmployee.certs?.[typeId];
+              if (status === "missing") return `${t.short} not on file`;
+              const d = cert
+                ? new Date(cert.expiresAt).toLocaleDateString(undefined, {
+                    month: "short",
+                    day: "numeric",
+                  })
+                : "";
+              return status === "expired"
+                ? `${t.short} expired ${d}`
+                : `${t.short} expires ${d}`;
+            })
+            .join(" · ")}{" "}
+          — see a manager to update
+        </p>
+      )}
+
       {drillCount > 0 && (
         <Link href="/training/drill" className="block group">
           <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border border-gold/45 hover:border-gold transition-colors duration-300 px-5 py-4 sm:px-7 sm:py-5">
@@ -520,17 +578,42 @@ function Dashboard() {
         </Link>
       )}
 
-      <ChapterHeading numeral="I" title={`Required for ${currentEmployee.role}`} />
-      <div className="border-b border-foreground/15">
-        {required.map((m) => (
-          <ModuleRow key={m.id} module={m} progress={currentEmployee.modules[m.id]} />
-        ))}
-      </div>
+      {isVeteran(currentEmployee) ? (
+        <>
+          <ChapterHeading numeral="I" title={`Required for ${currentEmployee.role}`} />
+          <div className="border-b border-foreground/15">
+            {required.map((m) => (
+              <ModuleRow key={m.id} module={m} progress={currentEmployee.modules[m.id]} />
+            ))}
+          </div>
+        </>
+      ) : (
+        plan.map((phase, i) => (
+          <div key={phase.phase}>
+            <ChapterHeading
+              numeral={["I", "II", "III"][i]}
+              title={phase.title}
+              chip={<PhaseChip phase={phase} />}
+            />
+            <div className="border-b border-foreground/15">
+              {phase.modules.map((m) => (
+                <ModuleRow
+                  key={m.id}
+                  module={m}
+                  progress={currentEmployee.modules[m.id]}
+                />
+              ))}
+            </div>
+          </div>
+        ))
+      )}
 
       {electives.length > 0 && (
         <>
           <ChapterHeading
-            numeral="II"
+            numeral={
+              isVeteran(currentEmployee) ? "II" : ["I", "II", "III", "IV"][plan.length]
+            }
             title="Electives"
             note="beyond your role — never counted against you"
           />

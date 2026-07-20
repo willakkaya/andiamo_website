@@ -19,10 +19,14 @@ import {
 import {
   ROLES,
   LOCATIONS,
+  CERT_TYPES,
+  PHASE_DUE_DAYS,
+  PHASE_TITLES,
   electiveModulesFor,
   requiredModulesFor,
   type Role,
   type Location,
+  type TrainingModule,
 } from "@/lib/training/content";
 
 // Re-exported so UI components keep a single import surface for training state.
@@ -37,6 +41,11 @@ export type ModuleProgress = {
   wrongQuestionIds: string[]; // from the best attempt
 };
 
+export type CertRecord = {
+  issuedAt: string; // ISO
+  expiresAt: string; // ISO
+};
+
 // Mirrors the server's EmployeeDTO.
 export type EmployeeRecord = {
   id: string;
@@ -46,11 +55,38 @@ export type EmployeeRecord = {
   isManager: boolean;
   createdAt: string;
   modules: Record<string, ModuleProgress>;
+  /** Compliance certifications keyed by cert type id (see CERT_TYPES). */
+  certs?: Record<string, CertRecord>;
   /** Set when the employee signs the standards acknowledgment. */
   acknowledgedAt?: string | null;
   /** The full name the employee typed as their signature. */
   signatureName?: string | null;
 };
+
+// ---------------------------------------------------------------------------
+// Compliance helpers
+// ---------------------------------------------------------------------------
+export type CertStatus = "valid" | "expiring" | "expired" | "missing" | "n/a";
+
+const EXPIRING_SOON_DAYS = 60;
+
+export function certStatus(emp: EmployeeRecord, certTypeId: string): CertStatus {
+  const type = CERT_TYPES.find((t) => t.id === certTypeId);
+  if (!type || !type.appliesTo.includes(emp.role)) return "n/a";
+  const cert = emp.certs?.[certTypeId];
+  if (!cert) return "missing";
+  const msLeft = new Date(cert.expiresAt).getTime() - Date.now();
+  if (msLeft < 0) return "expired";
+  if (msLeft < EXPIRING_SOON_DAYS * 86_400_000) return "expiring";
+  return "valid";
+}
+
+/** Cert types that need attention (missing/expiring/expired) for this employee. */
+export function certIssues(emp: EmployeeRecord): { typeId: string; status: CertStatus }[] {
+  return CERT_TYPES.map((t) => ({ typeId: t.id, status: certStatus(emp, t.id) })).filter(
+    (c) => c.status === "missing" || c.status === "expiring" || c.status === "expired",
+  );
+}
 
 export type AttemptAnswer = { questionId: string; correct: boolean };
 
@@ -137,6 +173,52 @@ export function isCertified(emp: EmployeeRecord | undefined): boolean {
 }
 
 // ---------------------------------------------------------------------------
+// Onboarding plan — phased due dates derived from the hire (first sign-in) date
+// ---------------------------------------------------------------------------
+export type PlanPhase = {
+  phase: 1 | 2 | 3;
+  title: string;
+  dueDate: Date;
+  complete: boolean;
+  overdue: boolean;
+  modules: TrainingModule[];
+};
+
+/** The employee's phased onboarding plan (only phases that apply to their role). */
+export function onboardingPlan(emp: EmployeeRecord): PlanPhase[] {
+  const required = requiredModulesFor(emp.role, emp.location);
+  const hired = new Date(emp.createdAt).getTime();
+  return ([1, 2, 3] as const)
+    .map((phase) => {
+      const modules = required.filter((m) => m.phase === phase);
+      const dueDate = new Date(hired + PHASE_DUE_DAYS[phase] * 86_400_000);
+      const complete =
+        modules.length > 0 && modules.every((m) => emp.modules[m.id]?.passed);
+      return {
+        phase,
+        title: PHASE_TITLES[phase],
+        dueDate,
+        complete,
+        overdue: !complete && Date.now() > dueDate.getTime(),
+        modules,
+      };
+    })
+    .filter((p) => p.modules.length > 0);
+}
+
+/** Hired long enough ago that due-date chips would be noise rather than help. */
+export function isVeteran(emp: EmployeeRecord): boolean {
+  return Date.now() - new Date(emp.createdAt).getTime() > 30 * 86_400_000;
+}
+
+export type OnboardingStatus = "complete" | "on-track" | "behind";
+
+export function onboardingStatus(emp: EmployeeRecord): OnboardingStatus {
+  if (isFullyTrained(emp)) return "complete";
+  return onboardingPlan(emp).some((p) => p.overdue) ? "behind" : "on-track";
+}
+
+// ---------------------------------------------------------------------------
 // Context
 // ---------------------------------------------------------------------------
 export type SignInArgs = {
@@ -164,6 +246,10 @@ type TrainingContextValue = {
   resetEmployeePin: (employeeId: string, newPin: string) => Promise<Result>;
   /** Manager-only: remove an employee and all their progress. */
   removeEmployee: (employeeId: string) => Promise<Result>;
+  /** Manager-only: record a compliance certification (issued date, ISO). */
+  setCert: (employeeId: string, certTypeId: string, issuedAt: string) => Promise<Result>;
+  /** Manager-only: clear a recorded certification. */
+  removeCert: (employeeId: string, certTypeId: string) => Promise<Result>;
 };
 
 const TrainingContext = createContext<TrainingContextValue | null>(null);
@@ -273,6 +359,40 @@ export function TrainingProvider({ children }: { children: ReactNode }) {
     [],
   );
 
+  const setCert = useCallback(
+    async (employeeId: string, certTypeId: string, issuedAt: string): Promise<Result> => {
+      const res = await api<{ employee: EmployeeRecord }>("set-cert", {
+        method: "POST",
+        body: { employeeId, certType: certTypeId, issuedAt },
+      });
+      if (!res.ok) return { ok: false, error: res.error };
+      setAllEmployees((prev) =>
+        prev.map((e) => (e.id === employeeId ? res.data.employee : e)),
+      );
+      return { ok: true };
+    },
+    [],
+  );
+
+  const removeCert = useCallback(
+    async (employeeId: string, certTypeId: string): Promise<Result> => {
+      const res = await api<{ ok: true }>("remove-cert", {
+        method: "POST",
+        body: { employeeId, certType: certTypeId },
+      });
+      if (!res.ok) return { ok: false, error: res.error };
+      setAllEmployees((prev) =>
+        prev.map((e) =>
+          e.id === employeeId
+            ? { ...e, certs: Object.fromEntries(Object.entries(e.certs ?? {}).filter(([k]) => k !== certTypeId)) }
+            : e,
+        ),
+      );
+      return { ok: true };
+    },
+    [],
+  );
+
   const value = useMemo<TrainingContextValue>(
     () => ({
       status,
@@ -285,6 +405,8 @@ export function TrainingProvider({ children }: { children: ReactNode }) {
       refreshTeam,
       resetEmployeePin,
       removeEmployee,
+      setCert,
+      removeCert,
     }),
     [
       status,
@@ -297,6 +419,8 @@ export function TrainingProvider({ children }: { children: ReactNode }) {
       refreshTeam,
       resetEmployeePin,
       removeEmployee,
+      setCert,
+      removeCert,
     ],
   );
 

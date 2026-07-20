@@ -66,8 +66,63 @@ export type TrainingModule = {
   hiddenUnlessRequired?: boolean;
   /** Per-module quiz draw size; falls back to the global QUIZ_DRAW. */
   quizDraw?: number;
+  /**
+   * Onboarding phase — drives each new hire's plan and due dates:
+   * 1 = before your first shift · 2 = your first week · 3 = week two.
+   */
+  phase: 1 | 2 | 3;
   lessons: Lesson[];
   quiz: QuizQuestion[];
+};
+
+/**
+ * California compliance certifications tracked per employee. Validity here
+ * mirrors the server (api/training.ts CERT_VALID_YEARS) — keep in sync.
+ */
+export type CertType = {
+  id: string;
+  label: string;
+  short: string;
+  validYears: number;
+  /** Roles this certification applies to; others show as n/a. */
+  appliesTo: Role[];
+  note: string;
+};
+
+export const CERT_TYPES: CertType[] = [
+  {
+    id: "rbs",
+    label: "RBS — Responsible Beverage Service",
+    short: "RBS",
+    validYears: 3,
+    appliesTo: ["Server", "Bartender", "Manager"],
+    note: "CA ABC requires certification within 60 days for anyone serving alcohol.",
+  },
+  {
+    id: "food-handler",
+    label: "Food Handler Card",
+    short: "Food Handler",
+    validYears: 3,
+    appliesTo: [...ROLES],
+    note: "Required within 30 days of hire in California.",
+  },
+  {
+    id: "harassment",
+    label: "Harassment Prevention Training",
+    short: "Harassment Prev.",
+    validYears: 2,
+    appliesTo: [...ROLES],
+    note: "CA requires 1hr (2hr for supervisors) within 6 months of hire, renewed every 2 years.",
+  },
+];
+
+/** Days from hire (first sign-in) each phase is due. */
+export const PHASE_DUE_DAYS: Record<1 | 2 | 3, number> = { 1: 3, 2: 7, 3: 14 };
+
+export const PHASE_TITLES: Record<1 | 2 | 3, string> = {
+  1: "Before your first shift",
+  2: "Your first week",
+  3: "Week two — know what we sell",
 };
 
 // Role groups for module requirements. To change who must complete what,
@@ -80,6 +135,7 @@ export const MODULES: TrainingModule[] = [
   {
     id: "culture",
     order: 1,
+    phase: 1,
     section: "Who We Are",
     title: "The Akkaya Standard & Culture",
     summary: "Our four values, our hospitality philosophy, and why we serve.",
@@ -284,6 +340,7 @@ export const MODULES: TrainingModule[] = [
   {
     id: "arrival",
     order: 2,
+    phase: 1,
     section: "Who We Are",
     title: "Arrival, Readiness & Appearance",
     summary: "Clock-in standards, uniform, dress code, and professional language.",
@@ -457,6 +514,7 @@ export const MODULES: TrainingModule[] = [
   {
     id: "roles",
     order: 3,
+    phase: 2,
     section: "Who We Are",
     title: "Roles & Responsibilities",
     summary: "Core duties for Host, Server, Bartender, and Busser/Runner.",
@@ -641,6 +699,7 @@ export const MODULES: TrainingModule[] = [
   {
     id: "opening",
     order: 4,
+    phase: 2,
     section: "How We Operate",
     title: "Opening SOP",
     summary: "Getting lighting, bar, dining room, and stations fully ready before doors.",
@@ -836,6 +895,7 @@ export const MODULES: TrainingModule[] = [
   {
     id: "closing",
     order: 5,
+    phase: 2,
     section: "How We Operate",
     title: "Closing SOP",
     summary: "Closing the bar, dining room, and stations so we're ready to open.",
@@ -1030,6 +1090,7 @@ export const MODULES: TrainingModule[] = [
   {
     id: "service",
     order: 6,
+    phase: 2,
     section: "How We Serve",
     title: "Steps of Service",
     summary: "The 10 steps, language & tone, presence on the floor, and check timing.",
@@ -1267,6 +1328,7 @@ export const MODULES: TrainingModule[] = [
   {
     id: "complaints",
     order: 7,
+    phase: 2,
     section: "How We Serve",
     title: "Handling Complaints",
     summary: "The LEARN method and how to handle common difficult situations.",
@@ -1434,6 +1496,7 @@ export const MODULES: TrainingModule[] = [
   {
     id: "wine",
     order: 8,
+    phase: 3,
     section: "What We Sell",
     title: "Wine & Upselling",
     summary:
@@ -1689,6 +1752,7 @@ export const MODULES: TrainingModule[] = [
   {
     id: "cocktails",
     order: 9,
+    phase: 3,
     section: "Bar Reference",
     title: "Cocktails & Bar Builds",
     summary: "Build standards, the cocktail cheat sheet, signature recipes, and batches.",
@@ -1865,6 +1929,7 @@ export const MODULES: TrainingModule[] = [
   {
     id: "tasting",
     order: 10,
+    phase: 3,
     section: "Bar Reference",
     title: "Spirits & Amaro \u2014 the After-Dinner Round",
     summary:
@@ -2115,6 +2180,7 @@ export const MODULES: TrainingModule[] = [
   {
     id: "figaro-btg-2026",
     order: 11,
+    phase: 3,
     section: "Bar Reference",
     title: "Caf\u00e9 Figaro: Wines by the Glass \u2014 Summer 2026",
     quizDraw: 12,
@@ -2504,6 +2570,7 @@ export const MODULES: TrainingModule[] = [
   {
     id: "figaro-cocktails",
     order: 12,
+    phase: 3,
     section: "Bar Reference",
     title: "Café Figaro: Cocktails",
     summary: "Figaro's cocktails and zero-proof mocktails — ingredients and how to describe each. Cocktails $16.",
@@ -2675,6 +2742,7 @@ export const MODULES: TrainingModule[] = [
   {
     id: "figaro-somm-method",
     order: 13,
+    phase: 3,
     section: "Coaching",
     title: "The Sommelier\u2019s Method \u2014 Coaching the Floor",
     summary:
@@ -2808,6 +2876,7 @@ export const MODULES: TrainingModule[] = [
   {
     id: "andiamo-menu",
     order: 14,
+    phase: 3,
     section: "What We Sell",
     title: "Andiamo: The Dinner Menu",
     summary:
@@ -3045,6 +3114,7 @@ export const MODULES: TrainingModule[] = [
   {
     id: "figaro-menu",
     order: 15,
+    phase: 3,
     section: "What We Sell",
     title: "Caf\u00e9 Figaro: The Summer Menu",
     summary:

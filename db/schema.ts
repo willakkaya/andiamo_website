@@ -57,5 +57,27 @@ export const moduleProgress = pgTable(
   }),
 );
 
+export const certifications = pgTable(
+  "certifications",
+  {
+    id: text("id").primaryKey(),
+    employeeId: text("employee_id")
+      .notNull()
+      .references(() => employees.id, { onDelete: "cascade" }),
+    // "rbs" | "food-handler" | "harassment" — see CERT_TYPES in the client.
+    certType: text("cert_type").notNull(),
+    issuedAt: timestamp("issued_at", { withTimezone: true }).notNull(),
+    expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
+  },
+  (t) => ({
+    // One row per (employee, cert type) — setting again replaces it.
+    employeeCert: uniqueIndex("certifications_employee_cert_idx").on(
+      t.employeeId,
+      t.certType,
+    ),
+  }),
+);
+
 export type EmployeeRow = typeof employees.$inferSelect;
 export type ModuleProgressRow = typeof moduleProgress.$inferSelect;
+export type CertificationRow = typeof certifications.$inferSelect;

@@ -43,11 +43,19 @@ import {
   electivePassCount,
   isFullyTrained,
   isCertified,
+  onboardingStatus,
+  certStatus,
   LOCATIONS,
+  type CertStatus,
   type EmployeeRecord,
   type Location,
 } from "@/contexts/TrainingContext";
-import { MODULES, requiredModulesFor } from "@/lib/training/content";
+import {
+  CERT_TYPES,
+  MODULES,
+  requiredModulesFor,
+  type CertType,
+} from "@/lib/training/content";
 
 function lastActivity(emp: EmployeeRecord): string {
   const times = Object.values(emp.modules)
@@ -78,6 +86,7 @@ function exportTeamCsv(trainees: EmployeeRecord[]) {
     "Completion %",
     "Electives passed",
     "Signed off",
+    "Onboarding",
     "Last active",
     "Needs work",
   ];
@@ -93,6 +102,7 @@ function exportTeamCsv(trainees: EmployeeRecord[]) {
       Math.round(overallCompletion(emp) * 100),
       electivePassCount(emp),
       isCertified(emp) ? `Yes (${emp.signatureName ?? emp.name})` : "No",
+      onboardingStatus(emp),
       lastActivity(emp),
       weakAreas(emp).join("; "),
     ];
@@ -105,6 +115,187 @@ function exportTeamCsv(trainees: EmployeeRecord[]) {
   a.download = `training-progress-${new Date().toISOString().slice(0, 10)}.csv`;
   a.click();
   URL.revokeObjectURL(url);
+}
+
+// ---------------------------------------------------------------------------
+// Compliance ledger — one cell per (employee, certification type)
+// ---------------------------------------------------------------------------
+function certCellStyle(status: CertStatus): string {
+  switch (status) {
+    case "valid":
+      return "border-gold/50 text-gold-dark hover:border-gold";
+    case "expiring":
+      return "border-amber-500/60 text-amber-700 hover:border-amber-500";
+    case "expired":
+      return "border-destructive/60 text-destructive hover:border-destructive";
+    case "missing":
+      return "border-foreground/20 text-muted-foreground hover:border-foreground/50";
+    default:
+      return "border-transparent text-muted-foreground/40 pointer-events-none";
+  }
+}
+
+function certCellLabel(emp: EmployeeRecord, typeId: string, status: CertStatus): string {
+  if (status === "n/a") return "—";
+  const cert = emp.certs?.[typeId];
+  const d = cert
+    ? new Date(cert.expiresAt).toLocaleDateString(undefined, { month: "short", year: "numeric" })
+    : "";
+  switch (status) {
+    case "valid":
+      return `Valid · ${d}`;
+    case "expiring":
+      return `Renew by ${d}`;
+    case "expired":
+      return `Expired ${d}`;
+    default:
+      return "Add";
+  }
+}
+
+function CertCell({ emp, type }: { emp: EmployeeRecord; type: CertType }) {
+  const { setCert, removeCert } = useTraining();
+  const [open, setOpen] = useState(false);
+  const [issued, setIssued] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
+  const status = certStatus(emp, type.id);
+  const existing = emp.certs?.[type.id];
+
+  const close = () => {
+    setOpen(false);
+    setIssued("");
+    setError(null);
+  };
+
+  const save = async () => {
+    if (!issued) {
+      setError("Enter the date the certification was issued");
+      return;
+    }
+    setBusy(true);
+    // Send local noon so a date-only value never shifts a day across timezones.
+    const res = await setCert(emp.id, type.id, `${issued}T12:00:00`);
+    setBusy(false);
+    if (!res.ok) {
+      setError(res.error ?? "Something went wrong");
+      return;
+    }
+    close();
+  };
+
+  const clear = async () => {
+    setBusy(true);
+    const res = await removeCert(emp.id, type.id);
+    setBusy(false);
+    if (!res.ok) {
+      setError(res.error ?? "Something went wrong");
+      return;
+    }
+    close();
+  };
+
+  return (
+    <>
+      <button
+        onClick={() => setOpen(true)}
+        disabled={status === "n/a"}
+        className={`w-full border px-2 py-1.5 font-body text-[10px] tracking-[0.14em] uppercase transition-colors duration-300 text-center ${certCellStyle(status)}`}
+      >
+        {certCellLabel(emp, type.id, status)}
+      </button>
+
+      <Dialog open={open} onOpenChange={(o) => !o && close()}>
+        <DialogContent className="sm:max-w-sm">
+          <DialogHeader>
+            <DialogTitle>
+              {type.label} — {emp.name}
+            </DialogTitle>
+            <DialogDescription>
+              {type.note} Valid {type.validYears} years from the issue date.
+              {existing &&
+                ` Currently on file: issued ${new Date(existing.issuedAt).toLocaleDateString()}, expires ${new Date(existing.expiresAt).toLocaleDateString()}.`}
+            </DialogDescription>
+          </DialogHeader>
+          <div>
+            <label
+              htmlFor={`cert-${emp.id}-${type.id}`}
+              className="block font-body text-[10px] tracking-[0.26em] uppercase text-muted-foreground mb-1"
+            >
+              Issued on
+            </label>
+            <Input
+              id={`cert-${emp.id}-${type.id}`}
+              type="date"
+              value={issued}
+              onChange={(e) => setIssued(e.target.value)}
+            />
+          </div>
+          {error && <p className="text-sm text-destructive">{error}</p>}
+          <DialogFooter>
+            {existing && (
+              <Button variant="ghost" className="text-destructive" onClick={clear} disabled={busy}>
+                Clear record
+              </Button>
+            )}
+            <Button variant="outline" onClick={close}>
+              Cancel
+            </Button>
+            <Button onClick={save} disabled={busy}>
+              {busy ? "Saving…" : "Save"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </>
+  );
+}
+
+function ComplianceSection({ employees }: { employees: EmployeeRecord[] }) {
+  if (employees.length === 0) return null;
+  return (
+    <>
+      <div className="mt-14 mb-1 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+        <h2 className="font-display text-xl">Compliance</h2>
+        <span className="font-accent italic text-sm text-muted-foreground">
+          California requirements — click a cell to record a certification
+        </span>
+      </div>
+      <div className="overflow-x-auto">
+        <div className="min-w-[560px]">
+          <div className="grid grid-cols-[1.4fr_1fr_1fr_1fr] gap-x-3 py-2 border-b border-foreground/15">
+            <span className="font-body text-[10px] tracking-[0.2em] uppercase text-muted-foreground">
+              Employee
+            </span>
+            {CERT_TYPES.map((t) => (
+              <span
+                key={t.id}
+                className="font-body text-[10px] tracking-[0.2em] uppercase text-muted-foreground text-center"
+              >
+                {t.short}
+              </span>
+            ))}
+          </div>
+          {employees.map((emp) => (
+            <div
+              key={emp.id}
+              className="grid grid-cols-[1.4fr_1fr_1fr_1fr] gap-x-3 items-center py-2.5 border-b border-foreground/10"
+            >
+              <span className="min-w-0">
+                <span className="block text-sm truncate">{emp.name}</span>
+                <span className="block font-body text-[9px] tracking-[0.16em] uppercase text-muted-foreground/70">
+                  {emp.role} · {emp.location}
+                </span>
+              </span>
+              {CERT_TYPES.map((t) => (
+                <CertCell key={t.id} emp={emp} type={t} />
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
+  );
 }
 
 // ---------------------------------------------------------------------------
@@ -406,6 +597,16 @@ export default function TrainingAdmin() {
                         ) : !hasStarted(emp) ? (
                           <Badge variant="secondary">Not started</Badge>
                         ) : null}
+                        {!isFullyTrained(emp) &&
+                          (onboardingStatus(emp) === "behind" ? (
+                            <Badge className="bg-destructive/10 text-destructive border-destructive/30">
+                              Behind plan
+                            </Badge>
+                          ) : (
+                            <Badge className="bg-foreground/[0.06] text-muted-foreground border-foreground/15">
+                              On track
+                            </Badge>
+                          ))}
                         <span className="text-xs text-muted-foreground">
                           Last active: {lastActivity(emp)}
                         </span>
@@ -501,6 +702,14 @@ export default function TrainingAdmin() {
               ))}
             </CardContent>
           </Card>
+
+          <ComplianceSection
+            employees={
+              locationFilter === "All"
+                ? allEmployees
+                : allEmployees.filter((e) => e.location === locationFilter)
+            }
+          />
 
           <div className="mt-10 flex justify-end gap-2">
             <Button
