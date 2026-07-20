@@ -2805,6 +2805,464 @@ export const MODULES: TrainingModule[] = [
       },
     ],
   },
+  {
+    id: "andiamo-menu",
+    order: 14,
+    section: "What We Sell",
+    title: "Andiamo: The Dinner Menu",
+    summary:
+      "Every dish on the current menu \u2014 what's in it, who it's for, and how to sell it.",
+    minutes: 12,
+    requiredFor: SERVICE_TEAM,
+    location: "Andiamo",
+    lessons: [
+      {
+        heading: "Antipasti & Insalate",
+        intro: "The first order sets the table's pace \u2014 know these cold.",
+        points: [
+          "Calamari Fritti ($20) \u2014 fresh squid, garlic, lemon, chipotle aioli. The crowd-pleaser while a table decides.",
+          "Saut\u00e9ed Prawns ($25, GF) \u2014 lemon butter, garlic, white wine. For the seafood table that wants to start rich.",
+          "Bruschetta al Pomodoro ($11, V) and Burrata Caprese ($17, GF\u00b7V) \u2014 the light, fresh openers.",
+          "Polpette di Manzo ($16) \u2014 Snake River Farms wagyu meatballs. Say 'wagyu' \u2014 it sells itself.",
+          "Apple & Brie Flatbread ($17, V) \u2014 caramelized apple, onion, brie, arugula, honey, truffle oil. The unexpected one guests remember.",
+          "Brussels Sprouts & Pancetta ($15, GF) \u00b7 Octopus 'Pulpo' ($19, GF) \u00b7 Steamed Mussels ($21) round out the starters.",
+          "Salads: Cesare (one $12 / two $17), Watermelon (GF\u00b7V \u2014 feta, candied walnut, lemon-mint), Rucola (GF\u00b7V). Add chicken $6, prawns $9, salmon $16.",
+        ],
+      },
+      {
+        heading: "Pizza & Pasta",
+        intro: "The heart of the menu \u2014 and where regulars have their favorites.",
+        points: [
+          "Pizza: Margherita $22 \u00b7 Diavola $23 (spicy sausage, mushroom) \u00b7 Vegetariana $23 \u00b7 Pepperoni $23 \u00b7 Bianca con Prosciutto $25 (no tomato \u2014 crimini, arugula, prosciutto, truffle oil).",
+          "SIGNATURE \u2014 Lobster Ravioli ($35): lemon butter cream, tiger prawns. Lead with this for celebrations.",
+          "Seafood pastas: Fettuccine alla Adriatica ($30 \u2014 rock shrimp, scallop, sun-dried tomato cream), Linguine con Vongole ($30 \u2014 manila clams, chili), Linguine Frutti di Mare ($36 \u2014 mixed seafood, tomato saffron).",
+          "SIGNATURE \u2014 Wild Mushroom Agnolotti ($31, V): truffle tartufata cream, roasted cherry tomato. The vegetarian showstopper.",
+          "Comfort row: Pappardelle Bolognese $28 \u00b7 Spaghetti & Meatballs $29 (two wagyu) \u00b7 Fettuccine Alfredo $23 \u00b7 Rigatoni alla Vodka $26 \u00b7 Linguine al Pesto $25 (pine nuts) \u00b7 Gnocchi Gorgonzola $27.",
+          "Distinctive: Bucatini alla Calabrese ($29 \u2014 calabrese sausage, calabrian chili: the spicy one), Tortellini Michelangelo ($28 \u2014 chicken & veal, pancetta, peas, cream), SIGNATURE Rigatoni alla Norma ($28, V \u2014 roasted eggplant, ricotta), Pappardelle al Filetto ($33 \u2014 filet mignon, marsala).",
+        ],
+        image: {
+          src: "/mushroom-agnolotti.jpg",
+          alt: "Wild Mushroom Agnolotti",
+          caption: "Wild Mushroom Agnolotti \u2014 truffle tartufata cream, a signature",
+        },
+      },
+      {
+        heading: "Secondi: Chicken, Veal, Grill & Seafood",
+        points: [
+          "Pollo ($30\u201331): Parmigiana (breaded, marinara, mozzarella, linguini), Piccata (caper-lemon-butter), Marsala.",
+          "Vitello ($34\u201335): Marsala, Piccata, and Saltimbocca \u2014 prosciutto, sage, mozzarella, demi-glace.",
+          "Grill (GF): New York Steak $43 (12oz choice, peppercorn brandy) \u00b7 Skirt Steak $43 (chimichurri, onion rings, mash).",
+          "SIGNATURE \u2014 Rack of Lamb ($45, GF): garlic, rosemary, balsamic reduction. The premium anchor of the menu.",
+          "SIGNATURE \u2014 Branzino ($38, GF): cherry tomato, olives, capers, white wine, orzo. The elegant lighter choice.",
+          "Frutti di Mare 'Cioppino' ($36, GF \u2014 tomato-saffron broth, crostini) and Salmon Piccata ($36, GF) complete the seafood.",
+        ],
+        image: {
+          src: "/lamb-chops.jpg",
+          alt: "Rack of lamb",
+          caption: "Rack of Lamb \u2014 garlic, rosemary, balsamico. Our premium anchor",
+        },
+      },
+      {
+        heading: "Dietary Flags & the Allergy Rule",
+        intro: "These flags are printed on the menu \u2014 anything beyond them, ask the kitchen. Never guess.",
+        points: [
+          "GF on the menu: Saut\u00e9ed Prawns, Brussels & Pancetta, Octopus, Burrata Caprese, Watermelon Salad, Rucola, both steaks, Rack of Lamb, Branzino, Cioppino, Salmon Piccata.",
+          "Gluten-free & vegan lentil pasta can replace the pasta in ANY pasta dish \u2014 the single most useful sentence for dietary tables.",
+          "V (vegetarian): Bruschetta, Flatbread, Burrata, Watermelon, Rucola, Margherita, Vegetariana, Gnocchi Gorgonzola, Vodka, Alfredo, Pesto, Agnolotti, Norma.",
+          "The menu says it and so do we: guests must be asked about allergies, and every allergy goes to the kitchen \u2014 flagged in the POS and said out loud.",
+          "If a modification isn't printed here, the answer is 'let me confirm with the kitchen' \u2014 never 'I think so.'",
+        ],
+      },
+      {
+        heading: "Selling the Menu",
+        points: [
+          "Know the four signatures by heart: Lobster Ravioli, Wild Mushroom Agnolotti (as Norma's partner in the printed signature trio: Norma, Rack of Lamb, Branzino) \u2014 lead with a signature when a guest says 'what's good?'",
+          "Celebration table \u2192 Lobster Ravioli or Rack of Lamb. Light and elegant \u2192 Branzino. Vegetarian who wants special \u2192 Agnolotti. Spice-seeker \u2192 Bucatini alla Calabrese or Diavola.",
+          "Salad add-ons are the easiest honest upsell: 'Would you like grilled prawns or salmon on the Rucola?'",
+          "Describe with the defining ingredient, not adjectives: 'the Adriatica is rock shrimp and scallops in a sun-dried tomato cream' beats 'it's really good.'",
+        ],
+      },
+    ],
+    quiz: [
+      {
+        id: "andiamo-menu-1",
+        question: "A guest asks what's in the Fettuccine alla Adriatica:",
+        options: [
+          "Rock shrimp and scallops in a sun-dried tomato white-wine cream",
+          "Manila clams, garlic, and chili",
+          "Mixed seafood in tomato saffron",
+          "Tiger prawns in lemon butter cream",
+        ],
+        answer: 0,
+        explanation:
+          "Adriatica = rock shrimp + scallop, sun-dried tomato, white wine cream. (Clams = Vongole; mixed seafood = Frutti di Mare; tiger prawns = Lobster Ravioli.)",
+      },
+      {
+        id: "andiamo-menu-2",
+        question: "Our meatballs are made from:",
+        options: [
+          "House-ground beef and pork",
+          "Snake River Farms wagyu",
+          "Veal and ricotta",
+          "Angus chuck",
+        ],
+        answer: 1,
+        explanation:
+          "Snake River Farms wagyu \u2014 in the Polpette starter and Spaghetti & Meatballs. Say 'wagyu'; it's a selling point.",
+      },
+      {
+        id: "andiamo-menu-3",
+        question: "A gluten-free guest wants pasta. What do you tell them?",
+        options: [
+          "Unfortunately pasta isn't possible",
+          "Only the risotto works",
+          "Any pasta dish can be made with our gluten-free & vegan lentil pasta",
+          "The gnocchi is gluten-free",
+        ],
+        answer: 2,
+        explanation:
+          "Printed right on the menu: gluten-free & vegan lentil pasta is available for any pasta dish.",
+      },
+      {
+        id: "andiamo-menu-4",
+        question: "Which pasta has filet mignon in it?",
+        options: [
+          "Tortellini alla Michelangelo",
+          "Pappardelle alla Bolognese",
+          "Pappardelle al Filetto",
+          "Bucatini alla Calabrese",
+        ],
+        answer: 2,
+        explanation:
+          "Pappardelle al Filetto ($33) \u2014 filet mignon, cherry tomato, mushroom, marsala.",
+      },
+      {
+        id: "andiamo-menu-5",
+        question: "A guest wants something spicy. Best recommendations:",
+        options: [
+          "Alfredo or Margherita",
+          "Bucatini alla Calabrese or the Diavola pizza",
+          "Branzino or Salmon Piccata",
+          "Gnocchi Gorgonzola",
+        ],
+        answer: 1,
+        explanation:
+          "Calabrese = calabrese sausage + calabrian chili; Diavola = spicy Italian sausage. Those are the heat.",
+      },
+      {
+        id: "andiamo-menu-6",
+        question: "The Bianca con Prosciutto pizza is different from the others because:",
+        options: [
+          "It's the only one with mushrooms",
+          "It has no tomato \u2014 mozzarella base with crimini, arugula, prosciutto, and truffle oil",
+          "It's gluten-free",
+          "It comes in two sizes",
+        ],
+        answer: 1,
+        explanation:
+          "Bianca = white pizza. No tomato; finished with prosciutto, arugula, parmigiano, truffle oil.",
+      },
+      {
+        id: "andiamo-menu-7",
+        question: "Which of these is NOT one of our printed signatures?",
+        options: [
+          "Lobster Ravioli",
+          "Rack of Lamb",
+          "Branzino",
+          "Fettuccine Alfredo",
+        ],
+        answer: 3,
+        explanation:
+          "Signatures on the menu: Lobster Ravioli, Rigatoni alla Norma, Rack of Lamb, Branzino. Alfredo is a classic, not a signature.",
+      },
+      {
+        id: "andiamo-menu-8",
+        question: "A celebration table asks 'what's special here?' Your best lead:",
+        options: [
+          "List the whole pasta section",
+          "The Lobster Ravioli \u2014 lemon butter cream with tiger prawns \u2014 or the Rack of Lamb",
+          "Whatever is cheapest",
+          "Spaghetti & Meatballs",
+        ],
+        answer: 1,
+        explanation:
+          "Lead with a signature. Celebrations want the dish with a story \u2014 ravioli or the lamb.",
+      },
+      {
+        id: "andiamo-menu-9",
+        question: "What comes with the Branzino?",
+        options: [
+          "Mashed potato and onion rings",
+          "Cherry tomato, olives, capers, lemon, white wine \u2014 over orzo",
+          "Linguini marinara",
+          "Risotto",
+        ],
+        answer: 1,
+        explanation:
+          "Branzino (GF, $38): cherry tomato, olives, capers, lemon, white wine, orzo. The elegant lighter signature.",
+      },
+      {
+        id: "andiamo-menu-10",
+        question: "Salad protein add-ons are priced:",
+        options: [
+          "Chicken $6 \u00b7 prawns $9 \u00b7 salmon $16",
+          "Chicken $9 \u00b7 prawns $12 \u00b7 salmon $18",
+          "All add-ons $10",
+          "Chicken $5 \u00b7 prawns $10 \u00b7 steak $15",
+        ],
+        answer: 0,
+        explanation:
+          "Chicken 6, prawns 9, salmon 16 \u2014 the easiest honest upsell on the menu.",
+      },
+      {
+        id: "andiamo-menu-11",
+        question: "A guest mentions a shellfish allergy and orders the Cioppino. You:",
+        options: [
+          "Serve it \u2014 the broth is what matters",
+          "Suggest removing the mussels",
+          "Stop \u2014 Cioppino is clams, mussels, and shrimp; guide them elsewhere and flag the allergy to the kitchen",
+          "Offer extra crostini instead",
+        ],
+        answer: 2,
+        explanation:
+          "Cioppino IS shellfish. Redirect (Branzino, Salmon Piccata, a steak) and make sure the kitchen knows about the allergy either way.",
+      },
+      {
+        id: "andiamo-menu-12",
+        question: "The vegetarian guest who wants something special gets steered to:",
+        options: [
+          "Fettuccine Alfredo",
+          "The Wild Mushroom Agnolotti \u2014 truffle tartufata cream, roasted cherry tomato",
+          "A side of Brussels sprouts",
+          "The Margherita",
+        ],
+        answer: 1,
+        explanation:
+          "The Agnolotti is the vegetarian showstopper \u2014 truffle cream, house signature energy, $31.",
+      },
+    ],
+  },
+  {
+    id: "figaro-menu",
+    order: 15,
+    section: "What We Sell",
+    title: "Caf\u00e9 Figaro: The Summer Menu",
+    summary:
+      "The Summer 2026 menu \u2014 every dish, the seasonal features, and how to guide the table.",
+    minutes: 12,
+    requiredFor: SERVICE_TEAM,
+    location: "Cafe Figaro",
+    lessons: [
+      {
+        heading: "Antipasti, Zuppe & Insalate",
+        intro: "Figaro since 1989 \u2014 guests expect you to know this menu like family.",
+        points: [
+          "Bruschetta $13 (heirloom tomato) \u00b7 Funghi Ripieni $18 (stuffed mushroom, sausage, mozzarella) \u00b7 Calamari Fritti $21 (chipotle aioli).",
+          "Carpaccio di Manzo $22 \u2014 raw beef fillet, capers, lemon, parmigiano. For the confident palate.",
+          "Polpette $18 \u2014 Snake River Farms wagyu meatballs. Capesante $28 \u2014 seared scallops, lemon butter: the premium starter.",
+          "Burrata e Prosciutto $21 \u2014 parma prosciutto, balsamico, truffle honey.",
+          "SUMMER \u2014 Pesche Grigliate $23: grilled peach, burrata, prosciutto, mint. Lead with this while it lasts.",
+          "Soups & salads: Minestrone $11 \u00b7 Cesare (one $14 / two $22 \u2014 NOTE: contains anchovy) \u00b7 Caprese $16 (bufala) \u00b7 Rucola $16 (cranberry, walnut) \u00b7 Napa Cabbage $18 (pepper bacon, blue cheese, warm red-wine dijon).",
+          "SUMMER \u2014 Insalata California $16: baby greens, avocado, castelvetrano olives, sun-dried tomato, dijon-apple cider. Add-ons: chicken $6 \u00b7 prawns $9 \u00b7 salmon $16.",
+        ],
+      },
+      {
+        heading: "Pasta & Risotto",
+        points: [
+          "Spaghetti Bolognese $27 (slow-cooked rag\u00f9) \u00b7 Lasagna alla Figaro $28 (rag\u00f9, b\u00e9chamel) \u00b7 Rigatoni alla Vodka $27 \u00b7 Gnocchi Sorrentina $26 (tomato, mozzarella, basil).",
+          "Tortellini Michelangelo $28 \u2014 chicken & veal, pancetta, peas, cream. A Figaro classic.",
+          "Seafood: Linguine alle Vongole $31 (manila clams, chili) \u00b7 Fettuccine Adriatica $29 (rock shrimp, scallop, sun-dried tomato cream) \u00b7 Linguine Mediterranea $29 (tiger prawn, olive, mushroom, FETA, white wine).",
+          "Pappardelle Figaro $36 \u2014 filet mignon, cherry tomato, mushroom, marsala. The pasta for steak people.",
+          "Fusilloni al Pesto $24 \u00b7 Fettuccine Alfredo $23. Lentil pasta available for any dish.",
+          "RISOTTO \u2014 made with acquerello (aged carnaroli rice, the best there is): Ai Frutti di Mare $36 (prawn, scallop, clam, saffron) \u00b7 Ai Funghi Porcini $28. Tell guests why acquerello matters \u2014 it's a story worth $36.",
+        ],
+      },
+      {
+        heading: "Pollo, Vitello, Pesce & Griglia",
+        points: [
+          "Pollo: Parmigiana $32 \u00b7 Piccata $30 \u00b7 Monterey $32 \u2014 grilled breast, peas, artichoke cream, over risotto. Monterey is the one guests haven't had elsewhere.",
+          "Vitello ($35\u201337): Saltimbocca (prosciutto, sage, white wine demi) \u00b7 Piccata \u00b7 Marsala \u00b7 Impanate (breaded cutlet, garlic butter \u2014 the only breaded one).",
+          "SUMMER \u2014 Halibut all'Acqua Pazza $45: pacific halibut, san marzano, castelvetrano olives, white wine, grilled bread. The seasonal showpiece.",
+          "Frutti di Mare 'Cioppino' $36 \u2014 prawn, scallop, clam, mussel, CRAB, saffron tomato.",
+          "Gamberi Mediterranea $30 \u2014 tiger prawns, olive, cherry tomato, feta, white wine.",
+          "Grill: Bistecca $49 (12oz PRIME New York, peppercorn brandy) \u00b7 Agnello $49 (lamb chops, garlic, rosemary, balsamico).",
+        ],
+      },
+      {
+        heading: "House Rules of the Menu",
+        intro: "Printed at the bottom of the menu \u2014 and part of the Figaro story.",
+        points: [
+          "'Don't see something you remember? Ask \u2014 many of our dishes still live in the kitchen.' Long-time regulars order off-menu classics; take the request to the kitchen, never say no outright.",
+          "Kindly share any allergies \u2014 ask every table, flag every allergy to the kitchen.",
+          "The Cesare contains anchovy \u2014 say it before a fish-averse or allergic guest finds out.",
+          "Lentil pasta swaps into any pasta dish for gluten-free guests.",
+          "Anything not printed \u2014 modifications, prep questions \u2014 is a kitchen question. 'Let me confirm' beats guessing, every time.",
+        ],
+      },
+      {
+        heading: "Selling the Summer",
+        points: [
+          "Seasonal features are your openers: Pesche Grigliate to start, Halibut all'Acqua Pazza as the main event, Insalata California for the light lunch crowd.",
+          "Premium anchors: Bistecca and Agnello at $49, halibut at $45, seafood risotto at $36 \u2014 describe with ingredients, recommend with confidence.",
+          "The acquerello risotto story and 'dishes that still live in the kitchen' are what make Figaro feel 35 years deep \u2014 use them.",
+          "Steak-lover at a pasta table \u2192 Pappardelle Figaro. Adventurous starter \u2192 Carpaccio or Capesante. Peach season is short \u2014 say so.",
+        ],
+      },
+    ],
+    quiz: [
+      {
+        id: "figaro-menu-1",
+        question: "A guest with a fish allergy orders the Cesare. What do you need to know?",
+        options: [
+          "Nothing \u2014 it's just romaine and parmigiano",
+          "The house caesar contains anchovy \u2014 tell them and flag the kitchen",
+          "Only the two-person size has anchovy",
+          "Swap the dressing silently",
+        ],
+        answer: 1,
+        explanation:
+          "Printed on the menu: romaine, ANCHOVY, parmigiano, house caesar. Say it before it becomes a problem.",
+      },
+      {
+        id: "figaro-menu-2",
+        question: "What is the Pesche Grigliate?",
+        options: [
+          "Grilled prawns with peach salsa",
+          "A summer starter \u2014 grilled peach, burrata, prosciutto, mint",
+          "A peach dessert",
+          "A prosciutto flatbread",
+        ],
+        answer: 1,
+        explanation:
+          "The summer feature starter, $23. Peach season is short \u2014 lead with it while it lasts.",
+      },
+      {
+        id: "figaro-menu-3",
+        question: "Our risotto is special because:",
+        options: [
+          "It's made to order in 10 minutes",
+          "It's made with acquerello \u2014 aged carnaroli rice",
+          "It's baked",
+          "It comes with truffle on every version",
+        ],
+        answer: 1,
+        explanation:
+          "Acquerello aged carnaroli \u2014 the finest risotto rice. That story is what justifies $36 for the Frutti di Mare.",
+      },
+      {
+        id: "figaro-menu-4",
+        question: "The Pappardelle Figaro is the pasta you recommend to:",
+        options: [
+          "The vegetarian",
+          "The steak lover \u2014 it's filet mignon, cherry tomato, mushroom, marsala",
+          "The guest avoiding cream",
+          "Kids",
+        ],
+        answer: 1,
+        explanation:
+          "Filet mignon in a pasta, $36 \u2014 the bridge for the guest who always orders steak.",
+      },
+      {
+        id: "figaro-menu-5",
+        question: "This summer's seasonal fish entr\u00e9e is:",
+        options: [
+          "Salmon Piccata",
+          "Branzino",
+          "Halibut all'Acqua Pazza \u2014 san marzano, castelvetrano olives, white wine, grilled bread",
+          "Grilled ahi",
+        ],
+        answer: 2,
+        explanation:
+          "Pacific halibut 'in crazy water' \u2014 the $45 summer showpiece.",
+      },
+      {
+        id: "figaro-menu-6",
+        question: "A regular asks for a dish that isn't on the menu anymore. You:",
+        options: [
+          "Tell them it's discontinued",
+          "Say 'many of our dishes still live in the kitchen' and ask the kitchen",
+          "Offer the closest current dish without asking",
+          "Suggest they visit Andiamo instead",
+        ],
+        answer: 1,
+        explanation:
+          "It's printed on the menu itself \u2014 off-menu classics live in the kitchen. Never a flat no at Figaro.",
+      },
+      {
+        id: "figaro-menu-7",
+        question: "Which pasta contains feta?",
+        options: [
+          "Linguine Mediterranea",
+          "Fusilloni al Pesto",
+          "Gnocchi Sorrentina",
+          "Lasagna alla Figaro",
+        ],
+        answer: 0,
+        explanation:
+          "Mediterranea = tiger prawn, olive, mushroom, feta, white wine \u2014 same flavors as the Gamberi entr\u00e9e.",
+      },
+      {
+        id: "figaro-menu-8",
+        question: "The Chicken Monterey is:",
+        options: [
+          "Breaded with marinara and mozzarella",
+          "Grilled breast with peas and artichoke cream over risotto",
+          "Scallopini with capers and lemon",
+          "Stuffed with prosciutto",
+        ],
+        answer: 1,
+        explanation:
+          "Monterey ($32) \u2014 grilled, artichoke cream, risotto. The chicken dish guests haven't had elsewhere.",
+      },
+      {
+        id: "figaro-menu-9",
+        question: "Which veal preparation is breaded?",
+        options: ["Saltimbocca", "Piccata", "Marsala", "Impanate"],
+        answer: 3,
+        explanation:
+          "Impanate ($35) = breaded cutlet, garlic butter, olive oil. 'Impanate' literally means breaded.",
+      },
+      {
+        id: "figaro-menu-10",
+        question: "What makes Figaro's Cioppino different from a typical one?",
+        options: [
+          "It has no shellfish",
+          "It includes crab along with prawn, scallop, clam, and mussel in saffron tomato",
+          "It's served over pasta",
+          "It's a cream base",
+        ],
+        answer: 1,
+        explanation:
+          "Prawn, scallop, clam, mussel, AND crab \u2014 saffron tomato broth, $36.",
+      },
+      {
+        id: "figaro-menu-11",
+        question: "The Bistecca is:",
+        options: [
+          "12oz USDA choice New York",
+          "12oz PRIME New York strip with peppercorn brandy \u2014 $49",
+          "A ribeye with chimichurri",
+          "8oz filet",
+        ],
+        answer: 1,
+        explanation:
+          "Prime grade \u2014 a step above choice. That word belongs in your description at $49.",
+      },
+      {
+        id: "figaro-menu-12",
+        question: "A gluten-free guest at Figaro wants pasta. You offer:",
+        options: [
+          "Only the risotto",
+          "Lentil pasta \u2014 available for any pasta dish",
+          "Half portions",
+          "The lasagna without noodles",
+        ],
+        answer: 1,
+        explanation:
+          "Same house rule as Andiamo: lentil pasta swaps into any dish. (Risotto is a great second option.)",
+      },
+    ],
+  },
 ];
 
 export const TOTAL_MODULES = MODULES.length;
