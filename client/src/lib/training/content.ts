@@ -2836,14 +2836,14 @@ export const MODULES: TrainingModule[] = [
           "Pizza: Margherita $22 \u00b7 Diavola $23 (spicy sausage, mushroom) \u00b7 Vegetariana $23 \u00b7 Pepperoni $23 \u00b7 Bianca con Prosciutto $25 (no tomato \u2014 crimini, arugula, prosciutto, truffle oil).",
           "SIGNATURE \u2014 Lobster Ravioli ($35): lemon butter cream, tiger prawns. Lead with this for celebrations.",
           "Seafood pastas: Fettuccine alla Adriatica ($30 \u2014 rock shrimp, scallop, sun-dried tomato cream), Linguine con Vongole ($30 \u2014 manila clams, chili), Linguine Frutti di Mare ($36 \u2014 mixed seafood, tomato saffron).",
-          "SIGNATURE \u2014 Wild Mushroom Agnolotti ($31, V): truffle tartufata cream, roasted cherry tomato. The vegetarian showstopper.",
+          "Wild Mushroom Agnolotti ($31, V): truffle tartufata cream, roasted cherry tomato. The vegetarian showstopper.",
           "Comfort row: Pappardelle Bolognese $28 \u00b7 Spaghetti & Meatballs $29 (two wagyu) \u00b7 Fettuccine Alfredo $23 \u00b7 Rigatoni alla Vodka $26 \u00b7 Linguine al Pesto $25 (pine nuts) \u00b7 Gnocchi Gorgonzola $27.",
           "Distinctive: Bucatini alla Calabrese ($29 \u2014 calabrese sausage, calabrian chili: the spicy one), Tortellini Michelangelo ($28 \u2014 chicken & veal, pancetta, peas, cream), SIGNATURE Rigatoni alla Norma ($28, V \u2014 roasted eggplant, ricotta), Pappardelle al Filetto ($33 \u2014 filet mignon, marsala).",
         ],
         image: {
           src: "/mushroom-agnolotti.jpg",
           alt: "Wild Mushroom Agnolotti",
-          caption: "Wild Mushroom Agnolotti \u2014 truffle tartufata cream, a signature",
+          caption: "Wild Mushroom Agnolotti \u2014 truffle tartufata cream, the vegetarian showstopper",
         },
       },
       {
@@ -2869,14 +2869,14 @@ export const MODULES: TrainingModule[] = [
           "GF on the menu: Saut\u00e9ed Prawns, Brussels & Pancetta, Octopus, Burrata Caprese, Watermelon Salad, Rucola, both steaks, Rack of Lamb, Branzino, Cioppino, Salmon Piccata.",
           "Gluten-free & vegan lentil pasta can replace the pasta in ANY pasta dish \u2014 the single most useful sentence for dietary tables.",
           "V (vegetarian): Bruschetta, Flatbread, Burrata, Watermelon, Rucola, Margherita, Vegetariana, Gnocchi Gorgonzola, Vodka, Alfredo, Pesto, Agnolotti, Norma.",
-          "The menu says it and so do we: guests must be asked about allergies, and every allergy goes to the kitchen \u2014 flagged in the POS and said out loud.",
+          "The menu asks guests to tell us ('please inform your server of any allergies or intolerances') \u2014 our house standard goes further: we ask every table, and every allergy goes to the kitchen, flagged in the POS and said out loud.",
           "If a modification isn't printed here, the answer is 'let me confirm with the kitchen' \u2014 never 'I think so.'",
         ],
       },
       {
         heading: "Selling the Menu",
         points: [
-          "Know the four signatures by heart: Lobster Ravioli, Wild Mushroom Agnolotti (as Norma's partner in the printed signature trio: Norma, Rack of Lamb, Branzino) \u2014 lead with a signature when a guest says 'what's good?'",
+          "Know the four printed signatures by heart \u2014 Lobster Ravioli, Rigatoni alla Norma, Rack of Lamb, Branzino \u2014 and lead with one when a guest says 'what's good?'",
           "Celebration table \u2192 Lobster Ravioli or Rack of Lamb. Light and elegant \u2192 Branzino. Vegetarian who wants special \u2192 Agnolotti. Spice-seeker \u2192 Bucatini alla Calabrese or Diavola.",
           "Salad add-ons are the easiest honest upsell: 'Would you like grilled prawns or salmon on the Rucola?'",
           "Describe with the defining ingredient, not adjectives: 'the Adriatica is rock shrimp and scallops in a sun-dried tomato cream' beats 'it's really good.'",
@@ -3038,7 +3038,7 @@ export const MODULES: TrainingModule[] = [
         ],
         answer: 1,
         explanation:
-          "The Agnolotti is the vegetarian showstopper \u2014 truffle cream, house signature energy, $31.",
+          "The Agnolotti is the vegetarian showstopper \u2014 truffle tartufata cream, roasted cherry tomato, $31.",
       },
     ],
   },
@@ -3104,7 +3104,7 @@ export const MODULES: TrainingModule[] = [
         points: [
           "Seasonal features are your openers: Pesche Grigliate to start, Halibut all'Acqua Pazza as the main event, Insalata California for the light lunch crowd.",
           "Premium anchors: Bistecca and Agnello at $49, halibut at $45, seafood risotto at $36 \u2014 describe with ingredients, recommend with confidence.",
-          "The acquerello risotto story and 'dishes that still live in the kitchen' are what make Figaro feel 35 years deep \u2014 use them.",
+          "The acquerello risotto story and 'dishes that still live in the kitchen' are what make Figaro feel like it's been on Broadway since 1989 \u2014 use them.",
           "Steak-lover at a pasta table \u2192 Pappardelle Figaro. Adventurous starter \u2192 Carpaccio or Capesante. Peach season is short \u2014 say so.",
         ],
       },
