@@ -61,6 +61,8 @@ export default function TrainingModuleView() {
   const [finalPct, setFinalPct] = useState(0);
   const [run, setRun] = useState<RunQuestion[]>([]);
   const [submitting, setSubmitting] = useState(false);
+  const [saveFailed, setSaveFailed] = useState(false);
+  const [saving, setSaving] = useState(false);
 
   // Must be signed in (wait for the session to finish restoring first).
   useEffect(() => {
@@ -101,19 +103,32 @@ export default function TrainingModuleView() {
     setRun(buildRun(module.quiz, drawCount));
     setAnswers({});
     setCurrent(0);
+    setSaveFailed(false);
     setMode("quiz");
   };
+
+  const attemptPayload = () =>
+    run.map((rq) => ({ questionId: rq.id, correct: answers[rq.id] === rq.correctIndex }));
 
   const submit = async () => {
     if (submitting) return;
     setSubmitting(true);
-    const pct = await recordAttempt(
-      module.id,
-      run.map((rq) => ({ questionId: rq.id, correct: answers[rq.id] === rq.correctIndex })),
-    );
-    setFinalPct(pct);
+    // The verdict comes from the answers themselves — the score is true even
+    // if the network is not. Saving is tracked separately below.
+    const correct = attemptPayload().filter((a) => a.correct).length;
+    setFinalPct(run.length > 0 ? correct / run.length : 0);
+    const res = await recordAttempt(module.id, attemptPayload());
+    setSaveFailed(!res.ok);
     setMode("results");
     setSubmitting(false);
+  };
+
+  const retrySave = async () => {
+    if (saving) return;
+    setSaving(true);
+    const res = await recordAttempt(module.id, attemptPayload());
+    setSaveFailed(!res.ok);
+    setSaving(false);
   };
 
   /* ---- LEARN ---- */
@@ -343,6 +358,21 @@ export default function TrainingModuleView() {
               ? "Great work — now let it show on the floor."
               : "Review below, then go again. The next draw mixes in fresh questions."}
           </p>
+          {saveFailed && (
+            <div className="mt-6 flex flex-wrap items-center gap-4 border border-amber-400/60 px-4 py-3 max-w-lg">
+              <p className="font-body text-[10px] tracking-[0.2em] uppercase text-amber-300 flex-1 min-w-[200px]">
+                Your score is real, but it couldn't be saved — check your
+                connection
+              </p>
+              <button
+                onClick={retrySave}
+                disabled={saving}
+                className="inline-flex items-center justify-center gap-2 border border-amber-300 text-amber-300 hover:bg-amber-300 hover:text-charcoal transition-colors duration-300 font-body text-[10px] tracking-[0.24em] uppercase h-9 px-4 disabled:opacity-40"
+              >
+                {saving ? "Saving…" : "Retry save"}
+              </button>
+            </div>
+          )}
           <div className="flex flex-wrap gap-4 mt-8">
             <button
               onClick={startQuiz}

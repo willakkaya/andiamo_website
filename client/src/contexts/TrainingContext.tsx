@@ -238,7 +238,7 @@ type TrainingContextValue = {
   allEmployees: EmployeeRecord[];
   signIn: (args: SignInArgs) => Promise<Result>;
   signOut: () => void;
-  recordAttempt: (moduleId: string, answers: AttemptAnswer[]) => Promise<number>;
+  recordAttempt: (moduleId: string, answers: AttemptAnswer[]) => Promise<Result>;
   recordAcknowledgment: (signatureName: string) => Promise<Result>;
   /** Manager-only: load every employee's progress from the server. */
   refreshTeam: () => Promise<void>;
@@ -299,20 +299,23 @@ export function TrainingProvider({ children }: { children: ReactNode }) {
     setAllEmployees([]);
   }, []);
 
+  // Persists an attempt. The SCORE shown to the employee is computed locally
+  // from their answers — this only reports whether saving succeeded, so a
+  // network failure can never masquerade as a failing grade.
   const recordAttempt = useCallback(
-    async (moduleId: string, answers: AttemptAnswer[]): Promise<number> => {
+    async (moduleId: string, answers: AttemptAnswer[]): Promise<Result> => {
       const res = await api<{ pct: number; module: ModuleProgress }>("attempt", {
         method: "POST",
         body: { moduleId, answers },
       });
-      if (!res.ok) return 0;
+      if (!res.ok) return { ok: false, error: res.error };
       // Reflect the saved progress locally without a full refetch.
       setCurrentEmployee((prev) =>
         prev
           ? { ...prev, modules: { ...prev.modules, [moduleId]: res.data.module } }
           : prev,
       );
-      return res.data.pct;
+      return { ok: true };
     },
     [],
   );
