@@ -64,7 +64,7 @@ export default function RehearsalDinners() {
                 of effortless elegance.
               </p>
               <p className="font-accent text-charcoal/65 text-base leading-[1.8] mb-8">
-                Seating 12 to 20 guests, it's perfectly sized for rehearsal dinners where
+                Seating 12 to 22 guests, it's perfectly sized for rehearsal dinners where
                 every guest feels like family.
               </p>
               <ul className="space-y-3">

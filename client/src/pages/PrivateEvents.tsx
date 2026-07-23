@@ -18,7 +18,7 @@ const fadeUp = {
 
 // The clear, plainly-labeled paths — one obvious choice each (no guessing)
 const PATHS = [
-  { href: "/the-vault", title: "The Vault", desc: "Our private room inside the original 1920s bank vault. Seats 12 to 20." },
+  { href: "/the-vault", title: "The Vault", desc: "Our private room inside the original 1920s bank vault. Seats 12 to 22." },
   { href: "/private-dining", title: "Corporate dinners", desc: "Client dinners, board meetings, and recruiting — minutes from the biotech corridor." },
   { href: "/holiday-parties", title: "Holiday parties", desc: "Company celebrations from a dozen guests to a full-restaurant buyout." },
   { href: "/rehearsal-dinners", title: "Rehearsal dinners", desc: "Begin the celebration somewhere as memorable as the occasion." },
@@ -27,7 +27,7 @@ const PATHS = [
 const FAQ = [
   {
     q: "What private dining spaces do you have?",
-    a: "The Vault — our restored 1920s bank-vault room — seats 12 to 20. For larger gatherings we open the main dining room or arrange a full-restaurant buyout for 100-plus guests.",
+    a: "The Vault — our restored 1920s bank-vault room — seats 12 to 22. For larger gatherings we open the main dining room or arrange a full-restaurant buyout for 100-plus guests.",
   },
   {
     q: "What are the menus and prices?",

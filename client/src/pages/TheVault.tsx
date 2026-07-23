@@ -95,7 +95,7 @@ export default function TheVault() {
             className="grid grid-cols-2 md:grid-cols-4 gap-px bg-gold/10 mb-24"
           >
             {[
-              { icon: Users, title: "12 \u2013 20 Guests", desc: "Intimate to mid-size gatherings" },
+              { icon: Users, title: "12 \u2013 22 Guests", desc: "Intimate to mid-size gatherings" },
               { icon: Utensils, title: "Custom Menus", desc: "Prix fixe tailored to your event" },
               { icon: Monitor, title: "A/V Ready", desc: "Screen and sound for presentations" },
               { icon: Wine, title: "Wine Pairings", desc: "Curated selections from our list" },

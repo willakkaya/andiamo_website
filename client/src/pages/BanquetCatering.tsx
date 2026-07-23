@@ -277,7 +277,7 @@ const BANQUET_FAQ = [
   },
   {
     q: "How many guests can you host?",
-    a: "The Vault — our restored 1920s bank-vault room — seats 12 to 20 for intimate dinners. For larger parties we open the main dining room, up to a full-restaurant buyout for 100.",
+    a: "The Vault — our restored 1920s bank-vault room — seats 12 to 22 for intimate dinners. For larger parties we open the main dining room, up to a full-restaurant buyout for 100.",
   },
   {
     q: "What's the difference between a banquet and catering?",

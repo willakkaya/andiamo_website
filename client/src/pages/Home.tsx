@@ -321,7 +321,7 @@ export default function Home() {
                 custom={3}
                 className="space-y-3 mb-10 text-sm text-cream/55 font-accent tracking-wide"
               >
-                {["Seats 12 to 20 guests", "Custom prix-fixe menus & wine pairings", "Built for corporate dinners and celebrations"].map((item) => (
+                {["Seats 12 to 22 guests", "Custom prix-fixe menus & wine pairings", "Built for corporate dinners and celebrations"].map((item) => (
                   <li key={item} className="flex items-center gap-3">
                     <span className="w-4 h-px bg-gold" />
                     {item}
