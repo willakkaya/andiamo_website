@@ -393,7 +393,7 @@ export default function EventQuoteCalculator() {
                   We'll follow up within 24 hours with availability and a finalized proposal.
                 </p>
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
                     <input
                       type="text"
                       required
@@ -417,18 +417,31 @@ export default function EventQuoteCalculator() {
                       placeholder="Phone"
                       className="w-full bg-transparent border border-cream/15 px-4 py-3 text-cream font-accent text-sm placeholder:text-cream/25 focus:border-gold/40 focus:outline-none transition-all"
                     />
-                    <input
-                      type="date"
-                      value={formData.eventDate}
-                      onChange={(e) => setFormData({ ...formData, eventDate: e.target.value })}
-                      className="w-full bg-transparent border border-cream/15 px-4 py-3 text-cream font-accent text-sm placeholder:text-cream/25 focus:border-gold/40 focus:outline-none transition-all"
-                    />
-                    <select
-                      value={formData.eventTime}
-                      onChange={(e) => setFormData({ ...formData, eventTime: e.target.value })}
-                      className="w-full bg-charcoal border border-cream/15 px-4 py-3 text-cream font-accent text-sm focus:border-gold/40 focus:outline-none transition-all"
-                    >
-                      <option value="">Preferred start time</option>
+                    <div className="flex flex-col gap-1.5">
+                      <label htmlFor="eventDate" className="font-accent text-cream/40 text-[11px] tracking-[0.15em] uppercase">
+                        Event date *
+                      </label>
+                      <input
+                        id="eventDate"
+                        type="date"
+                        required
+                        min={new Date().toISOString().split("T")[0]}
+                        value={formData.eventDate}
+                        onChange={(e) => setFormData({ ...formData, eventDate: e.target.value })}
+                        className="w-full bg-transparent border border-cream/15 px-4 py-3 text-cream font-accent text-sm placeholder:text-cream/25 focus:border-gold/40 focus:outline-none transition-all [color-scheme:dark]"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <label htmlFor="eventTime" className="font-accent text-cream/40 text-[11px] tracking-[0.15em] uppercase">
+                        Preferred start time
+                      </label>
+                      <select
+                        id="eventTime"
+                        value={formData.eventTime}
+                        onChange={(e) => setFormData({ ...formData, eventTime: e.target.value })}
+                        className="w-full bg-charcoal border border-cream/15 px-4 py-3 text-cream font-accent text-sm focus:border-gold/40 focus:outline-none transition-all"
+                      >
+                        <option value="">Flexible / not sure yet</option>
                       <optgroup label="Lunch">
                         <option value="11:00 AM">11:00 AM</option>
                         <option value="11:30 AM">11:30 AM</option>
@@ -445,7 +458,8 @@ export default function EventQuoteCalculator() {
                         <option value="7:30 PM">7:30 PM</option>
                         <option value="8:00 PM">8:00 PM</option>
                       </optgroup>
-                    </select>
+                      </select>
+                    </div>
                   </div>
                   <textarea
                     value={formData.message}
