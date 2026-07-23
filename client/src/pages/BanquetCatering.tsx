@@ -261,6 +261,30 @@ const cateringMenu = [
   },
 ];
 
+/* ── Banquet FAQ — answers the questions that stall event leads ── */
+const BANQUET_FAQ = [
+  {
+    q: "Do my guests choose their own entrée?",
+    a: "Yes. On our served banquet menus, each guest selects their own main course from the options on your chosen menu — so everyone at the table gets exactly what they'd like.",
+  },
+  {
+    q: "How does a hosted banquet work?",
+    a: "It's prix-fixe and fully served. You pick a per-person menu, we assign a dedicated coordinator, and setup, service, and timing are all handled for you. After you send a quote, we follow up with availability and a finalized proposal.",
+  },
+  {
+    q: "Can you accommodate dietary needs?",
+    a: "Absolutely — vegetarian, gluten-free, and other dietary needs are no problem. Note them when you send your quote, or let your coordinator know, and we'll take care of the details.",
+  },
+  {
+    q: "How many guests can you host?",
+    a: "The Vault — our restored 1920s bank-vault room — seats 12 to 20 for intimate dinners. For larger parties we open the main dining room, up to a full-restaurant buyout for 100.",
+  },
+  {
+    q: "What's the difference between a banquet and catering?",
+    a: "A banquet is a hosted, served event at the restaurant — in The Vault or the dining room. Catering is family-style trays delivered to your office or venue. Both are on this page; pick the tab that fits your event.",
+  },
+];
+
 /* ── Direct catering order form ── */
 function CateringOrderForm() {
   const [form, setForm] = useState({ name: "", phone: "", email: "", date: "", headcount: "", notes: "" });
@@ -331,6 +355,24 @@ function CateringOrderForm() {
 
 export default function BanquetCatering() {
   usePageMeta("/banquet-catering");
+
+  // FAQ structured data — helps Google rich results and AI assistants cite us
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.id = "banquet-faq-schema";
+    script.text = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: BANQUET_FAQ.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    });
+    document.head.appendChild(script);
+    return () => { document.getElementById("banquet-faq-schema")?.remove(); };
+  }, []);
 
   const [activeTab, setActiveTab] = useState<TabKey>(() => {
     if (typeof window !== "undefined") {
@@ -673,6 +715,31 @@ export default function BanquetCatering() {
               </div>
             </motion.div>
           )}
+        </div>
+      </section>
+
+      {/* Good to know — FAQ */}
+      <section className="section-padding bg-background">
+        <div className="container max-w-3xl">
+          <div className="text-center mb-14">
+            <div className="divider-diamond mb-6"><i /></div>
+            <h2 className="font-display text-3xl md:text-4xl text-charcoal">Good to know</h2>
+          </div>
+          <div className="divide-y divide-charcoal/10">
+            {BANQUET_FAQ.map((f, i) => (
+              <motion.div
+                key={i}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="py-7"
+              >
+                <h3 className="font-display text-xl md:text-2xl text-charcoal mb-2">{f.q}</h3>
+                <p className="font-accent text-charcoal/70 text-base md:text-lg leading-[1.8]">{f.a}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
