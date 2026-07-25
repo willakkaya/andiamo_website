@@ -512,6 +512,350 @@ export const MODULES: TrainingModule[] = [
     ],
   },
   {
+    id: "figaro-appearance",
+    order: 16,
+    phase: 1,
+    section: "Who We Are",
+    title: "Café Figaro: Dress Code & Uniform",
+    summary:
+      "The Figaro floor runs a step more formal — the shirt-and-tie floor uniform for Servers, Bartenders and Bussers/Runners, business professional for Hosts and Managers (a blazer for managers), and the grooming behind all of it.",
+    minutes: 5,
+    requiredFor: EVERYONE,
+    location: "Cafe Figaro",
+    lessons: [
+      {
+        heading: "The Floor Uniform — Servers, Bartenders & Bussers/Runners",
+        intro:
+          "Café Figaro runs a step more formal than the group standard. Servers, bartenders, and bussers/runners all wear the same uniform — and the tie is not optional, every shift.",
+        points: [
+          "Non-slip shoes — closed-toe, black. Safety first, and they finish the look.",
+          "A pressed dress shirt — clean, buttoned, no wrinkles.",
+          "Slacks — tailored and pressed. No jeans, no chinos, no shorts.",
+          "A tie, always. It is part of the uniform, not an accessory — no tie, not on the floor.",
+          "There are no casual days here — the same head to toe whether you're serving, behind the bar, or running food.",
+        ],
+      },
+      {
+        heading: "The Host Stand — Business Professional",
+        intro:
+          "The host is the first face a guest sees and the last goodbye — dressed to match. Business professional, not the Server floor uniform.",
+        points: [
+          "Business professional — think polished office or a nice interview. Formal dress wear, always.",
+          "Absolutely no t-shirts. Nothing casual — no jeans, no sneakers, no athleisure, no shorts.",
+          "A blazer, blouse, button-down, tailored dress, or slacks — clean, pressed, and put-together.",
+          "Closed-toe, polished shoes — kept comfortable, because you are on your feet all night.",
+          "When in doubt, dress up, not down. You set the tone the moment a guest walks in.",
+        ],
+      },
+      {
+        heading: "Managers — Business Professional, Plus a Blazer",
+        intro:
+          "Managers set the bar for the whole floor — dressed a notch above, so the team has a standard to reach.",
+        points: [
+          "Business professional with a blazer — the blazer is the manager's standard, on the floor every shift.",
+          "A pressed shirt or blouse, slacks or a tailored dress underneath; polished, closed-toe shoes.",
+          "No t-shirts, no casual wear — guests read the manager first, and the team dresses to match.",
+        ],
+      },
+      {
+        heading: "Grooming & the Rest",
+        intro: "The group appearance standards apply to everyone on the Figaro floor.",
+        points: [
+          "Pressed and polished head to toe — give yourself a mirror check before you clock in.",
+          "Hair neat and tied back if longer than collar length; clean, trimmed nails.",
+          "No heavy cologne or perfume; name tag visible at all times.",
+          "Phones on silent and out of sight during service.",
+          "Arrive dressed and ready — never clock in and then finish getting dressed.",
+        ],
+      },
+    ],
+    quiz: [
+      {
+        id: "figaro-appearance-1",
+        question:
+          "What does the Café Figaro floor uniform require that the general dress code does not?",
+        options: ["An apron", "A tie", "A vest", "A pocket square"],
+        answer: 1,
+        explanation:
+          "The Figaro floor is more formal — a tie is part of the uniform every shift, not optional.",
+      },
+      {
+        id: "figaro-appearance-2",
+        question: "The correct footwear on the Café Figaro floor is:",
+        options: [
+          "White sneakers",
+          "Leather-soled dress loafers",
+          "Closed-toe, non-slip black shoes",
+          "Sandals when it's warm",
+        ],
+        answer: 2,
+        explanation: "Closed-toe, non-slip, black — safety first, and they finish the look.",
+      },
+      {
+        id: "figaro-appearance-3",
+        question:
+          "Someone on the floor shows up in a pressed dress shirt and slacks but forgot a tie. The right outcome:",
+        options: [
+          "Work the shift and bring one tomorrow",
+          "Not on the floor without a tie — get one before service",
+          "A tie is optional in summer",
+          "Borrow one from a guest",
+        ],
+        answer: 1,
+        explanation: "No tie, not on the floor — it is part of the uniform, not an accessory.",
+      },
+      {
+        id: "figaro-appearance-4",
+        question: "Which outfit meets the Café Figaro floor dress code?",
+        options: [
+          "A clean polo and dark chinos",
+          "Dark jeans and a dress shirt",
+          "Pressed dress shirt, slacks, tie, and non-slip shoes",
+          "Shorts and a dress shirt on hot days",
+        ],
+        answer: 2,
+        explanation:
+          "Pressed dress shirt, slacks, a tie, and closed-toe non-slip shoes — clean and pressed, every shift.",
+      },
+      {
+        id: "figaro-appearance-8",
+        question: "Who wears the dress shirt, slacks, and tie floor uniform at Café Figaro?",
+        options: [
+          "Servers only",
+          "Servers, bartenders, and bussers/runners",
+          "Only Servers and Managers",
+          "Everyone except the bartenders",
+        ],
+        answer: 1,
+        explanation:
+          "Servers, bartenders, and bussers/runners all wear the same floor uniform. Hosts are business professional; managers add a blazer.",
+      },
+      {
+        id: "figaro-appearance-9",
+        question: "What does the Café Figaro manager's dress standard add over business professional?",
+        options: [
+          "A tie, like the floor team",
+          "A blazer",
+          "An apron",
+          "Nothing — it's identical to the hosts",
+        ],
+        answer: 1,
+        explanation:
+          "Managers wear business professional with a blazer — dressed a notch above, setting the standard the floor reaches for.",
+      },
+      {
+        id: "figaro-appearance-5",
+        question: "When should you be dressed and ready for the floor?",
+        options: [
+          "Right after you clock in",
+          "By the time the first guests arrive",
+          "Before you clock in, ready to work",
+          "Whenever a manager is checking",
+        ],
+        answer: 2,
+        explanation: "Arrive already dressed and ready — never clock in and then finish dressing.",
+      },
+      {
+        id: "figaro-appearance-6",
+        question: "The dress standard for a Café Figaro host is:",
+        options: [
+          "The same dress shirt and tie as the Servers",
+          "Business professional — formal dress wear, no t-shirts",
+          "Casual, as long as it's clean and neat",
+          "Anything, as long as it's black",
+        ],
+        answer: 1,
+        explanation:
+          "Hosts wear business professional — formal, polished, no t-shirts. You are the first and last impression of the room.",
+      },
+      {
+        id: "figaro-appearance-7",
+        question: "A host arrives in a clean t-shirt and dark jeans. This is:",
+        options: [
+          "Fine — it's clean and neat",
+          "Fine for a slow night",
+          "Not acceptable — the host stand is business professional, no t-shirts or casual wear",
+          "Fine as long as a blazer goes over it",
+        ],
+        answer: 2,
+        explanation:
+          "No t-shirts and nothing casual at the host stand — business professional, every shift.",
+      },
+    ],
+  },
+  {
+    id: "andiamo-appearance",
+    order: 17,
+    phase: 1,
+    section: "Who We Are",
+    title: "Andiamo: Dress Code & Uniform",
+    summary:
+      "The Andiamo floor runs a step more formal — the shirt-and-tie floor uniform for Servers, Bartenders and Bussers/Runners, business professional for Hosts and Managers (a blazer for managers), and the grooming behind all of it.",
+    minutes: 5,
+    requiredFor: EVERYONE,
+    location: "Andiamo",
+    lessons: [
+      {
+        heading: "The Floor Uniform — Servers, Bartenders & Bussers/Runners",
+        intro:
+          "Andiamo runs a step more formal than the group standard. Servers, bartenders, and bussers/runners all wear the same uniform — and the tie is not optional, every shift.",
+        points: [
+          "Non-slip shoes — closed-toe, black. Safety first, and they finish the look.",
+          "A pressed dress shirt — clean, buttoned, no wrinkles.",
+          "Slacks — tailored and pressed. No jeans, no chinos, no shorts.",
+          "A tie, always. It is part of the uniform, not an accessory — no tie, not on the floor.",
+          "There are no casual days here — the same head to toe whether you're serving, behind the bar, or running food.",
+        ],
+      },
+      {
+        heading: "The Host Stand — Business Professional",
+        intro:
+          "The host is the first face a guest sees and the last goodbye — dressed to match. Business professional, not the Server floor uniform.",
+        points: [
+          "Business professional — think polished office or a nice interview. Formal dress wear, always.",
+          "Absolutely no t-shirts. Nothing casual — no jeans, no sneakers, no athleisure, no shorts.",
+          "A blazer, blouse, button-down, tailored dress, or slacks — clean, pressed, and put-together.",
+          "Closed-toe, polished shoes — kept comfortable, because you are on your feet all night.",
+          "When in doubt, dress up, not down. You set the tone the moment a guest walks in.",
+        ],
+      },
+      {
+        heading: "Managers — Business Professional, Plus a Blazer",
+        intro:
+          "Managers set the bar for the whole floor — dressed a notch above, so the team has a standard to reach.",
+        points: [
+          "Business professional with a blazer — the blazer is the manager's standard, on the floor every shift.",
+          "A pressed shirt or blouse, slacks or a tailored dress underneath; polished, closed-toe shoes.",
+          "No t-shirts, no casual wear — guests read the manager first, and the team dresses to match.",
+        ],
+      },
+      {
+        heading: "Grooming & the Rest",
+        intro: "The group appearance standards apply to everyone on the Andiamo floor.",
+        points: [
+          "Pressed and polished head to toe — give yourself a mirror check before you clock in.",
+          "Hair neat and tied back if longer than collar length; clean, trimmed nails.",
+          "No heavy cologne or perfume; name tag visible at all times.",
+          "Phones on silent and out of sight during service.",
+          "Arrive dressed and ready — never clock in and then finish getting dressed.",
+        ],
+      },
+    ],
+    quiz: [
+      {
+        id: "andiamo-appearance-1",
+        question:
+          "What does the Andiamo floor uniform require that the general dress code does not?",
+        options: ["An apron", "A tie", "A vest", "A pocket square"],
+        answer: 1,
+        explanation:
+          "The Andiamo floor is more formal — a tie is part of the uniform every shift, not optional.",
+      },
+      {
+        id: "andiamo-appearance-2",
+        question: "The correct footwear on the Andiamo floor is:",
+        options: [
+          "White sneakers",
+          "Leather-soled dress loafers",
+          "Closed-toe, non-slip black shoes",
+          "Sandals when it's warm",
+        ],
+        answer: 2,
+        explanation: "Closed-toe, non-slip, black — safety first, and they finish the look.",
+      },
+      {
+        id: "andiamo-appearance-3",
+        question:
+          "Someone on the floor shows up in a pressed dress shirt and slacks but forgot a tie. The right outcome:",
+        options: [
+          "Work the shift and bring one tomorrow",
+          "Not on the floor without a tie — get one before service",
+          "A tie is optional in summer",
+          "Borrow one from a guest",
+        ],
+        answer: 1,
+        explanation: "No tie, not on the floor — it is part of the uniform, not an accessory.",
+      },
+      {
+        id: "andiamo-appearance-4",
+        question: "Which outfit meets the Andiamo floor dress code?",
+        options: [
+          "A clean polo and dark chinos",
+          "Dark jeans and a dress shirt",
+          "Pressed dress shirt, slacks, tie, and non-slip shoes",
+          "Shorts and a dress shirt on hot days",
+        ],
+        answer: 2,
+        explanation:
+          "Pressed dress shirt, slacks, a tie, and closed-toe non-slip shoes — clean and pressed, every shift.",
+      },
+      {
+        id: "andiamo-appearance-5",
+        question: "Who wears the dress shirt, slacks, and tie floor uniform at Andiamo?",
+        options: [
+          "Servers only",
+          "Servers, bartenders, and bussers/runners",
+          "Only Servers and Managers",
+          "Everyone except the bartenders",
+        ],
+        answer: 1,
+        explanation:
+          "Servers, bartenders, and bussers/runners all wear the same floor uniform. Hosts are business professional; managers add a blazer.",
+      },
+      {
+        id: "andiamo-appearance-6",
+        question: "The dress standard for an Andiamo host is:",
+        options: [
+          "The same dress shirt and tie as the Servers",
+          "Business professional — formal dress wear, no t-shirts",
+          "Casual, as long as it's clean and neat",
+          "Anything, as long as it's black",
+        ],
+        answer: 1,
+        explanation:
+          "Hosts wear business professional — formal, polished, no t-shirts. You are the first and last impression of the room.",
+      },
+      {
+        id: "andiamo-appearance-7",
+        question: "A host arrives in a clean t-shirt and dark jeans. This is:",
+        options: [
+          "Fine — it's clean and neat",
+          "Fine for a slow night",
+          "Not acceptable — the host stand is business professional, no t-shirts or casual wear",
+          "Fine as long as a blazer goes over it",
+        ],
+        answer: 2,
+        explanation:
+          "No t-shirts and nothing casual at the host stand — business professional, every shift.",
+      },
+      {
+        id: "andiamo-appearance-8",
+        question: "What does the Andiamo manager's dress standard add over business professional?",
+        options: [
+          "A tie, like the floor team",
+          "A blazer",
+          "An apron",
+          "Nothing — it's identical to the hosts",
+        ],
+        answer: 1,
+        explanation:
+          "Managers wear business professional with a blazer — dressed a notch above, setting the standard the floor reaches for.",
+      },
+      {
+        id: "andiamo-appearance-9",
+        question: "When should you be dressed and ready for the floor?",
+        options: [
+          "Right after you clock in",
+          "By the time the first guests arrive",
+          "Before you clock in, ready to work",
+          "Whenever a manager is checking",
+        ],
+        answer: 2,
+        explanation: "Arrive already dressed and ready — never clock in and then finish dressing.",
+      },
+    ],
+  },
+  {
     id: "roles",
     order: 3,
     phase: 2,
@@ -1498,69 +1842,131 @@ export const MODULES: TrainingModule[] = [
     order: 8,
     phase: 3,
     section: "What We Sell",
-    title: "Wine & Upselling",
+    title: "Wines by the Glass \u2014 Summer 2026",
+    quizDraw: 12,
     summary:
-      "Andiamo's by-the-glass program \u2014 the one-question method, every pour's formula, and the five moments that sell.",
-    minutes: 14,
+      "Andiamo\u2019s ten by-the-glass pours plus the bubbles \u2014 every wine\u2019s formula, the one-question method, the table scripts, and the five moments that sell.",
+    minutes: 18,
     requiredFor: BEVERAGE_TEAM,
     location: "Andiamo",
     lessons: [
       {
-        heading: "The One-Question Method",
+        heading: "Start Here \u2014 How to Actually Learn This",
         intro:
-          "You don\u2019t need to be a sommelier \u2014 you need one pattern: ask one question \u2192 pick the pour \u2192 say one sentence \u2192 stop talking. And \u2018great question \u2014 let me find out\u2019 is always a professional answer.",
+          "Nobody memorizes a dozen wines in one sitting. The pros learn in passes \u2014 do the same.",
         points: [
-          "THE CHARDONNAY WALKTHROUGH \u2014 guest: \u2018I\u2019ll just have a Chardonnay.\u2019 You: \u2018crisp and bright, or rich and buttery?\u2019 Buttery \u2192 Flowers (Sonoma Coast, full and creamy). Crisp \u2192 De Forville (unoaked, bright, mineral \u2014 \u2018Chard without the butter\u2019). Every answer has a pour waiting.",
-          "Pinot Grigio: \u2018the classic, or something with a coastal twist?\u2019 \u2192 Donini / La Cala Vermentino (saline \u2014 the branzino wine).",
-          "Sauvignon Blanc \u2192 Clos Henri: citrusy, zesty, refreshing. One sentence, done.",
-          "Reds: \u2018smooth and easy, or big and bold?\u2019 \u2192 smooth: House Nero d\u2019Avola or Routestock Pinot Noir; bold: The Calling Cabernet.",
-          "Italian mood: \u2018for the pasta, or something adventurous?\u2019 \u2192 Chianti with red sauce / Tintero Nebbiolo, the \u2018baby Barolo.\u2019",
-          "Why it works: the question does the selling; you sound like an expert by asking, not lecturing; the price comes last, plainly, no apology.",
+          "Pass 1 (3 min): skim every Formula line \u2014 grape \u00b7 place \u00b7 flavor \u00b7 feel. Just get the map.",
+          "Pass 2 (8 min): read the stories and say each Sentence OUT LOUD once. Out loud is the trick \u2014 your mouth remembers what your eyes forget.",
+          "Pass 3: run the Table Scripts with a coworker or in the mirror. Sixty seconds each.",
+          "Then taste: the wine of the day at pre-shift locks it in. Tasting one wine you\u2019ve already read about beats reading ten.",
+          "Learn YOUR anchors first: the House White, the House Red, and the three you pour most. Own five, then grow.",
+          "Different brains, different doors: readers \u2014 study the formulas; talkers \u2014 role-play the scripts; doers \u2014 taste and pour. Use yours.",
         ],
       },
       {
-        heading: "Price Transparency & Wine Words",
+        heading: "Why This Matters \u2014 You Are the Wine List",
         intro:
-          "One rule above all: no guest ever learns a price from the check.",
+          "A beautiful list doesn\u2019t sell wine. You do. A guest guided to the right glass has a better night, spends a little more, and comes back \u2014 and regulars are the whole business.",
         points: [
-          "ALWAYS say the price when you recommend \u2014 plainly, at the end, straight off the printed list: \u201cthe Flowers \u2014 [price].\u201d Confidence with numbers reads as honesty.",
-          "Picking for a guest? Confirm pick AND price before you pour: \u201cI\u2019ll bring the Vermentino \u2014 [price] \u2014 perfect with the branzino.\u201d",
-          "DRY = not sweet (nearly everything we pour is dry \u2014 ask \u2018crisp or rich?\u2019 instead). BODY = weight: skim milk \u2192 whole milk \u2192 cream.",
-          "TANNIN = the tea-bag grip in reds (big in the Calling, gentle in Pinot). ACIDITY = mouth-watering brightness (Chianti loves food for this reason). OAK = vanilla/butter from barrels (Flowers yes, De Forville no).",
-          "CORKED = musty wet-cardboard smell from a faulty cork. It happens to good bottles: apologize, replace immediately without debate, tell a manager.",
+          "You don\u2019t need to be a sommelier. The entire skill: ask one question \u2192 pick the pour \u2192 say one sentence \u2192 stop talking.",
+          "\u2018Great question \u2014 let me find out\u2019 is always a professional answer. Never bluff a guest.",
+          "The upsell is generosity, not pressure: guiding someone to a wine they\u2019ll love is a gift.",
+          "Present two options, recommend one, let the guest choose. Two feels like help; the whole list feels like a quiz.",
+          "One memorable detail per wine \u2014 not a Wikipedia entry. \u2018Tastes like the coast\u2019 beats three sentences of geography.",
+          "Every pour in the building is 6 oz \u2014 a full ounce over the standard. It\u2019s real generosity; let it show in how you pour and how you talk.",
         ],
       },
       {
-        heading: "Whites & Sparkling \u2014 Formula \u00b7 Sentence \u00b7 For",
+        heading: "Service Rules & Price Transparency",
+        intro:
+          "One rule above all: no guest ever learns a price from the check. Surprise is the enemy of trust \u2014 and trust is what sells the second visit.",
         points: [
-          "Lamberti Prosecco: Glera \u00b7 Veneto \u00b7 green apple \u00b7 light, frothy. \u201cThe welcome glass \u2014 dry, crisp, celebratory.\u201d FOR every table at greeting.",
-          "Donini Pinot Grigio: PG \u00b7 Italy \u00b7 light citrus \u00b7 crisp, easy. \u201cThe classic \u2014 crisp and clean.\u201d FOR the PG guest; never talk them out of it.",
-          "Flowers Chardonnay: Chard \u00b7 Sonoma Coast \u00b7 cream & ripe orchard fruit \u00b7 full, rich. \u201cThe rich crowd-pleaser from one of Sonoma\u2019s great coastal names.\u201d FOR the buttery-Chard guest \u2014 their yes.",
-          "De Forville Chardonnay: Chard \u00b7 Piedmont \u00b7 bright minerality \u00b7 zero oak. \u201cChardonnay without the butter.\u201d FOR crisp-white drinkers and the \u2018I don\u2019t like Chardonnay\u2019 guest.",
-          "Clos Henri Sauvignon Blanc: SB \u00b7 Marlborough (founded by Sancerre\u2019s Bourgeois family) \u00b7 citrus & zest \u00b7 crisp. \u201cA Sancerre family making Sauvignon in New Zealand.\u201d FOR the SB-by-default guest.",
-          "La Cala Vermentino: Vermentino \u00b7 Sardinia \u00b7 saline & coastal \u00b7 fresh. \u201cThe seafood wine \u2014 tastes like the coast.\u201d FOR the branzino, crudo, anything from the sea.",
+          "ALWAYS say the price when you recommend \u2014 plainly, at the end, no apology: \u201cthe Tyler \u2014 eighteen.\u201d Confidence with numbers reads as honesty.",
+          "Picking for a guest who said \u2018you choose\u2019? Confirm the pick AND the price before you pour: \u201cI\u2019ll bring the Vermentino \u2014 thirteen \u2014 perfect with the branzino.\u201d",
+          "Say the price at the welcome too: \u201ca glass of Prosecco while you look? Twelve.\u201d Named and priced up front, never a surprise later.",
+          "CORKED = a musty, wet-cardboard smell from a faulty cork. It happens to good bottles. Never argue \u2014 apologize, replace the glass immediately, tell a manager.",
+          "If you don\u2019t know a wine, say so and find out. A confident \u2018let me check\u2019 beats a wrong answer every time.",
+        ],
+      },
+      {
+        heading: "Wine Words in Plain English",
+        intro:
+          "A handful of words cover almost every wine question at the table. Use these definitions exactly like this with guests.",
+        points: [
+          "DRY = not sweet. Almost everything we pour is dry. When a guest asks for \u2018dry,\u2019 they usually mean crisp \u2014 ask \u2018crisp and bright, or rich and rounded?\u2019",
+          "BODY = weight in your mouth: skim milk (light) \u2192 whole milk (medium) \u2192 cream (full).",
+          "TANNIN = the tea-bag grip in reds, that drying feel on your gums. Softens with food; firm in the Cabernet, gentle in the Pinot.",
+          "ACIDITY = mouth-watering brightness. High-acid wines like Chianti love food \u2014 that\u2019s why Chianti and red sauce are magic.",
+          "OAK = vanilla, toast, and butter from barrel aging. The Tyler has a touch; the De Forville has none.",
+          "MINERALITY = stone, chalk, or saline instead of fruit \u2014 the word for the Vermentino and the Sauvignon Blanc.",
+          "VINTAGE = the year the grapes were picked. N.V. = a blend of years, normal for Prosecco and most sparkling.",
+          "Say them with confidence \u2014 a clean pronunciation sells the wine: NERO D\u2019AVOLA (NEH-ro DAH-vo-lah), VERMENTINO (ver-men-TEE-no), NEBBIOLO (neh-bee-OH-lo).",
+        ],
+      },
+      {
+        heading: "Whites & Bubbles \u2014 Formula \u00b7 Sentence \u00b7 For",
+        intro:
+          "Grape \u00b7 place \u00b7 flavor \u00b7 feel, then the one sentence you say, then who it\u2019s for.",
+        points: [
+          "Lamberti Prosecco (12 / bottle 38): Glera \u00b7 Veneto \u00b7 green apple \u00b7 light, frothy. \u201cThe welcome glass \u2014 dry, crisp, celebratory.\u201d FOR every table at greeting.",
+          "Sommariva \u2018Il Rosa\u2019 Ros\u00e9 (15 / 45): sparkling ros\u00e9 \u00b7 Veneto \u00b7 wild strawberry \u00b7 dry, festive. \u201cPink bubbles \u2014 dry, not sweet, made for a celebration.\u201d FOR birthdays, toasts, any table that wants an occasion.",
+          "House White \u2014 Donini Pinot Grigio (12 / 40): Pinot Grigio \u00b7 Venezia \u00b7 light citrus \u00b7 crisp, clean. \u201cThe easy classic \u2014 crisp and clean.\u201d FOR the Pinot Grigio guest; never talk them out of it.",
+          "De Forville Chardonnay (12 / 40): Chardonnay \u00b7 Piedmont \u00b7 bright, mineral \u00b7 zero oak. \u201cChardonnay without the butter.\u201d FOR crisp-white drinkers and the \u2018I don\u2019t like Chardonnay\u2019 guest.",
+          "Tyler Chardonnay (18 / 58): Chardonnay \u00b7 Santa Barbara \u00b7 orchard fruit, a touch of cream \u00b7 richer, rounded. \u201cThe step-up Chardonnay \u2014 Santa Barbara elegance, fuller and rounder.\u201d FOR the guest who wants a real, generous white.",
+          "Clos Henri Sauvignon Blanc (14 / 45): Sauvignon Blanc \u00b7 Marlborough, New Zealand \u00b7 citrus & zest \u00b7 crisp. \u201cA Sancerre family \u2014 from France \u2014 making Sauvignon in New Zealand.\u201d FOR the Sauvignon-by-default guest.",
+          "La Cala Vermentino (13 / 45): Vermentino \u00b7 Sardinia \u00b7 saline, coastal \u00b7 fresh. \u201cThe seafood wine \u2014 it tastes like the coast.\u201d FOR the branzino, the crudo, anything from the sea.",
         ],
       },
       {
         heading: "Reds \u2014 Formula \u00b7 Sentence \u00b7 For",
         points: [
-          "House Nero d\u2019Avola (Rapital\u00e0): Nero d\u2019Avola \u00b7 Sicily \u00b7 juicy dark fruit \u00b7 smooth, easy. \u201cOur house red \u2014 Sicilian sunshine, smooth and generous.\u201d FOR the \u2018just a red\u2019 guest.",
-          "Routestock Pinot Noir: Pinot \u00b7 California \u00b7 red berries \u00b7 silky, lighter. \u201cSilky and elegant \u2014 the red that loves salmon and chicken.\u201d FOR the easy-red guest; whites crossing over.",
-          "Villa Sant\u2019Anna Chianti: Sangiovese \u00b7 Tuscany \u00b7 cherry & leather \u00b7 bright, food-first. \u201cThe classic with anything red-sauce.\u201d FOR the traditional Italian order.",
-          "Tintero Nebbiolo: Nebbiolo \u00b7 Piedmont \u00b7 red fruit & rose \u00b7 elegant, floral. \u201cA baby Barolo \u2014 the noble grape at a friendly price.\u201d FOR the curious; the step up from Chianti.",
-          "The Calling Cabernet: Cab \u00b7 California \u00b7 dark fruit \u00b7 bold, firm. \u201cThe big one \u2014 dark fruit and structure.\u201d FOR the bold-red guest and the steak.",
-          "The Italian ladder: Nero d\u2019Avola \u2192 Chianti \u2192 Tintero Nebbiolo \u2014 one friendly rung at a time.",
+          "House Red \u2014 Rapital\u00e0 Nero d\u2019Avola (12 / 45): Nero d\u2019Avola \u00b7 Sicily \u00b7 juicy dark fruit \u00b7 smooth, easy. \u201cOur house red \u2014 Sicilian sunshine, smooth and generous.\u201d FOR the \u2018just a red\u2019 guest.",
+          "Routestock Pinot Noir (16 / 55): Pinot Noir \u00b7 Sonoma Coast \u00b7 red berries \u00b7 silky, lighter. \u201cSilky and elegant \u2014 the red that loves salmon and chicken.\u201d FOR the easy-red guest and whites crossing over.",
+          "Villa Sant\u2019Anna Chianti (13 / 45): Sangiovese \u00b7 Tuscany \u00b7 cherry & leather \u00b7 bright, food-first. \u201cThe classic with anything red-sauce.\u201d FOR the traditional Italian order.",
+          "Tintero Nebbiolo (15 / 50): Nebbiolo \u00b7 Piedmont \u00b7 red fruit & rose \u00b7 elegant, floral. \u201cA baby Barolo \u2014 the noble grape at a friendly price.\u201d FOR the curious drinker; the step up from Chianti.",
+          "Wild Horse Cabernet (17 / 58): Cabernet Sauvignon \u00b7 Paso Robles \u00b7 dark fruit \u00b7 bold, firm. \u201cThe big one \u2014 dark fruit and backbone, built for the steak.\u201d FOR the bold-red guest and the griglia.",
+          "The Italian ladder \u2014 walk a curious guest up one friendly rung at a time: Nero d\u2019Avola \u2192 Chianti \u2192 Tintero Nebbiolo.",
         ],
       },
       {
-        heading: "The Moments That Sell",
+        heading: "The One-Question Method",
+        intro:
+          "Learn this pattern once and every category works the same way. The question does the selling \u2014 you sound like an expert by asking, not lecturing.",
         points: [
-          "THE WELCOME: offer the Lamberti at greeting, with price \u2014 \u201ca glass of Prosecco while you look things over?\u201d An opened table drinks more all night.",
-          "THE SECOND GLASS: offer at a third full, never after empty \u2014 \u201canother Flowers, or should I bring the De Forville so you can taste the two styles side by side?\u201d The compare play turns a glass into a tasting.",
-          "THE BOTTLE MATH: \u201cCan I bring a bottle? It works out to about the same as three glasses each.\u201d Offer BEFORE the third round \u2014 guests never resent being saved money.",
-          "THE DESSERT HANDOFF: when dessert lands, hand the table to the after-dinner round \u2014 amaro, limoncello, or a caff\u00e8 corretto (see the Spirits & Amaro module).",
-          "THE CHECK MOMENT: every price was said out loud earlier, so the check holds zero surprises. No surprises = trust = tips = regulars.",
-          "The mindset under all of it: you are not selling \u2014 you are guiding. Be specific and sensory: \u201cthe Vermentino is drinking beautifully \u2014 saline, coastal, perfect with the branzino.\u201d",
+          "\u2018I\u2019ll just have a Chardonnay.\u2019 \u2192 \u2018Love it \u2014 crisp and bright, or rich and rounded?\u2019 Crisp \u2192 De Forville, no oak, twelve. Rich \u2192 Tyler, fuller and rounder, eighteen. Every answer has a pour waiting.",
+          "Pinot Grigio: \u2018the classic, or something coastal?\u2019 \u2192 Donini (classic, twelve) / La Cala Vermentino (saline, the seafood wine, thirteen).",
+          "Sauvignon Blanc \u2192 Clos Henri: \u2018citrusy and zesty \u2014 a Sancerre family making it in New Zealand.\u2019 Fourteen. One sentence, done.",
+          "Reds: \u2018smooth and easy, or big and bold?\u2019 \u2192 smooth: House Nero d\u2019Avola (twelve) or Routestock Pinot (sixteen); bold: Wild Horse Cabernet (seventeen).",
+          "Italian mood: \u2018for the pasta, or something to explore?\u2019 \u2192 Chianti with red sauce (thirteen) / Tintero Nebbiolo, the baby Barolo (fifteen).",
+          "Bubbles: \u2018a glass to start?\u2019 \u2192 Lamberti Prosecco (twelve); pink and celebrating \u2192 Sommariva Ros\u00e9 (fifteen).",
+          "Why it works: the question does the selling; every answer has a pour ready; the price comes last, plainly, no apology.",
+        ],
+      },
+      {
+        heading: "Real Tables \u2014 the Scripts",
+        intro:
+          "The most common order isn\u2019t a question \u2014 it\u2019s a grape. The move is always the same: name the pour, one descriptor, the price, and where it shines. Two options at most, never the whole list.",
+        points: [
+          "\u201cI\u2019ll have a Pinot Noir.\u201d \u2192 \u201cThe Routestock from the Sonoma Coast \u2014 silky and elegant, sixteen. Beautiful with the salmon or the chicken if that\u2019s where you\u2019re headed.\u201d",
+          "\u201cA glass of Cabernet.\u201d \u2192 \u201cThe Wild Horse from Paso Robles \u2014 bold, dark fruit, seventeen. It\u2019s the one for the steak.\u201d",
+          "\u201cChardonnay.\u201d \u2192 \u201cCrisp or rich? The De Forville is bright with no oak, twelve \u2014 the Tyler is fuller and rounder, from Santa Barbara, eighteen.\u201d",
+          "\u201cSomething Italian and white, easy.\u201d \u2192 \u201cThe Donini Pinot Grigio, crisp and clean, twelve \u2014 or if you love the sea, the Sardinian Vermentino at thirteen.\u201d",
+          "\u201cA red for my pasta.\u201d \u2192 \u201cThe Chianti \u2014 made for red sauce, thirteen \u2014 or the Nebbiolo, a baby Barolo, a little more serious, fifteen.\u201d",
+          "\u201cDo you have Prosecco?\u201d \u2192 \u201cThe Lamberti \u2014 proper dry Prosecco, twelve. And pink bubbles at fifteen if the table\u2019s celebrating.\u201d",
+          "\u201cYou pick for me.\u201d \u2192 confirm both the pick and the price before you pour: \u201cI\u2019ll bring the Vermentino \u2014 thirteen \u2014 it\u2019s perfect with the branzino.\u201d",
+          "\u201cWhat\u2019s good?\u201d \u2192 don\u2019t recite the list. \u201cDepends what you love \u2014 for a white the Vermentino is singing right now, thirteen; for a red the Nebbiolo is a baby Barolo, fifteen.\u201d",
+        ],
+      },
+      {
+        heading: "The Five Moments That Sell",
+        intro:
+          "Wine revenue isn\u2019t one big move \u2014 it\u2019s five small moments, every table, every night.",
+        points: [
+          "THE WELCOME: offer the Lamberti at greeting, by name, with price \u2014 \u201ca glass of Prosecco while you look things over? Twelve.\u201d An opened table drinks more all night.",
+          "THE SECOND GLASS: offer at a third full, never after empty \u2014 \u201canother Tyler, or should I bring the De Forville so you can taste the two styles side by side?\u201d The compare play turns a glass into a tasting.",
+          "THE BOTTLE MATH: two guests, two rounds of the same wine \u2192 offer the bottle BEFORE the third glass \u2014 \u201ccan I bring the bottle? It\u2019s about the same as three glasses each.\u201d Guests never resent being saved money.",
+          "THE DESSERT HANDOFF: when dessert lands, pass the table to the after-dinner round \u2014 amaro, limoncello, or a caff\u00e8 corretto (see the Spirits & Amaro module).",
+          "THE CHECK MOMENT: every price was said out loud earlier, so the check holds zero surprises. No surprises = trust = tips = regulars. That is the whole system.",
         ],
       },
     ],
@@ -1570,26 +1976,26 @@ export const MODULES: TrainingModule[] = [
         question: "A guest ordering the branzino wants a white. The strongest pairing logic:",
         options: [
           "Clos Henri Sauvignon Blanc \u2014 crisp cuts through fish",
-          "La Cala Vermentino \u2014 saline and coastal, the wine literally made for seafood",
+          "La Cala Vermentino \u2014 saline and coastal, the wine practically made for seafood",
           "Donini Pinot Grigio \u2014 light enough to stay out of the way",
-          "Flowers Chardonnay \u2014 richness matches a whole fish",
+          "Tyler Chardonnay \u2014 richness matches a whole fish",
         ],
         answer: 1,
         explanation:
-          "Three of these \u2018work\u2019 \u2014 but the Vermentino\u2019s salinity is the story pick, and the story sells: \u2018tastes like the coast.\u2019",
+          "Several of these \u2018work\u2019 \u2014 but the Vermentino\u2019s salinity is the story pick, and the story sells: \u2018tastes like the coast.\u2019",
       },
       {
         id: "wine-2",
         question: "\u2018I like Chardonnay but hate that buttery thing.\u2019 Pour:",
         options: [
-          "Flowers, but ask the kitchen to pair it lighter",
+          "Tyler \u2014 but ask the kitchen to pair it lighter",
           "Clos Henri \u2014 no butter in Sauvignon Blanc",
           "De Forville \u2014 unoaked Chardonnay, bright and mineral: \u2018Chard without the butter\u2019",
           "Donini Pinot Grigio \u2014 the closest clean white",
         ],
         answer: 2,
         explanation:
-          "They asked for Chardonnay \u2014 keep them in the grape, drop the oak. Switching grapes ignores what they said.",
+          "They asked for Chardonnay \u2014 keep them in the grape, just drop the oak. Switching grapes ignores what they said.",
       },
       {
         id: "wine-3",
@@ -1597,18 +2003,18 @@ export const MODULES: TrainingModule[] = [
         options: [
           "Villa Sant\u2019Anna Chianti \u2014 acidity loves rich fish",
           "House Nero d\u2019Avola \u2014 smooth enough for anything",
-          "The Calling Cabernet \u2014 our best red",
-          "Routestock Pinot Noir \u2014 silky, lighter, made for salmon",
+          "Wild Horse Cabernet \u2014 our biggest red",
+          "Routestock Pinot Noir \u2014 silky and lighter, made for salmon",
         ],
         answer: 3,
         explanation:
-          "Chianti\u2019s a defensible second \u2014 but Pinot\u2019s silk against salmon is the classic, and \u2018made for salmon\u2019 is a one-sentence sell.",
+          "Chianti is a defensible second \u2014 but Pinot\u2019s silk against salmon is the classic, and \u2018made for salmon\u2019 is a one-sentence sell.",
       },
       {
         id: "wine-4",
         question: "The strongest bottle-upsell line:",
         options: [
-          "\u201cCan I bring a bottle? It works out to about the same as three glasses each.\u201d",
+          "\u201cCan I bring the bottle? It\u2019s about the same as three glasses each.\u201d",
           "\u201cA bottle is our best value per ounce.\u201d",
           "\u201cMost tables your size do a bottle.\u201d",
           "\u201cShould we just make it a bottle?\u201d",
@@ -1635,13 +2041,13 @@ export const MODULES: TrainingModule[] = [
         question: "\u2018Just something easy and light, Italian white.\u2019 Pour:",
         options: [
           "La Cala Vermentino \u2014 light and Italian",
-          "De Forville \u2014 light and Italian",
+          "Tyler Chardonnay \u2014 a rounder white",
           "Donini Pinot Grigio \u2014 the easy, crisp classic they\u2019re describing",
           "Clos Henri \u2014 light and zesty",
         ],
         answer: 2,
         explanation:
-          "Vermentino and De Forville are Italian too \u2014 but \u2018easy and light\u2019 is the Pinot Grigio guest describing their own wine. Give the classic; never over-correct.",
+          "The Vermentino is Italian too \u2014 but \u2018easy and light\u2019 is the Pinot Grigio guest describing their own wine. Give the classic; never over-correct.",
       },
       {
         id: "wine-7",
@@ -1650,11 +2056,11 @@ export const MODULES: TrainingModule[] = [
           "Tintero Nebbiolo \u2014 the most serious red we pour",
           "House Nero d\u2019Avola \u2014 dark Sicilian fruit",
           "Villa Sant\u2019Anna Chianti \u2014 the classic",
-          "The Calling Cabernet \u2014 dark fruit and firm tannin",
+          "Wild Horse Cabernet \u2014 dark fruit and firm tannin",
         ],
         answer: 3,
         explanation:
-          "Nebbiolo is elegant, not big; Nero d\u2019Avola is smooth, not bold. \u2018Big and bold\u2019 = the Calling, every time.",
+          "Nebbiolo is elegant, not big; Nero d\u2019Avola is smooth, not bold. \u2018Big and bold\u2019 = the Cabernet, every time.",
       },
       {
         id: "wine-8",
@@ -1663,7 +2069,7 @@ export const MODULES: TrainingModule[] = [
           "Villa Sant\u2019Anna Chianti \u2014 acidity built for tomato",
           "House Nero d\u2019Avola \u2014 the house red with the house pasta",
           "Routestock Pinot Noir \u2014 won\u2019t overpower",
-          "The Calling Cabernet \u2014 stands up to the sauce",
+          "Wild Horse Cabernet \u2014 stands up to the sauce",
         ],
         answer: 0,
         explanation:
@@ -1699,9 +2105,9 @@ export const MODULES: TrainingModule[] = [
         id: "wine-11",
         question: "\u2018I\u2019ll just have a Chardonnay.\u2019 Your first move:",
         options: [
-          "\u201cCrisp and bright, or rich and buttery?\u201d \u2014 De Forville or Flowers, either answer has a pour",
+          "\u201cCrisp and bright, or rich and rounded?\u201d \u2014 De Forville or Tyler, either answer has a pour",
           "\u201cCalifornia or Italian?\u201d",
-          "Bring the Flowers \u2014 it\u2019s the crowd-pleaser",
+          "Bring the Tyler \u2014 it\u2019s the nicer glass",
           "Describe both Chardonnays fully, then let them decide",
         ],
         answer: 0,
@@ -1715,7 +2121,7 @@ export const MODULES: TrainingModule[] = [
           "Nothing \u2014 they delegated the choice",
           "Check their entr\u00e9e order first",
           "Bring two options so they still choose",
-          "Confirm the pick AND the price: \u201cI\u2019ll bring the Vermentino \u2014 [price] \u2014 perfect with the branzino\u201d",
+          "Confirm the pick AND the price: \u201cI\u2019ll bring the Vermentino \u2014 thirteen \u2014 perfect with the branzino\u201d",
         ],
         answer: 3,
         explanation:
@@ -1723,10 +2129,10 @@ export const MODULES: TrainingModule[] = [
       },
       {
         id: "wine-13",
-        question: "A guest is a third from finishing a Flowers they love. Best line:",
+        question: "A guest is a third from finishing a Tyler they love. Best line:",
         options: [
-          "\u201cAnother Flowers \u2014 or should I bring the De Forville so you can taste the two styles side by side?\u201d",
-          "\u201cReady for another?\u201d when the glass is empty",
+          "\u201cAnother Tyler \u2014 or should I bring the De Forville so you can taste the two styles side by side?\u201d",
+          "\u201cReady for another?\u201d once the glass is empty",
           "\u201cShall I just bring the bottle?\u201d",
           "Refill quietly \u2014 they clearly want more",
         ],
@@ -1741,11 +2147,37 @@ export const MODULES: TrainingModule[] = [
           "Suggest decanting to blow off the aroma",
           "Apologize, replace it immediately without debate, tell a manager \u2014 the bottle is corked",
           "Bring a fresh glass from the same bottle",
-          "Explain that older wines can smell earthy",
+          "Explain that some wines just smell earthy",
         ],
         answer: 1,
         explanation:
           "Cork taint doesn\u2019t blow off and it\u2019s in the whole bottle. Replace, report, never argue.",
+      },
+      {
+        id: "wine-15",
+        question: "A guest orders the New York steak and asks for \u2018a red that can handle it.\u2019 Pour:",
+        options: [
+          "Routestock Pinot Noir \u2014 silky and elegant",
+          "Tintero Nebbiolo \u2014 floral and refined",
+          "Wild Horse Cabernet \u2014 bold, dark fruit and backbone, built for the steak",
+          "House Nero d\u2019Avola \u2014 smooth and easy",
+        ],
+        answer: 2,
+        explanation:
+          "Steak wants structure. The Cabernet\u2019s tannin is the grip that stands up to a char \u2014 \u2018the one for the steak.\u2019",
+      },
+      {
+        id: "wine-16",
+        question: "How much do we pour by the glass, and why say it?",
+        options: [
+          "5 oz \u2014 the standard; no need to mention it",
+          "6 oz \u2014 a full ounce over standard; generosity only counts if the guest knows",
+          "Whatever the glass holds; pours aren\u2019t measured",
+          "6 oz \u2014 but keep it quiet so it feels like a bonus",
+        ],
+        answer: 1,
+        explanation:
+          "Every pour is a generous 6 oz. It\u2019s a real edge \u2014 name it when it helps, the way we do on the reserve pours at Figaro.",
       },
     ],
   },
