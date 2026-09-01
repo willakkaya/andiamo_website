@@ -1,11 +1,11 @@
-// CDN-hosted images & video for the Andiamo in Banca website
+// Images & video for the Andiamo in Banca website — all served from /client/public (self-hosted; the old Manus CDN expired 2026-09)
 // All real restaurant photography — no stock images
 export const IMAGES = {
   // Logo
-  logo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663412679184/kqPisyaY2DvmGsDpfntLLc/ANDIAMOLOGOVECTOR_1e23f135.webp",
+  logo: "/andiamo-logo.webp",
 
   // Exterior / Building
-  exterior: "https://d2xsxph8kpxj0f.cloudfront.net/310519663412679184/kqPisyaY2DvmGsDpfntLLc/andiamo_9501c21c.webp",
+  exterior: "/exterior.webp",
 
   // The Vault — private dining, repainted red (new on-site photos in /public)
   vault: "/vault-red.jpg",
@@ -15,7 +15,7 @@ export const IMAGES = {
   diningRoom: "/dining-room.jpg",
 
   // Food Photography — new on-site dishes in /public
-  petraleSole: "https://d2xsxph8kpxj0f.cloudfront.net/310519663412679184/kqPisyaY2DvmGsDpfntLLc/DSC02097_Original_49a88565.webp",
+  petraleSole: "/petrale-sole.webp",
   lambChops: "/lamb-chops.jpg",
   alfredo: "/fettuccine-alfredo.jpg",
   mushroomAgnolotti: "/mushroom-agnolotti.jpg",
@@ -23,10 +23,10 @@ export const IMAGES = {
   steak: "/skirt-steak.jpg",
 
   // Happy Hour Flyer
-  happyHour: "https://d2xsxph8kpxj0f.cloudfront.net/310519663412679184/kqPisyaY2DvmGsDpfntLLc/Andiamo_HappyHour_1a3bd2fd.jpeg",
+  happyHour: "/happy-hour.webp",
 
   // Hero Video
-  heroVideo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663412679184/kqPisyaY2DvmGsDpfntLLc/ee16909b-bdd5-49d3-9717-1ba74a1cd94a_c8d3eb19.mp4",
+  heroVideo: "/hero.mp4",
 
   // Awards
   wineSpectatorAward: "/wine-spectator-award-2026.jpg",
