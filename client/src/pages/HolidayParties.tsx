@@ -78,7 +78,7 @@ export default function HolidayParties() {
   return (
     <PageLayout>
       {/* ========== HERO — a building directory, not a banner ========== */}
-      <section className="grid grid-cols-1 lg:grid-cols-2 lg:h-screen lg:min-h-[44rem] lg:max-h-[54rem]">
+      <section className="grid grid-cols-1 lg:grid-cols-2 lg:min-h-[clamp(44rem,100vh,54rem)]">
         <div className="order-2 lg:order-1 section-dark grain">
           <div className="relative z-[2] h-full flex flex-col justify-end px-6 sm:px-10 lg:pl-[max(3rem,calc((100vw-1320px)/2+3rem))] lg:pr-16 pt-14 lg:pt-28 pb-14 lg:pb-12">
             <p className={`${LABEL} text-cream/70`}>Holiday parties</p>
@@ -110,13 +110,11 @@ export default function HolidayParties() {
             </nav>
           </div>
         </div>
-        <div className="order-1 lg:order-2 h-80 sm:h-96 lg:h-auto pt-20 lg:pt-0 bg-espresso">
+        <div className="relative order-1 lg:order-2 h-80 sm:h-96 lg:h-auto bg-espresso overflow-hidden">
           <img
             src={IMAGES.diningRoom}
             alt="The dining room at Andiamo in Banca set for a private party"
-            width={1600}
-            height={1067}
-            className="w-full h-full object-cover"
+            className="absolute inset-x-0 bottom-0 top-20 lg:top-0 w-full h-[calc(100%-5rem)] lg:h-full object-cover"
           />
         </div>
       </section>
@@ -129,8 +127,8 @@ export default function HolidayParties() {
           aria-labelledby={`${r.id}-heading`}
           className={`grid grid-cols-1 lg:grid-cols-2 scroll-mt-0 ${i % 2 ? "section-cream" : "bg-background"}`}
         >
-          <div className={`h-72 sm:h-96 lg:h-auto lg:min-h-[34rem] ${i % 2 ? "lg:order-2" : ""}`}>
-            <img src={r.image} alt={r.alt} loading="lazy" width={1600} height={1067} className="w-full h-full object-cover" />
+          <div className={`relative h-72 sm:h-96 lg:h-auto lg:min-h-[34rem] overflow-hidden ${i % 2 ? "lg:order-2" : ""}`}>
+            <img src={r.image} alt={r.alt} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
           </div>
           <div className="px-6 sm:px-10 lg:px-16 xl:px-20 py-14 lg:py-20 flex flex-col justify-center">
             <p className="font-display lining-nums text-charcoal leading-[0.82] text-[5.5rem] sm:text-[7rem] xl:text-[8.5rem] tracking-[-0.02em]" aria-hidden="true">

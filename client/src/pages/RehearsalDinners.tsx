@@ -66,14 +66,12 @@ export default function RehearsalDinners() {
   return (
     <PageLayout>
       {/* ========== HERO — the long table leads ========== */}
-      <section className="grid grid-cols-1 lg:grid-cols-2 lg:h-screen lg:min-h-[44rem] lg:max-h-[54rem]">
-        <div className="h-80 sm:h-96 lg:h-auto pt-20 lg:pt-0 bg-espresso">
+      <section className="grid grid-cols-1 lg:grid-cols-2 lg:min-h-[clamp(44rem,100vh,54rem)]">
+        <div className="relative h-80 sm:h-96 lg:h-auto bg-espresso overflow-hidden">
           <img
             src={IMAGES.vault}
             alt="The Vault private dining room: red walls and one long table set for dinner"
-            width={1600}
-            height={1067}
-            className="w-full h-full object-cover"
+            className="absolute inset-x-0 bottom-0 top-20 lg:top-0 w-full h-[calc(100%-5rem)] lg:h-full object-cover"
           />
         </div>
         <div className="section-cream">
