@@ -1,24 +1,52 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "wouter";
+import { Link, useLocation, useSearch } from "wouter";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { IMAGES, LINKS } from "@/lib/images";
-import { trackReservationClick } from "@/lib/analytics";
+import { trackReservationClick, trackEventMenusClick } from "@/lib/analytics";
 
-const NAV_LINKS = [
+// desktop: false keeps a link out of the desktop bar; the mobile overlay shows all of them
+const NAV_LINKS: { label: string; href: string; desktop?: boolean }[] = [
   { label: "Menu", href: "/menu" },
   { label: "Our Story", href: "/our-story" },
   { label: "The Vault", href: "/the-vault" },
   { label: "Private Events", href: "/private-events" },
+  { label: "Event Menus", href: "/banquet-catering" },
   { label: "Catering", href: "/banquet-catering?tab=catering" },
-  { label: "Gallery", href: "/gallery" },
   { label: "Contact", href: "/contact" },
+  { label: "Gallery", href: "/gallery", desktop: false },
 ];
+
+const DESKTOP_LINKS = NAV_LINKS.filter((link) => link.desktop !== false);
+
+// Pages under the Private Events hub — its nav link stays lit on them
+const PRIVATE_EVENTS_PATHS = ["/private-dining", "/holiday-parties", "/rehearsal-dinners"];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [location] = useLocation();
+  const search = useSearch();
+
+  // /banquet-catering holds two views behind ?tab=, and two nav links point at it,
+  // so a link there is active only when its tab matches the one in the URL.
+  const currentTab = new URLSearchParams(search).get("tab") === "catering" ? "catering" : "events";
+  const isActive = (href: string) => {
+    const [path, query = ""] = href.split("?");
+    if (path === "/banquet-catering") {
+      const wantedTab = new URLSearchParams(query).get("tab") ?? "events";
+      return location === path && wantedTab === currentTab;
+    }
+    if (path === "/private-events" && PRIVATE_EVENTS_PATHS.includes(location)) return true;
+    return location === path;
+  };
+
+  // Path-only navigation already closes the overlay (effect below); a tab switch on
+  // /banquet-catering changes only the query, so every link closes it on click too.
+  const handleLinkClick = (label: string) => {
+    setMobileOpen(false);
+    if (label === "Event Menus") trackEventMenusClick("nav");
+  };
 
   // On the home page, navbar starts transparent over the hero video
   const isHome = location === "/";
@@ -47,7 +75,7 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
+        className={`fixed top-0 left-0 right-0 z-50 print:hidden transition-all duration-700 ${
           showSolid
             ? "bg-warm-white/95 backdrop-blur-md shadow-[0_1px_0_0_rgba(0,0,0,0.06)]"
             : "bg-transparent"
@@ -66,13 +94,15 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center gap-10">
-            {NAV_LINKS.map((link) => (
+          <div className="hidden lg:flex items-center lg:gap-6 xl:gap-10">
+            {DESKTOP_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`font-body text-[11px] tracking-[0.18em] uppercase transition-colors duration-500 ${
-                  location === link.href.split("?")[0]
+                onClick={() => handleLinkClick(link.label)}
+                aria-current={isActive(link.href) ? "page" : undefined}
+                className={`font-body text-[11px] tracking-[0.18em] uppercase whitespace-nowrap transition-colors duration-500 ${
+                  isActive(link.href)
                     ? showSolid ? "text-gold" : "text-gold-light"
                     : showSolid
                       ? "text-charcoal/60 hover:text-charcoal"
@@ -120,9 +150,9 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
-            className="fixed inset-0 z-[60] bg-espresso flex flex-col items-center justify-center"
+            className="fixed inset-0 z-[60] bg-espresso flex flex-col items-center justify-center overflow-y-auto print:hidden [@media(max-height:700px)]:justify-start [@media(max-height:700px)]:pt-24 [@media(max-height:700px)]:pb-10"
           >
-            <nav className="flex flex-col items-center gap-7">
+            <nav className="flex flex-col items-center gap-6">
               {NAV_LINKS.map((link, i) => (
                 <motion.div
                   key={link.href}
@@ -132,8 +162,10 @@ export default function Navbar() {
                 >
                   <Link
                     href={link.href}
+                    onClick={() => handleLinkClick(link.label)}
+                    aria-current={isActive(link.href) ? "page" : undefined}
                     className={`font-display text-2xl tracking-[0.1em] transition-colors duration-300 ${
-                      location === link.href.split("?")[0]
+                      isActive(link.href)
                         ? "text-gold-light"
                         : "text-white/70 hover:text-white"
                     }`}

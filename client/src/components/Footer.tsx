@@ -1,11 +1,12 @@
 import { Link } from "wouter";
 import { MapPin, Phone, Mail, Clock, Instagram, ExternalLink } from "lucide-react";
 import { IMAGES, LINKS } from "@/lib/images";
-import { trackPhoneClick } from "@/lib/analytics";
+import { trackPhoneClick, trackPlannerPdf } from "@/lib/analytics";
+import { PLANNER_PDF } from "@/data/eventMenus";
 
 export default function Footer() {
   return (
-    <footer>
+    <footer className="print:hidden">
       {/* Pre-footer CTA — warm cream background */}
       <div className="section-padding bg-background text-center">
         <div className="divider-diamond mb-8">
@@ -143,11 +144,20 @@ export default function Footer() {
                   Private Events
                 </Link>
                 <Link href="/banquet-catering" className="block text-cream/65 hover:text-cream/80 transition-colors">
-                  Banquet & Catering Menus
+                  Event &amp; banquet menus
                 </Link>
                 <Link href="/banquet-catering?tab=catering" className="block text-cream/65 hover:text-cream/80 transition-colors">
-                  Order Catering
+                  Catering delivery
                 </Link>
+                {PLANNER_PDF.published && (
+                  <a
+                    href={PLANNER_PDF.href}
+                    onClick={() => trackPlannerPdf("footer")}
+                    className="block text-cream/65 hover:text-cream/80 transition-colors"
+                  >
+                    Planner packet (PDF)
+                  </a>
+                )}
                 <Link href="/gallery" className="block text-cream/65 hover:text-cream/80 transition-colors">
                   Gallery
                 </Link>
