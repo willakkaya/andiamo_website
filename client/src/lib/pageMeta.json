@@ -1,7 +1,7 @@
 {
   "/": {
     "title": "Andiamo in Banca | Award-Winning Italian Dining in SSF",
-    "description": "South San Francisco's premier Italian restaurant in a restored 1920s bank building. Recipient of the 2026 Wine Spectator Award of Excellence. Handmade pasta, curated wines, and The Vault private dining."
+    "description": "Italian restaurant in a restored 1920s bank building in South San Francisco. Recipient of the 2026 Wine Spectator Award of Excellence. Handmade pasta, a serious wine list, and The Vault private dining room."
   },
   "/menu": {
     "title": "Menu & Award-Winning Wine List | Andiamo in Banca",
@@ -9,27 +9,27 @@
   },
   "/our-story": {
     "title": "Our Story | Andiamo in Banca",
-    "description": "From Cafe Figaro in 1989 to Andiamo in Banca — the Akkaya family has been feeding the Bay Area for over 35 years. Discover our story."
+    "description": "From Cafe Figaro in 1989 to Andiamo in Banca in 2019, the Akkaya family has been feeding the Bay Area for over 35 years."
   },
   "/the-vault": {
     "title": "The Vault Private Dining | Andiamo in Banca",
-    "description": "Host your private event in The Vault — our exclusive dining room inside a restored 1920s bank vault. Pair your event with our Wine Spectator Award of Excellence cellar. South San Francisco."
+    "description": "Host a private dinner in The Vault, a dining room for 12 to 22 guests inside a restored 1920s bank vault, with a Wine Spectator Award of Excellence cellar. South San Francisco."
   },
   "/private-dining": {
     "title": "Private Dining & Corporate Events | Andiamo in Banca SSF",
-    "description": "South San Francisco's most distinctive private dining room with a 2026 Wine Spectator Award of Excellence wine program. Host corporate dinners and board meetings in a restored 1920s bank vault. Walking distance from Genentech and the SSF biotech corridor. 10 minutes from SFO."
+    "description": "Corporate dinners and board meetings in a restored 1920s bank vault, with a 2026 Wine Spectator Award of Excellence wine program. Walking distance from Genentech and the SSF biotech corridor, 10 minutes from SFO."
   },
   "/contact": {
     "title": "Contact & Hours | Andiamo in Banca",
-    "description": "Visit us at 301 Linden Ave, South San Francisco. Reservations, hours, and directions for Andiamo in Banca — 2026 Wine Spectator Award of Excellence."
+    "description": "Visit us at 301 Linden Ave, South San Francisco. Reservations, hours, and directions for Andiamo in Banca, recipient of the 2026 Wine Spectator Award of Excellence."
   },
   "/gallery": {
     "title": "Gallery | Andiamo in Banca",
-    "description": "Photos of our dining room, dishes, and historic bank building. Andiamo in Banca — South San Francisco."
+    "description": "Photos of our dining room, dishes, and historic bank building. Andiamo in Banca, South San Francisco."
   },
   "/private-events": {
     "title": "Private Events & Private Dining | Andiamo in Banca SSF",
-    "description": "Host private events in a restored 1920s bank — The Vault private dining room, corporate dinners, holiday parties, and rehearsal dinners. Banquet menus from $35/guest, an award-winning cellar, and on-site catering. South San Francisco, minutes from the biotech corridor and SFO.",
+    "description": "Host private events in a restored 1920s bank: The Vault private dining room, corporate dinners, holiday parties, and rehearsal dinners. Event menus from $35 per guest, an award-winning cellar, and catering delivery. South San Francisco, minutes from the biotech corridor and SFO.",
     "image": "/vault-red.jpg"
   },
   "/banquet-catering": {

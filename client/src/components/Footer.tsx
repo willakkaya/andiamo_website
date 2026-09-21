@@ -13,7 +13,7 @@ export default function Footer() {
           <i />
         </div>
         <p className="font-accent italic text-xl md:text-2xl text-gold/80 mb-4">
-          Andiamo &mdash; let&rsquo;s go.
+          Andiamo: let&rsquo;s go.
         </p>
         <h2 className="font-display text-3xl md:text-5xl text-charcoal mb-8">
           Join us for dinner
@@ -52,8 +52,7 @@ export default function Footer() {
             <div>
               <img src={IMAGES.logo} alt="Andiamo in Banca" className="h-14 w-auto mb-5 brightness-0 invert opacity-80" />
               <p className="text-cream/65 text-sm leading-relaxed font-accent tracking-wide mb-7">
-                Upscale Italian dining in a beautifully restored historic bank building.
-                South San Francisco's most unique culinary destination.
+                Handmade Italian cooking in a restored 1920s bank building on Linden Avenue, South San Francisco.
               </p>
               <a
                 href={LINKS.wineSpectatorAwards}
@@ -138,7 +137,7 @@ export default function Footer() {
                   Dinner Menu
                 </Link>
                 <Link href="/the-vault" className="block text-cream/65 hover:text-cream/80 transition-colors">
-                  The Vault &mdash; Private Dining
+                  The Vault private dining
                 </Link>
                 <Link href="/private-events" className="block text-cream/65 hover:text-cream/80 transition-colors">
                   Private Events

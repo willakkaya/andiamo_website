@@ -12,7 +12,7 @@ import ViewSwitch from "./ViewSwitch";
 const cateringMenu = [
   {
     category: "Salads",
-    subtitle: "Fresh, vibrant, and crafted with seasonal ingredients.",
+    subtitle: "Made in-house with seasonal ingredients.",
     items: [
       { name: "Organic Mixed Greens", desc: "Organic mixed greens with shredded vegetables, housemade balsamic vinaigrette", half: "$50", full: "$90" },
       { name: "Arugula Salad", desc: "Organic arugula with red onions, cherry tomatoes, shaved Parmigiano, Champagne vinaigrette", half: "$55", full: "$95" },
@@ -22,7 +22,7 @@ const cateringMenu = [
   },
   {
     category: "Appetizers & Starters",
-    subtitle: "Perfect beginnings for your event — vibrant, flavorful, and crafted with care.",
+    subtitle: "To open the table.",
     items: [
       { name: "Bruschetta Classica", desc: "Toasted crostini topped with marinated chopped tomatoes, garlic, basil, and EVOO", half: "$55", full: "$95" },
       { name: "Garlic Bread", desc: "Warm sourdough bread brushed with garlic butter and baked until golden", half: "$45", full: "$75" },
@@ -33,7 +33,7 @@ const cateringMenu = [
   },
   {
     category: "Pasta",
-    subtitle: "Authentic housemade pasta made fresh every day.",
+    subtitle: "Housemade, rolled fresh every day.",
     items: [
       { name: "Rigatoni Alla Salsiccia", desc: "Rigatoni tossed in a spicy roasted bell pepper and tomato sauce with grilled Italian sausage", half: "$140", full: "$185" },
       { name: "Lasagne Bolognese", desc: "Layered pasta sheets with slow-simmered all-beef ragù, ricotta, mozzarella, and Parmigiano-Reggiano", half: "$150", full: "$195" },
@@ -46,18 +46,18 @@ const cateringMenu = [
       { name: "Rigatoni alla Vodka", desc: "Rigatoni with shallots, chili flakes, Parmigiano, and a silky cream sauce", half: "$130", full: "$170" },
       { name: "Penne al Pesto Genovese", desc: "Classic basil pesto with Parmigiano, toasted pine nuts, and a touch of cream", half: "$130", full: "$170" },
       { name: "Penne Arrabbiata", desc: "Penne in a bold, spicy marinara with chili and garlic", half: "$120", full: "$160" },
-      { name: "Penne Pomodoro", desc: "Simple and bright — tomato, garlic, basil, and olive oil", half: "$115", full: "$150" },
+      { name: "Penne Pomodoro", desc: "Simple and bright: tomato, garlic, basil, and olive oil", half: "$115", full: "$150" },
       { name: "Pasta Bolognese", desc: "Slow-cooked beef ragù with aromatic vegetables and herbs. Choice of Penne, Spaghetti, or Gluten-Free Penne", half: "$130", full: "$170" },
     ],
   },
   {
     category: "Entrées",
-    subtitle: "Chef-crafted main courses designed for family-style catering and elegant service.",
+    subtitle: "Main courses served family-style.",
     items: [
       { name: "Chicken Marsala", desc: "Tender chicken breast sautéed with cremini mushrooms and finished in a rich Marsala wine reduction", half: "$170", full: "$225" },
       { name: "Chicken Parmesan", desc: "Crispy chicken breast topped with marinara, mozzarella, and Parmigiano, baked until golden", half: "$170", full: "$225" },
       { name: "Chicken Piccata", desc: "Pan-seared chicken breast with capers, lemon, and white wine butter sauce", half: "$170", full: "$225" },
-      { name: "Grilled Salmon Fillet", desc: "Fresh salmon grilled to perfection and served with a delicate lemon butter sauce", half: "$220", full: "$320" },
+      { name: "Grilled Salmon Fillet", desc: "Fresh grilled salmon with a lemon butter sauce", half: "$220", full: "$320" },
       { name: "Beef Brasato al Barolo", desc: "Slow-braised short ribs simmered in Barolo wine, aromatic vegetables, and herbs", half: "$260", full: "$400" },
       { name: "Eggplant Parmesan", desc: "Breaded eggplant layered with marinara and mozzarella, baked until bubbling", half: "$140", full: "$185" },
     ],
@@ -93,7 +93,7 @@ function CateringOrderForm() {
     return (
       <div className="text-center py-12">
         <div className="divider-diamond mb-6"><i /></div>
-        <h3 className="font-display text-2xl text-charcoal mb-3">Grazie — we're on it.</h3>
+        <h3 className="font-display text-2xl text-charcoal mb-3">Grazie. We're on it.</h3>
         <p className="font-accent text-charcoal/65 tracking-wide max-w-md mx-auto">
           Your catering request is in. We'll get back to you <span className="text-charcoal">within the hour</span> during
           business hours to confirm the details.
@@ -118,7 +118,7 @@ function CateringOrderForm() {
       </div>
       {error && (
         <p className="font-accent text-sm text-red-700/80 mt-4">
-          Something went wrong sending your request — please call us at (650) 745-8811 and we'll take care of you.
+          Something went wrong sending your request. Please call us at (650) 745-8811 and we'll take care of you.
         </p>
       )}
       <button
@@ -210,7 +210,7 @@ export default function CateringView() {
               <div className="divider-diamond mb-6"><i /></div>
               <h2 className="font-display text-2xl md:text-3xl text-charcoal mb-3">Order Catering Direct</h2>
               <p className="font-accent text-charcoal/65 max-w-xl mx-auto tracking-wide">
-                Tell us what you need and we'll confirm your order personally &mdash; no middleman, no service fees.
+                Tell us what you need and we'll confirm your order personally, with no middleman and no service fees.
               </p>
               <p className="inline-flex items-center gap-2 font-accent text-gold-dark text-sm tracking-wide mt-4">
                 <Clock size={14} />

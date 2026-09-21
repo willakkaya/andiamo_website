@@ -118,16 +118,12 @@ export default function TheVault() {
               custom={0}
             >
               <p className="font-accent text-charcoal/60 text-lg leading-[1.8] mb-8">
-                The rich red walls, intimate lighting, and white tablecloths create an atmosphere
-                where every gathering feels significant. Whether you're hosting a corporate client dinner,
-                celebrating a milestone, or bringing your team together, The Vault provides a setting
-                that elevates any occasion.
+                Red walls, low light and white tablecloths, in a room that closes behind its original steel door. It works for a client dinner, a milestone birthday, or an evening with your team.
               </p>
               <p className="font-accent text-charcoal/65 text-base leading-[1.8] mb-10">
-                Our dedicated events team will work with you to create a custom menu and experience
-                tailored to your vision.
+                The owner coordinates every private event personally, and the chef can write a menu for your group.
               </p>
-              <h3 className="font-body text-[11px] tracking-[0.2em] uppercase text-gold mb-5">Perfect For</h3>
+              <h3 className="font-body text-[11px] tracking-[0.2em] uppercase text-gold mb-5">Good for</h3>
               <div className="grid grid-cols-2 gap-x-8 gap-y-3">
                 {[
                   "Corporate dinners", "Client entertainment",
@@ -177,8 +173,7 @@ export default function TheVault() {
             </p>
             <h2 className="font-display text-3xl md:text-4xl text-cream mb-6">Dining Options</h2>
             <p className="font-accent text-cream/60 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
-              Every event in The Vault is custom-tailored. Choose from our banquet prix fixe menus
-              or work with our chef to create a bespoke dining experience.
+              Choose one of the prix-fixe event menus, or work with the chef on a menu written for your group.
             </p>
           </motion.div>
 
@@ -218,14 +213,13 @@ export default function TheVault() {
 
             {/* Custom Experience */}
             <div className="bg-espresso p-10 md:p-14 text-center">
-              <h3 className="font-display text-2xl text-gold-light mb-6">Custom Experience</h3>
+              <h3 className="font-display text-2xl text-gold-light mb-6">A custom menu</h3>
               <div className="mb-6">
-                <span className="font-display text-3xl text-cream">Bespoke</span>
-                <span className="font-accent text-cream/60 text-base block mt-1">tailored to your vision</span>
+                <span className="font-display text-3xl text-cream">Written for you</span>
+                <span className="font-accent text-cream/60 text-base block mt-1">by the chef, for your group</span>
               </div>
               <p className="font-accent text-cream/60 text-base mb-8 leading-relaxed">
-                Work directly with our chef and events team to design a completely
-                personalized menu and experience for your group.
+                Work directly with the chef on the courses, the wines and the pacing of the evening.
               </p>
               <a
                 href="#inquiry"

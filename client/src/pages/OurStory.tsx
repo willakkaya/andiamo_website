@@ -53,7 +53,7 @@ export default function OurStory() {
               custom={0}
               className="lg:col-span-4"
             >
-              <span className="chapter mb-7">I &mdash; The Beginning</span>
+              <span className="chapter mb-7">I &middot; The Beginning</span>
               <p className="font-display text-7xl md:text-8xl text-gradient-gold leading-none mt-7">1989</p>
               <h2 className="mt-5">
                 <img src={IMAGES.figaroLogo} alt="Cafe Figaro" className="h-16 md:h-20 w-auto" loading="lazy" />
@@ -71,14 +71,12 @@ export default function OurStory() {
               <p className="font-accent text-charcoal/75 leading-[1.9] text-lg md:text-xl mb-7">
                 John Akkaya left Turkey at sixteen years old with nothing but determination
                 and a willingness to work. After years in the hospitality industry learning
-                his craft, he opened Cafe Figaro on Broadway in Burlingame in 1989 &mdash; a small
-                Italian cafe that would become a beloved neighborhood institution for over
-                35 years.
+                his craft, he opened Cafe Figaro on Broadway in Burlingame in 1989. The small Italian cafe has been a neighborhood institution for over 35 years.
               </p>
               <p className="font-accent text-charcoal/75 leading-[1.9] text-lg md:text-xl">
                 From the very first year, John began a tradition that would define the family&rsquo;s
                 approach to the business: every Thanksgiving, he opened the doors
-                and served free meals to anyone who walked in &mdash; no questions asked. That tradition
+                and served free meals to anyone who walked in, no questions asked. That tradition
                 has continued for over three decades, serving more than 1,500 people each year.
               </p>
             </motion.div>
@@ -127,10 +125,9 @@ export default function OurStory() {
                 Silicon Valley.
               </p>
               <p className="font-accent text-charcoal/75 leading-[1.9] text-lg md:text-xl">
-                The Thanksgiving tradition grew with it &mdash; 150 turkeys, a volunteer army
+                The Thanksgiving tradition grew with it: 150 turkeys, a volunteer army
                 of family and friends, and full sit-down meals for anyone who showed up.
-                It wasn&rsquo;t charity. It was family. That&rsquo;s how the Akkayas have always
-                done things.
+                To the Akkayas this was family, the way they have always done things.
               </p>
             </motion.div>
             <motion.div
@@ -141,7 +138,7 @@ export default function OurStory() {
               custom={0}
               className="lg:col-span-4 order-1 lg:order-2 lg:text-right"
             >
-              <span className="chapter mb-7">II &mdash; Growing</span>
+              <span className="chapter mb-7">II &middot; Growing</span>
               <p className="font-display text-7xl md:text-8xl text-gradient-gold leading-none mt-7">1997</p>
               <h2 className="mt-5">
                 <img src={IMAGES.donGiovanniLogo} alt="Ristorante Don Giovanni" className="h-14 md:h-[4.5rem] w-auto inline-block" loading="lazy" />
@@ -182,16 +179,10 @@ export default function OurStory() {
                 Father &amp; Son
               </h2>
               <p className="font-accent text-charcoal/75 leading-[1.9] text-lg mb-6">
-                Will Akkaya grew up in the restaurants &mdash; bussing tables, watching his
-                father treat every guest like family, and learning that hospitality
-                isn&rsquo;t a business, it&rsquo;s a way of life.
+                Will Akkaya grew up in the restaurants, bussing tables and watching his father treat every guest like family.
               </p>
               <p className="font-accent text-charcoal/75 leading-[1.9] text-lg mb-8">
-                Now running the family&rsquo;s restaurants, Will has brought his own passion to
-                the table: an award-winning wine program recognized by Wine Spectator
-                and Star Wine List, a commitment to sourcing the finest ingredients,
-                and the same belief his father instilled &mdash; that a great restaurant
-                is built on generosity.
+                Now running the family&rsquo;s restaurants, Will has added a wine program recognized by Wine Spectator and Star Wine List, and he keeps the belief his father taught him: a great restaurant is built on generosity.
               </p>
               <blockquote className="border-l-2 border-gold/40 pl-5">
                 <p className="font-accent text-charcoal/70 text-lg italic leading-relaxed">
@@ -237,7 +228,7 @@ export default function OurStory() {
               custom={0}
               className="lg:col-span-4"
             >
-              <span className="chapter chapter-light mb-7">III &mdash; The Next Chapter</span>
+              <span className="chapter chapter-light mb-7">III &middot; The Next Chapter</span>
               <p className="font-display text-7xl md:text-8xl text-gradient-gold leading-none mt-7">2019</p>
               <h2 className="mt-5">
                 <img src={IMAGES.logo} alt="Andiamo in Banca" className="h-14 md:h-16 w-auto brightness-0 invert opacity-90" loading="lazy" />
@@ -253,21 +244,14 @@ export default function OurStory() {
               className="lg:col-span-8 lg:pt-3"
             >
               <p className="font-accent text-cream/65 leading-[1.9] text-lg md:text-xl mb-7">
-                In 2019, the Akkaya family opened the doors to their most ambitious project
-                yet: Andiamo in Banca, housed in a beautifully restored historic bank building
-                in downtown South San Francisco. The name says it all &mdash;
-                &ldquo;Andiamo in Banca&rdquo; is Italian for &ldquo;let&rsquo;s go to the bank,&rdquo; which is exactly
+                In 2019 the Akkaya family opened their most ambitious project yet: Andiamo in Banca, in a restored 1920s bank building in downtown South San Francisco. &ldquo;Andiamo in Banca&rdquo; is Italian for &ldquo;let&rsquo;s go to the bank,&rdquo; which is exactly
                 what the place once was.
               </p>
               <p className="font-accent text-cream/65 leading-[1.9] text-lg md:text-xl mb-7">
-                The grand columns and soaring ceilings were preserved. The original bank vault
-                was transformed into the Peninsula&rsquo;s most exclusive private dining room &mdash; the
-                massive vault door still intact, a stunning portal between the building&rsquo;s
-                past and its future.
+                The grand columns and soaring ceilings were preserved. The original bank vault became a private dining room, the only one of its kind on the Peninsula, with the massive vault door still intact.
               </p>
               <p className="font-accent text-cream/65 leading-[1.9] text-lg md:text-xl">
-                Three restaurants. Over 35 years. One family&rsquo;s unwavering belief that great
-                food, great wine, and genuine hospitality can make any night extraordinary.
+                Three restaurants and more than 35 years in, the family still believes that good food, good wine, and real hospitality can make any night extraordinary.
               </p>
             </motion.div>
           </div>

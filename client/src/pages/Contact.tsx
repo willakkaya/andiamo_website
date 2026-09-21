@@ -57,7 +57,7 @@ function ContactForm() {
             </p>
             <h2 className="font-display text-3xl md:text-4xl text-charcoal mb-4">Send us a message</h2>
             <p className="font-accent text-charcoal/65 text-base tracking-wide">
-              Questions, feedback, or special requests — we'd love to hear from you.
+              Questions, feedback, or special requests? We'd love to hear from you.
             </p>
           </div>
 

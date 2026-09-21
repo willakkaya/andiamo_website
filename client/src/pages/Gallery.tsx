@@ -9,16 +9,16 @@ import { Link } from "wouter";
 type Category = "All" | "The Building" | "Private Dining" | "Cuisine";
 
 const GALLERY_ITEMS: { src: string; alt: string; category: Exclude<Category, "All"> }[] = [
-  { src: IMAGES.diningRoom, alt: "The main dining room — restored 1920s bank with marble columns and soaring ceilings", category: "The Building" },
-  { src: IMAGES.exterior, alt: "Andiamo in Banca — historic bank building exterior with grand columns", category: "The Building" },
-  { src: IMAGES.vault, alt: "The Vault — private dining room with rich red walls and white linen", category: "Private Dining" },
-  { src: IMAGES.vaultAlt, alt: "The Vault — historic Linden Avenue photographs line the red walls", category: "Private Dining" },
+  { src: IMAGES.diningRoom, alt: "The main dining room, a restored 1920s bank with marble columns and soaring ceilings", category: "The Building" },
+  { src: IMAGES.exterior, alt: "Andiamo in Banca, the historic bank building exterior with grand columns", category: "The Building" },
+  { src: IMAGES.vault, alt: "The Vault, the private dining room with rich red walls and white linen", category: "Private Dining" },
+  { src: IMAGES.vaultAlt, alt: "The Vault, where historic Linden Avenue photographs line the red walls", category: "Private Dining" },
   { src: IMAGES.lambChops, alt: "Grilled rack of lamb with rosemary and a red wine reduction", category: "Cuisine" },
   { src: IMAGES.alfredo, alt: "Fettuccine Alfredo with chicken and fresh microgreens", category: "Cuisine" },
   { src: IMAGES.mushroomAgnolotti, alt: "Wild mushroom agnolotti in a black truffle cream", category: "Cuisine" },
-  { src: IMAGES.oysters, alt: "Oysters Rockefeller — baked with spinach, herbs, and breadcrumbs", category: "Cuisine" },
+  { src: IMAGES.oysters, alt: "Oysters Rockefeller, baked with spinach, herbs, and breadcrumbs", category: "Cuisine" },
   { src: IMAGES.steak, alt: "Grilled steak with chimichurri over truffle mashed potatoes", category: "Cuisine" },
-  { src: IMAGES.petraleSole, alt: "Petrale sole — a signature dish, with microgreens", category: "Cuisine" },
+  { src: IMAGES.petraleSole, alt: "Petrale sole, a signature dish, with microgreens", category: "Cuisine" },
 ];
 
 const CATEGORIES: Category[] = ["All", "The Building", "Private Dining", "Cuisine"];
@@ -150,14 +150,10 @@ export default function Gallery() {
           <div className="text-center mt-20 max-w-2xl mx-auto">
             <div className="divider-diamond mb-6 opacity-50"><i /></div>
             <p className="font-accent text-cream/65 text-base leading-relaxed mb-6">
-              Andiamo in Banca occupies a beautifully restored 1920s bank building at the heart of South San Francisco.
-              From the grand marble columns and original vault door to the intimate private dining room, every detail
-              tells a story of Italian craftsmanship and hospitality.
+              Andiamo in Banca occupies a restored 1920s bank building in downtown South San Francisco: marble columns, the original vault door, and a private dining room inside the vault itself.
             </p>
             <p className="font-accent text-cream/65 text-base leading-relaxed mb-8">
-              Our kitchen produces handmade pasta daily, sources the finest seasonal ingredients, and presents
-              each dish with the care it deserves. Whether it's a weeknight dinner or a private celebration in
-              The Vault, the experience is always simply delicious.
+              The kitchen makes pasta by hand every day and cooks with what is in season, for a weeknight dinner or a private party in The Vault.
             </p>
             <div className="flex flex-wrap justify-center gap-6 mb-8">
               <Link href="/menu" className="font-accent text-gold/70 hover:text-gold text-sm tracking-wide transition-colors duration-300">

@@ -151,9 +151,9 @@ export default function Home() {
               custom={0}
               className="lg:col-span-7"
             >
-              <span className="chapter mb-8">I &mdash; In Banca</span>
+              <span className="chapter mb-8">I &middot; In Banca</span>
               <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-charcoal leading-[1.08] mt-7">
-                <span className="italic text-gradient-gold">Andiamo in Banca</span> &mdash;
+                Andiamo in Banca,
                 <br />
                 Italian for &ldquo;let&rsquo;s go to the bank.&rdquo;
               </h2>
@@ -168,14 +168,12 @@ export default function Home() {
               className="lg:col-span-5 lg:pt-4"
             >
               <p className="font-accent text-charcoal/75 leading-[1.85] text-lg mb-6">
-                The bank itself closed long ago. These days, &ldquo;let&rsquo;s go to the bank&rdquo;
-                means something better &mdash; a landmark 1920s building on Linden Avenue, marble
+                The bank itself closed long ago. These days, &ldquo;let&rsquo;s go to the bank&rdquo; means a landmark 1920s building on Linden Avenue, marble
                 and columns and a steel vault still intact, filled with the food a Bay Area
                 family has cooked since 1989.
               </p>
               <p className="font-accent text-charcoal/75 leading-[1.85] text-lg mb-8">
-                Three restaurants. Two generations. One idea passed from father to son:
-                treat every guest like family, and pour them something extraordinary.
+                Three restaurants and two generations on, the idea passed from father to son hasn&rsquo;t changed: treat every guest like family, and pour them something extraordinary.
               </p>
               <Link
                 href="/our-story"
@@ -231,11 +229,11 @@ export default function Home() {
               <h2 className="font-display text-4xl md:text-5xl text-charcoal leading-[1.08] mt-7 mb-7">
                 Twenty-foot ceilings,
                 <br />
-                <span className="italic text-gradient-gold">marble columns,</span> dinner.
+                marble columns, dinner.
               </h2>
               <p className="font-accent text-charcoal/75 leading-[1.85] text-lg mb-8">
                 The grand columns and soaring ceilings of the old bank were preserved, not
-                papered over. You dine beneath them &mdash; in a room that still feels like it
+                papered over. You dine beneath them, in a room that still feels like it
                 holds something valuable, because it once did.
               </p>
               <Link
@@ -290,7 +288,7 @@ export default function Home() {
                 custom={0}
                 className="chapter chapter-light mb-7"
               >
-                II &mdash; Private Dining
+                II &middot; Private Dining
               </motion.span>
               <motion.h2
                 variants={fadeUp}
@@ -361,7 +359,7 @@ export default function Home() {
         <div className="container">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
             <div>
-              <span className="chapter mb-6">III &mdash; The Table</span>
+              <span className="chapter mb-6">III &middot; The Table</span>
               <h2 className="font-display text-4xl md:text-5xl text-charcoal mt-5">
                 Made by hand, every day
               </h2>
@@ -420,7 +418,7 @@ export default function Home() {
               whileInView="visible"
               viewport={{ once: true }}
               className="flex justify-center md:justify-end group"
-              aria-label="Wine Spectator Award of Excellence 2026 — learn more"
+              aria-label="Wine Spectator Award of Excellence 2026, learn more"
             >
               <img
                 src={IMAGES.wineSpectatorAward}
@@ -443,13 +441,10 @@ export default function Home() {
               <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-charcoal leading-tight mb-6 mt-2">
                 Wine Spectator
                 <br />
-                <span className="text-gradient-gold">Award of Excellence</span>
+                Award of Excellence
               </h2>
               <p className="font-accent text-charcoal/75 text-lg leading-relaxed mb-6">
-                In 2026 our cellar earned Wine Spectator&rsquo;s Award of Excellence &mdash;
-                recognition for a list of quality producers chosen to pair, in price and style,
-                with every plate we send out. From Brunello, Barolo, and Super Tuscans to
-                California cult cabernets and reserve Champagne.
+                In 2026 our cellar earned Wine Spectator&rsquo;s Award of Excellence, given for a list of quality producers chosen to pair, in price and style, with every plate we send out. It runs from Brunello, Barolo, and Super Tuscans to California cult cabernets and reserve Champagne.
               </p>
               <p className="font-accent text-charcoal/70 text-lg italic leading-relaxed">
                 &ldquo;Whoever wrote the rule that a little caf&eacute; can&rsquo;t have the best

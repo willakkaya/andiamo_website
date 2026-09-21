@@ -20,15 +20,15 @@ const fadeUp = {
 // The clear, plainly-labeled paths — one obvious choice each (no guessing)
 const PATHS = [
   { href: "/the-vault", title: "The Vault", desc: "Our private room inside the original 1920s bank vault. Seats 12 to 22." },
-  { href: "/private-dining", title: "Corporate dinners", desc: "Client dinners, board meetings, and recruiting — minutes from the biotech corridor." },
+  { href: "/private-dining", title: "Corporate dinners", desc: "Client dinners, board meetings, and recruiting, minutes from the biotech corridor." },
   { href: "/holiday-parties", title: "Holiday parties", desc: "Company celebrations from a dozen guests to a full-restaurant buyout." },
-  { href: "/rehearsal-dinners", title: "Rehearsal dinners", desc: "Begin the celebration somewhere as memorable as the occasion." },
+  { href: "/rehearsal-dinners", title: "Rehearsal dinners", desc: "The night before, at one long table in The Vault." },
 ];
 
 const FAQ = [
   {
     q: "What private dining spaces do you have?",
-    a: "The Vault — our restored 1920s bank-vault room — seats 12 to 22. For larger gatherings we open the main dining room or arrange a full-restaurant buyout for 100-plus guests.",
+    a: "The Vault, our restored 1920s bank-vault room, seats 12 to 22. Parties of 23 to 100 take the main dining room with no buyout required, and the whole restaurant can be closed to the public for the evening.",
   },
   {
     q: "What are the menus and prices?",
@@ -36,11 +36,11 @@ const FAQ = [
   },
   {
     q: "Do you cater off-site?",
-    a: "Yes — for drop-off and delivered catering (office lunches, trays, family-style platters for 10 or 20), order online through ezCater. On-site hosted events are arranged directly with our events team.",
+    a: "Yes. For drop-off and delivered catering (office lunches, trays, family-style platters for 10 or 20), order online through ezCater. On-site hosted events are arranged directly with the events desk.",
   },
   {
     q: "How far in advance should I book?",
-    a: "Popular dates — holidays, JPM Healthcare Conference week, and weekends — book weeks to months out. Reach out early and we'll hold your date.",
+    a: "Popular dates (holidays, JPM Healthcare Conference week, and weekends) book weeks to months out. Reach out early and we'll hold your date.",
   },
   {
     q: "How do I book?",
@@ -83,8 +83,7 @@ export default function PrivateEvents() {
             Host it in a 1920s bank
           </h1>
           <p className="font-accent italic text-cream/70 text-lg md:text-xl max-w-xl mx-auto mt-6 leading-relaxed">
-            A private bank vault, a grand dining room, an award-winning cellar &mdash;
-            and a team that makes the evening feel effortless.
+            A private bank vault, a grand dining room, an award-winning cellar, and an owner who coordinates every event personally.
           </p>
           <a
             href="#paths"
@@ -135,14 +134,13 @@ export default function PrivateEvents() {
               <h2 className="font-display text-3xl md:text-5xl text-charcoal leading-[1.08] mt-7">
                 Every kind of evening,
                 <br />
-                <span className="italic text-gradient-gold">one address.</span>
+                one address.
               </h2>
             </motion.div>
             <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={1} className="lg:col-span-7 lg:pt-3">
               <p className="font-accent text-charcoal/75 leading-[1.85] text-lg mb-6">
                 From a quiet board dinner in The Vault to a hundred-guest holiday buyout, we
-                host it all in a restored historic bank on Linden Avenue &mdash; five minutes
-                from the biotech corridor, ten from SFO.
+                host it all in a restored historic bank on Linden Avenue, five minutes from the biotech corridor and ten from SFO.
               </p>
               <p className="font-accent text-charcoal/75 leading-[1.85] text-lg">
                 Pick the kind of evening you&rsquo;re planning below. Every path leads to the
@@ -188,7 +186,7 @@ export default function PrivateEvents() {
               <h3 className="font-display text-2xl md:text-3xl text-charcoal mb-2">Catering, delivered</h3>
               <p className="font-accent text-charcoal/65 text-base leading-relaxed">
                 Office lunches and family-style trays for 10 or 20, brought to you. Order online
-                and pay through ezCater &mdash; no event coordinator required.
+                and pay through ezCater. No event planning required.
               </p>
             </div>
             <a

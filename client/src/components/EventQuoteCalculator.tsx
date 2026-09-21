@@ -120,7 +120,7 @@ export default function EventQuoteCalculator({
           </h2>
           <p className="font-accent text-cream/70 text-base max-w-xl mx-auto leading-relaxed">
             Choose a menu and a few touches to get a sense of the figures. It&rsquo;s only a
-            starting point &mdash; nothing is fixed until we&rsquo;ve spoken.
+            starting point. Nothing is fixed until we&rsquo;ve spoken.
           </p>
         </div>
 

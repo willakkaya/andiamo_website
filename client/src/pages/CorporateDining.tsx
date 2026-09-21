@@ -33,14 +33,14 @@ const OCCASIONS = [
   { title: "Candidate recruiting", desc: "Court your top hire over a long, unhurried tasting menu." },
   { title: "Visiting executives", desc: "Land at SFO, dine ten minutes later. No city traffic." },
   { title: "Team celebrations", desc: "Milestones, launches, and year-end dinners in the round." },
-  { title: "JPM Healthcare week", desc: "Conference-week dinners book early — reserve by November." },
+  { title: "JPM Healthcare week", desc: "Conference-week dinners book early. Reserve by November." },
 ];
 
 // Ways to dine — pricing presented with restraint, not as packages to "buy"
 const WAYS = [
   { title: "The business lunch", href: tierHref("lunch35"), note: "from $35 / guest", desc: "An efficient, elegant weekday lunch. Three courses, and you're back in your meeting in forty-five minutes if you need to be." },
   { title: "The client dinner", href: tierHref("dinner65"), note: "from $65 / guest", desc: "A multi-course dinner in the main room or The Vault. Scales gracefully from a four-top to a table of thirty." },
-  { title: "The Vault, exclusively", href: "/the-vault", note: "from $80 / guest", desc: "The restored bank vault, yours alone — twelve to twenty-two guests, a dedicated captain, and a menu built with the chef." },
+  { title: "The Vault, exclusively", href: "/the-vault", note: "from $80 / guest", desc: "The restored bank vault, yours alone: twelve to twenty-two guests, a dedicated captain, and a menu built with the chef." },
   { title: "The whole restaurant", href: undefined as string | undefined, note: "by arrangement", desc: "A full buyout for launches, holidays, and large gatherings. The room, the menu, and the evening, shaped around you." },
 ];
 
@@ -61,7 +61,7 @@ export default function CorporateDining() {
     if (ok) {
       setSubmitted(true);
       trackContactSubmit("corporate-dining");
-      toast.success("Thank you — our events team will be in touch.");
+      toast.success("Thank you. The events desk will be in touch.");
     } else {
       toast.error("Something went wrong. Please call us at (650) 745-8811.");
     }
@@ -97,7 +97,7 @@ export default function CorporateDining() {
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7, duration: 0.9 }}
             className="font-accent italic text-cream/70 text-lg md:text-xl max-w-xl mx-auto mt-6 leading-relaxed"
           >
-            Five minutes from the biotech corridor, ten from SFO — and unlike any room
+            Five minutes from the biotech corridor, ten from SFO, and unlike any room
             your guests have dined in before.
           </motion.p>
           <motion.a
@@ -132,7 +132,7 @@ export default function CorporateDining() {
               <h2 className="font-display text-4xl md:text-5xl text-charcoal leading-[1.08] mt-7">
                 The room does the
                 <br />
-                <span className="italic text-gradient-gold">convincing.</span>
+                convincing.
               </h2>
             </motion.div>
             <motion.div
@@ -140,9 +140,7 @@ export default function CorporateDining() {
               className="lg:col-span-6 lg:pt-4"
             >
               <p className="font-accent text-charcoal/75 leading-[1.85] text-lg mb-6">
-                When the conversation matters &mdash; a client you&rsquo;re closing, a candidate
-                you&rsquo;re courting, a board you&rsquo;re hosting &mdash; the setting is part of
-                the argument.
+                When the conversation matters, whether it&rsquo;s a client you&rsquo;re closing, a candidate you&rsquo;re courting, or a board you&rsquo;re hosting, the setting is part of the argument.
               </p>
               <p className="font-accent text-charcoal/75 leading-[1.85] text-lg mb-8">
                 The Vault was a working bank vault until 2019: marble, a two-ton steel door,
@@ -219,9 +217,9 @@ export default function CorporateDining() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12">
             {[
               { title: "A room they won't have seen", desc: "A restored 1920s bank vault, steel door intact. It does more for a first impression than any boardroom can." },
-              { title: "Walking distance from biotech", desc: "Genentech, Amgen, Roche, Takeda — minutes away. Skip the drive into the city and bring the team somewhere worth the walk." },
+              { title: "Walking distance from biotech", desc: "Genentech, Amgen, Roche and Takeda are minutes away. Skip the drive into the city and bring the team somewhere worth the walk." },
               { title: "Ten minutes from SFO", desc: "Inbound executives land and are at the table before they'd have cleared city traffic. The most efficient hosting in the Bay." },
-              { title: "Lunches that respect the clock", desc: "A forty-five-minute weekday lunch when you need it — or a seven-course afternoon when you don't." },
+              { title: "Lunches that respect the clock", desc: "A forty-five-minute weekday lunch when you need it, or a seven-course afternoon when you don't." },
             ].map((f, i) => (
               <motion.div
                 key={f.title}
@@ -245,8 +243,7 @@ export default function CorporateDining() {
               loading="lazy"
             />
             <p className="font-accent text-cream/65 text-base md:text-lg italic leading-relaxed">
-              A cellar recognized with the 2026 Wine Spectator Award of Excellence &mdash;
-              the right bottle for the table, whatever the occasion calls for.
+              A cellar recognized with the 2026 Wine Spectator Award of Excellence, with the right bottle for the table, whatever the occasion calls for.
             </p>
           </motion.div>
         </div>
@@ -383,7 +380,7 @@ export default function CorporateDining() {
                   <a href="tel:+16507458811" onClick={() => trackPhoneClick("corporate-inquiry")} className="text-gold hover:text-gold-light transition-colors">
                     (650) 745-8811
                   </a>
-                  {" "}— Tuesday through Sunday.
+                  , Tuesday through Sunday.
                 </p>
               </form>
             )}

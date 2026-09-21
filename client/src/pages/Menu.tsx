@@ -31,7 +31,7 @@ const DINNER: Record<string, Section> = {
   insalate: {
     title: "Insalate",
     subtitle: "Salads",
-    note: "Add — chicken 6 · prawns 9 · salmon 16",
+    note: "Add chicken 6 · prawns 9 · salmon 16",
     items: [
       { name: "Cesare", desc: "Romaine, parmigiano, house caesar", price: "12 / 17" },
       { name: "Watermelon Salad", desc: "Watermelon, feta, candied walnut, lemon-mint vinaigrette", price: "15", tags: ["GF", "V"] },
@@ -242,7 +242,7 @@ const HAPPY_HOUR: Record<string, Section> = {
     title: "Happy Hour",
     subtitle: "Tuesday – Friday · 4:00 – 5:00 PM",
     items: [
-      { name: "At the bar", desc: "Specially priced wines, cocktails, and antipasti — a quiet hour before the evening begins.", price: "" },
+      { name: "At the bar", desc: "Specially priced wines, cocktails, and antipasti. A quiet hour before the evening begins.", price: "" },
     ],
   },
 };
@@ -273,7 +273,7 @@ const CATERING: Record<string, Section> = {
   pasta: {
     title: "Pasta",
     subtitle: "Housemade, fresh daily",
-    note: "Priced by guest count — request a quote",
+    note: "Half and full tray prices are on the catering page",
     items: [
       { name: "Lasagne Bolognese", desc: "All-beef ragù, ricotta, mozzarella, Parmigiano-Reggiano", price: "" },
       { name: "Rigatoni alla Salsiccia", desc: "Roasted bell pepper, tomato, grilled Italian sausage", price: "" },
@@ -287,18 +287,18 @@ const CATERING: Record<string, Section> = {
       { name: "Spinach & Ricotta Ravioli", desc: "Choice of marinara or bolognese", price: "" },
       { name: "Chicken Alfredo", desc: "Penne, grilled chicken, rich alfredo", price: "" },
       { name: "Vegetarian Lasagna", desc: "Grilled vegetables, ricotta, mozzarella, marinara", price: "" },
-      { name: "Pasta Bolognese", desc: "Slow-cooked beef ragù — penne, spaghetti, or GF penne", price: "" },
+      { name: "Pasta Bolognese", desc: "Slow-cooked beef ragù with penne, spaghetti, or GF penne", price: "" },
     ],
   },
   entrees: {
     title: "Entrées",
-    subtitle: "Chef-crafted mains",
-    note: "Priced by guest count — request a quote",
+    subtitle: "Main courses, family style",
+    note: "Half and full tray prices are on the catering page",
     items: [
       { name: "Chicken Marsala", desc: "Cremini mushrooms, rich marsala reduction", price: "" },
       { name: "Chicken Parmesan", desc: "Crispy chicken, marinara, mozzarella, Parmigiano", price: "" },
       { name: "Chicken Piccata", desc: "Caper, lemon, white wine butter", price: "" },
-      { name: "Grilled Salmon Fillet", desc: "Delicate lemon butter sauce", price: "" },
+      { name: "Grilled Salmon Fillet", desc: "Lemon butter sauce", price: "" },
       { name: "Beef Brasato al Barolo", desc: "Short ribs braised in Barolo, aromatics, herbs", price: "" },
       { name: "Eggplant Parmesan", desc: "Breaded eggplant, marinara, mozzarella, baked", price: "" },
     ],
@@ -424,8 +424,7 @@ export default function Menu() {
           {active === "catering" && (
             <div className="max-w-2xl mx-auto text-center -mt-4 mb-14">
               <p className="font-accent text-charcoal/70 text-base md:text-lg leading-relaxed">
-                Family-style trays for office lunches, meetings, and gatherings &mdash; delivered.
-                Browse below, then order online through ezCater &mdash; or ask us about a custom spread.
+                Family-style trays for office lunches, meetings, and gatherings, delivered. Browse below, then order online through ezCater, or ask us about a custom spread.
               </p>
             </div>
           )}
@@ -450,8 +449,7 @@ export default function Menu() {
                 />
               </a>
               <p className="font-accent text-charcoal/70 text-base md:text-lg leading-relaxed">
-                Our cellar earned the <span className="text-charcoal">2026 Wine Spectator Award of Excellence</span> &mdash;
-                Italian classics, California cult bottles, and reserve Champagne, chosen to pair with every plate.
+                Our cellar earned the <span className="text-charcoal">2026 Wine Spectator Award of Excellence</span> for a list of Italian classics, California cult bottles, and reserve Champagne, chosen to pair with every plate.
               </p>
             </div>
           )}
@@ -473,7 +471,7 @@ export default function Menu() {
                   25.95 per person &nbsp;&middot;&nbsp; Tuesday&ndash;Friday, 11am&ndash;2pm
                 </p>
                 <p className="font-accent text-charcoal/70 text-base md:text-lg leading-relaxed mt-3">
-                  Soup or salad, a choice of six mains, and dolce &mdash; add a glass of house wine
+                  Soup or salad, a choice of six mains, and dolce. Add a glass of house wine
                   or an Aperol Spritz for 8. Parties of up to four.
                 </p>
               </div>
@@ -500,7 +498,7 @@ export default function Menu() {
                 <span className="text-gold/70">&#10022;</span> house pour &nbsp;&middot;&nbsp; by-the-glass prices shown glass&nbsp;|&nbsp;bottle
               </p>
               <p className="font-accent text-charcoal/60 text-xs md:text-sm mt-2 tracking-wide">
-                A selection from our cellar &mdash; the full wine book is available at the table.
+                A selection from our cellar. The full wine book is available at the table.
               </p>
             </div>
           )}
