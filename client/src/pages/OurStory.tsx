@@ -58,7 +58,7 @@ export default function OurStory() {
               <h2 className="mt-5">
                 <img src={IMAGES.figaroLogo} alt="Cafe Figaro" className="h-16 md:h-20 w-auto" loading="lazy" />
               </h2>
-              <p className="font-accent text-charcoal/45 text-sm tracking-wide mt-3">Broadway, Burlingame</p>
+              <p className="font-accent text-charcoal/60 text-sm tracking-wide mt-3">Broadway, Burlingame</p>
             </motion.div>
             <motion.div
               variants={fadeUp}
@@ -146,7 +146,7 @@ export default function OurStory() {
               <h2 className="mt-5">
                 <img src={IMAGES.donGiovanniLogo} alt="Ristorante Don Giovanni" className="h-14 md:h-[4.5rem] w-auto inline-block" loading="lazy" />
               </h2>
-              <p className="font-accent text-charcoal/45 text-sm tracking-wide mt-3">Castro Street, Mountain View</p>
+              <p className="font-accent text-charcoal/60 text-sm tracking-wide mt-3">Castro Street, Mountain View</p>
             </motion.div>
           </div>
         </div>
@@ -242,7 +242,7 @@ export default function OurStory() {
               <h2 className="mt-5">
                 <img src={IMAGES.logo} alt="Andiamo in Banca" className="h-14 md:h-16 w-auto brightness-0 invert opacity-90" loading="lazy" />
               </h2>
-              <p className="font-accent text-cream/40 text-sm tracking-wide mt-3">301 Linden Avenue, South San Francisco</p>
+              <p className="font-accent text-cream/60 text-sm tracking-wide mt-3">301 Linden Avenue, South San Francisco</p>
             </motion.div>
             <motion.div
               variants={fadeUp}

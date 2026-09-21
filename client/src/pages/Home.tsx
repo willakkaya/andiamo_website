@@ -135,7 +135,7 @@ export default function Home() {
           transition={{ delay: 1.6, duration: 0.8 }}
           className="absolute bottom-10 left-1/2 -translate-x-1/2"
         >
-          <ChevronDown size={20} className="text-white/30 animate-bounce" />
+          <ChevronDown size={20} className="text-white/60 animate-bounce" />
         </motion.div>
       </section>
 
@@ -184,7 +184,7 @@ export default function Home() {
                 Read our story
                 <ArrowRight size={14} />
               </Link>
-              <p className="text-charcoal/45 text-sm mt-10 flex items-center gap-2 font-accent tracking-wide">
+              <p className="text-charcoal/60 text-sm mt-10 flex items-center gap-2 font-accent tracking-wide">
                 <MapPin size={14} className="text-gold" />
                 301 Linden Avenue, South San Francisco
               </p>
@@ -521,7 +521,7 @@ export default function Home() {
                   {[...Array(review.rating)].map((_, j) => (
                     <Star key={j} size={12} className="text-gold fill-gold" />
                   ))}
-                  <span className="text-charcoal/40 text-xs ml-1 tracking-wider uppercase">via {review.source}</span>
+                  <span className="text-charcoal/60 text-xs ml-1 tracking-wider uppercase">via {review.source}</span>
                 </div>
               </motion.a>
             ))}

@@ -286,21 +286,22 @@ export default function TheVault() {
                     { label: "Guest Count", key: "guestCount", type: "number", placeholder: "12\u201322", required: false },
                   ].map((field) => (
                     <div key={field.key}>
-                      <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/65 mb-2.5">{field.label}</label>
+                      <label htmlFor={`vault-${field.key}`} className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/65 mb-2.5">{field.label}</label>
                       <input
+                        id={`vault-${field.key}`}
                         type={field.type}
                         required={field.required}
                         value={formData[field.key as keyof typeof formData]}
                         onChange={(e) => setFormData({ ...formData, [field.key]: e.target.value })}
-                        className="w-full bg-charcoal/[0.03] border border-charcoal/20 px-4 py-3.5 text-charcoal font-accent text-sm placeholder:text-charcoal/25 focus:border-gold/40 focus:bg-white focus:outline-none transition-all duration-300"
+                        className="w-full bg-charcoal/[0.03] border border-charcoal/20 px-4 py-3.5 text-charcoal font-accent text-sm placeholder:text-charcoal/60 focus:border-gold/40 focus:bg-white focus:outline-none transition-all duration-300"
                         placeholder={field.placeholder}
                       />
                     </div>
                   ))}
                 </div>
                 <div>
-                  <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/65 mb-2.5">Event Type</label>
-                  <select
+                  <label htmlFor="vault-event-type" className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/65 mb-2.5">Event Type</label>
+                  <select id="vault-event-type"
                     value={formData.eventType}
                     onChange={(e) => setFormData({ ...formData, eventType: e.target.value })}
                     className="w-full bg-charcoal/[0.03] border border-charcoal/20 px-4 py-3.5 text-charcoal font-accent text-sm focus:border-gold/40 focus:bg-white focus:outline-none transition-all duration-300"
@@ -316,12 +317,12 @@ export default function TheVault() {
                   </select>
                 </div>
                 <div>
-                  <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/65 mb-2.5">Additional Details</label>
-                  <textarea
+                  <label htmlFor="vault-additional-details" className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/65 mb-2.5">Additional Details</label>
+                  <textarea id="vault-additional-details"
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     rows={4}
-                    className="w-full bg-charcoal/[0.03] border border-charcoal/20 px-4 py-3.5 text-charcoal font-accent text-sm placeholder:text-charcoal/25 focus:border-gold/40 focus:bg-white focus:outline-none transition-all duration-300 resize-none"
+                    className="w-full bg-charcoal/[0.03] border border-charcoal/20 px-4 py-3.5 text-charcoal font-accent text-sm placeholder:text-charcoal/60 focus:border-gold/40 focus:bg-white focus:outline-none transition-all duration-300 resize-none"
                     placeholder="Tell us about your event..."
                   />
                 </div>

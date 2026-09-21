@@ -38,7 +38,7 @@ function ContactForm() {
   };
 
   const inputClass =
-    "w-full bg-transparent border-b border-charcoal/15 px-0 py-3 text-charcoal font-accent text-sm tracking-wide focus:border-gold/50 focus:outline-none transition-colors placeholder:text-charcoal/25";
+    "w-full bg-transparent border-b border-charcoal/15 px-0 py-3 text-charcoal font-accent text-sm tracking-wide focus:border-gold/50 focus:outline-none transition-colors placeholder:text-charcoal/60";
 
   return (
     <section className="section-padding bg-background">
@@ -73,8 +73,8 @@ function ContactForm() {
             <form onSubmit={handleSubmit} className="space-y-8">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6">
                 <div>
-                  <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Name *</label>
-                  <input
+                  <label htmlFor="contact-name" className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Name *</label>
+                  <input id="contact-name"
                     type="text"
                     required
                     value={formData.name}
@@ -84,8 +84,8 @@ function ContactForm() {
                   />
                 </div>
                 <div>
-                  <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Email *</label>
-                  <input
+                  <label htmlFor="contact-email" className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Email *</label>
+                  <input id="contact-email"
                     type="email"
                     required
                     value={formData.email}
@@ -96,8 +96,8 @@ function ContactForm() {
                 </div>
               </div>
               <div>
-                <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Phone</label>
-                <input
+                <label htmlFor="contact-phone" className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Phone</label>
+                <input id="contact-phone"
                   type="tel"
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
@@ -106,8 +106,8 @@ function ContactForm() {
                 />
               </div>
               <div>
-                <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Preferred Time</label>
-                <select
+                <label htmlFor="contact-preferred-time" className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Preferred Time</label>
+                <select id="contact-preferred-time"
                   value={formData.eventTime}
                   onChange={(e) => setFormData({ ...formData, eventTime: e.target.value })}
                   className="w-full bg-transparent border-b border-charcoal/15 px-0 py-3 text-charcoal font-accent text-sm tracking-wide focus:border-gold/50 focus:outline-none transition-colors"
@@ -132,13 +132,13 @@ function ContactForm() {
                 </select>
               </div>
               <div>
-                <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Message *</label>
-                <textarea
+                <label htmlFor="contact-message" className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Message *</label>
+                <textarea id="contact-message"
                   rows={4}
                   required
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full bg-transparent border border-charcoal/20 px-4 py-3 text-charcoal font-accent text-sm tracking-wide focus:border-gold/50 focus:outline-none transition-colors resize-none placeholder:text-charcoal/25"
+                  className="w-full bg-transparent border border-charcoal/20 px-4 py-3 text-charcoal font-accent text-sm tracking-wide focus:border-gold/50 focus:outline-none transition-colors resize-none placeholder:text-charcoal/60"
                   placeholder="How can we help?"
                 />
               </div>
@@ -359,13 +359,13 @@ export default function Contact() {
               ].map((item) => (
                 <div key={item.day} className="flex justify-between items-center py-4 border-b border-cream/8">
                   <span className="font-accent text-cream/60 text-base tracking-wide">{item.day}</span>
-                  <span className={`font-accent text-base ${item.hours === "Closed" ? "text-cream/45 italic" : "text-cream/45"}`}>
+                  <span className={`font-accent text-base ${item.hours === "Closed" ? "text-cream/60 italic" : "text-cream/60"}`}>
                     {item.hours}
                   </span>
                 </div>
               ))}
             </div>
-            <p className="font-accent text-cream/45 text-xs mt-8 text-center italic leading-relaxed">
+            <p className="font-accent text-cream/60 text-xs mt-8 text-center italic leading-relaxed">
               Happy Hour: Tuesday &ndash; Friday, 4:00 PM &ndash; 5:00 PM. Holiday hours may vary.
             </p>
             <div className="flex flex-wrap justify-center gap-6 mt-10">

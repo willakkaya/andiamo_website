@@ -4,6 +4,7 @@ import NotFound from "@/pages/NotFound";
 import { Route, Switch, useLocation, useSearch } from "wouter";
 import { useLocationProperty } from "wouter/use-browser-location";
 import { useEffect } from "react";
+import { MotionConfig } from "framer-motion";
 import ErrorBoundary from "./components/ErrorBoundary";
 import Home from "./pages/Home";
 import Menu from "./pages/Menu";
@@ -100,10 +101,12 @@ function Router() {
 function App() {
   return (
     <ErrorBoundary>
-      <TooltipProvider>
-        <Toaster />
-        <Router />
-      </TooltipProvider>
+      <MotionConfig reducedMotion="user">
+        <TooltipProvider>
+          <Toaster />
+          <Router />
+        </TooltipProvider>
+      </MotionConfig>
     </ErrorBoundary>
   );
 }

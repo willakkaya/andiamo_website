@@ -135,7 +135,7 @@ export default function EventQuoteCalculator({
               </label>
               <div className="flex items-center gap-4">
                 <input
-                  type="range"
+                  aria-label="Guest count" type="range"
                   min={10}
                   max={100}
                   step={1}
@@ -145,7 +145,7 @@ export default function EventQuoteCalculator({
                 />
                 <div className="flex items-center gap-1">
                   <input
-                    type="number"
+                    aria-label="Guest count, exact number" type="number"
                     min={10}
                     max={200}
                     value={guestCount}
@@ -171,11 +171,11 @@ export default function EventQuoteCalculator({
                     className={`p-3 border text-center transition-all duration-300 ${
                       menuTier === t.key
                         ? "border-gold bg-gold/10 text-cream"
-                        : "border-cream/10 text-cream/50 hover:border-cream/30"
+                        : "border-cream/10 text-cream/60 hover:border-cream/30"
                     }`}
                   >
                     <span className="font-display text-lg block">{t.label.split(" ")[0]}</span>
-                    <span className="font-accent text-[10px] tracking-wider uppercase block mt-0.5 opacity-60">
+                    <span className="font-accent text-[11px] tracking-wider uppercase block mt-0.5 opacity-60">
                       {t.label.split(" ").slice(1).join(" ")}
                     </span>
                   </button>
@@ -226,9 +226,9 @@ export default function EventQuoteCalculator({
                   Add-Ons & Hors d'Oeuvres
                 </span>
                 {showDetails ? (
-                  <ChevronUp size={16} className="text-cream/40" />
+                  <ChevronUp size={16} className="text-cream/60" />
                 ) : (
-                  <ChevronDown size={16} className="text-cream/40" />
+                  <ChevronDown size={16} className="text-cream/60" />
                 )}
               </button>
 
@@ -242,7 +242,7 @@ export default function EventQuoteCalculator({
                     className="overflow-hidden"
                   >
                     <div className="mt-4 space-y-2">
-                      <p className="font-accent text-cream/50 text-[10px] tracking-wider uppercase mb-2">Enhancements</p>
+                      <p className="font-accent text-cream/60 text-[11px] tracking-wider uppercase mb-2">Enhancements</p>
                       {ENHANCEMENTS.map((e) => {
                         const included = is120 && e.includedIn120;
                         return (
@@ -272,7 +272,7 @@ export default function EventQuoteCalculator({
                     </div>
 
                     <div className="mt-6 space-y-2">
-                      <p className="font-accent text-cream/50 text-[10px] tracking-wider uppercase mb-2">Hors d'Oeuvres</p>
+                      <p className="font-accent text-cream/60 text-[11px] tracking-wider uppercase mb-2">Hors d'Oeuvres</p>
                       {HORS_DOEUVRES.map((h) => (
                         <label
                           key={h.key}
@@ -347,7 +347,7 @@ export default function EventQuoteCalculator({
                 </p>
               </div>
 
-              <p className="font-accent text-cream/50 text-[10px] mt-4 leading-relaxed italic">
+              <p className="font-accent text-cream/60 text-[11px] mt-4 leading-relaxed italic">
                 Estimate only. Tax and gratuity not included. Final pricing confirmed by our events team.
               </p>
 
@@ -394,26 +394,26 @@ export default function EventQuoteCalculator({
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      placeholder="Your name *"
-                      className="w-full bg-transparent border border-cream/15 px-4 py-3 text-cream font-accent text-sm placeholder:text-cream/25 focus:border-gold/40 focus:outline-none transition-all"
+                      aria-label="Your name" placeholder="Your name *"
+                      className="w-full bg-transparent border border-cream/15 px-4 py-3 text-cream font-accent text-sm placeholder:text-cream/60 focus:border-gold/40 focus:outline-none transition-all"
                     />
                     <input
                       type="email"
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      placeholder="Email *"
-                      className="w-full bg-transparent border border-cream/15 px-4 py-3 text-cream font-accent text-sm placeholder:text-cream/25 focus:border-gold/40 focus:outline-none transition-all"
+                      aria-label="Email" placeholder="Email *"
+                      className="w-full bg-transparent border border-cream/15 px-4 py-3 text-cream font-accent text-sm placeholder:text-cream/60 focus:border-gold/40 focus:outline-none transition-all"
                     />
                     <input
                       type="tel"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      placeholder="Phone"
-                      className="w-full bg-transparent border border-cream/15 px-4 py-3 text-cream font-accent text-sm placeholder:text-cream/25 focus:border-gold/40 focus:outline-none transition-all"
+                      aria-label="Phone" placeholder="Phone"
+                      className="w-full bg-transparent border border-cream/15 px-4 py-3 text-cream font-accent text-sm placeholder:text-cream/60 focus:border-gold/40 focus:outline-none transition-all"
                     />
                     <div className="flex flex-col gap-1.5">
-                      <label htmlFor="eventDate" className="font-accent text-cream/40 text-[11px] tracking-[0.15em] uppercase">
+                      <label htmlFor="eventDate" className="font-accent text-cream/60 text-[11px] tracking-[0.15em] uppercase">
                         Event date *
                       </label>
                       <input
@@ -423,11 +423,11 @@ export default function EventQuoteCalculator({
                         min={new Date().toISOString().split("T")[0]}
                         value={formData.eventDate}
                         onChange={(e) => setFormData({ ...formData, eventDate: e.target.value })}
-                        className="w-full bg-transparent border border-cream/15 px-4 py-3 text-cream font-accent text-sm placeholder:text-cream/25 focus:border-gold/40 focus:outline-none transition-all [color-scheme:dark]"
+                        className="w-full bg-transparent border border-cream/15 px-4 py-3 text-cream font-accent text-sm placeholder:text-cream/60 focus:border-gold/40 focus:outline-none transition-all [color-scheme:dark]"
                       />
                     </div>
                     <div className="flex flex-col gap-1.5">
-                      <label htmlFor="eventTime" className="font-accent text-cream/40 text-[11px] tracking-[0.15em] uppercase">
+                      <label htmlFor="eventTime" className="font-accent text-cream/60 text-[11px] tracking-[0.15em] uppercase">
                         Preferred start time
                       </label>
                       <select
@@ -459,9 +459,9 @@ export default function EventQuoteCalculator({
                   <textarea
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    placeholder="Anything else we should know? (dietary needs, A/V, etc.)"
+                    aria-label="Anything else we should know (dietary needs, A/V, etc.)" placeholder="Anything else we should know? (dietary needs, A/V, etc.)"
                     rows={3}
-                    className="w-full bg-transparent border border-cream/15 px-4 py-3 text-cream font-accent text-sm placeholder:text-cream/25 focus:border-gold/40 focus:outline-none transition-all resize-none"
+                    className="w-full bg-transparent border border-cream/15 px-4 py-3 text-cream font-accent text-sm placeholder:text-cream/60 focus:border-gold/40 focus:outline-none transition-all resize-none"
                   />
                   <button
                     type="submit"

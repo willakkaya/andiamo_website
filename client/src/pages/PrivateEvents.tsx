@@ -170,7 +170,7 @@ export default function PrivateEvents() {
                       <h3 className="font-display text-2xl md:text-3xl text-charcoal mb-2 group-hover:text-gold transition-colors duration-500">{p.title}</h3>
                       <p className="font-accent text-charcoal/65 text-base leading-relaxed max-w-sm">{p.desc}</p>
                     </div>
-                    <ArrowRight size={18} className="text-charcoal/25 group-hover:text-gold group-hover:translate-x-1 transition-all duration-500 shrink-0 mt-2" />
+                    <ArrowRight size={18} className="text-charcoal/60 group-hover:text-gold group-hover:translate-x-1 transition-all duration-500 shrink-0 mt-2" />
                   </div>
                 </Link>
               </motion.div>

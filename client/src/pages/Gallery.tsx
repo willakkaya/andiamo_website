@@ -133,7 +133,7 @@ export default function Gallery() {
                   {/* Refined hover overlay — no bouncy transforms */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
                     <div className="p-5 pb-6">
-                      <p className="font-accent text-[10px] tracking-[0.3em] uppercase text-gold/80">
+                      <p className="font-accent text-[11px] tracking-[0.3em] uppercase text-gold/80">
                         {item.category}
                       </p>
                       <p className="font-accent text-cream/90 text-sm mt-1.5 leading-snug">
@@ -206,7 +206,7 @@ export default function Gallery() {
             </button>
             <button
               onClick={(e) => { e.stopPropagation(); goPrev(); }}
-              className="absolute left-4 md:left-8 text-cream/20 hover:text-cream transition-colors duration-300 z-10"
+              className="absolute left-4 md:left-8 text-cream/60 hover:text-cream transition-colors duration-300 z-10"
               aria-label="Previous image"
             >
               <ChevronLeft size={36} />
@@ -224,13 +224,13 @@ export default function Gallery() {
             />
             <button
               onClick={(e) => { e.stopPropagation(); goNext(); }}
-              className="absolute right-4 md:right-8 text-cream/20 hover:text-cream transition-colors duration-300 z-10"
+              className="absolute right-4 md:right-8 text-cream/60 hover:text-cream transition-colors duration-300 z-10"
               aria-label="Next image"
             >
               <ChevronRight size={36} />
             </button>
             <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-center">
-              <p className="font-accent text-[10px] tracking-[0.3em] uppercase text-gold/70">
+              <p className="font-accent text-[11px] tracking-[0.3em] uppercase text-gold/70">
                 {filtered[lightboxIndex].category}
               </p>
               <p className="font-accent text-cream/65 text-xs mt-1">

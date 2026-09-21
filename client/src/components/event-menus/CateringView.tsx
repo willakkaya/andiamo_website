@@ -87,7 +87,7 @@ function CateringOrderForm() {
   };
 
   const field =
-    "w-full bg-white/70 border border-charcoal/15 focus:border-gold/60 outline-none px-4 py-3 font-accent text-charcoal text-base tracking-wide placeholder:text-charcoal/35 transition-colors duration-300";
+    "w-full bg-white/70 border border-charcoal/15 focus:border-gold/60 outline-none px-4 py-3 font-accent text-charcoal text-base tracking-wide placeholder:text-charcoal/60 transition-colors duration-300";
 
   if (submitted) {
     return (
@@ -105,16 +105,16 @@ function CateringOrderForm() {
   return (
     <form onSubmit={handleSubmit} className="max-w-2xl mx-auto">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <input required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Your name *" className={field} />
-        <input required type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="Phone *" className={field} />
-        <input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="Email (optional)" className={field} />
+        <input required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} aria-label="Your name" placeholder="Your name *" className={field} />
+        <input required type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} aria-label="Phone" placeholder="Phone *" className={field} />
+        <input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} aria-label="Email (optional)" placeholder="Email (optional)" className={field} />
         <input required type="date" value={form.date} onChange={(e) => setForm({ ...form, date: e.target.value })} aria-label="Delivery date" className={field} />
       </div>
       <div className="mt-4">
-        <input required value={form.headcount} onChange={(e) => setForm({ ...form, headcount: e.target.value })} placeholder="How many people? *" className={field} />
+        <input required value={form.headcount} onChange={(e) => setForm({ ...form, headcount: e.target.value })} aria-label="How many people" placeholder="How many people? *" className={field} />
       </div>
       <div className="mt-4">
-        <textarea rows={3} value={form.notes} onChange={(e) => setForm({ ...form, notes: e.target.value })} placeholder="Anything else? Tray preferences, dietary needs, delivery address…" className={field} />
+        <textarea rows={3} value={form.notes} onChange={(e) => setForm({ ...form, notes: e.target.value })} aria-label="Anything else Tray preferences, dietary needs, delivery address" placeholder="Anything else? Tray preferences, dietary needs, delivery address…" className={field} />
       </div>
       {error && (
         <p className="font-accent text-sm text-red-700/80 mt-4">
@@ -170,8 +170,8 @@ export default function CateringView() {
               </div>
 
               <div className="hidden sm:flex justify-end gap-6 mb-3">
-                <span className="font-body text-[10px] tracking-[0.2em] uppercase text-charcoal/60 w-20 text-center">Half Tray</span>
-                <span className="font-body text-[10px] tracking-[0.2em] uppercase text-charcoal/60 w-20 text-center">Full Tray</span>
+                <span className="font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 w-20 text-center">Half Tray</span>
+                <span className="font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 w-20 text-center">Full Tray</span>
               </div>
 
               <div className="space-y-5">

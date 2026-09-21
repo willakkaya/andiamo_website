@@ -86,7 +86,7 @@ export default function Footer() {
               <div className="space-y-3 text-sm font-accent tracking-wide">
                 <div className="flex justify-between gap-4">
                   <span className="text-cream/65">Monday</span>
-                  <span className="text-cream/50">Closed</span>
+                  <span className="text-cream/60">Closed</span>
                 </div>
                 <div className="flex justify-between gap-4">
                   <span className="text-cream/65">Tue – Fri</span>
@@ -172,7 +172,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-cream/8 py-6">
           <div className="container flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-[11px] text-cream/50 tracking-wider">
+            <p className="text-[11px] text-cream/60 tracking-wider">
               &copy; {new Date().getFullYear()} Andiamo in Banca. All rights reserved.
             </p>
             <div className="flex items-center gap-6">

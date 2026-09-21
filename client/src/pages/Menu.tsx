@@ -255,7 +255,7 @@ const CATERING: Record<string, Section> = {
     items: [
       { name: "Organic Mixed Greens", desc: "Shredded vegetables, housemade balsamic vinaigrette", price: "50 / 90" },
       { name: "Arugula", desc: "Red onion, cherry tomato, shaved Parmigiano, champagne vinaigrette", price: "55 / 95" },
-      { name: "Caesar", desc: "Romaine, garlic croutons, Parmigiano-Reggiano, classic caesar", price: "60 / 100" },
+      { name: "Caesar", desc: "Romaine, garlic croutons, Parmigiano-Reggiano, classic caesar", price: "60 / 110" },
       { name: "Caprese", desc: "Ripe tomato, fresh mozzarella, basil, balsamic, extra-virgin olive oil", price: "55 / 95" },
     ],
   },
@@ -266,7 +266,7 @@ const CATERING: Record<string, Section> = {
       { name: "Bruschetta Classica", desc: "Crostini, marinated tomato, garlic, basil, olive oil", price: "55 / 95" },
       { name: "Garlic Bread", desc: "Warm sourdough, garlic butter, baked golden", price: "45 / 75" },
       { name: "Brussels Sprouts con Pancetta", desc: "Oven-roasted, crispy pancetta, balsamic reduction", price: "60 / 100" },
-      { name: "Seasonal Grilled Vegetables", desc: "Mesquite-grilled, olive oil, sea salt", price: "80 / 115" },
+      { name: "Seasonal Grilled Vegetables", desc: "Mesquite-grilled, olive oil, sea salt", price: "80 / 130" },
       { name: "Mini Meatballs Marinara", desc: "Housemade beef meatballs, signature marinara", price: "110 / 190" },
     ],
   },
@@ -329,7 +329,7 @@ function MenuItem({ item }: { item: Item }) {
           {item.signature && <span className="text-gold/70 mr-1.5" aria-hidden>&#10022;</span>}
           {item.name}
           {item.tags && item.tags.length > 0 && (
-            <span className="ml-2 font-body text-[10px] tracking-[0.15em] text-gold/60 uppercase align-[0.15em]">
+            <span className="ml-2 font-body text-[11px] tracking-[0.15em] text-gold/60 uppercase align-[0.15em]">
               {item.tags.join(" · ")}
             </span>
           )}
@@ -357,7 +357,7 @@ function MenuSection({ section }: { section: Section }) {
         )}
         <div className="w-10 h-px bg-gold/30 mt-3" />
         {section.note && (
-          <p className="font-accent text-charcoal/45 text-xs md:text-sm tracking-wide mt-3">{section.note}</p>
+          <p className="font-accent text-charcoal/60 text-xs md:text-sm tracking-wide mt-3">{section.note}</p>
         )}
       </div>
       <div>
@@ -499,7 +499,7 @@ export default function Menu() {
               <p className="font-accent text-charcoal/55 text-sm md:text-base tracking-wide">
                 <span className="text-gold/70">&#10022;</span> house pour &nbsp;&middot;&nbsp; by-the-glass prices shown glass&nbsp;|&nbsp;bottle
               </p>
-              <p className="font-accent text-charcoal/45 text-xs md:text-sm mt-2 tracking-wide">
+              <p className="font-accent text-charcoal/60 text-xs md:text-sm mt-2 tracking-wide">
                 A selection from our cellar &mdash; the full wine book is available at the table.
               </p>
             </div>
@@ -513,7 +513,7 @@ export default function Menu() {
                 <span className="text-gold/70 font-medium">GF</span> gluten-free &nbsp;·&nbsp;
                 <span className="text-gold/70 font-medium">V</span> vegetarian
               </p>
-              <p className="font-accent text-charcoal/45 text-xs md:text-sm mt-2 tracking-wide">
+              <p className="font-accent text-charcoal/60 text-xs md:text-sm mt-2 tracking-wide">
                 Gluten-free &amp; vegan lentil pasta available for any pasta dish. Please inform your server of any allergies or intolerances.
               </p>
             </div>
@@ -542,7 +542,7 @@ export default function Menu() {
               >
                 Order Catering Online <ShoppingBag size={13} />
               </a>
-              <p className="font-accent text-charcoal/50 text-sm mt-5 tracking-wide">
+              <p className="font-accent text-charcoal/60 text-sm mt-5 tracking-wide">
                 Delivered through ezCater. Hosting at the restaurant?{" "}
                 <Link href="/banquet-catering" className="text-gold hover:text-gold-light transition-colors">See event menus &amp; pricing</Link>.
               </p>
@@ -551,7 +551,7 @@ export default function Menu() {
 
           {/* Family line + links */}
           <div className="mt-14 text-center">
-            <p className="font-accent italic text-charcoal/40 text-sm tracking-wide">
+            <p className="font-accent italic text-charcoal/60 text-sm tracking-wide">
               Andiamo in Banca, South San Francisco &nbsp;·&nbsp; Caf&eacute; Figaro, Burlingame &nbsp;·&nbsp; Don Giovanni&rsquo;s, Mountain View
             </p>
             <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 mt-8">

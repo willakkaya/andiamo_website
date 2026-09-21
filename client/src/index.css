@@ -324,6 +324,17 @@
   .link-line:hover {
     background-size: 100% 1px;
   }
+  /* Touch screens: text links keep their look but get a finger-sized hit area */
+  @media (pointer: coarse) {
+    .link-line {
+      position: relative;
+    }
+    .link-line::after {
+      content: "";
+      position: absolute;
+      inset: -0.7rem -0.35rem;
+    }
+  }
 
   /* Ledger double rule — opens a rate sheet or a tier, like a ruled bank book */
   .rule-double {
