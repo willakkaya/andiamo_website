@@ -17,13 +17,13 @@ export default function EmailCapture() {
     const ok = await submitForm({
       name,
       email,
-      _subject: "Event Planning Guide Request",
+      _subject: "Event menus by email (reply with menus + availability)",
       source: "email-capture",
     });
     if (ok) {
       setSubmitted(true);
       trackEmailCapture("event-planning-guide");
-      toast.success("We'll send your guide shortly!");
+      toast.success("Thanks. The events desk will be in touch.");
     } else {
       toast.error("Something went wrong. Please try again.");
     }
@@ -47,14 +47,14 @@ export default function EmailCapture() {
             Planning a Private Event?
           </h3>
           <p className="font-accent text-charcoal/60 text-base leading-relaxed max-w-lg mx-auto mb-8">
-            Get our complimentary Event Planning Guide with sample menus, pricing,
-            floor plans, and tips for hosting the perfect event at Andiamo in Banca.
+            Leave your email and the events desk will send the event menus and pricing,
+            along with availability for the dates you have in mind.
           </p>
 
           {submitted ? (
             <div className="flex items-center justify-center gap-2 text-gold">
               <Check size={18} />
-              <span className="font-accent text-sm tracking-wide">Check your inbox — we'll send it shortly!</span>
+              <span className="font-accent text-sm tracking-wide">Thank you. The events desk will email you shortly.</span>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="max-w-md mx-auto">
@@ -65,7 +65,9 @@ export default function EmailCapture() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="First name"
-                  className="flex-1 bg-transparent border border-charcoal/15 px-4 py-3 text-charcoal font-accent text-sm placeholder:text-charcoal/30 focus:border-gold/40 focus:outline-none transition-all"
+                  aria-label="First name"
+                  autoComplete="given-name"
+                  className="flex-1 bg-transparent border border-charcoal/15 px-4 py-3 text-charcoal font-accent text-sm placeholder:text-charcoal/60 focus:border-gold/40 focus:outline-none transition-all"
                 />
                 <input
                   type="email"
@@ -73,7 +75,9 @@ export default function EmailCapture() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Email address"
-                  className="flex-1 bg-transparent border border-charcoal/15 px-4 py-3 text-charcoal font-accent text-sm placeholder:text-charcoal/30 focus:border-gold/40 focus:outline-none transition-all"
+                  aria-label="Email address"
+                  autoComplete="email"
+                  className="flex-1 bg-transparent border border-charcoal/15 px-4 py-3 text-charcoal font-accent text-sm placeholder:text-charcoal/60 focus:border-gold/40 focus:outline-none transition-all"
                 />
               </div>
               <button
@@ -81,11 +85,11 @@ export default function EmailCapture() {
                 disabled={submitting}
                 className="w-full sm:w-auto px-8 py-3 bg-charcoal text-cream font-body text-[11px] tracking-[0.2em] uppercase hover:bg-espresso transition-all duration-300 disabled:opacity-50 flex items-center justify-center gap-2 mx-auto"
               >
-                {submitting ? "Sending..." : "Send Me the Guide"}
+                {submitting ? "Sending..." : "Email me the menus"}
                 <ArrowRight size={13} />
               </button>
-              <p className="font-accent text-charcoal/35 text-[10px] mt-3">
-                No spam. Just one helpful email with your guide.
+              <p className="font-accent text-charcoal/60 text-xs mt-3">
+                One reply from a person. No mailing list.
               </p>
             </form>
           )}
