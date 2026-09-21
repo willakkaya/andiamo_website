@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { MapPin, Phone, Mail, Clock, Instagram, Car, Train, ArrowRight, Check } from "lucide-react";
 import { Link } from "wouter";
 import { submitForm } from "@/lib/formspree";
-import { trackContactSubmit, trackPhoneClick, trackReservationClick } from "@/lib/analytics";
+import { trackContactSubmit, trackPhoneClick, trackReservationClick, trackEventMenusClick } from "@/lib/analytics";
 import { toast } from "sonner";
 
 const fadeUp = {
@@ -250,6 +250,12 @@ export default function Contact() {
                     <Mail size={16} className="text-gold/70 stroke-[1.5]" />
                     {LINKS.email}
                   </a>
+                  <p className="font-accent text-charcoal/70">
+                    Planning an event?{" "}
+                    <Link href="/banquet-catering" onClick={() => trackEventMenusClick("contact")} className="link-line text-charcoal">
+                      Event menus &amp; pricing
+                    </Link>
+                  </p>
                   <a
                     href={LINKS.instagram}
                     target="_blank"
@@ -370,7 +376,7 @@ export default function Contact() {
                 Private Dining
               </Link>
               <Link href="/banquet-catering" className="font-accent text-gold/70 hover:text-gold text-sm tracking-wide transition-colors duration-300">
-                Banquet & Catering
+                Event menus &amp; pricing
               </Link>
             </div>
           </motion.div>

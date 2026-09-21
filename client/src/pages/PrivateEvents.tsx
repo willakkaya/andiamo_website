@@ -5,7 +5,8 @@ import { motion } from "framer-motion";
 import { ArrowRight, ShoppingBag } from "lucide-react";
 import { Link } from "wouter";
 import { usePageMeta } from "@/hooks/usePageMeta";
-import { trackPhoneClick } from "@/lib/analytics";
+import { trackPhoneClick, trackEventMenusClick } from "@/lib/analytics";
+import EventMenuRates from "@/components/event-menus/EventMenuRates";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 22 },
@@ -92,6 +93,36 @@ export default function PrivateEvents() {
           >
             Find your event <ArrowRight size={14} />
           </a>
+          <p className="mt-6">
+            <Link
+              href="/banquet-catering"
+              onClick={() => trackEventMenusClick("hub-hero")}
+              className="link-line font-body text-[12px] tracking-[0.2em] uppercase text-cream/80 hover:text-cream"
+            >
+              Event menus &amp; pricing
+            </Link>
+          </p>
+        </div>
+      </section>
+
+      {/* ========== MENUS & PRICING — straight under the hero, where a planner looks first ========== */}
+      <section className="section-cream py-16 md:py-20">
+        <div className="container">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-14 gap-y-8 items-start">
+            <div className="lg:col-span-4">
+              <span className="chapter mb-6">Menus</span>
+              <h2 className="font-display text-3xl md:text-[2.6rem] text-charcoal leading-[1.08] mt-5">
+                Event menus &amp; pricing
+              </h2>
+              <p className="font-accent text-charcoal/75 text-lg leading-[1.8] mt-5 max-w-md">
+                Hosted events are prix-fixe. Four menus, priced per guest. Each guest chooses
+                their own main course.
+              </p>
+            </div>
+            <div className="lg:col-span-8">
+              <EventMenuRates variant="rows" source="hub-strip" />
+            </div>
+          </div>
         </div>
       </section>
 
@@ -144,36 +175,6 @@ export default function PrivateEvents() {
                 </Link>
               </motion.div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ========== EVENT MENUS & PRICING — front and center ========== */}
-      <section className="section-padding section-dark grain">
-        <div className="container max-w-5xl relative z-[2]">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0}>
-              <span className="chapter chapter-light mb-6">The food</span>
-              <h2 className="font-display text-3xl md:text-5xl text-cream mt-5 mb-6">Event menus &amp; pricing</h2>
-              <p className="font-accent text-cream/65 text-lg leading-[1.8] mb-4">
-                Hosted events are prix-fixe &mdash; from <span className="text-gold-light">$35</span> per
-                guest for a working lunch to <span className="text-gold-light">$120</span> for our premier
-                dinner, with optional sommelier wine pairings from $30.
-              </p>
-              <p className="font-accent text-cream/55 text-base leading-[1.8] mb-9">
-                Four prix-fixe tiers, family-style additions, and a full catering menu &mdash;
-                all in one place.
-              </p>
-              <Link
-                href="/banquet-catering"
-                className="inline-flex items-center gap-3 px-10 py-4 bg-gold text-charcoal font-body text-[12px] tracking-[0.2em] uppercase font-semibold hover:bg-gold-light transition-all duration-500"
-              >
-                View the banquet &amp; catering menus <ArrowRight size={14} />
-              </Link>
-            </motion.div>
-            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={1} className="aspect-[4/3] overflow-hidden">
-              <img src={IMAGES.lambChops} alt="A plated banquet course at Andiamo in Banca" className="w-full h-full object-cover" loading="lazy" />
-            </motion.div>
           </div>
         </div>
       </section>
@@ -235,7 +236,7 @@ export default function PrivateEvents() {
           </a>
           <div className="mt-10 flex flex-wrap justify-center gap-x-8 gap-y-3">
             <Link href="/the-vault" className="link-line font-body text-[12px] tracking-[0.2em] uppercase text-gold-light">Tour The Vault</Link>
-            <Link href="/banquet-catering" className="link-line font-body text-[12px] tracking-[0.2em] uppercase text-gold-light">Event menus</Link>
+            <Link href="/banquet-catering" className="link-line font-body text-[12px] tracking-[0.2em] uppercase text-gold-light">Event menus &amp; pricing</Link>
             <Link href="/contact" className="link-line font-body text-[12px] tracking-[0.2em] uppercase text-gold-light">Contact us</Link>
           </div>
         </div>

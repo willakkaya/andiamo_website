@@ -1,12 +1,15 @@
 import PageLayout from "@/components/PageLayout";
 import { IMAGES, LINKS } from "@/lib/images";
 import { motion } from "framer-motion";
-import { Users, Utensils, Monitor, Wine, Check } from "lucide-react";
+import { Check } from "lucide-react";
 import { useState } from "react";
+import { Link } from "wouter";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import { toast } from "sonner";
 import { submitForm } from "@/lib/formspree";
-import { trackContactSubmit } from "@/lib/analytics";
+import { trackContactSubmit, trackEventMenusClick } from "@/lib/analytics";
+import EventMenuRates from "@/components/event-menus/EventMenuRates";
+import { tierHref } from "@/data/eventMenus";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -57,6 +60,15 @@ export default function TheVault() {
           <p className="font-accent italic text-cream/60 text-lg md:text-xl max-w-xl mx-auto leading-relaxed">
             A working bank vault until 2019. Now the only private dining room of its kind on the Peninsula.
           </p>
+          <p className="mt-7">
+            <Link
+              href="/banquet-catering"
+              onClick={() => trackEventMenusClick("vault-hero")}
+              className="link-line font-body text-[12px] tracking-[0.2em] uppercase text-cream/80 hover:text-cream"
+            >
+              Event menus &amp; pricing
+            </Link>
+          </p>
         </div>
       </section>
 
@@ -85,31 +97,16 @@ export default function TheVault() {
             </p>
           </motion.div>
 
-          {/* Features — editorial row, no cards */}
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            custom={1}
-            className="grid grid-cols-2 md:grid-cols-4 gap-px bg-gold/10 mb-24"
-          >
-            {[
-              { icon: Users, title: "12 \u2013 22 Guests", desc: "Intimate to mid-size gatherings" },
-              { icon: Utensils, title: "Custom Menus", desc: "Prix fixe tailored to your event" },
-              { icon: Monitor, title: "A/V Ready", desc: "Screen and sound for presentations" },
-              { icon: Wine, title: "Wine Pairings", desc: "Curated selections from our list" },
-            ].map((feat) => (
-              <div
-                key={feat.title}
-                className="bg-cream p-8 md:p-10 text-center"
-              >
-                <feat.icon size={24} className="text-gold mx-auto mb-4 stroke-[1.5]" />
-                <h3 className="font-display text-base md:text-lg text-charcoal mb-2">{feat.title}</h3>
-                <p className="font-accent text-charcoal/65 text-base">{feat.desc}</p>
-              </div>
-            ))}
-          </motion.div>
+          {/* The facts a planner needs, as ruled rows: the room, then the menu prices */}
+          <div className="mb-24">
+            <p className="flex flex-wrap items-baseline gap-x-7 gap-y-2 border-t border-charcoal/10 py-4">
+              <span className="font-body text-[11px] font-medium uppercase tracking-[0.2em] text-charcoal/70">The room</span>
+              <span className="font-accent text-lg md:text-xl text-charcoal">
+                12 to 22 guests &middot; screen and sound &middot; private
+              </span>
+            </p>
+            <EventMenuRates variant="line" source="vault-facts" />
+          </div>
 
           {/* Two-column editorial with image */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -197,25 +194,26 @@ export default function TheVault() {
             <div className="bg-espresso p-10 md:p-14 text-center">
               <h3 className="font-display text-2xl text-gold-light mb-6">Banquet Prix Fixe</h3>
               <div className="flex items-center justify-center gap-8 mb-6">
-                <div>
-                  <span className="font-display text-3xl text-cream">$35</span>
-                  <span className="font-accent text-cream/60 text-base block mt-1">per person, lunch</span>
-                </div>
+                <Link href={tierHref("lunch35")} onClick={() => trackEventMenusClick("vault-options")} className="group">
+                  <span className="font-display text-3xl text-cream group-hover:text-gold-light transition-colors duration-300">$35</span>
+                  <span className="font-accent text-cream/60 text-base block mt-1">per guest, lunch</span>
+                </Link>
                 <div className="w-px h-12 bg-cream/10" />
-                <div>
-                  <span className="font-display text-3xl text-cream">$65</span>
-                  <span className="font-accent text-cream/60 text-base block mt-1">per person, dinner</span>
-                </div>
+                <Link href={tierHref("dinner65")} onClick={() => trackEventMenusClick("vault-options")} className="group">
+                  <span className="font-display text-3xl text-cream group-hover:text-gold-light transition-colors duration-300">$65</span>
+                  <span className="font-accent text-cream/60 text-base block mt-1">per guest, dinner</span>
+                </Link>
               </div>
               <p className="font-accent text-cream/60 text-base mb-8 leading-relaxed">
-                Curated multi-course menus with optional wine pairings from our cellar.
+                Multi-course menus with optional wine pairings from our cellar.
               </p>
-              <a
+              <Link
                 href="/banquet-catering"
+                onClick={() => trackEventMenusClick("vault-options")}
                 className="inline-flex items-center px-8 py-3 border border-cream/20 text-cream font-body text-[12px] tracking-[0.2em] uppercase hover:bg-cream hover:text-charcoal transition-all duration-300"
               >
-                View Banquet Menus
-              </a>
+                All four event menus &amp; pricing
+              </Link>
             </div>
 
             {/* Custom Experience */}
@@ -285,7 +283,7 @@ export default function TheVault() {
                     { label: "Phone", key: "phone", type: "tel", placeholder: "(555) 123-4567", required: false },
                     { label: "Company", key: "company", type: "text", placeholder: "Company name", required: false },
                     { label: "Preferred Date", key: "eventDate", type: "date", placeholder: "", required: false },
-                    { label: "Guest Count", key: "guestCount", type: "number", placeholder: "12\u201320", required: false },
+                    { label: "Guest Count", key: "guestCount", type: "number", placeholder: "12\u201322", required: false },
                   ].map((field) => (
                     <div key={field.key}>
                       <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/65 mb-2.5">{field.label}</label>

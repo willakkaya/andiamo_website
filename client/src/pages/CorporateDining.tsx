@@ -6,9 +6,11 @@ import { useState } from "react";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import { toast } from "sonner";
 import { submitForm } from "@/lib/formspree";
-import { trackContactSubmit, trackPhoneClick } from "@/lib/analytics";
+import { trackContactSubmit, trackPhoneClick, trackEventMenusClick } from "@/lib/analytics";
 import EventQuoteCalculator from "@/components/EventQuoteCalculator";
 import { Link } from "wouter";
+import EventMenuRates from "@/components/event-menus/EventMenuRates";
+import { tierHref } from "@/data/eventMenus";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 22 },
@@ -36,10 +38,10 @@ const OCCASIONS = [
 
 // Ways to dine — pricing presented with restraint, not as packages to "buy"
 const WAYS = [
-  { title: "The business lunch", note: "from $35 / guest", desc: "An efficient, elegant weekday lunch. Three courses, and you're back in your meeting in forty-five minutes if you need to be." },
-  { title: "The client dinner", note: "from $65 / guest", desc: "A multi-course dinner in the main room or The Vault. Scales gracefully from a four-top to a table of thirty." },
-  { title: "The Vault, exclusively", note: "from $80 / guest", desc: "The restored bank vault, yours alone — up to sixty guests, a dedicated captain, and a menu built with the chef." },
-  { title: "The whole restaurant", note: "by arrangement", desc: "A full buyout for launches, holidays, and large gatherings. The room, the menu, and the evening, shaped around you." },
+  { title: "The business lunch", href: tierHref("lunch35"), note: "from $35 / guest", desc: "An efficient, elegant weekday lunch. Three courses, and you're back in your meeting in forty-five minutes if you need to be." },
+  { title: "The client dinner", href: tierHref("dinner65"), note: "from $65 / guest", desc: "A multi-course dinner in the main room or The Vault. Scales gracefully from a four-top to a table of thirty." },
+  { title: "The Vault, exclusively", href: "/the-vault", note: "from $80 / guest", desc: "The restored bank vault, yours alone — twelve to twenty-two guests, a dedicated captain, and a menu built with the chef." },
+  { title: "The whole restaurant", href: undefined as string | undefined, note: "by arrangement", desc: "A full buyout for launches, holidays, and large gatherings. The room, the menu, and the evening, shaped around you." },
 ];
 
 export default function CorporateDining() {
@@ -106,6 +108,15 @@ export default function CorporateDining() {
           >
             Begin an inquiry <ArrowRight size={14} />
           </motion.a>
+          <p className="mt-6">
+            <Link
+              href="/banquet-catering"
+              onClick={() => trackEventMenusClick("corporate-hero")}
+              className="link-line font-body text-[12px] tracking-[0.2em] uppercase text-cream/80 hover:text-cream"
+            >
+              Event menus &amp; pricing
+            </Link>
+          </p>
         </div>
       </section>
 
@@ -141,8 +152,9 @@ export default function CorporateDining() {
               <div className="flex flex-wrap gap-x-10 gap-y-3 text-sm font-accent text-charcoal/55 border-t border-charcoal/10 pt-6">
                 <span>5 min from Genentech &amp; the biotech corridor</span>
                 <span>10 min from SFO</span>
-                <span>Up to 60 in The Vault &middot; 100+ for a buyout</span>
+                <span>12 to 22 in The Vault &middot; up to 100 for a buyout</span>
               </div>
+              <EventMenuRates variant="line" source="corporate-facts" className="mt-6" />
             </motion.div>
           </div>
         </div>
@@ -257,7 +269,15 @@ export default function CorporateDining() {
                 className="py-9 first:pt-0"
               >
                 <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1.5 mb-3">
-                  <h3 className="font-display text-2xl md:text-3xl text-charcoal">{w.title}</h3>
+                  <h3 className="font-display text-2xl md:text-3xl text-charcoal">
+                    {w.href ? (
+                      <Link href={w.href} onClick={() => trackEventMenusClick("corporate-ways")} className="link-line">
+                        {w.title}
+                      </Link>
+                    ) : (
+                      w.title
+                    )}
+                  </h3>
                   <span className="font-accent italic text-gold text-lg shrink-0">{w.note}</span>
                 </div>
                 <p className="font-accent text-charcoal/65 text-base md:text-lg leading-relaxed max-w-2xl">{w.desc}</p>
@@ -269,7 +289,7 @@ export default function CorporateDining() {
               href="/banquet-catering"
               className="link-line inline-flex items-center gap-3 text-gold font-body text-[12px] tracking-[0.2em] uppercase"
             >
-              See exactly what&rsquo;s on each menu
+              Event menus &amp; pricing
               <ArrowRight size={14} />
             </Link>
           </div>
@@ -382,7 +402,7 @@ export default function CorporateDining() {
               Tour The Vault
             </Link>
             <Link href="/banquet-catering" className="link-line font-body text-[12px] tracking-[0.2em] uppercase text-gold-light">
-              Banquet menus
+              Event menus &amp; pricing
             </Link>
             <Link href="/menu" className="link-line font-body text-[12px] tracking-[0.2em] uppercase text-gold-light">
               The dinner menu

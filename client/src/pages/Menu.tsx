@@ -5,6 +5,7 @@ import { usePageMeta } from "@/hooks/usePageMeta";
 import { motion } from "framer-motion";
 import { ShoppingBag } from "lucide-react";
 import { Link } from "wouter";
+import { trackEventMenusClick } from "@/lib/analytics";
 
 type MenuTab = "dinner" | "lunch" | "catering" | "wine" | "happyhour";
 type Tag = "GF" | "V";
@@ -407,6 +408,18 @@ export default function Menu() {
             ))}
           </div>
 
+          {/* Not a tab: people looking for the group menus land here first */}
+          <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1.5 border-y border-charcoal/10 py-4 -mt-8 mb-14">
+            <span className="font-body text-[11px] font-medium tracking-[0.2em] uppercase text-charcoal/70">Hosting a group?</span>
+            <Link
+              href="/banquet-catering"
+              onClick={() => trackEventMenusClick("menu-page")}
+              className="link-line font-accent lining-nums text-lg text-charcoal"
+            >
+              Event menus &amp; pricing, $35 to $120 per guest
+            </Link>
+          </div>
+
           {/* Catering intro */}
           {active === "catering" && (
             <div className="max-w-2xl mx-auto text-center -mt-4 mb-14">
@@ -530,8 +543,8 @@ export default function Menu() {
                 Order Catering Online <ShoppingBag size={13} />
               </a>
               <p className="font-accent text-charcoal/50 text-sm mt-5 tracking-wide">
-                Delivered through ezCater. Planning a hosted event?{" "}
-                <Link href="/private-events" className="text-gold hover:text-gold-light transition-colors">See Private Events</Link>.
+                Delivered through ezCater. Hosting at the restaurant?{" "}
+                <Link href="/banquet-catering" className="text-gold hover:text-gold-light transition-colors">See event menus &amp; pricing</Link>.
               </p>
             </div>
           )}
@@ -542,6 +555,9 @@ export default function Menu() {
               Andiamo in Banca, South San Francisco &nbsp;·&nbsp; Caf&eacute; Figaro, Burlingame &nbsp;·&nbsp; Don Giovanni&rsquo;s, Mountain View
             </p>
             <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 mt-8">
+              <Link href="/banquet-catering" onClick={() => trackEventMenusClick("menu-page-footer")} className="link-line font-body text-[12px] tracking-[0.2em] uppercase text-gold">
+                Event menus &amp; pricing
+              </Link>
               <Link href="/private-events" className="link-line font-body text-[12px] tracking-[0.2em] uppercase text-gold">
                 Private events &amp; banquets
               </Link>

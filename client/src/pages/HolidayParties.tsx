@@ -5,7 +5,9 @@ import PageLayout from "@/components/PageLayout";
 import { IMAGES, LINKS } from "@/lib/images";
 import { Check, ArrowRight, Star, Users, Utensils, Wine, Gift } from "lucide-react";
 import EmailCapture from "@/components/EmailCapture";
-import { trackPhoneClick } from "@/lib/analytics";
+import { trackPhoneClick, trackEventMenusClick } from "@/lib/analytics";
+import EventMenuRates from "@/components/event-menus/EventMenuRates";
+import { tierHref, type MenuTier } from "@/data/eventMenus";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -20,7 +22,8 @@ const PACKAGES = [
   {
     name: "Classic Holiday Dinner",
     price: "$65",
-    per: "per person",
+    tier: "dinner65" as MenuTier,
+    per: "per guest",
     highlights: [
       "Bruschetta & salad course",
       "5 entrée choices including filet mignon",
@@ -31,7 +34,8 @@ const PACKAGES = [
   {
     name: "Elevated Holiday Experience",
     price: "$80",
-    per: "per person",
+    tier: "dinner80" as MenuTier,
+    per: "per guest",
     featured: true,
     highlights: [
       "Burrata & crab cake appetizers",
@@ -43,7 +47,8 @@ const PACKAGES = [
   {
     name: "Premier Celebration",
     price: "$120",
-    per: "per person",
+    tier: "dinner120" as MenuTier,
+    per: "per guest",
     highlights: [
       "Champagne toast for all guests",
       "Oysters Rockefeller first course",
@@ -81,6 +86,9 @@ export default function HolidayParties() {
 
       {/* Why Host Here */}
       <section className="section-cream">
+        <div className="max-w-5xl mx-auto px-6 pt-10">
+          <EventMenuRates variant="line" tiers={["dinner65", "dinner80", "dinner120"]} source="holiday" />
+        </div>
         <div className="max-w-5xl mx-auto px-6 py-24 md:py-28">
           <motion.div
             variants={fadeUp}
@@ -164,10 +172,11 @@ export default function HolidayParties() {
                   ))}
                 </ul>
                 <Link
-                  href="/banquet-catering"
+                  href={tierHref(pkg.tier)}
+                  onClick={() => trackEventMenusClick("holiday-packages")}
                   className="inline-flex items-center gap-2 font-body text-[11px] tracking-[0.18em] uppercase text-gold hover:text-gold-light transition-colors"
                 >
-                  View Full Menu <ArrowRight size={13} />
+                  The {pkg.price} menu <ArrowRight size={13} />
                 </Link>
               </motion.div>
             ))}
@@ -178,7 +187,7 @@ export default function HolidayParties() {
               href="/banquet-catering#quote-calculator"
               className="inline-flex items-center gap-2 px-10 py-4 bg-gold text-charcoal font-body text-[12px] tracking-[0.2em] uppercase font-semibold hover:bg-gold-light transition-all duration-300"
             >
-              Get Your Instant Quote
+              Estimate your event
               <ArrowRight size={14} />
             </Link>
           </div>

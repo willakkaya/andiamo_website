@@ -5,7 +5,9 @@ import PageLayout from "@/components/PageLayout";
 import { IMAGES, LINKS } from "@/lib/images";
 import { Check, ArrowRight, Star, Heart } from "lucide-react";
 import EmailCapture from "@/components/EmailCapture";
-import { trackPhoneClick } from "@/lib/analytics";
+import { trackPhoneClick, trackEventMenusClick } from "@/lib/analytics";
+import EventMenuRates from "@/components/event-menus/EventMenuRates";
+import { tierHref, type MenuTier } from "@/data/eventMenus";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -44,6 +46,9 @@ export default function RehearsalDinners() {
 
       {/* Why The Vault */}
       <section className="section-cream">
+        <div className="max-w-4xl mx-auto px-6 pt-10">
+          <EventMenuRates variant="line" tiers={["dinner65", "dinner80", "dinner120"]} source="rehearsal" />
+        </div>
         <div className="max-w-4xl mx-auto px-6 py-24 md:py-28">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div
@@ -118,9 +123,9 @@ export default function RehearsalDinners() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-cream/10 mb-12">
             {[
-              { price: "$65", label: "Dinner", desc: "Multi-course prix fixe with 5 entrée choices and dessert trio" },
-              { price: "$80", label: "Elevated", desc: "Appetizer course, premium proteins, sommelier wine pairing available", featured: true },
-              { price: "$120", label: "Premier", desc: "Champagne toast, oysters, lobster ravioli, and our finest entrées" },
+              { price: "$65", tier: "dinner65" as MenuTier, label: "Dinner", desc: "Multi-course prix fixe with 5 entrée choices and a choice of dessert" },
+              { price: "$80", tier: "dinner80" as MenuTier, label: "Elevated", desc: "Appetizer course, premium proteins, sommelier wine pairing available", featured: true },
+              { price: "$120", tier: "dinner120" as MenuTier, label: "Premier", desc: "Champagne toast, oysters, lobster ravioli, and our finest entrées" },
             ].map((tier, i) => (
               <motion.div
                 key={tier.price}
@@ -134,7 +139,14 @@ export default function RehearsalDinners() {
                 {tier.featured && (
                   <p className="font-body text-[10px] tracking-[0.25em] uppercase text-gold mb-3">Most Popular</p>
                 )}
-                <span className="font-display text-3xl text-gold">{tier.price}</span>
+                <Link
+                  href={tierHref(tier.tier)}
+                  onClick={() => trackEventMenusClick("rehearsal-pricing")}
+                  aria-label={`The ${tier.price} menu`}
+                  className="font-display text-3xl text-gold hover:text-gold-light transition-colors duration-300"
+                >
+                  {tier.price}
+                </Link>
                 <span className="font-accent text-cream/40 text-sm block mt-1">{tier.label}</span>
                 <p className="font-accent text-cream/50 text-sm mt-4 leading-relaxed">{tier.desc}</p>
               </motion.div>
@@ -146,7 +158,7 @@ export default function RehearsalDinners() {
               href="/banquet-catering#quote-calculator"
               className="inline-flex items-center gap-2 px-10 py-4 bg-gold text-charcoal font-body text-[12px] tracking-[0.2em] uppercase font-semibold hover:bg-gold-light transition-all duration-300"
             >
-              Build Your Quote
+              Estimate your event
               <ArrowRight size={14} />
             </Link>
             <p className="font-accent text-cream/30 text-xs mt-4">

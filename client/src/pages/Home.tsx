@@ -1,6 +1,7 @@
 import PageLayout from "@/components/PageLayout";
 import { IMAGES, LINKS } from "@/lib/images";
 import { Link } from "wouter";
+import { trackEventMenusClick } from "@/lib/analytics";
 import { motion } from "framer-motion";
 import { Star, ArrowRight, ChevronDown, ShoppingBag, MapPin } from "lucide-react";
 import { usePageMeta } from "@/hooks/usePageMeta";
@@ -104,12 +105,12 @@ export default function Home() {
             >
               Reserve a Table
             </a>
-            <a
+            <Link
               href="/banquet-catering?tab=catering"
               className="inline-flex items-center gap-2 px-12 py-4 border border-white/35 text-white font-body text-[12px] tracking-[0.2em] uppercase hover:bg-white/10 transition-all duration-500"
             >
               Order Catering <ShoppingBag size={13} />
-            </a>
+            </Link>
           </motion.div>
 
           <motion.a
@@ -341,6 +342,13 @@ export default function Home() {
                 >
                   Step inside The Vault
                   <ArrowRight size={14} />
+                </Link>
+                <Link
+                  href="/banquet-catering"
+                  onClick={() => trackEventMenusClick("home-vault")}
+                  className="link-line inline-flex items-center gap-3 font-body text-[12px] tracking-[0.2em] uppercase text-gold-light ml-10"
+                >
+                  Event menus &amp; pricing
                 </Link>
               </motion.div>
             </div>
