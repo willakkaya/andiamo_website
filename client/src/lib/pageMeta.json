@@ -29,11 +29,13 @@
   },
   "/private-events": {
     "title": "Private Events & Private Dining | Andiamo in Banca SSF",
-    "description": "Host private events in a restored 1920s bank — The Vault private dining room, corporate dinners, holiday parties, and rehearsal dinners. Banquet menus from $35/guest, an award-winning cellar, and on-site catering. South San Francisco, minutes from the biotech corridor and SFO."
+    "description": "Host private events in a restored 1920s bank — The Vault private dining room, corporate dinners, holiday parties, and rehearsal dinners. Banquet menus from $35/guest, an award-winning cellar, and on-site catering. South San Francisco, minutes from the biotech corridor and SFO.",
+    "image": "/vault-red.jpg"
   },
   "/banquet-catering": {
-    "title": "Banquet & Catering Menus | Andiamo in Banca",
-    "description": "Banquet prix-fixe menus from $35 to $120 per guest and family-style catering, paired with our 2026 Wine Spectator Award of Excellence wine program. Order catering online or inquire about a hosted event. Andiamo in Banca, South San Francisco."
+    "title": "Private Event & Banquet Menus, Catering | Andiamo in Banca",
+    "description": "Prix-fixe private event and group dining menus in South San Francisco: $35 lunch, $65, $80 and $120 dinners per guest, wine pairings from $30. The Vault seats 12 to 22; buyouts to 100. Catering delivery through ezCater.",
+    "image": "/vault-red.jpg"
   },
   "/holiday-parties": {
     "title": "Holiday Party Packages | Andiamo in Banca",
