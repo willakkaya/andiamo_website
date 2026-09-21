@@ -214,8 +214,8 @@ export default function HolidayParties() {
               Hold a date for your party.
             </h2>
             <p className="font-accent text-charcoal/75 text-lg leading-relaxed mt-5 max-w-sm">
-              Send the slip or call the events desk. You get availability and a written proposal back,
-              from a person.
+              Send the slip or call the events desk. You get availability and a written proposal back
+              from the owner, who coordinates every private event personally.
             </p>
             <p className="font-display lining-nums text-2xl md:text-3xl text-charcoal mt-7">
               <a href="tel:+16507458811" onClick={() => trackPhoneClick("holiday-parties")} className={`link-line ${FOCUS}`}>

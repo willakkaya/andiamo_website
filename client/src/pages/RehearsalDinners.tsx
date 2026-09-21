@@ -173,8 +173,8 @@ export default function RehearsalDinners() {
               Someone will want to say a few words.
             </h2>
             <p className="font-accent text-charcoal/75 text-lg leading-relaxed mt-5 max-w-sm">
-              The Vault has a screen and sound for the slideshow. Your coordinator handles the timing on
-              the night, toasts included.
+              The Vault has a screen and sound for the slideshow. The owner coordinates every private
+              event personally, and handles the timing on the night, toasts included.
             </p>
           </div>
           <ul className="lg:col-span-8 border-t border-charcoal/25 self-start">
@@ -209,8 +209,8 @@ export default function RehearsalDinners() {
               Hold the night before.
             </h2>
             <p className="font-accent text-charcoal/75 text-lg leading-relaxed mt-5 max-w-sm">
-              Send the slip or call the events desk. You get availability and a written proposal back,
-              from a person.
+              Send the slip or call the events desk. You get availability and a written proposal back
+              from the owner, who coordinates every private event personally.
             </p>
             <p className="font-display lining-nums text-2xl md:text-3xl text-charcoal mt-7">
               <a href="tel:+16507458811" onClick={() => trackPhoneClick("rehearsal-dinners")} className={`link-line ${FOCUS}`}>
