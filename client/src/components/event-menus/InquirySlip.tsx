@@ -22,9 +22,19 @@ interface Props {
   slipNo: string;
   room: string;
   onRoomChange: (room: string) => void;
+  dateLabel?: string;
+  companyLabel?: string; // the field is still submitted as `company`
 }
 
-export default function InquirySlip({ source, subject, slipNo, room, onRoomChange }: Props) {
+export default function InquirySlip({
+  source,
+  subject,
+  slipNo,
+  room,
+  onRoomChange,
+  dateLabel = "Date wanted",
+  companyLabel = "Company",
+}: Props) {
   const [form, setForm] = useState({
     eventDate: "",
     guestCount: "",
@@ -76,7 +86,7 @@ export default function InquirySlip({ source, subject, slipNo, room, onRoomChang
           <form onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 sm:grid-cols-12 gap-x-8 gap-y-7">
               <div className="sm:col-span-4">
-                <label htmlFor={`${source}-date`} className={LABEL}>Date wanted</label>
+                <label htmlFor={`${source}-date`} className={LABEL}>{dateLabel}</label>
                 <input id={`${source}-date`} type="date" min={today} required value={form.eventDate} onChange={set("eventDate")} className={FIELD} />
               </div>
               <div className="sm:col-span-3">
@@ -98,7 +108,7 @@ export default function InquirySlip({ source, subject, slipNo, room, onRoomChang
                 </select>
               </div>
               <div className="sm:col-span-6">
-                <label htmlFor={`${source}-company`} className={LABEL}>Company</label>
+                <label htmlFor={`${source}-company`} className={LABEL}>{companyLabel}</label>
                 <input id={`${source}-company`} type="text" autoComplete="organization" value={form.company} onChange={set("company")} className={FIELD} />
               </div>
               <div className="sm:col-span-4">
