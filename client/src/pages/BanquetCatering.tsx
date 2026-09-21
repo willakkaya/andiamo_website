@@ -1,362 +1,36 @@
 import { useState, useEffect } from "react";
-import { useSearch } from "wouter";
+import { Link, useSearch } from "wouter";
 import { usePageMeta } from "@/hooks/usePageMeta";
-import { motion } from "framer-motion";
-import { Link } from "wouter";
 import PageLayout from "@/components/PageLayout";
-import { IMAGES, LINKS } from "@/lib/images";
-import { ShoppingBag, ArrowRight, Star, Clock } from "lucide-react";
+import { LINKS } from "@/lib/images";
 import EventQuoteCalculator from "@/components/EventQuoteCalculator";
-import StickyEventCTA from "@/components/StickyEventCTA";
-import EmailCapture from "@/components/EmailCapture";
-import { trackPhoneClick, trackContactSubmit, trackCateringInquiry, trackEzCaterClick } from "@/lib/analytics";
-import { submitForm } from "@/lib/formspree";
+import EventMenuRates from "@/components/event-menus/EventMenuRates";
+import ViewSwitch from "@/components/event-menus/ViewSwitch";
+import JumpBar from "@/components/event-menus/JumpBar";
+import TierSheet from "@/components/event-menus/TierSheet";
+import AdditionsLedger from "@/components/event-menus/AdditionsLedger";
+import CateringView from "@/components/event-menus/CateringView";
+import { TIERS, ROOMS, FAQ, SECTION_IDS, CATERING_HREF, PLANNER_PDF, type MenuTier } from "@/data/eventMenus";
+import { trackPhoneClick, trackTierEstimate, trackPlannerPdf } from "@/lib/analytics";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7 } },
-};
+const FOCUS =
+  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-charcoal";
 
-type TabKey = "banquet" | "catering";
-
-/* ── Banquet Menus ── */
-const banquetMenus = [
-  {
-    title: "$35 Per Person",
-    subtitle: "Lunch Only",
-    sections: [
-      {
-        heading: "Salad — All Guests",
-        items: [
-          { name: "Verde Mista", desc: "Organic spring greens and shaved heirloom carrots, tossed in a house-made balsamic vinaigrette" },
-        ],
-      },
-      {
-        heading: "Main Course — Choice of One Per Guest",
-        items: [
-          { name: "Spaghetti & Meatballs", desc: "Spaghetti pasta with marinara and homemade meatballs" },
-          { name: "Salmon Piccata", desc: "Salmon filet with capers and lemon butter white wine sauce" },
-          { name: "Rigatoni alle Verdure", desc: "Rigatoni pasta with a light marinara sauce and seasonal vegetables" },
-          { name: "Chicken Parmesan", desc: "Breaded free-range chicken breast topped with marinara sauce and fresh mozzarella cheese" },
-          { name: "Pork Chop", desc: "Grilled bone-in pork chop with a mushroom cream reduction" },
-        ],
-      },
-      {
-        heading: "Dessert — All Guests",
-        items: [
-          { name: "Chocolate Mousse", desc: "Velvety rich mousse served with fresh berries" },
-        ],
-      },
-    ],
-  },
-  {
-    title: "$65 Per Person",
-    subtitle: "Dinner",
-    sections: [
-      {
-        heading: "First Course — All Guests",
-        items: [
-          { name: "Tomato Bruschetta", desc: "Crostinis with fresh chopped tomato, basil and olive oil" },
-        ],
-      },
-      {
-        heading: "Salad — Choice of One Per Guest",
-        items: [
-          { name: "Verde Mista", desc: "Organic spring mixed, shaved carrots, and shaved Parmigiano Regiano" },
-          { name: "Caesar Salad", desc: "Organic romaine lettuce, house made Caesar dressing, croutons and shaved Parmigiano Regiano" },
-        ],
-      },
-      {
-        heading: "Main Course — Choice of One Per Guest",
-        items: [
-          { name: "Rigatoni alle Verdure", desc: "Orecchiette pasta tossed with seasonal vegetables in house made marinara sauce" },
-          { name: "Spaghetti with Meatballs", desc: "Spaghetti pasta with marinara and homemade meatballs" },
-          { name: "Salmon Piccata", desc: "Pan-seared salmon filet with capers and lemon butter white wine sauce" },
-          { name: "Filet Mignon Bordelaise", desc: "Grilled 7 oz filet mignon with a red wine bordelaise, served with starch and seasonal vegetables" },
-          { name: "Chicken Marsala", desc: "Free range chicken breast in Marsala wine sauce with mushrooms, served with starch and seasonal vegetables" },
-        ],
-      },
-      {
-        heading: "Dessert — Choice of One Per Guest",
-        items: [
-          { name: "Tiramisu", desc: "Espresso-soaked ladyfingers, silky mascarpone cream, and a dusting of cocoa" },
-          { name: "Vanilla Bean Panna Cotta", desc: "Velvety smooth panna cotta infused with Madagascar vanilla bean, topped with macerated berries and a balsamic glaze" },
-          { name: "Lemon Blueberry Cheesecake", desc: "Rich and creamy lemon-infused cheesecake with a graham cracker crust, finished with a fresh blueberry compote and lemon zest" },
-        ],
-      },
-    ],
-    extras: [
-      { label: "Standard Wine Pairing", price: "$30 / person", note: "Curated by our Sommelier" },
-      { label: "Rare Wine Pairing", price: "$75 / person", note: "Curated by our Sommelier" },
-      { label: "Legendary Wine Pairing", price: "$150 / person", note: "Curated by our Sommelier" },
-    ],
-  },
-  {
-    title: "$80 Per Person",
-    subtitle: "Dinner",
-    sections: [
-      {
-        heading: "Salad — Choice of One Per Guest",
-        items: [
-          { name: "Verde Mista", desc: "Organic spring mixed, shaved carrots, in a balsamic vinaigrette" },
-          { name: "Caesar Salad", desc: "Organic romaine lettuce, house made Caesar dressing, croutons and shaved Parmigiano Regiano" },
-        ],
-      },
-      {
-        heading: "Appetizer — Served Family Style",
-        items: [
-          { name: "Burrata & Roasted Peppers", desc: "Creamy burrata with fire-roasted bell peppers, fresh basil, and aged balsamic" },
-          { name: "Crab Cakes", desc: "Golden, pan-seared lump crab cakes with a crispy exterior and tender center, served with lemon-caper aioli and microgreens" },
-        ],
-      },
-      {
-        heading: "Entrée — Choice of One Per Guest",
-        items: [
-          { name: "Filet Mignon with Red Wine Demi-Glace", desc: "Prime center-cut filet mignon, seared to perfection, served with truffle mashed potatoes and seasonal vegetables" },
-          { name: "Halibut Piccata", desc: "Delicate, pan-seared halibut with lemon-caper white wine sauce, saffron-infused risotto and sautéed broccolini" },
-          { name: "Chicken Saltimbocca", desc: "Free-range chicken breast layered with prosciutto and sage in a white wine butter sauce, with roasted garlic mashed potatoes and baby zucchini" },
-          { name: "Roasted Rack of Lamb with Rosemary Jus", desc: "Herb-crusted New Zealand rack of lamb, roasted to perfection and drizzled with a rosemary-infused jus" },
-          { name: "Wild Mushroom & Truffle Risotto", desc: "Creamy aged Carnaroli rice infused with black truffle and slow-roasted wild mushrooms, finished with Parmigiano-Reggiano and white truffle oil (Vegetarian)" },
-        ],
-      },
-      {
-        heading: "Dessert — Choice of One Per Guest",
-        items: [
-          { name: "Tiramisu", desc: "Espresso-soaked ladyfingers, silky mascarpone cream, and a dusting of cocoa" },
-          { name: "Lemon Blueberry Cheesecake", desc: "Rich and creamy lemon-infused cheesecake with a graham cracker crust, finished with a fresh blueberry compote and lemon zest" },
-        ],
-      },
-    ],
-    extras: [
-      { label: "Standard Wine Pairing", price: "$30 / person", note: "Curated by our Sommelier" },
-      { label: "Rare Wine Pairing", price: "$75 / person", note: "Curated by our Sommelier" },
-      { label: "Legendary Wine Pairing", price: "$150 / person", note: "Curated by our Sommelier" },
-    ],
-  },
-  {
-    title: "$120 Per Person",
-    subtitle: "Premier Dinner — Our Most Elevated Experience",
-    sections: [
-      {
-        heading: "Welcome — All Guests",
-        items: [
-          { name: "Champagne Toast", desc: "A glass of premium sparkling wine to welcome your guests and set the tone for an unforgettable evening" },
-        ],
-      },
-      {
-        heading: "First Course — All Guests",
-        items: [
-          { name: "Oysters Rockefeller", desc: "Half-dozen baked oysters per guest with spinach, Pernod, Parmigiano, and herb breadcrumbs — a classic showstopper" },
-          { name: "Winter Citrus & Fennel Salad", desc: "Shaved fennel, cara cara orange, arugula, champagne vinaigrette (Vegan, Gluten-Free)" },
-        ],
-      },
-      {
-        heading: "Second Course — Choice of One",
-        items: [
-          { name: "Lobster Ravioli", desc: "Housemade ravioli filled with Maine lobster and mascarpone in a saffron cream sauce with fresh tarragon" },
-          { name: "Wild Mushroom & Truffle Risotto", desc: "Creamy aged Carnaroli rice with black truffle and slow-roasted wild mushrooms, Parmigiano-Reggiano and white truffle oil (Vegetarian, Gluten-Free)" },
-        ],
-      },
-      {
-        heading: "Main Course — Choice of One Per Guest",
-        items: [
-          { name: "Pan-Roasted Chilean Sea Bass", desc: "Lemon-caper beurre blanc, fingerling potatoes, market vegetables (Gluten-Free, Pescatarian)" },
-          { name: "Herb-Crusted California Rack of Lamb", desc: "Garlic, rosemary, aged balsamic — truffle mashed potatoes and seasonal vegetables (Gluten-Free)" },
-          { name: "Grilled Prime Filet Mignon", desc: "10 oz center-cut filet, red wine demi-glace, choice of blue cheese butter or herb-garlic olive oil (Gluten-Free)" },
-          { name: "Gamberi al Limone", desc: "Tiger prawns sautéed with garlic, white wine, basil, and citrus — served with roasted potatoes and vegetables (Gluten-Free, Pescatarian)" },
-          { name: "Osso Buco alla Milanese", desc: "Slow-braised veal shank with saffron risotto and gremolata — a timeless Italian classic" },
-          { name: "Roasted Cauliflower Steak", desc: "Smoked tomato-caper vinaigrette, pine nuts, herbs (Vegan, Gluten-Free)" },
-        ],
-      },
-      {
-        heading: "Dessert — Choice of One Per Guest",
-        items: [
-          { name: "Classic Tiramisu", desc: "Espresso-soaked ladyfingers, silky mascarpone cream, and a dusting of Valrhona cocoa" },
-          { name: "Affogato al Caffè", desc: "Vanilla gelato, hot espresso, amaretti biscotti" },
-          { name: "Chocolate Lava Cake", desc: "Warm Valrhona chocolate fondant with a molten center, served with vanilla gelato and fresh berries" },
-        ],
-      },
-    ],
-    extras: [
-      { label: "Standard Wine Pairing", price: "$30 / person", note: "Curated by our Sommelier" },
-      { label: "Rare Wine Pairing", price: "$75 / person", note: "Curated by our Sommelier" },
-      { label: "Legendary Wine Pairing", price: "$150 / person", note: "Curated by our Sommelier" },
-    ],
-  },
+const SPOKES = [
+  { href: "/the-vault", label: "The Vault" },
+  { href: "/private-dining", label: "Corporate dinners" },
+  { href: "/holiday-parties", label: "Holiday parties" },
+  { href: "/rehearsal-dinners", label: "Rehearsal dinners" },
 ];
 
-/* ── Event Enhancements ── */
-const eventEnhancements = [
-  { name: "Champagne Toast", price: "$12 / person", desc: "A glass of premium sparkling wine to welcome your guests", note: "Included in $120 menu" },
-  { name: "Oysters Rockefeller", price: "$18 / person", desc: "Half-dozen baked oysters per guest with spinach, Pernod, and Parmigiano", note: "Included in $120 menu" },
-  { name: "Antipasto & Cheese Display", price: "$15 / person", desc: "Imported cheeses, cured meats, marinated olives, and fresh focaccia" },
-  { name: "Limoncello Toast", price: "$6 / person", desc: "House limoncello digestivo — a classic Italian after-dinner tradition" },
-  { name: "Espresso & Cappuccino Bar", price: "$8 / person", desc: "Full after-dinner coffee service with espresso, cappuccino, and biscotti" },
-  { name: "Soft Drinks & Beverages", price: "$5 / person", desc: "Assorted sodas, sparkling water, iced tea, and fresh lemonade" },
-];
+/* Event menus & pricing — the four prix-fixe menus, posted like a bank's rates:
+   the comparison first, then each menu in full. */
+function EventsView() {
+  // Stays undefined until a planner picks "Estimate with this menu", so the
+  // calculator behaves exactly as before for everyone else.
+  const [estimateTier, setEstimateTier] = useState<MenuTier | undefined>();
 
-const horsDoeuves = [
-  { name: "Bruschetta al Pomodoro", desc: "Toasted slices of bread topped with tomato cubes marinated with olive oil, garlic and basil", price: "$4 / person" },
-  { name: "Italian Meatballs", desc: "Delicious Italian meatballs served with a dipping sauce", price: "$5 / person" },
-  { name: "Shrimp Cocktail", desc: "Fresh shrimp with cocktail sauce", price: "$7 / person" },
-  { name: "Calamari Fritti", desc: "Fresh squid fried and tossed in a garlic lemon sauce served with cocktail sauce", price: "$6 / person" },
-  { name: "Grilled Chicken Skewer", desc: "Marinated chicken breast grilled over charcoal grill", price: "$5 / person" },
-  { name: "Garlic Bread", desc: "Warm, toasty bread with garlic butter baked in", price: "$3 / person" },
-];
-
-/* ── Catering Menu ──
-   Half tray serves ~10 · Full tray serves ~20 */
-const cateringMenu = [
-  {
-    category: "Salads",
-    subtitle: "Fresh, vibrant, and crafted with seasonal ingredients.",
-    items: [
-      { name: "Organic Mixed Greens", desc: "Organic mixed greens with shredded vegetables, housemade balsamic vinaigrette", half: "$50", full: "$90" },
-      { name: "Arugula Salad", desc: "Organic arugula with red onions, cherry tomatoes, shaved Parmigiano, Champagne vinaigrette", half: "$55", full: "$95" },
-      { name: "Caesar Salad", desc: "Crisp romaine lettuce with garlic croutons, shaved Parmigiano-Reggiano, classic Caesar dressing", half: "$60", full: "$110" },
-      { name: "Caprese Salad", desc: "Ripe tomatoes, fresh mozzarella, basil with balsamic vinaigrette and extra-virgin olive oil", half: "$55", full: "$95" },
-    ],
-  },
-  {
-    category: "Appetizers & Starters",
-    subtitle: "Perfect beginnings for your event — vibrant, flavorful, and crafted with care.",
-    items: [
-      { name: "Bruschetta Classica", desc: "Toasted crostini topped with marinated chopped tomatoes, garlic, basil, and EVOO", half: "$55", full: "$95" },
-      { name: "Garlic Bread", desc: "Warm sourdough bread brushed with garlic butter and baked until golden", half: "$45", full: "$75" },
-      { name: "Brussels Sprouts con Pancetta", desc: "Oven-roasted Brussels sprouts tossed with crispy pancetta and balsamic reduction", half: "$60", full: "$100" },
-      { name: "Seasonal Grilled Vegetables", desc: "Fresh seasonal vegetables grilled over mesquite fire with olive oil and sea salt", half: "$80", full: "$130" },
-      { name: "Mini Meatballs Marinara", desc: "Housemade 100% beef meatballs blended with fresh breadcrumbs and herbs in signature marinara", half: "$110", full: "$190" },
-    ],
-  },
-  {
-    category: "Pasta",
-    subtitle: "Authentic housemade pasta made fresh every day.",
-    items: [
-      { name: "Rigatoni Alla Salsiccia", desc: "Rigatoni tossed in a spicy roasted bell pepper and tomato sauce with grilled Italian sausage", half: "$140", full: "$185" },
-      { name: "Lasagne Bolognese", desc: "Layered pasta sheets with slow-simmered all-beef ragù, ricotta, mozzarella, and Parmigiano-Reggiano", half: "$150", full: "$195" },
-      { name: "Penne Alfredo", desc: "Creamy Parmesan Alfredo sauce over penne pasta", half: "$130", full: "$170" },
-      { name: "Rigatoni al Funghi e Tartufo", desc: "Rigatoni with wild mushrooms, thyme, garlic, and a touch of truffle cream", half: "$150", full: "$200" },
-      { name: "Spinach & Ricotta Ravioli", desc: "Housemade ravioli filled with spinach and ricotta. Choice of Sauce: Marinara or Bolognese", half: "$145", full: "$190" },
-      { name: "Vegetarian Lasagna", desc: "Grilled seasonal vegetables layered with ricotta, mozzarella, and housemade marinara", half: "$140", full: "$180" },
-      { name: "Chicken Alfredo", desc: "Penne pasta with grilled chicken tenderloins in a rich, creamy Alfredo sauce", half: "$145", full: "$190" },
-      { name: "Rigatoni alla Norma", desc: "Sicilian-style rigatoni with roasted eggplant, tomato, basil, and shaved ricotta salata", half: "$130", full: "$170" },
-      { name: "Rigatoni alla Vodka", desc: "Rigatoni with shallots, chili flakes, Parmigiano, and a silky cream sauce", half: "$130", full: "$170" },
-      { name: "Penne al Pesto Genovese", desc: "Classic basil pesto with Parmigiano, toasted pine nuts, and a touch of cream", half: "$130", full: "$170" },
-      { name: "Penne Arrabbiata", desc: "Penne in a bold, spicy marinara with chili and garlic", half: "$120", full: "$160" },
-      { name: "Penne Pomodoro", desc: "Simple and bright — tomato, garlic, basil, and olive oil", half: "$115", full: "$150" },
-      { name: "Pasta Bolognese", desc: "Slow-cooked beef ragù with aromatic vegetables and herbs. Choice of Penne, Spaghetti, or Gluten-Free Penne", half: "$130", full: "$170" },
-    ],
-  },
-  {
-    category: "Entrées",
-    subtitle: "Chef-crafted main courses designed for family-style catering and elegant service.",
-    items: [
-      { name: "Chicken Marsala", desc: "Tender chicken breast sautéed with cremini mushrooms and finished in a rich Marsala wine reduction", half: "$170", full: "$225" },
-      { name: "Chicken Parmesan", desc: "Crispy chicken breast topped with marinara, mozzarella, and Parmigiano, baked until golden", half: "$170", full: "$225" },
-      { name: "Chicken Piccata", desc: "Pan-seared chicken breast with capers, lemon, and white wine butter sauce", half: "$170", full: "$225" },
-      { name: "Grilled Salmon Fillet", desc: "Fresh salmon grilled to perfection and served with a delicate lemon butter sauce", half: "$220", full: "$320" },
-      { name: "Beef Brasato al Barolo", desc: "Slow-braised short ribs simmered in Barolo wine, aromatic vegetables, and herbs", half: "$260", full: "$400" },
-      { name: "Eggplant Parmesan", desc: "Breaded eggplant layered with marinara and mozzarella, baked until bubbling", half: "$140", full: "$185" },
-    ],
-  },
-];
-
-/* ── Banquet FAQ — answers the questions that stall event leads ── */
-const BANQUET_FAQ = [
-  {
-    q: "Do my guests choose their own entrée?",
-    a: "Yes. On our served banquet menus, each guest selects their own main course from the options on your chosen menu — so everyone at the table gets exactly what they'd like.",
-  },
-  {
-    q: "How does a hosted banquet work?",
-    a: "It's prix-fixe and fully served. You pick a per-person menu, we assign a dedicated coordinator, and setup, service, and timing are all handled for you. After you send a quote, we follow up with availability and a finalized proposal.",
-  },
-  {
-    q: "Can you accommodate dietary needs?",
-    a: "Absolutely — vegetarian, gluten-free, and other dietary needs are no problem. Note them when you send your quote, or let your coordinator know, and we'll take care of the details.",
-  },
-  {
-    q: "How many guests can you host?",
-    a: "The Vault — our restored 1920s bank-vault room — seats 12 to 22 for intimate dinners. For larger parties we open the main dining room, up to a full-restaurant buyout for 100.",
-  },
-  {
-    q: "What's the difference between a banquet and catering?",
-    a: "A banquet is a hosted, served event at the restaurant — in The Vault or the dining room. Catering is family-style trays delivered to your office or venue. Both are on this page; pick the tab that fits your event.",
-  },
-];
-
-/* ── Direct catering order form ── */
-function CateringOrderForm() {
-  const [form, setForm] = useState({ name: "", phone: "", email: "", date: "", headcount: "", notes: "" });
-  const [submitted, setSubmitted] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitting(true);
-    setError(false);
-    const ok = await submitForm({ ...form, _subject: "Catering Order Inquiry", source: "catering-direct" });
-    setSubmitting(false);
-    if (ok) {
-      setSubmitted(true);
-      trackContactSubmit("catering-direct");
-      trackCateringInquiry(form.headcount || "unspecified");
-    } else {
-      setError(true);
-    }
-  };
-
-  const field =
-    "w-full bg-white/70 border border-charcoal/15 focus:border-gold/60 outline-none px-4 py-3 font-accent text-charcoal text-base tracking-wide placeholder:text-charcoal/35 transition-colors duration-300";
-
-  if (submitted) {
-    return (
-      <div className="text-center py-12">
-        <div className="divider-diamond mb-6"><i /></div>
-        <h3 className="font-display text-2xl text-charcoal mb-3">Grazie — we're on it.</h3>
-        <p className="font-accent text-charcoal/65 tracking-wide max-w-md mx-auto">
-          Your catering request is in. We'll get back to you <span className="text-charcoal">within the hour</span> during
-          business hours to confirm the details.
-        </p>
-      </div>
-    );
-  }
-
-  return (
-    <form onSubmit={handleSubmit} className="max-w-2xl mx-auto">
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <input required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Your name *" className={field} />
-        <input required type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="Phone *" className={field} />
-        <input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="Email (optional)" className={field} />
-        <input required type="date" value={form.date} onChange={(e) => setForm({ ...form, date: e.target.value })} aria-label="Delivery date" className={field} />
-      </div>
-      <div className="mt-4">
-        <input required value={form.headcount} onChange={(e) => setForm({ ...form, headcount: e.target.value })} placeholder="How many people? *" className={field} />
-      </div>
-      <div className="mt-4">
-        <textarea rows={3} value={form.notes} onChange={(e) => setForm({ ...form, notes: e.target.value })} placeholder="Anything else? Tray preferences, dietary needs, delivery address…" className={field} />
-      </div>
-      {error && (
-        <p className="font-accent text-sm text-red-700/80 mt-4">
-          Something went wrong sending your request — please call us at (650) 745-8811 and we'll take care of you.
-        </p>
-      )}
-      <button
-        type="submit"
-        disabled={submitting}
-        className="mt-6 w-full sm:w-auto px-12 py-4 bg-gold text-charcoal font-body text-[12px] tracking-[0.2em] uppercase font-semibold hover:bg-gold-light transition-all duration-500 disabled:opacity-60"
-      >
-        {submitting ? "Sending…" : "Request Catering"}
-      </button>
-    </form>
-  );
-}
-
-export default function BanquetCatering() {
-  usePageMeta("/banquet-catering");
-
-  // FAQ structured data — helps Google rich results and AI assistants cite us
+  // FAQ structured data — built from the same array as the visible answers
   useEffect(() => {
     const script = document.createElement("script");
     script.type = "application/ld+json";
@@ -364,7 +38,7 @@ export default function BanquetCatering() {
     script.text = JSON.stringify({
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      mainEntity: BANQUET_FAQ.map((f) => ({
+      mainEntity: FAQ.map((f) => ({
         "@type": "Question",
         name: f.q,
         acceptedAnswer: { "@type": "Answer", text: f.a },
@@ -374,508 +48,176 @@ export default function BanquetCatering() {
     return () => { document.getElementById("banquet-faq-schema")?.remove(); };
   }, []);
 
-  const [activeTab, setActiveTab] = useState<TabKey>(() => {
-    if (typeof window !== "undefined") {
-      const tab = new URLSearchParams(window.location.search).get("tab");
-      if (tab === "catering") return "catering";
-    }
-    return "banquet";
-  });
-
-  // Keep the tab in sync when the URL changes while already on this page
-  // (e.g. clicking "Catering" in the nav from the banquet tab)
-  const search = useSearch();
-  useEffect(() => {
-    const tab = new URLSearchParams(search).get("tab");
-    if (tab === "catering" || tab === "banquet") setActiveTab(tab);
-  }, [search]);
+  const onEstimate = (tier: MenuTier) => {
+    setEstimateTier(tier);
+    trackTierEstimate(tier);
+  };
 
   return (
-    <PageLayout>
-      {/* Hero */}
-      <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0">
-          <img src={IMAGES.vault} alt="Private dining at Andiamo in Banca" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60" />
-        </div>
-        <div className="relative z-10 text-center px-6">
-          <p className="eyebrow !text-white/55 mb-4">From a dinner in The Vault to a buyout for 100</p>
-          <h1 className="font-display text-4xl md:text-6xl text-white tracking-wide">
-            Banquet &amp; Catering
-          </h1>
-          <p className="font-accent italic text-white/60 text-lg md:text-xl mt-3">
-            Your event, our table.
-          </p>
-        </div>
-      </section>
-
-      {/* Tab Switcher + Menu Content */}
-      <section className="section-padding section-cream">
-        <div className="container max-w-4xl">
-          {/* Intro */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            className="text-center mb-14"
-          >
-            <p className="font-accent text-charcoal/70 text-lg leading-relaxed max-w-2xl mx-auto tracking-wide">
-              Two ways to bring Andiamo to your event: a <span className="text-charcoal">hosted banquet</span> in
-              The Vault or the dining room &mdash; prix-fixe and served, with a coordinator &mdash; or
-              <span className="text-charcoal"> catering to-go</span>, delivered to your office or venue.
-              Pick a menu below.
-            </p>
-            <p className="font-accent text-charcoal/50 text-sm mt-5">
-              Planning a hosted event?{" "}
-              <a href="/private-events" className="text-gold hover:text-gold-light transition-colors">Start with Private Events</a>.
-            </p>
-          </motion.div>
-
-          {/* Tab Navigation — matches Menu page style */}
-          <div className="flex flex-wrap justify-center gap-1 mb-16 border-b border-charcoal/8 pb-6">
-            {(["banquet", "catering"] as TabKey[]).map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`px-8 py-2.5 font-accent text-sm tracking-[0.15em] transition-all duration-500 ${
-                  activeTab === tab
-                    ? "text-gold border-b-2 border-gold"
-                    : "text-charcoal/55 hover:text-charcoal/80"
-                }`}
-              >
-                {tab === "banquet" ? "Banquet Menu" : "Catering Menu"}
-              </button>
-            ))}
-          </div>
-
-          {/* ── BANQUET TAB ── */}
-          {activeTab === "banquet" && (
-            <motion.div
-              key="banquet"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
-            >
-              <div className="text-center mb-14">
-                <div className="divider-diamond mb-6"><i /></div>
-                <h2 className="font-display text-3xl md:text-4xl text-charcoal mb-3">Banquet Dining</h2>
-                <p className="font-accent text-charcoal/65 max-w-2xl mx-auto tracking-wide">
-                  Perfect for private events in The Vault or our main dining room. Choose from our curated prix fixe options.
-                </p>
-              </div>
-
-              {banquetMenus.map((menu, mi) => (
-                <div key={mi} className="mb-16">
-                  <div className="text-center mb-8">
-                    <h3 className="font-display text-2xl md:text-3xl text-charcoal">{menu.title}</h3>
-                    {menu.subtitle && (
-                      <p className="font-accent text-sm text-gold/80 tracking-[0.15em] uppercase mt-2">{menu.subtitle}</p>
-                    )}
-                    <div className="w-12 h-px bg-gold/30 mx-auto mt-4" />
-                  </div>
-
-                  {/* Simple items (hors d'oeuvres) — dotted line pattern */}
-                  {menu.items && (
-                    <div className="max-w-2xl mx-auto space-y-5">
-                      {menu.items.map((item, i) => (
-                        <div key={i} className="group">
-                          <div className="flex items-baseline gap-3">
-                            <h4 className="font-display text-base text-charcoal group-hover:text-gold transition-colors duration-500">
-                              {item.name}
-                            </h4>
-                            <div className="flex-1 border-b border-dotted border-charcoal/20 mb-1.5 min-w-[20px]" />
-                          </div>
-                          <p className="text-charcoal/60 text-base mt-1 font-accent italic tracking-wide leading-relaxed">
-                            {item.desc}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-
-                  {/* Sectioned items ($35/$65 menus) */}
-                  {menu.sections && (
-                    <div className="max-w-2xl mx-auto space-y-12">
-                      {menu.sections.map((section, si) => (
-                        <div key={si}>
-                          <p className="font-accent text-xs tracking-[0.25em] uppercase text-gold/80 mb-5 border-b border-gold/15 pb-2">
-                            {section.heading}
-                          </p>
-                          <div className="space-y-5">
-                            {section.items.map((item, ii) => (
-                              <div key={ii} className="group">
-                                <div className="flex items-baseline gap-3">
-                                  <h4 className="font-display text-base text-charcoal group-hover:text-gold transition-colors duration-500">
-                                    {item.name}
-                                  </h4>
-                                  <div className="flex-1 border-b border-dotted border-charcoal/20 mb-1.5 min-w-[20px]" />
-                                </div>
-                                <p className="text-charcoal/60 text-base mt-1 font-accent italic tracking-wide leading-relaxed">
-                                  {item.desc}
-                                </p>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-
-                  {/* Wine pairing extras */}
-                  {menu.extras && (
-                    <div className="max-w-2xl mx-auto mt-10 border border-gold/15 p-8">
-                      <p className="font-accent text-xs tracking-[0.25em] uppercase text-gold/80 mb-6">
-                        Optional Wine Pairing — Curated by Our Sommelier
-                      </p>
-                      <div className="space-y-4">
-                        {menu.extras.map((extra, ei) => (
-                          <div key={ei} className="flex items-baseline justify-between gap-3">
-                            <span className="font-display text-base text-charcoal">{extra.label}</span>
-                            <div className="flex-1 border-b border-dotted border-charcoal/20 mb-1.5 min-w-[20px]" />
-                            <span className="font-accent text-gold text-sm tracking-wide shrink-0">{extra.price}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {mi < banquetMenus.length - 1 && (
-                    <div className="divider-gold my-14" />
-                  )}
+    <div data-print-root className="event-menus">
+      {/* Masthead — type only, so the rates sit on the first screen */}
+      <section className="bg-background pt-24 md:pt-[7.25rem]">
+        <div className="container">
+          <ViewSwitch view="events" />
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-14 gap-y-6 mt-6 md:mt-7">
+            <div className="lg:col-span-7">
+              <h1 className="font-display text-4xl md:text-5xl text-charcoal leading-[1.05]">
+                Event menus &amp; pricing
+              </h1>
+              <p className="font-accent text-charcoal/75 text-lg leading-relaxed mt-4 max-w-2xl">
+                Four prix-fixe banquet menus for private events and group dinners, priced per guest. Every
+                course is served at the table.
+              </p>
+              <p className="lg:hidden font-accent text-charcoal/75 text-base mt-3">
+                Events desk{" "}
+                <a
+                  href="tel:+16507458811"
+                  onClick={() => trackPhoneClick("banquet-catering")}
+                  className={`link-line lining-nums text-charcoal ${FOCUS}`}
+                >
+                  (650) 745-8811
+                </a>
+              </p>
+            </div>
+            {/* On a phone the prices come first; these facts repeat in the rate-sheet footnote */}
+            <dl className="hidden lg:block lg:col-span-5 self-end font-accent text-base">
+              {[
+                { term: "The Vault", desc: "12 to 22 guests, private" },
+                { term: "Dining room and buyout", desc: "Larger parties, up to 100" },
+              ].map((row) => (
+                <div key={row.term} className="flex items-baseline justify-between gap-6 border-t border-charcoal/15 py-2">
+                  <dt className="font-body text-[11px] font-medium uppercase tracking-[0.2em] text-charcoal/70">{row.term}</dt>
+                  <dd className="text-charcoal text-right">{row.desc}</dd>
                 </div>
               ))}
-
-              {/* Event Enhancements */}
-              <div className="mt-20">
-                <div className="text-center mb-10">
-                  <div className="divider-diamond mb-6"><i /></div>
-                  <h3 className="font-display text-2xl md:text-3xl text-charcoal">Event Enhancements</h3>
-                  <p className="font-accent text-sm text-charcoal/40 tracking-wider mt-2">
-                    Elevate any banquet menu with these add-ons
-                  </p>
-                  <div className="w-12 h-px bg-gold/30 mx-auto mt-4" />
-                </div>
-
-                {/* Hors d'Oeuvres */}
-                <div className="max-w-2xl mx-auto mb-12">
-                  <p className="font-accent text-xs tracking-[0.25em] uppercase text-gold/80 mb-5 border-b border-gold/15 pb-2">
-                    Hors d'Oeuvres — Priced Per Guest Count
-                  </p>
-                  <p className="text-charcoal/55 text-sm mb-6 font-accent italic tracking-wide">
-                    Perfect for cocktail hours and reception-style events. Add any combination to your banquet package.
-                  </p>
-                  <div className="space-y-4">
-                    {horsDoeuves.map((item, i) => (
-                      <div key={i} className="group">
-                        <div className="flex items-baseline justify-between gap-3">
-                          <h4 className="font-display text-base text-charcoal group-hover:text-gold transition-colors duration-500">
-                            {item.name}
-                          </h4>
-                          <div className="flex-1 border-b border-dotted border-charcoal/20 mb-1.5 min-w-[20px]" />
-                          <span className="font-accent text-gold text-sm tracking-wide shrink-0">{item.price}</span>
-                        </div>
-                        <p className="text-charcoal/60 text-base mt-1 font-accent italic tracking-wide leading-relaxed">
-                          {item.desc}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Enhancement Add-Ons */}
-                <div className="max-w-2xl mx-auto border border-gold/15 p-8 md:p-10">
-                  <p className="font-accent text-xs tracking-[0.25em] uppercase text-gold/80 mb-6">
-                    Add-Ons
-                  </p>
-                  <div className="space-y-6">
-                    {eventEnhancements.map((item, i) => (
-                      <div key={i}>
-                        <div className="flex items-baseline justify-between gap-3">
-                          <span className="font-display text-base text-charcoal">{item.name}</span>
-                          <div className="flex-1 border-b border-dotted border-charcoal/20 mb-1.5 min-w-[20px]" />
-                          <span className="font-accent text-gold text-sm tracking-wide shrink-0">{item.price}</span>
-                        </div>
-                        <p className="text-charcoal/60 text-base mt-1 font-accent italic tracking-wide leading-relaxed">
-                          {item.desc}
-                        </p>
-                        {item.note && (
-                          <p className="text-gold/70 text-xs mt-1 font-accent tracking-wide">
-                            {item.note}
-                          </p>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                </div>
+              <div className="flex items-baseline justify-between gap-6 border-y border-charcoal/15 py-2">
+                <dt className="font-body text-[11px] font-medium uppercase tracking-[0.2em] text-charcoal/70">Events desk</dt>
+                <dd className="text-charcoal text-right">
+                  <a
+                    href="tel:+16507458811"
+                    onClick={() => trackPhoneClick("banquet-catering")}
+                    className={`link-line lining-nums whitespace-nowrap ${FOCUS}`}
+                  >
+                    (650) 745-8811
+                  </a>
+                </dd>
               </div>
-            </motion.div>
-          )}
-
-          {/* ── CATERING TAB ── */}
-          {activeTab === "catering" && (
-            <motion.div
-              key="catering"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
-            >
-              <div className="text-center mb-14">
-                <div className="divider-diamond mb-6"><i /></div>
-                <h2 className="font-display text-3xl md:text-4xl text-charcoal mb-3">Catering Menu</h2>
-                <p className="font-accent text-charcoal/65 max-w-2xl mx-auto tracking-wide">
-                  Bring Andiamo's flavors to your office, home, or event venue.
+              {PLANNER_PDF.published && (
+                <p className="pt-3 text-right">
+                  <a
+                    href={PLANNER_PDF.href}
+                    onClick={() => trackPlannerPdf("masthead")}
+                    className={`link-line font-body text-[11px] font-medium uppercase tracking-[0.2em] text-charcoal ${FOCUS}`}
+                  >
+                    Planner packet (PDF)
+                  </a>
                 </p>
-                <p className="font-accent text-gold/80 text-sm tracking-wide mt-3">
-                  Half tray serves ~10 &middot; Full tray serves ~20 &middot; House bread and delivery included
-                </p>
-              </div>
-
-              {cateringMenu.map((cat, ci) => (
-                <div key={ci} className="mb-16">
-                  <div className="mb-8">
-                    <h3 className="font-display text-2xl md:text-3xl text-charcoal">{cat.category}</h3>
-                    <p className="font-accent text-sm text-charcoal/40 tracking-wider mt-1">{cat.subtitle}</p>
-                    <div className="w-12 h-px bg-gold/30 mt-4" />
-                  </div>
-
-                  {/* Price column headers for items that have them */}
-                  {cat.items[0] && "half" in cat.items[0] && (
-                    <div className="hidden sm:flex justify-end gap-6 mb-3">
-                      <span className="font-body text-[10px] tracking-[0.2em] uppercase text-charcoal/30 w-20 text-center">Half Tray</span>
-                      <span className="font-body text-[10px] tracking-[0.2em] uppercase text-charcoal/30 w-20 text-center">Full Tray</span>
-                    </div>
-                  )}
-
-                  <div className="space-y-5">
-                    {cat.items.map((item, ii) => (
-                      <div key={ii} className="group">
-                        <div className="flex flex-col sm:flex-row sm:items-baseline gap-2">
-                          <div className="flex items-baseline gap-3 flex-1 min-w-0">
-                            <h4 className="font-display text-base text-charcoal group-hover:text-gold transition-colors duration-500 shrink-0">
-                              {item.name}
-                            </h4>
-                            <div className="flex-1 border-b border-dotted border-charcoal/20 mb-1.5 min-w-[20px]" />
-                          </div>
-                          {"half" in item && (
-                            <div className="flex gap-6 shrink-0">
-                              <span className="font-accent text-gold text-sm tracking-wide w-20 text-center">{(item as any).half}</span>
-                              <span className="font-accent text-gold text-sm tracking-wide w-20 text-center">{(item as any).full}</span>
-                            </div>
-                          )}
-                        </div>
-                        <p className="text-charcoal/60 text-base mt-1 font-accent italic tracking-wide leading-relaxed">
-                          {item.desc}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-
-                </div>
-              ))}
-
-              {/* Direct order — primary CTA after browsing the menu */}
-              <div id="order-catering" className="mt-16 pt-12 border-t border-charcoal/8">
-                <div className="text-center mb-10">
-                  <div className="divider-diamond mb-6"><i /></div>
-                  <h3 className="font-display text-2xl md:text-3xl text-charcoal mb-3">Order Catering Direct</h3>
-                  <p className="font-accent text-charcoal/65 max-w-xl mx-auto tracking-wide">
-                    Tell us what you need and we'll confirm your order personally &mdash; no middleman, no service fees.
-                  </p>
-                  <p className="inline-flex items-center gap-2 font-accent text-gold text-sm tracking-wide mt-4">
-                    <Clock size={14} />
-                    We respond within the hour during business hours
-                  </p>
-                </div>
-
-                <CateringOrderForm />
-
-                <div className="text-center mt-10">
-                  <p className="font-accent text-charcoal/55 text-sm tracking-wide">
-                    In a hurry? Call{" "}
-                    <a href="tel:+16507458811" onClick={() => trackPhoneClick("catering-order")} className="text-gold hover:text-gold-light transition-colors">
-                      (650) 745-8811
-                    </a>{" "}
-                    and we'll take your order over the phone.
-                  </p>
-                  <div className="mt-8">
-                    <p className="font-accent text-charcoal/40 text-xs tracking-wide mb-3">Prefer instant checkout?</p>
-                    <a
-                      href={LINKS.ezcater}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => trackEzCaterClick("catering-tab")}
-                      className="inline-flex items-center gap-2 px-8 py-3 border border-charcoal/25 text-charcoal/70 font-body text-[11px] tracking-[0.2em] uppercase hover:border-charcoal/50 hover:text-charcoal transition-all duration-500"
-                    >
-                      <ShoppingBag size={13} />
-                      Order on ezCater
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          )}
+              )}
+            </dl>
+          </div>
         </div>
       </section>
 
-      {/* Good to know — FAQ */}
-      <section className="section-padding bg-background">
-        <div className="container max-w-3xl">
-          <div className="text-center mb-14">
-            <div className="divider-diamond mb-6"><i /></div>
-            <h2 className="font-display text-3xl md:text-4xl text-charcoal">Good to know</h2>
-          </div>
-          <div className="divide-y divide-charcoal/10">
-            {BANQUET_FAQ.map((f, i) => (
-              <motion.div
-                key={i}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                className="py-7"
-              >
-                <h3 className="font-display text-xl md:text-2xl text-charcoal mb-2">{f.q}</h3>
-                <p className="font-accent text-charcoal/70 text-base md:text-lg leading-[1.8]">{f.a}</p>
-              </motion.div>
+      {/* The posted rates */}
+      <section id={SECTION_IDS.rates} aria-label="The four menus at a glance" className="bg-background pt-6 md:pt-7 pb-12 md:pb-14 scroll-mt-4">
+        <div className="container">
+          <EventMenuRates variant="sheet" inPage source="page-rates" />
+        </div>
+      </section>
+
+      <JumpBar />
+
+      {/* The four menus in full */}
+      <div className="section-cream pt-12 md:pt-16 pb-8 space-y-10 md:space-y-14">
+        {TIERS.map((tier) => (
+          <TierSheet key={tier.key} tier={tier} onEstimate={onEstimate} />
+        ))}
+      </div>
+
+      <AdditionsLedger />
+
+      {/* Rooms */}
+      <section id={SECTION_IDS.rooms} aria-labelledby="rooms-heading" className="bg-background py-16 md:py-20 scroll-mt-12">
+        <div className="container grid grid-cols-1 lg:grid-cols-12 gap-x-14 gap-y-8">
+          <h2 id="rooms-heading" className="lg:col-span-4 font-display text-3xl md:text-4xl text-charcoal leading-tight">
+            Where your group sits
+          </h2>
+          <dl className="lg:col-span-8 border-t border-charcoal/25">
+            {ROOMS.map((room) => (
+              <div key={room.name} className="grid grid-cols-1 sm:grid-cols-[13rem_1fr] gap-x-8 gap-y-1 border-b border-charcoal/10 py-5">
+                <dt className="font-display text-xl text-charcoal">{room.name}</dt>
+                <dd className="font-accent text-base leading-relaxed">
+                  <span className="text-charcoal lining-nums">{room.capacity}.</span>{" "}
+                  <span className="text-charcoal/70">{room.note}</span>
+                </dd>
+              </div>
             ))}
-          </div>
+          </dl>
         </div>
       </section>
 
-      {/* Quote Calculator */}
-      <EventQuoteCalculator />
-
-      {/* Event Testimonials */}
-      <section className="section-cream">
-        <div className="max-w-5xl mx-auto px-6 py-20 md:py-24">
-          <div className="text-center mb-12">
-            <div className="divider-diamond mb-6"><i /></div>
-            <h2 className="font-display text-2xl md:text-3xl text-charcoal mb-3">What event hosts say</h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {[
-              {
-                text: "We hosted a corporate dinner in The Vault and it was perfect. The staff was attentive, the food was exceptional, and our clients were thoroughly impressed. The historic bank setting is unlike anything else on the Peninsula.",
-                author: "Corporate Client",
-                type: "Holiday Dinner in The Vault",
-                rating: 5,
-              },
-              {
-                text: "Andiamo handled our company's holiday party for 60 people flawlessly. The prix fixe menu was outstanding — every course was a hit. Our team is still talking about it months later.",
-                author: "Event Planner",
-                type: "Corporate Holiday Party",
-                rating: 5,
-              },
-            ].map((review, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.15, duration: 0.6 }}
-                className="p-8 bg-white/50 border border-charcoal/5"
-              >
-                <div className="flex gap-1 mb-4">
-                  {[...Array(5)].map((_, j) => (
-                    <Star key={j} size={13} className={j < review.rating ? "text-gold fill-gold" : "text-charcoal/10"} />
-                  ))}
-                </div>
-                <p className="font-accent text-charcoal/70 text-base leading-relaxed italic mb-5">
-                  "{review.text}"
-                </p>
-                <div>
-                  <span className="font-body text-[10px] tracking-[0.2em] uppercase text-charcoal/50">{review.author}</span>
-                  <span className="font-accent text-charcoal/30 text-xs block mt-0.5">{review.type}</span>
-                </div>
-              </motion.div>
+      {/* Questions — everything visible, no accordion */}
+      <section id={SECTION_IDS.questions} aria-labelledby="questions-heading" className="section-cream py-16 md:py-20 scroll-mt-12">
+        <div className="container grid grid-cols-1 lg:grid-cols-12 gap-x-14 gap-y-8">
+          <h2 id="questions-heading" className="lg:col-span-4 lg:sticky lg:top-40 self-start font-display text-3xl md:text-4xl text-charcoal leading-tight">
+            Questions
+          </h2>
+          <dl className="lg:col-span-8 border-t border-charcoal/25">
+            {FAQ.map((f) => (
+              <div key={f.q} className="border-b border-charcoal/10 py-6">
+                <dt className="font-display text-xl md:text-2xl text-charcoal leading-snug">{f.q}</dt>
+                <dd className="font-accent text-charcoal/75 text-base md:text-lg leading-[1.75] mt-2 max-w-2xl">{f.a}</dd>
+              </div>
             ))}
-          </div>
+          </dl>
         </div>
       </section>
 
-      {/* Event Type Landing Pages */}
-      <section className="section-warm">
-        <div className="max-w-4xl mx-auto px-6 py-16 md:py-20">
-          <div className="text-center mb-10">
-            <h3 className="font-display text-2xl text-charcoal mb-2">Planning a Specific Event?</h3>
-            <p className="font-accent text-charcoal/50 text-sm">Explore our dedicated event pages with tailored packages and details.</p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl mx-auto">
-            <Link
-              href="/holiday-parties"
-              className="flex items-center justify-between p-5 border border-charcoal/10 hover:border-gold/30 bg-white/50 transition-all duration-300 group"
-            >
-              <div>
-                <span className="font-display text-lg text-charcoal group-hover:text-gold transition-colors">Holiday Parties</span>
-                <span className="font-accent text-charcoal/40 text-xs block mt-0.5">Corporate & team celebrations</span>
-              </div>
-              <ArrowRight size={16} className="text-charcoal/20 group-hover:text-gold transition-colors" />
-            </Link>
-            <Link
-              href="/rehearsal-dinners"
-              className="flex items-center justify-between p-5 border border-charcoal/10 hover:border-gold/30 bg-white/50 transition-all duration-300 group"
-            >
-              <div>
-                <span className="font-display text-lg text-charcoal group-hover:text-gold transition-colors">Rehearsal Dinners</span>
-                <span className="font-accent text-charcoal/40 text-xs block mt-0.5">Private dining in The Vault</span>
-              </div>
-              <ArrowRight size={16} className="text-charcoal/20 group-hover:text-gold transition-colors" />
-            </Link>
+      <EventQuoteCalculator tier={estimateTier} onTierChange={setEstimateTier} />
+
+      {/* Closing row */}
+      <section data-no-print className="bg-background py-14 md:py-16">
+        <div className="container">
+          <div className="border-t border-charcoal/25 pt-8 grid grid-cols-1 lg:grid-cols-12 gap-x-14 gap-y-8">
+            <p className="lg:col-span-5 font-display text-2xl md:text-3xl text-charcoal leading-snug">
+              <a
+                href="tel:+16507458811"
+                onClick={() => trackPhoneClick("banquet-catering")}
+                className={`link-line lining-nums ${FOCUS}`}
+              >
+                (650) 745-8811
+              </a>
+              <br />
+              <a href={`mailto:${LINKS.email}`} className={`link-line text-xl md:text-2xl ${FOCUS}`}>{LINKS.email}</a>
+            </p>
+            <div className="lg:col-span-7">
+              <ul className="flex flex-wrap gap-x-8 gap-y-3 font-body text-[11px] font-medium uppercase tracking-[0.2em] text-charcoal/80">
+                {SPOKES.map((s) => (
+                  <li key={s.href}>
+                    <Link href={s.href} className={`link-line ${FOCUS}`}>{s.label}</Link>
+                  </li>
+                ))}
+              </ul>
+              <p className="font-accent text-charcoal/70 text-base mt-6">
+                Ordering trays for the office instead?{" "}
+                <Link href={CATERING_HREF} className={`link-line text-charcoal ${FOCUS}`}>
+                  Catering delivery is separate, through ezCater.
+                </Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>
-
-      {/* Email Capture */}
-      <EmailCapture />
-
-      {/* Sticky Mobile CTA */}
-      <StickyEventCTA />
-
-      {/* CTA */}
-      <section className="section-dark py-20">
-        <motion.div
-          className="container max-w-2xl text-center"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeUp}
-        >
-          <div className="divider-diamond mb-8"><i /></div>
-          <h2 className="font-display text-3xl md:text-4xl text-cream mb-4">Ready to plan your event?</h2>
-          <p className="font-accent text-white/45 tracking-wide leading-relaxed mb-10">
-            Whether it's a private dinner in The Vault or catering for your next corporate gathering,
-            our team is here to help create an unforgettable experience.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="/banquet-catering?tab=catering#order-catering"
-              className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-white text-charcoal font-body text-[12px] tracking-[0.2em] uppercase font-semibold hover:bg-white/90 transition-all duration-500"
-              onClick={(e) => {
-                e.preventDefault();
-                const el = document.getElementById("order-catering");
-                if (el) el.scrollIntoView({ behavior: "smooth" });
-                else window.location.href = "/banquet-catering?tab=catering#order-catering";
-              }}
-            >
-              <ShoppingBag size={14} />
-              Order Catering Direct
-            </a>
-            <a
-              href="/the-vault"
-              className="inline-flex items-center justify-center px-10 py-4 border border-white/20 text-white font-body text-[12px] tracking-[0.2em] uppercase hover:bg-white/5 transition-all duration-500"
-            >
-              Inquire About The Vault
-            </a>
-          </div>
-          <p className="text-white/30 text-sm mt-5 font-accent tracking-wide">
-            Or call us at{" "}
-            <a href="tel:+16507458811" onClick={() => trackPhoneClick("banquet-catering")} className="text-gold/80 hover:text-gold transition-colors">
-              (650) 745-8811
-            </a>
-          </p>
-        </motion.div>
-      </section>
-    </PageLayout>
+    </div>
   );
+}
+
+export default function BanquetCatering() {
+  usePageMeta("/banquet-catering");
+
+  // The view is derived from the URL, never held in state: nav "Catering",
+  // Back/Forward and shared links all stay in step.
+  const view = new URLSearchParams(useSearch()).get("tab") === "catering" ? "catering" : "events";
+
+  return <PageLayout>{view === "catering" ? <CateringView /> : <EventsView />}</PageLayout>;
 }

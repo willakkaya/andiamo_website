@@ -4,44 +4,37 @@ import { Users, Wine, ChevronDown, ChevronUp, ArrowRight, Check } from "lucide-r
 import { submitForm } from "@/lib/formspree";
 import { trackQuoteSubmit } from "@/lib/analytics";
 import { toast } from "sonner";
+import {
+  TIERS,
+  WINE_PAIRINGS as WINE_PAIRING_DATA,
+  ADDITIONS,
+  HORS_DOEUVRES as HORS_DOEUVRE_DATA,
+  type MenuTier,
+} from "@/data/eventMenus";
 
-type MenuTier = "lunch35" | "dinner65" | "dinner80" | "dinner120";
+// Keys, labels and prices come from the shared event-menus data. The labels and
+// keys are FROZEN there: they are the Formspree payload values and the GA
+// quote_submit event_label, so this form reads them and never rewrites them.
+const MENU_TIERS = TIERS.map((t) => ({ key: t.key, label: t.calcLabel, price: t.price, desc: t.calcDesc }));
 
-const MENU_TIERS: { key: MenuTier; label: string; price: number; desc: string }[] = [
-  { key: "lunch35", label: "$35 Lunch", price: 35, desc: "Salad, entrée choice, dessert" },
-  { key: "dinner65", label: "$65 Dinner", price: 65, desc: "Bruschetta, salad, entrée, dessert" },
-  { key: "dinner80", label: "$80 Dinner", price: 80, desc: "Burrata, crab cakes, filet mignon & more" },
-  { key: "dinner120", label: "$120 Premier", price: 120, desc: "Champagne, oysters, lobster, osso buco" },
-];
+const WINE_PAIRINGS = WINE_PAIRING_DATA.map((w) => ({ key: w.key as string, label: w.label, price: w.price, desc: w.desc }));
 
-const WINE_PAIRINGS = [
-  { key: "none", label: "No Wine Pairing", price: 0, desc: "" },
-  { key: "standard", label: "Standard Pairing", price: 30, desc: "Curated Italian & California wines paired to each course by our sommelier" },
-  { key: "rare", label: "Rare Pairing", price: 75, desc: "Reserve selections — Barolo, Super Tuscans, and Napa cult favorites" },
-  { key: "legendary", label: "Legendary Pairing", price: 150, desc: "Trophy wines — Brunello Riserva, Amarone, first-growth Bordeaux & premium Champagne" },
-];
+const ENHANCEMENTS = ADDITIONS.map((a) => ({ key: a.key, label: a.label, price: a.price, includedIn120: a.includedIn120 }));
 
-const ENHANCEMENTS = [
-  { key: "champagne", label: "Champagne Toast", price: 12, includedIn120: true },
-  { key: "oysters", label: "Oysters Rockefeller", price: 18, includedIn120: true },
-  { key: "antipasto", label: "Antipasto & Cheese Display", price: 15, includedIn120: false },
-  { key: "limoncello", label: "Limoncello Toast", price: 6, includedIn120: false },
-  { key: "espresso", label: "Espresso & Cappuccino Bar", price: 8, includedIn120: false },
-  { key: "softdrinks", label: "Soft Drinks & Beverages", price: 5, includedIn120: false },
-];
+const HORS_DOEUVRES = HORS_DOEUVRE_DATA.map((h) => ({ key: h.key, label: h.label, price: h.price }));
 
-const HORS_DOEUVRES = [
-  { key: "bruschetta", label: "Bruschetta al Pomodoro", price: 4 },
-  { key: "meatballs", label: "Italian Meatballs", price: 5 },
-  { key: "shrimp", label: "Shrimp Cocktail", price: 7 },
-  { key: "calamari", label: "Calamari Fritti", price: 6 },
-  { key: "chicken_skewer", label: "Grilled Chicken Skewer", price: 5 },
-  { key: "garlic_bread", label: "Garlic Bread", price: 3 },
-];
-
-export default function EventQuoteCalculator() {
+export default function EventQuoteCalculator({
+  tier: tierProp,
+  onTierChange,
+}: { tier?: MenuTier; onTierChange?: (t: MenuTier) => void } = {}) {
   const [guestCount, setGuestCount] = useState(20);
-  const [menuTier, setMenuTier] = useState<MenuTier>("dinner65");
+  // Controlled when a `tier` prop is passed, otherwise self-managed (as on /private-dining).
+  const [internal, setInternal] = useState<MenuTier>("dinner65");
+  const menuTier = tierProp ?? internal;
+  const setMenuTier = (t: MenuTier) => {
+    setInternal(t);
+    onTierChange?.(t);
+  };
   const [winePairing, setWinePairing] = useState("none");
   const [selectedEnhancements, setSelectedEnhancements] = useState<string[]>([]);
   const [selectedHors, setSelectedHors] = useState<string[]>([]);
@@ -115,7 +108,7 @@ export default function EventQuoteCalculator() {
   };
 
   return (
-    <section className="section-dark" id="quote-calculator">
+    <section className="section-dark" id="quote-calculator" data-no-print>
       <div className="max-w-4xl mx-auto px-6 py-24 md:py-32">
         <div className="text-center mb-14">
           <div className="divider-diamond mb-8 opacity-70"><i /></div>
@@ -123,7 +116,7 @@ export default function EventQuoteCalculator() {
             If it helps to see numbers
           </p>
           <h2 className="font-display text-3xl md:text-4xl text-cream mb-4">
-            Sketch an estimate
+            Estimate your event
           </h2>
           <p className="font-accent text-cream/70 text-base max-w-xl mx-auto leading-relaxed">
             Choose a menu and a few touches to get a sense of the figures. It&rsquo;s only a
@@ -174,6 +167,7 @@ export default function EventQuoteCalculator() {
                   <button
                     key={t.key}
                     onClick={() => setMenuTier(t.key)}
+                    aria-pressed={menuTier === t.key}
                     className={`p-3 border text-center transition-all duration-300 ${
                       menuTier === t.key
                         ? "border-gold bg-gold/10 text-cream"
@@ -201,6 +195,7 @@ export default function EventQuoteCalculator() {
                   <button
                     key={w.key}
                     onClick={() => setWinePairing(w.key)}
+                    aria-pressed={winePairing === w.key}
                     className={`p-4 border text-left transition-all duration-300 ${
                       winePairing === w.key
                         ? "border-gold bg-gold/10 text-cream"
