@@ -152,7 +152,7 @@ export default function CorporateDining() {
               <div className="flex flex-wrap gap-x-10 gap-y-3 text-sm font-accent text-charcoal/55 border-t border-charcoal/10 pt-6">
                 <span>5 min from Genentech &amp; the biotech corridor</span>
                 <span>10 min from SFO</span>
-                <span>12 to 22 in The Vault &middot; up to 100 for a buyout</span>
+                <span>12 to 22 in The Vault &middot; up to 100 in the dining room</span>
               </div>
               <EventMenuRates variant="line" source="corporate-facts" className="mt-6" />
             </motion.div>

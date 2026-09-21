@@ -83,7 +83,7 @@ function EventsView() {
             <dl className="hidden lg:block lg:col-span-5 self-end font-accent text-base">
               {[
                 { term: "The Vault", desc: "12 to 22 guests, private" },
-                { term: "Dining room and buyout", desc: "Larger parties, up to 100" },
+                { term: "Dining room", desc: "23 to 100 guests, no buyout needed" },
               ].map((row) => (
                 <div key={row.term} className="flex items-baseline justify-between gap-6 border-t border-charcoal/15 py-2">
                   <dt className="font-body text-[11px] font-medium uppercase tracking-[0.2em] text-charcoal/70">{row.term}</dt>

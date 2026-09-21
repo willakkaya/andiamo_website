@@ -256,7 +256,7 @@
   ],
   "rooms": [
     { "name": "The Vault", "capacity": "12 to 22 guests", "note": "Private room inside the original bank vault, with screen and sound." },
-    { "name": "Main dining room", "capacity": "Larger parties", "note": "Arranged with the events desk." },
+    { "name": "Main dining room", "capacity": "23 to 100 guests", "note": "A section of the banking hall or the full room. No buyout required." },
     { "name": "Full restaurant", "capacity": "Buyout for up to 100", "note": "By arrangement." }
   ],
   "faq": [
@@ -274,7 +274,7 @@
     },
     {
       "q": "How many guests can you host?",
-      "a": "The Vault, our restored 1920s bank-vault room, seats 12 to 22. Larger parties take the main dining room, up to a full-restaurant buyout for 100."
+      "a": "The Vault, our restored 1920s bank-vault room, seats 12 to 22. Parties of 23 to 100 take the main dining room, with no buyout required. The whole restaurant can also be closed to the public for the evening."
     },
     {
       "q": "What is the difference between an event menu and catering?",
