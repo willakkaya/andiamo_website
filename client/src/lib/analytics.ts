@@ -64,3 +64,28 @@ export const trackEzCaterClick = (location: string) =>
     event_category: "engagement",
     event_label: location,
   });
+
+// Event menus — how planners reach the menus and what they do with a tier
+export const trackEventMenusClick = (source: string) =>
+  trackEvent("event_menus_click", {
+    event_category: "event_menus",
+    event_label: source,
+  });
+
+export const trackTierLinkCopy = (tier: string) =>
+  trackEvent("event_menu_link_copy", {
+    event_category: "event_menus",
+    event_label: tier,
+  });
+
+export const trackTierEstimate = (tier: string) =>
+  trackEvent("event_menu_estimate", {
+    event_category: "event_menus",
+    event_label: tier,
+  });
+
+export const trackPlannerPdf = (source: string) =>
+  trackEvent("event_menu_pdf", {
+    event_category: "event_menus",
+    event_label: source,
+  });

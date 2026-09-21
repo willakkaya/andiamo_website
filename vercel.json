@@ -19,7 +19,7 @@
     { "source": "/add-your-review", "destination": "https://www.yelp.com/biz/andiamo-in-banca-south-san-francisco-3", "statusCode": 301 },
     { "source": "/about", "destination": "/our-story", "statusCode": 301 },
     { "source": "/about-us", "destination": "/our-story", "statusCode": 301 },
-    { "source": "/catering", "destination": "/banquet-catering", "statusCode": 301 },
+    { "source": "/catering", "destination": "/banquet-catering?tab=catering", "statusCode": 301 },
     { "source": "/banquet", "destination": "/banquet-catering", "statusCode": 301 },
     { "source": "/events", "destination": "/banquet-catering", "statusCode": 301 },
     { "source": "/corporate", "destination": "/private-dining", "statusCode": 301 },
@@ -41,7 +41,13 @@
     { "source": "/our-history", "destination": "/our-story", "statusCode": 301 },
     { "source": "/story", "destination": "/our-story", "statusCode": 301 },
     { "source": "/the-vault-private-dining", "destination": "/the-vault", "statusCode": 301 },
-    { "source": "/vault", "destination": "/the-vault", "statusCode": 301 }
+    { "source": "/vault", "destination": "/the-vault", "statusCode": 301 },
+    { "source": "/event-menus", "destination": "/banquet-catering", "statusCode": 302 },
+    { "source": "/eventmenus", "destination": "/banquet-catering", "statusCode": 302 },
+    { "source": "/event-menus/35", "destination": "/banquet-catering#lunch-35", "statusCode": 302 },
+    { "source": "/event-menus/65", "destination": "/banquet-catering#dinner-65", "statusCode": 302 },
+    { "source": "/event-menus/80", "destination": "/banquet-catering#dinner-80", "statusCode": 302 },
+    { "source": "/event-menus/120", "destination": "/banquet-catering#dinner-120", "statusCode": 302 }
   ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }

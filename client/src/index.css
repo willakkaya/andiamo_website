@@ -325,6 +325,11 @@
     background-size: 100% 1px;
   }
 
+  /* Ledger double rule — opens a rate sheet or a tier, like a ruled bank book */
+  .rule-double {
+    border-top: 3px double var(--charcoal);
+  }
+
   /* Filmic grain — barely-there texture so flat dark fields feel like film, not vector */
   .grain {
     position: relative;
@@ -345,6 +350,13 @@
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
+  /* Anchor targets (#dinner-80, #quote-calculator…) land below the fixed nav */
+  scroll-padding-top: 7rem;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 /* Bigger base font on desktop — scales every rem-based text size site-wide.
@@ -379,4 +391,47 @@ html {
 ::selection {
   background: oklch(0.58 0.14 60 / 25%);
   color: oklch(0.15 0.01 50);
+}
+
+/* Print — a planner hitting Cmd+P on the event menus gets the menus, not the
+   site chrome. Opt a page in with data-print-root; hide a block with
+   data-no-print. Kept last so it wins over the font-size rules above. */
+@media print {
+  @page {
+    size: letter;
+    margin: 0.6in 0.7in;
+  }
+  html {
+    font-size: 10.5pt;
+    scroll-behavior: auto;
+  }
+  body {
+    background: #fff;
+  }
+  nav,
+  footer,
+  [data-no-print],
+  #quote-calculator {
+    display: none !important;
+  }
+  [data-print-root] * {
+    opacity: 1 !important;
+    transform: none !important;
+    color: #1a1a1a !important;
+    position: static !important;
+  }
+  /* position: static un-hides inline .sr-only text, so drop it on paper */
+  [data-print-root] .sr-only {
+    display: none !important;
+  }
+  [data-print-root] [data-course] {
+    break-inside: avoid;
+  }
+  [data-print-root] h2,
+  [data-print-root] h3 {
+    break-after: avoid;
+  }
+  .grain::after {
+    display: none;
+  }
 }

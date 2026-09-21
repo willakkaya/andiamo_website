@@ -1,7 +1,8 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
-import { Route, Switch, useLocation } from "wouter";
+import { Route, Switch, useLocation, useSearch } from "wouter";
+import { useLocationProperty } from "wouter/use-browser-location";
 import { useEffect } from "react";
 import ErrorBoundary from "./components/ErrorBoundary";
 import Home from "./pages/Home";
@@ -16,11 +17,45 @@ import PrivateEvents from "./pages/PrivateEvents";
 import HolidayParties from "./pages/HolidayParties";
 import RehearsalDinners from "./pages/RehearsalDinners";
 
-function ScrollToTop() {
-  const [location] = useLocation();
+const currentHash = () => window.location.hash;
+
+// One scroll manager for the whole site: a URL with a #hash lands on that
+// element (hard load, cross-page <Link>, or in-page anchor); anything else
+// lands at the top. Runs again once webfonts settle, since the swap shifts
+// layout — unless the visitor has already started scrolling.
+function ScrollManager() {
+  const [pathname] = useLocation();
+  const search = useSearch();
+  const hash = useLocationProperty(currentHash);
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "instant" });
-  }, [location]);
+    const go = () => {
+      let id = hash.slice(1);
+      try {
+        id = decodeURIComponent(id);
+      } catch {
+        // malformed escape in the hash — fall back to the raw string
+      }
+      const el = id ? document.getElementById(id) : null;
+      if (el) el.scrollIntoView({ behavior: "instant", block: "start" });
+      else window.scrollTo({ top: 0, behavior: "instant" });
+    };
+    go();
+
+    let live = true;
+    let moved = false;
+    const mark = () => {
+      moved = true;
+    };
+    const events = ["wheel", "touchstart", "keydown"];
+    events.forEach((e) => window.addEventListener(e, mark, { once: true, passive: true }));
+    document.fonts?.ready.then(() => {
+      if (live && !moved && hash) go();
+    });
+    return () => {
+      live = false;
+      events.forEach((e) => window.removeEventListener(e, mark));
+    };
+  }, [pathname, search, hash]);
   return null;
 }
 
@@ -41,7 +76,7 @@ function PageviewTracker() {
 function Router() {
   return (
     <>
-      <ScrollToTop />
+      <ScrollManager />
       <PageviewTracker />
       <Switch>
         <Route path={"/"} component={Home} />
