@@ -1,0 +1,284 @@
+{
+  "asOf": "September 2026",
+  "pdf": { "href": "/andiamo-event-menus.pdf", "published": false, "edition": "rates" },
+  "tiers": [
+    {
+      "key": "lunch35",
+      "anchor": "lunch-35",
+      "price": 35,
+      "name": "Lunch",
+      "meal": "lunch",
+      "note": "Lunch only",
+      "coursesLabel": "Three courses",
+      "mainsSummary": [
+        "Salmon piccata",
+        "Chicken parmesan",
+        "Pork chop",
+        "Spaghetti & meatballs",
+        "Rigatoni alle verdure (vegetarian)"
+      ],
+      "alsoServed": "Verde mista salad to start, chocolate mousse to finish",
+      "winePairing": false,
+      "calcLabel": "$35 Lunch",
+      "calcDesc": "Salad, entrée choice, dessert",
+      "courses": [
+        {
+          "label": "Salad",
+          "rule": "all",
+          "dishes": [
+            { "name": "Verde Mista", "desc": "Organic spring greens and shaved heirloom carrots, tossed in a house-made balsamic vinaigrette" }
+          ]
+        },
+        {
+          "label": "Main course",
+          "rule": "choose-one",
+          "isMain": true,
+          "dishes": [
+            { "name": "Spaghetti & Meatballs", "desc": "Spaghetti pasta with marinara and homemade meatballs" },
+            { "name": "Salmon Piccata", "desc": "Pan-seared salmon filet with capers and lemon butter white wine sauce" },
+            { "name": "Rigatoni alle Verdure", "desc": "Rigatoni pasta tossed with seasonal vegetables in house-made marinara", "diet": ["vegetarian"] },
+            { "name": "Chicken Parmesan", "desc": "Breaded free-range chicken breast topped with marinara sauce and fresh mozzarella cheese" },
+            { "name": "Pork Chop", "desc": "Grilled bone-in pork chop with a mushroom cream reduction" }
+          ]
+        },
+        {
+          "label": "Dessert",
+          "rule": "all",
+          "dishes": [
+            { "name": "Chocolate Mousse", "desc": "Velvety rich mousse served with fresh berries" }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "dinner65",
+      "anchor": "dinner-65",
+      "price": 65,
+      "name": "Dinner",
+      "meal": "dinner",
+      "coursesLabel": "Four courses",
+      "mainsSummary": [
+        "Filet mignon bordelaise",
+        "Salmon piccata",
+        "Chicken marsala",
+        "Spaghetti & meatballs",
+        "Rigatoni alle verdure (vegetarian)"
+      ],
+      "alsoServed": "Tomato bruschetta, a choice of salad, a choice of dessert",
+      "winePairing": true,
+      "calcLabel": "$65 Dinner",
+      "calcDesc": "Bruschetta, salad, entrée, dessert",
+      "courses": [
+        {
+          "label": "To start",
+          "rule": "all",
+          "dishes": [
+            { "name": "Tomato Bruschetta", "desc": "Crostini with fresh chopped tomato, basil and olive oil" }
+          ]
+        },
+        {
+          "label": "Salad",
+          "rule": "choose-one",
+          "dishes": [
+            { "name": "Verde Mista", "desc": "Organic spring greens and shaved heirloom carrots, tossed in a house-made balsamic vinaigrette" },
+            { "name": "Caesar Salad", "desc": "Organic romaine lettuce, house-made Caesar dressing, croutons and shaved Parmigiano-Reggiano" }
+          ]
+        },
+        {
+          "label": "Main course",
+          "rule": "choose-one",
+          "isMain": true,
+          "dishes": [
+            { "name": "Rigatoni alle Verdure", "desc": "Rigatoni pasta tossed with seasonal vegetables in house-made marinara", "diet": ["vegetarian"] },
+            { "name": "Spaghetti & Meatballs", "desc": "Spaghetti pasta with marinara and homemade meatballs" },
+            { "name": "Salmon Piccata", "desc": "Pan-seared salmon filet with capers and lemon butter white wine sauce" },
+            { "name": "Filet Mignon Bordelaise", "desc": "Grilled 7 oz filet mignon with a red wine bordelaise, served with mashed potatoes and seasonal vegetables" },
+            { "name": "Chicken Marsala", "desc": "Free range chicken breast in Marsala wine sauce with mushrooms, served with seasonal vegetables" }
+          ]
+        },
+        {
+          "label": "Dessert",
+          "rule": "choose-one",
+          "dishes": [
+            { "name": "Tiramisu", "desc": "Espresso-soaked ladyfingers, silky mascarpone cream, and a dusting of cocoa" },
+            { "name": "Vanilla Bean Panna Cotta", "desc": "Velvety smooth panna cotta infused with Madagascar vanilla bean, topped with macerated berries and a balsamic glaze" },
+            { "name": "Lemon Blueberry Cheesecake", "desc": "Rich and creamy lemon-infused cheesecake with a graham cracker crust, finished with a fresh blueberry compote and lemon zest" }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "dinner80",
+      "anchor": "dinner-80",
+      "price": 80,
+      "name": "Dinner",
+      "meal": "dinner",
+      "coursesLabel": "Four courses",
+      "mainsSummary": [
+        "Filet mignon",
+        "Halibut piccata",
+        "Rack of lamb",
+        "Chicken saltimbocca",
+        "Wild mushroom & truffle risotto (vegetarian)"
+      ],
+      "alsoServed": "Burrata and crab cakes for the table, a choice of salad, a choice of dessert",
+      "winePairing": true,
+      "calcLabel": "$80 Dinner",
+      "calcDesc": "Burrata, crab cakes, filet mignon & more",
+      "courses": [
+        {
+          "label": "To start",
+          "rule": "shared",
+          "dishes": [
+            { "name": "Burrata & Roasted Peppers", "desc": "Creamy burrata with fire-roasted bell peppers, fresh basil, and aged balsamic" },
+            { "name": "Crab Cakes", "desc": "Golden, pan-seared lump crab cakes with a crispy exterior and tender center, served with lemon-caper aioli and microgreens" }
+          ]
+        },
+        {
+          "label": "Salad",
+          "rule": "choose-one",
+          "dishes": [
+            { "name": "Verde Mista", "desc": "Organic spring greens and shaved heirloom carrots, tossed in a house-made balsamic vinaigrette" },
+            { "name": "Caesar Salad", "desc": "Organic romaine lettuce, house-made Caesar dressing, croutons and shaved Parmigiano-Reggiano" }
+          ]
+        },
+        {
+          "label": "Main course",
+          "rule": "choose-one",
+          "isMain": true,
+          "dishes": [
+            { "name": "Filet Mignon with Red Wine Demi-Glace", "desc": "Prime center-cut filet mignon, served with truffle mashed potatoes and seasonal vegetables" },
+            { "name": "Halibut Piccata", "desc": "Delicate, pan-seared halibut with lemon-caper white wine sauce, saffron-infused risotto and sautéed broccolini" },
+            { "name": "Chicken Saltimbocca", "desc": "Free-range chicken breast layered with prosciutto and sage in a white wine butter sauce, with roasted garlic mashed potatoes and baby zucchini" },
+            { "name": "Roasted Rack of Lamb with Rosemary Jus", "desc": "Herb-crusted New Zealand rack of lamb, roasted and drizzled with a rosemary-infused jus" },
+            { "name": "Wild Mushroom & Truffle Risotto", "desc": "Creamy aged Carnaroli rice infused with black truffle and slow-roasted wild mushrooms, finished with Parmigiano-Reggiano and white truffle oil", "diet": ["vegetarian"] }
+          ]
+        },
+        {
+          "label": "Dessert",
+          "rule": "choose-one",
+          "dishes": [
+            { "name": "Tiramisu", "desc": "Espresso-soaked ladyfingers, silky mascarpone cream, and a dusting of cocoa" },
+            { "name": "Lemon Blueberry Cheesecake", "desc": "Rich and creamy lemon-infused cheesecake with a graham cracker crust, finished with a fresh blueberry compote and lemon zest" }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "dinner120",
+      "anchor": "dinner-120",
+      "price": 120,
+      "name": "Premier dinner",
+      "meal": "dinner",
+      "coursesLabel": "Welcome toast and four courses",
+      "mainsSummary": [
+        "Chilean sea bass",
+        "Rack of lamb",
+        "Filet mignon",
+        "Gamberi al limone",
+        "Osso buco alla Milanese",
+        "Roasted cauliflower steak (vegan)"
+      ],
+      "alsoServed": "Champagne toast, oysters Rockefeller and a citrus-fennel salad, lobster ravioli or truffle risotto, a choice of dessert",
+      "winePairing": true,
+      "calcLabel": "$120 Premier",
+      "calcDesc": "Champagne, oysters, lobster, osso buco",
+      "courses": [
+        {
+          "label": "Welcome toast",
+          "rule": "all",
+          "dishes": [
+            { "name": "Champagne Toast", "desc": "A glass of sparkling wine to welcome your guests" }
+          ]
+        },
+        {
+          "label": "First course",
+          "rule": "all",
+          "dishes": [
+            { "name": "Oysters Rockefeller", "desc": "Half-dozen baked oysters per guest with spinach, Pernod, Parmigiano, and herb breadcrumbs" },
+            { "name": "Winter Citrus & Fennel Salad", "desc": "Shaved fennel, cara cara orange, arugula, champagne vinaigrette", "diet": ["vegan", "gluten-free"] }
+          ]
+        },
+        {
+          "label": "Second course",
+          "rule": "choose-one",
+          "dishes": [
+            { "name": "Lobster Ravioli", "desc": "Housemade ravioli filled with Maine lobster and mascarpone in a saffron cream sauce with fresh tarragon" },
+            { "name": "Wild Mushroom & Truffle Risotto", "desc": "Creamy aged Carnaroli rice with black truffle and slow-roasted wild mushrooms, Parmigiano-Reggiano and white truffle oil", "diet": ["vegetarian", "gluten-free"] }
+          ]
+        },
+        {
+          "label": "Main course",
+          "rule": "choose-one",
+          "isMain": true,
+          "dishes": [
+            { "name": "Pan-Roasted Chilean Sea Bass", "desc": "Lemon-caper beurre blanc, fingerling potatoes, market vegetables", "diet": ["gluten-free", "pescatarian"] },
+            { "name": "Herb-Crusted California Rack of Lamb", "desc": "Garlic, rosemary, aged balsamic, with truffle mashed potatoes and seasonal vegetables", "diet": ["gluten-free"] },
+            { "name": "Grilled Prime Filet Mignon", "desc": "10 oz center-cut filet, red wine demi-glace, choice of blue cheese butter or herb-garlic olive oil", "diet": ["gluten-free"] },
+            { "name": "Gamberi al Limone", "desc": "Tiger prawns sautéed with garlic, white wine, basil, and citrus, served with roasted potatoes and vegetables", "diet": ["gluten-free", "pescatarian"] },
+            { "name": "Osso Buco alla Milanese", "desc": "Slow-braised veal shank with saffron risotto and gremolata" },
+            { "name": "Roasted Cauliflower Steak", "desc": "Smoked tomato-caper vinaigrette, pine nuts, herbs", "diet": ["vegan", "gluten-free"] }
+          ]
+        },
+        {
+          "label": "Dessert",
+          "rule": "choose-one",
+          "dishes": [
+            { "name": "Tiramisu", "desc": "Espresso-soaked ladyfingers, silky mascarpone cream, and a dusting of cocoa" },
+            { "name": "Affogato al Caffè", "desc": "Vanilla gelato, hot espresso, amaretti biscotti" },
+            { "name": "Chocolate Lava Cake", "desc": "Warm Valrhona chocolate fondant with a molten center, served with vanilla gelato and fresh berries" }
+          ]
+        }
+      ]
+    }
+  ],
+  "winePairings": [
+    { "key": "none", "label": "No Wine Pairing", "displayName": "No wine pairing", "price": 0, "desc": "" },
+    { "key": "standard", "label": "Standard Pairing", "displayName": "Standard pairing", "price": 30, "desc": "Italian and California wines chosen by our sommelier for each course." },
+    { "key": "rare", "label": "Rare Pairing", "displayName": "Rare pairing", "price": 75, "desc": "Reserve selections: Barolo, Super Tuscans and Napa cult favorites." },
+    { "key": "legendary", "label": "Legendary Pairing", "displayName": "Legendary pairing", "price": 150, "desc": "Brunello Riserva, Amarone, first-growth Bordeaux and premium Champagne." }
+  ],
+  "additions": [
+    { "key": "champagne", "label": "Champagne Toast", "price": 12, "desc": "A glass of sparkling wine to welcome your guests", "includedIn120": true },
+    { "key": "oysters", "label": "Oysters Rockefeller", "price": 18, "desc": "Half-dozen baked oysters per guest with spinach, Pernod, and Parmigiano", "includedIn120": true },
+    { "key": "antipasto", "label": "Antipasto & Cheese Display", "price": 15, "desc": "Imported cheeses, cured meats, marinated olives, and fresh focaccia", "includedIn120": false },
+    { "key": "limoncello", "label": "Limoncello Toast", "price": 6, "desc": "House limoncello digestivo", "includedIn120": false },
+    { "key": "espresso", "label": "Espresso & Cappuccino Bar", "price": 8, "desc": "Full after-dinner coffee service with espresso, cappuccino, and biscotti", "includedIn120": false },
+    { "key": "softdrinks", "label": "Soft Drinks & Beverages", "price": 5, "desc": "Assorted sodas, sparkling water, iced tea, and fresh lemonade", "includedIn120": false }
+  ],
+  "horsDoeuvres": [
+    { "key": "bruschetta", "label": "Bruschetta al Pomodoro", "price": 4, "desc": "Toasted slices of bread topped with tomato cubes marinated with olive oil, garlic and basil" },
+    { "key": "meatballs", "label": "Italian Meatballs", "price": 5, "desc": "Delicious Italian meatballs served with a dipping sauce" },
+    { "key": "shrimp", "label": "Shrimp Cocktail", "price": 7, "desc": "Fresh shrimp with cocktail sauce" },
+    { "key": "calamari", "label": "Calamari Fritti", "price": 6, "desc": "Fresh squid fried and tossed in a garlic lemon sauce served with cocktail sauce" },
+    { "key": "chicken_skewer", "label": "Grilled Chicken Skewer", "price": 5, "desc": "Marinated chicken breast grilled over charcoal grill" },
+    { "key": "garlic_bread", "label": "Garlic Bread", "price": 3, "desc": "Warm, toasty bread with garlic butter baked in" }
+  ],
+  "rooms": [
+    { "name": "The Vault", "capacity": "12 to 22 guests", "note": "Private room inside the original bank vault, with screen and sound." },
+    { "name": "Main dining room", "capacity": "Larger parties", "note": "Arranged with the events desk." },
+    { "name": "Full restaurant", "capacity": "Buyout for up to 100", "note": "By arrangement." }
+  ],
+  "faq": [
+    {
+      "q": "Do my guests choose their own entrée?",
+      "a": "Yes. Each guest chooses their own main course from the options on your menu."
+    },
+    {
+      "q": "How does a hosted event work?",
+      "a": "It is prix-fixe and fully served. You choose a per-guest menu, we assign a coordinator, and setup, service and timing are handled for you. Send the estimate form or call, and we reply with availability and a written proposal."
+    },
+    {
+      "q": "Can you accommodate dietary needs?",
+      "a": "Yes. Every menu has a vegetarian main course, and gluten-free and other needs are handled on request. Note them in the estimate form or tell your coordinator."
+    },
+    {
+      "q": "How many guests can you host?",
+      "a": "The Vault, our restored 1920s bank-vault room, seats 12 to 22. Larger parties take the main dining room, up to a full-restaurant buyout for 100."
+    },
+    {
+      "q": "What is the difference between an event menu and catering?",
+      "a": "Event menus are served at the restaurant, in The Vault or the dining room. Catering is family-style trays delivered to your office or venue, ordered from the Catering trays view of this page or through ezCater."
+    }
+  ]
+}
