@@ -38,8 +38,9 @@
     "image": "/vault-red.jpg"
   },
   "/holiday-parties": {
-    "title": "Holiday Party Packages | Andiamo in Banca",
-    "description": "Book your holiday party at Andiamo in Banca. Corporate holiday dinners with an award-winning wine list, team celebrations, and private events in The Vault. South San Francisco."
+    "title": "Holiday Parties for 12 to 100 Guests | Andiamo in Banca",
+    "description": "Holiday parties in a restored 1920s bank in South San Francisco. The Vault seats 12 to 22, the dining room takes up to 100 with no buyout, or close the whole restaurant. Dinner menus at $65, $80 and $120 per guest.",
+    "image": "/dining-room.jpg"
   },
   "/rehearsal-dinners": {
     "title": "Rehearsal Dinners | Andiamo in Banca",
