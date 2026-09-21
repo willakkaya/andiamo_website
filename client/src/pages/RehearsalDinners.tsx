@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import { motion } from "framer-motion";
 import PageLayout from "@/components/PageLayout";
 import { IMAGES, LINKS } from "@/lib/images";
-import { Check, ArrowRight, Star, Heart } from "lucide-react";
+import {Check, ArrowRight, Heart } from "lucide-react";
 import EmailCapture from "@/components/EmailCapture";
 import { trackPhoneClick, trackEventMenusClick } from "@/lib/analytics";
 import EventMenuRates from "@/components/event-menus/EventMenuRates";
@@ -37,7 +37,7 @@ export default function RehearsalDinners() {
           <h1 className="font-display text-4xl md:text-6xl lg:text-7xl text-cream mb-5">
             Rehearsal Dinners
           </h1>
-          <p className="font-accent text-cream/50 text-lg max-w-lg mx-auto leading-relaxed">
+          <p className="font-accent text-cream/60 text-lg max-w-lg mx-auto leading-relaxed">
             Begin your celebration in a setting as special as the occasion — inside
             a restored bank vault with the warmth of Italian hospitality.
           </p>
@@ -115,7 +115,7 @@ export default function RehearsalDinners() {
             <h2 className="font-display text-3xl md:text-4xl text-cream mb-4">
               Rehearsal Dinner Menus
             </h2>
-            <p className="font-accent text-cream/45 text-base max-w-xl mx-auto">
+            <p className="font-accent text-cream/60 text-base max-w-xl mx-auto">
               Choose from our curated prix fixe menus or work with our chef
               to create something completely custom for your evening.
             </p>
@@ -137,7 +137,7 @@ export default function RehearsalDinners() {
                 className={`p-8 md:p-10 text-center ${tier.featured ? "bg-espresso ring-1 ring-gold/30" : "bg-espresso"}`}
               >
                 {tier.featured && (
-                  <p className="font-body text-[10px] tracking-[0.25em] uppercase text-gold mb-3">Most Popular</p>
+                  <p className="font-body text-[11px] tracking-[0.25em] uppercase text-gold mb-3">Most Popular</p>
                 )}
                 <Link
                   href={tierHref(tier.tier)}
@@ -147,8 +147,8 @@ export default function RehearsalDinners() {
                 >
                   {tier.price}
                 </Link>
-                <span className="font-accent text-cream/40 text-sm block mt-1">{tier.label}</span>
-                <p className="font-accent text-cream/50 text-sm mt-4 leading-relaxed">{tier.desc}</p>
+                <span className="font-accent text-cream/60 text-sm block mt-1">{tier.label}</span>
+                <p className="font-accent text-cream/60 text-sm mt-4 leading-relaxed">{tier.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -161,30 +161,10 @@ export default function RehearsalDinners() {
               Estimate your event
               <ArrowRight size={14} />
             </Link>
-            <p className="font-accent text-cream/30 text-xs mt-4">
+            <p className="font-accent text-cream/60 text-xs mt-4">
               See your estimated total before reaching out
             </p>
           </div>
-        </div>
-      </section>
-
-      {/* Testimonial */}
-      <section className="section-cream">
-        <div className="max-w-3xl mx-auto px-6 py-20 md:py-24 text-center">
-          <div className="divider-diamond mb-8"><i /></div>
-          <div className="flex justify-center gap-1 mb-6">
-            {[...Array(5)].map((_, i) => (
-              <Star key={i} size={16} className="text-gold fill-gold" />
-            ))}
-          </div>
-          <p className="font-accent text-charcoal/70 text-lg md:text-xl leading-relaxed italic mb-6 max-w-2xl mx-auto">
-            "The Vault was the perfect setting for our rehearsal dinner. Our families felt like
-            they were dining somewhere truly special. The food was incredible and the staff
-            made everything seamless."
-          </p>
-          <p className="font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/40">
-            Rehearsal Dinner Host
-          </p>
         </div>
       </section>
 
@@ -197,7 +177,7 @@ export default function RehearsalDinners() {
           <h2 className="font-display text-3xl md:text-4xl text-cream mb-4">
             Let's Plan Your Evening
           </h2>
-          <p className="font-accent text-cream/45 text-base mb-8 leading-relaxed">
+          <p className="font-accent text-cream/60 text-base mb-8 leading-relaxed">
             Popular dates book months in advance. Reach out today and our
             events team will help you create the perfect rehearsal dinner.
           </p>

@@ -77,7 +77,7 @@ export default function HolidayParties() {
           <h1 className="font-display text-4xl md:text-6xl lg:text-7xl text-cream mb-5">
             Holiday Parties
           </h1>
-          <p className="font-accent text-cream/50 text-lg max-w-lg mx-auto leading-relaxed">
+          <p className="font-accent text-cream/60 text-lg max-w-lg mx-auto leading-relaxed">
             Give your team or clients the gift of an unforgettable evening
             inside South San Francisco's most iconic restaurant.
           </p>
@@ -126,7 +126,7 @@ export default function HolidayParties() {
               >
                 <feat.icon size={24} className="text-gold mx-auto mb-3 stroke-[1.5]" />
                 <h3 className="font-display text-base text-charcoal mb-1">{feat.label}</h3>
-                <p className="font-accent text-charcoal/50 text-sm">{feat.sub}</p>
+                <p className="font-accent text-charcoal/60 text-sm">{feat.sub}</p>
               </motion.div>
             ))}
           </div>
@@ -139,7 +139,7 @@ export default function HolidayParties() {
           <div className="text-center mb-16">
             <div className="divider-diamond mb-8 opacity-60"><i /></div>
             <h2 className="font-display text-3xl md:text-4xl text-cream mb-4">Holiday Packages</h2>
-            <p className="font-accent text-cream/45 text-base max-w-xl mx-auto">
+            <p className="font-accent text-cream/60 text-base max-w-xl mx-auto">
               Three tiers to match every budget. All include dedicated event coordination and customizable options.
             </p>
           </div>
@@ -156,12 +156,12 @@ export default function HolidayParties() {
                 className={`p-8 md:p-10 ${pkg.featured ? "bg-espresso ring-1 ring-gold/30" : "bg-espresso"}`}
               >
                 {pkg.featured && (
-                  <p className="font-body text-[10px] tracking-[0.25em] uppercase text-gold mb-4">Most Popular</p>
+                  <p className="font-body text-[11px] tracking-[0.25em] uppercase text-gold mb-4">Most Popular</p>
                 )}
                 <h3 className="font-display text-xl text-cream mb-2">{pkg.name}</h3>
                 <div className="mb-6">
                   <span className="font-display text-3xl text-gold">{pkg.price}</span>
-                  <span className="font-accent text-cream/40 text-sm ml-2">{pkg.per}</span>
+                  <span className="font-accent text-cream/60 text-sm ml-2">{pkg.per}</span>
                 </div>
                 <ul className="space-y-3 mb-8">
                   {pkg.highlights.map((item) => (
@@ -204,12 +204,12 @@ export default function HolidayParties() {
             ))}
           </div>
           <p className="font-accent text-charcoal/70 text-lg md:text-xl leading-relaxed italic mb-6 max-w-2xl mx-auto">
-            "We hosted a corporate dinner in The Vault and it was perfect. The staff was
-            attentive, the food was exceptional, and our clients were thoroughly impressed.
-            The historic bank setting is unlike anything else on the Peninsula."
+            "We hosted a corporate dinner in The Vault and it was perfect. Attentive staff,
+            exceptional food, and clients who were genuinely impressed. The historic bank
+            setting is unlike anything else on the Peninsula."
           </p>
-          <p className="font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/40">
-            Corporate Client — Holiday Dinner
+          <p className="font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60">
+            Via Yelp
           </p>
         </div>
       </section>
@@ -223,7 +223,7 @@ export default function HolidayParties() {
           <h2 className="font-display text-3xl md:text-4xl text-cream mb-4">
             Dates Fill Up Fast
           </h2>
-          <p className="font-accent text-cream/45 text-base mb-8 leading-relaxed">
+          <p className="font-accent text-cream/60 text-base mb-8 leading-relaxed">
             Holiday season is our busiest time. Contact us today to reserve your
             preferred date before it's gone.
           </p>

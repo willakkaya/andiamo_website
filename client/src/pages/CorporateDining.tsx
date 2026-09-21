@@ -69,7 +69,7 @@ export default function CorporateDining() {
   };
 
   const inputClass =
-    "w-full bg-transparent border-b border-charcoal/15 px-0 py-3 text-charcoal font-accent text-sm tracking-wide focus:border-gold/50 focus:outline-none transition-colors placeholder:text-charcoal/25";
+    "w-full bg-transparent border-b border-charcoal/15 px-0 py-3 text-charcoal font-accent text-sm tracking-wide focus:border-gold/50 focus:outline-none transition-colors placeholder:text-charcoal/60";
   const selectClass = inputClass + " appearance-none";
 
   return (
@@ -175,7 +175,7 @@ export default function CorporateDining() {
             <p className="font-accent italic text-cream/75 text-xl md:text-2xl max-w-2xl leading-relaxed">
               &ldquo;The historic bank setting is unlike anything else on the Peninsula.&rdquo;
             </p>
-            <p className="eyebrow !text-cream/45 mt-4">A corporate host, in The Vault</p>
+            <p className="eyebrow !text-cream/70 mt-4">Via Yelp, after a corporate dinner in The Vault</p>
           </div>
         </div>
       </section>
@@ -325,28 +325,28 @@ export default function CorporateDining() {
               <form onSubmit={handleSubmit} className="space-y-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6">
                   <div>
-                    <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Name *</label>
-                    <input type="text" required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className={inputClass} placeholder="Your name" />
+                    <label htmlFor="corp-name" className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Name *</label>
+                    <input id="corp-name" type="text" required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className={inputClass} placeholder="Your name" />
                   </div>
                   <div>
-                    <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Company</label>
-                    <input type="text" value={formData.company} onChange={(e) => setFormData({ ...formData, company: e.target.value })} className={inputClass} placeholder="Company name" />
+                    <label htmlFor="corp-company" className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Company</label>
+                    <input id="corp-company" type="text" value={formData.company} onChange={(e) => setFormData({ ...formData, company: e.target.value })} className={inputClass} placeholder="Company name" />
                   </div>
                   <div>
-                    <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Email *</label>
-                    <input type="email" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className={inputClass} placeholder="your@company.com" />
+                    <label htmlFor="corp-email" className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Email *</label>
+                    <input id="corp-email" type="email" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className={inputClass} placeholder="your@company.com" />
                   </div>
                   <div>
-                    <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Phone</label>
-                    <input type="tel" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className={inputClass} placeholder="(555) 123-4567" />
+                    <label htmlFor="corp-phone" className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Phone</label>
+                    <input id="corp-phone" type="tel" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className={inputClass} placeholder="(555) 123-4567" />
                   </div>
                   <div>
-                    <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Preferred date</label>
-                    <input type="date" value={formData.eventDate} onChange={(e) => setFormData({ ...formData, eventDate: e.target.value })} className={inputClass} />
+                    <label htmlFor="corp-preferred-date" className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Preferred date</label>
+                    <input id="corp-preferred-date" type="date" value={formData.eventDate} onChange={(e) => setFormData({ ...formData, eventDate: e.target.value })} className={inputClass} />
                   </div>
                   <div>
-                    <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Guests</label>
-                    <select value={formData.guestCount} onChange={(e) => setFormData({ ...formData, guestCount: e.target.value })} className={selectClass}>
+                    <label htmlFor="corp-guests" className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Guests</label>
+                    <select id="corp-guests" value={formData.guestCount} onChange={(e) => setFormData({ ...formData, guestCount: e.target.value })} className={selectClass}>
                       <option value="">Select</option>
                       <option value="10">6–10 guests</option>
                       <option value="20">11–20 guests</option>
@@ -357,8 +357,8 @@ export default function CorporateDining() {
                   </div>
                 </div>
                 <div>
-                  <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Occasion</label>
-                  <select value={formData.eventType} onChange={(e) => setFormData({ ...formData, eventType: e.target.value })} className={selectClass}>
+                  <label htmlFor="corp-occasion" className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Occasion</label>
+                  <select id="corp-occasion" value={formData.eventType} onChange={(e) => setFormData({ ...formData, eventType: e.target.value })} className={selectClass}>
                     <option value="">Select</option>
                     <option value="client-dinner">Client dinner</option>
                     <option value="board-meeting">Board / partner dinner</option>
@@ -371,8 +371,8 @@ export default function CorporateDining() {
                   </select>
                 </div>
                 <div>
-                  <label className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Anything we should know</label>
-                  <textarea rows={4} value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} className="w-full bg-transparent border border-charcoal/20 px-4 py-3 text-charcoal font-accent text-sm tracking-wide focus:border-gold/50 focus:outline-none transition-colors resize-none placeholder:text-charcoal/25" placeholder="Dietary needs, A/V, a budget in mind, the feeling you're after…" />
+                  <label htmlFor="corp-anything-we-should-know" className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Anything we should know</label>
+                  <textarea id="corp-anything-we-should-know" rows={4} value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} className="w-full bg-transparent border border-charcoal/20 px-4 py-3 text-charcoal font-accent text-sm tracking-wide focus:border-gold/50 focus:outline-none transition-colors resize-none placeholder:text-charcoal/60" placeholder="Dietary needs, A/V, a budget in mind, the feeling you're after…" />
                 </div>
                 <button type="submit" disabled={submitting} className="w-full flex items-center justify-center gap-2 px-8 py-4 bg-charcoal text-white font-body text-[12px] tracking-[0.2em] uppercase hover:bg-espresso transition-all duration-500 disabled:opacity-50">
                   {submitting ? "Sending…" : "Send inquiry"}
