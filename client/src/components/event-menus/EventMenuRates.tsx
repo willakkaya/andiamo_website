@@ -45,7 +45,7 @@ const FOCUS = "focus-visible:outline focus-visible:outline-2 focus-visible:outli
 const LABEL = "font-body text-[11px] font-medium uppercase tracking-[0.2em]";
 
 const FOOTNOTES = [
-  "Per guest, before tax and gratuity. Wine pairings ($30, $75 or $150 per guest), soft drinks ($5) and coffee service ($8) are optional additions, listed below.",
+  "Per guest. A 20% gratuity and sales tax are added to the final bill. Wine pairings ($30, $75 or $150 per guest) and soft drinks ($5) are optional additions, listed below; the $120 menu includes the espresso bar.",
   "The Vault seats 12 to 22, privately. Parties of 23 to 100 take the main dining room, no buyout required. A full-restaurant buyout is available.",
   "Every menu has a vegetarian main course. Gluten-free and other needs on request.",
 ];

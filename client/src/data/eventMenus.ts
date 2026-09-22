@@ -64,6 +64,13 @@ export interface Faq {
   q: string;
   a: string;
 }
+export interface Terms {
+  gratuity: string;
+  tax: string;
+  deposit: string;
+  headcount: string;
+  ordering: string;
+}
 
 // JSON imports widen literals to string, hence the casts.
 export const TIERS = data.tiers as Tier[]; // order: lunch35, dinner65, dinner80, dinner120
@@ -74,6 +81,7 @@ export const HORS_DOEUVRES: HorsDoeuvre[] = data.horsDoeuvres;
 export const ROOMS: Room[] = data.rooms;
 export const FAQ: Faq[] = data.faq; // drives both the visible <dl> and the JSON-LD
 export const AS_OF: string = data.asOf;
+export const TERMS: Terms = data.terms; // booking terms, confirmed by the owner 2026-09-22
 
 export const SERVICE_TEXT: Record<ServiceRule, string> = {
   all: "served to every guest",

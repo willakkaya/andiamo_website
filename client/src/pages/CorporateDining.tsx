@@ -40,7 +40,7 @@ const OCCASIONS = [
 const WAYS = [
   { title: "The business lunch", href: tierHref("lunch35"), note: "from $35 / guest", desc: "An efficient, elegant weekday lunch. Three courses, and you're back in your meeting in forty-five minutes if you need to be." },
   { title: "The client dinner", href: tierHref("dinner65"), note: "from $65 / guest", desc: "A multi-course dinner in the main room or The Vault. Scales gracefully from a four-top to a table of thirty." },
-  { title: "The Vault, exclusively", href: "/the-vault", note: "from $80 / guest", desc: "The restored bank vault, yours alone: twelve to twenty-two guests, a dedicated captain, and a menu built with the chef." },
+  { title: "The Vault, exclusively", href: "/the-vault", note: "any menu, from $35 / guest", desc: "The restored bank vault, yours alone: twelve to twenty-two guests, a dedicated captain, and a menu built with the chef." },
   { title: "The whole restaurant", href: undefined as string | undefined, note: "by arrangement", desc: "A full buyout for launches, holidays, and large gatherings. The room, the menu, and the evening, shaped around you." },
 ];
 
