@@ -23,6 +23,25 @@ const pageMeta = JSON.parse(
 );
 const template = readFileSync(resolve(DIST, "index.html"), "utf8");
 
+// Drift guard: the planner PDF is generated from eventMenus.json. If the data
+// changed and the PDF was not regenerated, fail the build while the PDF is
+// published, otherwise only warn. Regenerate with `pnpm pdf:event-menus`.
+import { createHash } from "node:crypto";
+import { existsSync } from "node:fs";
+{
+  const menus = JSON.parse(readFileSync(resolve(ROOT, "client/src/data/eventMenus.json"), "utf8"));
+  const { pdf, ...hashable } = menus;
+  const want = createHash("sha256").update(JSON.stringify(hashable)).digest("hex").slice(0, 16);
+  const metaPath = resolve(ROOT, "client/public/andiamo-event-menus.meta.json");
+  const have = existsSync(metaPath) ? JSON.parse(readFileSync(metaPath, "utf8")).dataHash : null;
+  if (have !== want) {
+    const msg = `event menus PDF is stale (data ${want}, pdf ${have}): run "pnpm pdf:event-menus" and commit the PDF`;
+    if (pdf?.published) throw new Error(msg);
+    console.warn("prerender: " + msg);
+  }
+}
+
+
 const esc = (s) =>
   s
     .replace(/&/g, "&amp;")
