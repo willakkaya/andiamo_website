@@ -67,6 +67,12 @@ export default function EventQuoteCalculator({
 
   const grandTotal = menuTotal + wineTotal + enhancementTotal + horsTotal;
   const perPerson = guestCount > 0 ? grandTotal / guestCount : 0;
+  // What the bill comes to: 20% gratuity and South San Francisco sales tax on top of the subtotal.
+  // Kept out of `grandTotal`, which feeds the quote_submit conversion and the Formspree payload.
+  const GRATUITY = 0.2;
+  const SALES_TAX = 0.09875;
+  const allInTotal = grandTotal * (1 + GRATUITY) * (1 + SALES_TAX);
+  const allInPerPerson = guestCount > 0 ? allInTotal / guestCount : 0;
 
   const toggleEnhancement = (key: string) => {
     setSelectedEnhancements((prev) =>
@@ -339,16 +345,23 @@ export default function EventQuoteCalculator({
 
               <div className="border-t border-cream/15 pt-4 mb-2">
                 <div className="flex justify-between items-baseline">
-                  <span className="font-display text-lg text-cream">Estimated Total</span>
+                  <span className="font-display text-lg text-cream">Subtotal</span>
                   <span className="font-display text-2xl text-gold">${grandTotal.toLocaleString()}</span>
                 </div>
                 <p className="font-accent text-cream/60 text-xs mt-1 text-right">
-                  ${perPerson.toFixed(0)} per person
+                  ${perPerson.toFixed(0)} per guest
+                </p>
+                <div className="flex justify-between items-baseline mt-4 pt-3 border-t border-cream/10">
+                  <span className="font-display text-lg text-cream">With 20% gratuity and tax</span>
+                  <span className="font-display text-2xl text-gold">${Math.round(allInTotal).toLocaleString()}</span>
+                </div>
+                <p className="font-accent text-cream/60 text-xs mt-1 text-right">
+                  about ${allInPerPerson.toFixed(0)} per guest, all in
                 </p>
               </div>
 
               <p className="font-accent text-cream/60 text-[11px] mt-4 leading-relaxed italic">
-                Estimate only. Tax and gratuity not included. Final pricing confirmed by our events team.
+                Estimate only. No deposit to hold a date; final headcount is due 24 hours before. Final pricing confirmed by the events desk.
               </p>
 
               <button
