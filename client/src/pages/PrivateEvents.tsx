@@ -7,6 +7,7 @@ import { Link } from "wouter";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import { trackPhoneClick, trackEventMenusClick } from "@/lib/analytics";
 import EventMenuRates from "@/components/event-menus/EventMenuRates";
+import TextLink from "@/components/TextLink";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 22 },
@@ -232,6 +233,9 @@ export default function PrivateEvents() {
           >
             (650) 745-8811
           </a>
+          <p className="mt-3 font-accent text-lg text-cream/75">
+            or <TextLink location="private-events" className="link-line text-cream" label="text" />
+          </p>
           <div className="mt-10 flex flex-wrap justify-center gap-x-8 gap-y-3">
             <Link href="/the-vault" className="link-line font-body text-[12px] tracking-[0.2em] uppercase text-gold-light">Tour The Vault</Link>
             <Link href="/banquet-catering" className="link-line font-body text-[12px] tracking-[0.2em] uppercase text-gold-light">Event menus &amp; pricing</Link>

@@ -47,6 +47,12 @@ export const trackPhoneClick = (location: string) =>
     event_label: location,
   });
 
+export const trackTextClick = (location: string) =>
+  trackEvent("text_click", {
+    event_category: "lead",
+    event_label: location,
+  });
+
 export const trackReservationClick = (location: string) =>
   trackEvent("reservation_click", {
     event_category: "engagement",

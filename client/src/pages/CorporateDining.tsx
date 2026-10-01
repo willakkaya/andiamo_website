@@ -11,6 +11,7 @@ import EventQuoteCalculator from "@/components/EventQuoteCalculator";
 import { Link } from "wouter";
 import EventMenuRates from "@/components/event-menus/EventMenuRates";
 import { tierHref } from "@/data/eventMenus";
+import TextLink from "@/components/TextLink";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 22 },
@@ -380,7 +381,8 @@ export default function CorporateDining() {
                   <a href="tel:+16507458811" onClick={() => trackPhoneClick("corporate-inquiry")} className="text-gold hover:text-gold-light transition-colors">
                     (650) 745-8811
                   </a>
-                  , Tuesday through Sunday.
+                  , Tuesday through Sunday, or{" "}
+                  <TextLink location="corporate-inquiry" className="text-gold hover:text-gold-light transition-colors" label="text" />.
                 </p>
               </form>
             )}

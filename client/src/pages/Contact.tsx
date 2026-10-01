@@ -8,6 +8,7 @@ import { Link } from "wouter";
 import { submitForm } from "@/lib/formspree";
 import { trackContactSubmit, trackPhoneClick, trackReservationClick, trackEventMenusClick } from "@/lib/analytics";
 import { toast } from "sonner";
+import TextLink from "@/components/TextLink";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -243,6 +244,7 @@ export default function Contact() {
                   >
                     {LINKS.phone}
                   </a>
+                  <TextLink location="contact-page" className="block font-accent text-lg text-charcoal hover:text-gold transition-colors" label="Or text" />
                   <a
                     href={`mailto:${LINKS.email}`}
                     className="flex items-center gap-3 font-accent text-charcoal/60 hover:text-gold transition-colors"

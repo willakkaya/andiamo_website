@@ -1,7 +1,7 @@
 import { Link } from "wouter";
-import { MapPin, Phone, Mail, Clock, Instagram, ExternalLink } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Instagram, ExternalLink, MessageSquare } from "lucide-react";
 import { IMAGES, LINKS } from "@/lib/images";
-import { trackPhoneClick, trackPlannerPdf } from "@/lib/analytics";
+import { trackPhoneClick, trackPlannerPdf, trackTextClick } from "@/lib/analytics";
 import { PLANNER_PDF } from "@/data/eventMenus";
 
 export default function Footer() {
@@ -119,6 +119,10 @@ export default function Footer() {
                 <a href="tel:+16507458811" onClick={() => trackPhoneClick("footer")} className="flex items-center gap-3 text-cream/65 hover:text-cream/80 transition-colors">
                   <Phone size={15} className="text-gold/50 shrink-0" />
                   <span className="font-accent tracking-wide">{LINKS.phone}</span>
+                </a>
+                <a href={LINKS.textHref} onClick={() => trackTextClick("footer")} className="flex items-center gap-3 text-cream/65 hover:text-cream/80 transition-colors">
+                  <MessageSquare size={15} className="text-gold/50 shrink-0" />
+                  <span className="font-accent tracking-wide">Text {LINKS.text}</span>
                 </a>
                 <a href={`mailto:${LINKS.email}`} className="flex items-center gap-3 text-cream/65 hover:text-cream/80 transition-colors">
                   <Mail size={15} className="text-gold/50 shrink-0" />

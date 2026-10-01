@@ -7,6 +7,7 @@ import { trackPhoneClick, trackEventMenusClick } from "@/lib/analytics";
 import { ADDITIONS } from "@/data/eventMenus";
 import EventMenuRates from "@/components/event-menus/EventMenuRates";
 import InquirySlip from "@/components/event-menus/InquirySlip";
+import TextLink from "@/components/TextLink";
 
 /* Rehearsal dinners. A sibling of the holiday page, not a copy: the lead is the
    Vault's one long table, the rooms sit side by side, and the toasts get their own ledger. */
@@ -214,6 +215,9 @@ export default function RehearsalDinners() {
               <a href="tel:+16507458811" onClick={() => trackPhoneClick("rehearsal-dinners")} className={`link-line ${FOCUS}`}>
                 {LINKS.phone}
               </a>
+            </p>
+            <p className="font-accent text-lg mt-1">
+              <TextLink location="rehearsal-dinners" className={`link-line text-charcoal ${FOCUS}`} />
             </p>
             <p className="font-accent text-lg mt-1">
               <a href={`mailto:${LINKS.email}`} className={`link-line text-charcoal ${FOCUS}`}>{LINKS.email}</a>

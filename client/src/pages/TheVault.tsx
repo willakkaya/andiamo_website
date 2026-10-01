@@ -10,6 +10,7 @@ import { submitForm } from "@/lib/formspree";
 import { trackContactSubmit, trackEventMenusClick } from "@/lib/analytics";
 import EventMenuRates from "@/components/event-menus/EventMenuRates";
 import { tierHref } from "@/data/eventMenus";
+import TextLink from "@/components/TextLink";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -332,6 +333,8 @@ export default function TheVault() {
                   <a href="tel:+16507458811" className="text-gold hover:text-gold-light transition-colors">
                     {LINKS.phone}
                   </a>
+                  {" "}or{" "}
+                  <TextLink location="the-vault" className="text-gold hover:text-gold-light transition-colors" label="text" />
                 </p>
               </form>
             )}

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { submitForm } from "@/lib/formspree";
 import { trackContactSubmit, trackPhoneClick } from "@/lib/analytics";
 import { TIERS } from "@/data/eventMenus";
+import TextLink from "@/components/TextLink";
 
 /* The event inquiry as a bank slip: ruled paper, underline-only fields,
    one block button. The room can be preset by the page ("Hold The Vault"). */
@@ -78,8 +79,8 @@ export default function InquirySlip({
               call{" "}
               <a href="tel:+16507458811" onClick={() => trackPhoneClick(source)} className="link-line text-charcoal lining-nums">
                 (650) 745-8811
-              </a>
-              .
+              </a>{" "}
+              or <TextLink location={source} className="link-line text-charcoal" label="text" />.
             </p>
           </div>
         ) : (

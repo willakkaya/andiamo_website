@@ -47,6 +47,9 @@ export const LINKS = {
   yelp: "https://www.yelp.com/biz/andiamo-in-banca-south-san-francisco-3?osq=andiamo+in+banca",
   instagram: "https://www.instagram.com/andiamoinbanca",
   phone: "(650) 745-8811",
+  // Text line (SMS), added 2026-10-01. Shown as "Text (650) 249-7956" beside the call number.
+  text: "(650) 249-7956",
+  textHref: "sms:+16502497956",
   email: "events@andiamoinbanca.com",
   address: "301 Linden Avenue, South San Francisco, CA 94080",
   addressShort: "301 Linden Ave\nSouth San Francisco, CA 94080",

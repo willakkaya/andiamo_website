@@ -12,6 +12,7 @@ import AdditionsLedger from "@/components/event-menus/AdditionsLedger";
 import CateringView from "@/components/event-menus/CateringView";
 import { TIERS, ROOMS, FAQ, SECTION_IDS, CATERING_HREF, PLANNER_PDF, type MenuTier } from "@/data/eventMenus";
 import { trackPhoneClick, trackTierEstimate, trackPlannerPdf } from "@/lib/analytics";
+import TextLink from "@/components/TextLink";
 
 const FOCUS =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-charcoal";
@@ -77,6 +78,7 @@ function EventsView() {
                 >
                   (650) 745-8811
                 </a>
+                , or <TextLink location="banquet-catering" className={`link-line text-charcoal ${FOCUS}`} label="text" />
               </p>
             </div>
             {/* On a phone the prices come first; these facts repeat in the rate-sheet footnote */}
@@ -100,6 +102,8 @@ function EventsView() {
                   >
                     (650) 745-8811
                   </a>
+                  <span className="mx-2 text-charcoal/40" aria-hidden="true">&middot;</span>
+                  <TextLink location="banquet-catering" className={`link-line ${FOCUS}`} label="text" />
                 </dd>
               </div>
               {PLANNER_PDF.published && (
@@ -187,6 +191,8 @@ function EventsView() {
               >
                 (650) 745-8811
               </a>
+              <br />
+              <TextLink location="banquet-catering" className={`link-line text-xl md:text-2xl ${FOCUS}`} />
               <br />
               <a href={`mailto:${LINKS.email}`} className={`link-line text-xl md:text-2xl ${FOCUS}`}>{LINKS.email}</a>
             </p>

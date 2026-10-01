@@ -6,6 +6,7 @@ import { IMAGES, LINKS } from "@/lib/images";
 import { trackPhoneClick, trackEventMenusClick } from "@/lib/analytics";
 import EventMenuRates from "@/components/event-menus/EventMenuRates";
 import InquirySlip from "@/components/event-menus/InquirySlip";
+import TextLink from "@/components/TextLink";
 
 /* Holiday parties, organised the way a planner thinks: by headcount.
    The hero is a building directory; each room is a band; the inquiry is a bank slip. */
@@ -219,6 +220,9 @@ export default function HolidayParties() {
               <a href="tel:+16507458811" onClick={() => trackPhoneClick("holiday-parties")} className={`link-line ${FOCUS}`}>
                 {LINKS.phone}
               </a>
+            </p>
+            <p className="font-accent text-lg mt-1">
+              <TextLink location="holiday-parties" className={`link-line text-charcoal ${FOCUS}`} />
             </p>
             <p className="font-accent text-lg mt-1">
               <a href={`mailto:${LINKS.email}`} className={`link-line text-charcoal ${FOCUS}`}>{LINKS.email}</a>

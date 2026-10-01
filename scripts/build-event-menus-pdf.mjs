@@ -73,7 +73,7 @@ const page1 = `
   </div>
 
   <footer class="contact">
-    <span>Events desk <b>(650) 745-8811</b></span><span>events@andiamoinbanca.com</span><span>301 Linden Avenue, South San Francisco</span><span>andiamoinbanca.com/event-menus</span>
+    <span>Events desk <b>(650) 745-8811</b></span><span>Text <b>(650) 249-7956</b></span><span>events@andiamoinbanca.com</span><span>301 Linden Avenue, South San Francisco</span><span>andiamoinbanca.com/event-menus</span>
   </footer>
 </section>`;
 
