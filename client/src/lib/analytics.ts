@@ -22,7 +22,7 @@ export function trackEvent(eventName: string, params: EventParams = {}) {
 // Share of quote requests expected to become a booked event. Google Ads reads
 // `value` as what one lead is worth, so it gets quote x this rate, not the full
 // quote. Provisional figure: replace with the restaurant's real booking rate.
-export const QUOTE_CLOSE_RATE = 0.3;
+export const QUOTE_CLOSE_RATE = 0.25;
 
 // High-value conversions — these become "Conversion" events in Google Ads
 export const trackQuoteSubmit = (params: { guestCount: number; menuTier: string; estimatedTotal: number }) =>
