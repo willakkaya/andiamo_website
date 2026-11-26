@@ -2,10 +2,13 @@ import PageLayout from "@/components/PageLayout";
 import { IMAGES, LINKS } from "@/lib/images";
 import { motion } from "framer-motion";
 import { ArrowRight, Check } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import { toast } from "sonner";
-import { submitForm } from "@/lib/formspree";
+import { submitForm, formValues, NO_SCRIPT_POST } from "@/lib/formspree";
+import { useAdoptFormValues, withFound } from "@/hooks/useAdoptFormValues";
+import InquiryFormMeta from "@/components/InquiryFormMeta";
+import { EVENT_INQUIRY_SENT, EVENT_INQUIRY_TOOL, replyToAgent } from "@/lib/agentTools";
 import { trackContactSubmit, trackPhoneClick, trackEventMenusClick } from "@/lib/analytics";
 import EventQuoteCalculator from "@/components/EventQuoteCalculator";
 import { Link } from "wouter";
@@ -55,10 +58,17 @@ export default function CorporateDining() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const formRef = useRef<HTMLFormElement>(null);
+  useAdoptFormValues(formRef, (found) => {
+    setFormData((prev) => withFound(prev, found));
+  });
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
-    const ok = await submitForm({ ...formData, _subject: "Corporate Dining Inquiry", source: "corporate-dining" });
+    const sending = submitForm({ ...formData, ...formValues(e.currentTarget), _subject: "Corporate Dining Inquiry", source: "corporate-dining" });
+    replyToAgent(e, sending, EVENT_INQUIRY_SENT);
+    const ok = await sending;
     if (ok) {
       setSubmitted(true);
       trackContactSubmit("corporate-dining");
@@ -320,31 +330,32 @@ export default function CorporateDining() {
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-8">
+              <form ref={formRef} {...NO_SCRIPT_POST} {...EVENT_INQUIRY_TOOL} onSubmit={handleSubmit} className="space-y-8">
+                <InquiryFormMeta subject={"Corporate Dining Inquiry"} source={"corporate-dining"} />
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6">
                   <div>
                     <label htmlFor="corp-name" className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Name *</label>
-                    <input id="corp-name" type="text" required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className={inputClass} placeholder="Your name" />
+                    <input id="corp-name" type="text" required name="name" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className={inputClass} placeholder="Your name" />
                   </div>
                   <div>
                     <label htmlFor="corp-company" className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Company</label>
-                    <input id="corp-company" type="text" value={formData.company} onChange={(e) => setFormData({ ...formData, company: e.target.value })} className={inputClass} placeholder="Company name" />
+                    <input id="corp-company" type="text" name="company" value={formData.company} onChange={(e) => setFormData({ ...formData, company: e.target.value })} className={inputClass} placeholder="Company name" />
                   </div>
                   <div>
                     <label htmlFor="corp-email" className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Email *</label>
-                    <input id="corp-email" type="email" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className={inputClass} placeholder="your@company.com" />
+                    <input id="corp-email" type="email" required name="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className={inputClass} placeholder="your@company.com" />
                   </div>
                   <div>
                     <label htmlFor="corp-phone" className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Phone</label>
-                    <input id="corp-phone" type="tel" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className={inputClass} placeholder="(555) 123-4567" />
+                    <input id="corp-phone" type="tel" name="phone" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className={inputClass} placeholder="(555) 123-4567" />
                   </div>
                   <div>
                     <label htmlFor="corp-preferred-date" className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Preferred date</label>
-                    <input id="corp-preferred-date" type="date" value={formData.eventDate} onChange={(e) => setFormData({ ...formData, eventDate: e.target.value })} className={inputClass} />
+                    <input id="corp-preferred-date" type="date" name="eventDate" value={formData.eventDate} onChange={(e) => setFormData({ ...formData, eventDate: e.target.value })} className={inputClass} />
                   </div>
                   <div>
                     <label htmlFor="corp-guests" className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Guests</label>
-                    <select id="corp-guests" value={formData.guestCount} onChange={(e) => setFormData({ ...formData, guestCount: e.target.value })} className={selectClass}>
+                    <select id="corp-guests" name="guestCount" value={formData.guestCount} onChange={(e) => setFormData({ ...formData, guestCount: e.target.value })} className={selectClass}>
                       <option value="">Select</option>
                       <option value="10">6–10 guests</option>
                       <option value="20">11–20 guests</option>
@@ -356,7 +367,7 @@ export default function CorporateDining() {
                 </div>
                 <div>
                   <label htmlFor="corp-occasion" className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Occasion</label>
-                  <select id="corp-occasion" value={formData.eventType} onChange={(e) => setFormData({ ...formData, eventType: e.target.value })} className={selectClass}>
+                  <select id="corp-occasion" name="eventType" value={formData.eventType} onChange={(e) => setFormData({ ...formData, eventType: e.target.value })} className={selectClass}>
                     <option value="">Select</option>
                     <option value="client-dinner">Client dinner</option>
                     <option value="board-meeting">Board / partner dinner</option>
@@ -370,7 +381,7 @@ export default function CorporateDining() {
                 </div>
                 <div>
                   <label htmlFor="corp-anything-we-should-know" className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Anything we should know</label>
-                  <textarea id="corp-anything-we-should-know" rows={4} value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} className="w-full bg-transparent border border-charcoal/20 px-4 py-3 text-charcoal font-accent text-sm tracking-wide focus:border-gold/50 focus:outline-none transition-colors resize-none placeholder:text-charcoal/60" placeholder="Dietary needs, A/V, a budget in mind, the feeling you're after…" />
+                  <textarea id="corp-anything-we-should-know" rows={4} name="message" value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} className="w-full bg-transparent border border-charcoal/20 px-4 py-3 text-charcoal font-accent text-sm tracking-wide focus:border-gold/50 focus:outline-none transition-colors resize-none placeholder:text-charcoal/60" placeholder="Dietary needs, A/V, a budget in mind, the feeling you're after…" />
                 </div>
                 <button type="submit" disabled={submitting} className="w-full flex items-center justify-center gap-2 px-8 py-4 bg-charcoal text-white font-body text-[12px] tracking-[0.2em] uppercase hover:bg-espresso transition-all duration-500 disabled:opacity-50">
                   {submitting ? "Sending…" : "Send inquiry"}

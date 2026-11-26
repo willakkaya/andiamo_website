@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import PageLayout from "@/components/PageLayout";
 import { IMAGES, LINKS } from "@/lib/images";
 import { motion } from "framer-motion";
 import { MapPin, Phone, Mail, Clock, Instagram, Car, Train, ArrowRight, Check } from "lucide-react";
 import { Link } from "wouter";
-import { submitForm } from "@/lib/formspree";
+import { submitForm, formValues, NO_SCRIPT_POST } from "@/lib/formspree";
+import { useAdoptFormValues, withFound } from "@/hooks/useAdoptFormValues";
+import InquiryFormMeta from "@/components/InquiryFormMeta";
+import { CONTACT_SENT, CONTACT_TOOL, replyToAgent } from "@/lib/agentTools";
 import { trackContactSubmit, trackPhoneClick, trackReservationClick, trackEventMenusClick } from "@/lib/analytics";
 import { toast } from "sonner";
 import TextLink from "@/components/TextLink";
@@ -24,10 +27,17 @@ function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const formRef = useRef<HTMLFormElement>(null);
+  useAdoptFormValues(formRef, (found) => {
+    setFormData((prev) => withFound(prev, found));
+  });
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
-    const ok = await submitForm({ ...formData, _subject: "Website Inquiry", source: "contact" });
+    const sending = submitForm({ ...formData, ...formValues(e.currentTarget), _subject: "Website Inquiry", source: "contact" });
+    replyToAgent(e, sending, CONTACT_SENT);
+    const ok = await sending;
     if (ok) {
       setSubmitted(true);
       trackContactSubmit("contact-page");
@@ -71,14 +81,15 @@ function ContactForm() {
               </p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-8">
+            <form ref={formRef} {...NO_SCRIPT_POST} {...CONTACT_TOOL} onSubmit={handleSubmit} className="space-y-8">
+              <InquiryFormMeta subject={"Website Inquiry"} source={"contact"} />
               <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6">
                 <div>
                   <label htmlFor="contact-name" className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Name *</label>
                   <input id="contact-name"
                     type="text"
                     required
-                    value={formData.name}
+                    name="name" value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     className={inputClass}
                     placeholder="Your name"
@@ -89,7 +100,7 @@ function ContactForm() {
                   <input id="contact-email"
                     type="email"
                     required
-                    value={formData.email}
+                    name="email" value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     className={inputClass}
                     placeholder="your@email.com"
@@ -100,7 +111,7 @@ function ContactForm() {
                 <label htmlFor="contact-phone" className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Phone</label>
                 <input id="contact-phone"
                   type="tel"
-                  value={formData.phone}
+                  name="phone" value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   className={inputClass}
                   placeholder="(555) 123-4567"
@@ -109,7 +120,7 @@ function ContactForm() {
               <div>
                 <label htmlFor="contact-preferred-time" className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/60 mb-1">Preferred Time</label>
                 <select id="contact-preferred-time"
-                  value={formData.eventTime}
+                  name="eventTime" value={formData.eventTime}
                   onChange={(e) => setFormData({ ...formData, eventTime: e.target.value })}
                   className="w-full bg-transparent border-b border-charcoal/15 px-0 py-3 text-charcoal font-accent text-sm tracking-wide focus:border-gold/50 focus:outline-none transition-colors"
                 >
@@ -137,7 +148,7 @@ function ContactForm() {
                 <textarea id="contact-message"
                   rows={4}
                   required
-                  value={formData.message}
+                  name="message" value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   className="w-full bg-transparent border border-charcoal/20 px-4 py-3 text-charcoal font-accent text-sm tracking-wide focus:border-gold/50 focus:outline-none transition-colors resize-none placeholder:text-charcoal/60"
                   placeholder="How can we help?"

@@ -1,9 +1,10 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Users, Wine, ChevronDown, ChevronUp, ArrowRight, Check } from "lucide-react";
-import { submitForm } from "@/lib/formspree";
+import { submitForm, formValues } from "@/lib/formspree";
 import { trackQuoteSubmit } from "@/lib/analytics";
 import { toast } from "sonner";
+import { useToday } from "@/hooks/useToday";
 import {
   TIERS,
   WINE_PAIRINGS as WINE_PAIRING_DATA,
@@ -41,6 +42,7 @@ export default function EventQuoteCalculator({
   const [showDetails, setShowDetails] = useState(false);
   const [showInquiry, setShowInquiry] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "", phone: "", eventDate: "", eventTime: "", message: "" });
+  const today = useToday();
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const inquiryRef = useRef<HTMLDivElement>(null);
@@ -86,15 +88,17 @@ export default function EventQuoteCalculator({
     );
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
+    const filled = formValues(e.currentTarget);
     const quoteDetails = {
       ...formData,
+      ...filled,
       _subject: `Event Quote — ${guestCount} guests, ${tier.label}`,
       source: "quote-calculator",
       guestCount: String(guestCount),
-      eventTime: formData.eventTime || "Not specified",
+      eventTime: (filled.eventTime ?? formData.eventTime) || "Not specified",
       menuTier: tier.label,
       winePairing: wine.label,
       enhancements: selectedEnhancements.join(", "),
@@ -405,7 +409,7 @@ export default function EventQuoteCalculator({
                     <input
                       type="text"
                       required
-                      value={formData.name}
+                      name="name" value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       aria-label="Your name" placeholder="Your name *"
                       className="w-full bg-transparent border border-cream/15 px-4 py-3 text-cream font-accent text-sm placeholder:text-cream/60 focus:border-gold/40 focus:outline-none transition-all"
@@ -413,14 +417,14 @@ export default function EventQuoteCalculator({
                     <input
                       type="email"
                       required
-                      value={formData.email}
+                      name="email" value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       aria-label="Email" placeholder="Email *"
                       className="w-full bg-transparent border border-cream/15 px-4 py-3 text-cream font-accent text-sm placeholder:text-cream/60 focus:border-gold/40 focus:outline-none transition-all"
                     />
                     <input
                       type="tel"
-                      value={formData.phone}
+                      name="phone" value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       aria-label="Phone" placeholder="Phone"
                       className="w-full bg-transparent border border-cream/15 px-4 py-3 text-cream font-accent text-sm placeholder:text-cream/60 focus:border-gold/40 focus:outline-none transition-all"
@@ -433,8 +437,8 @@ export default function EventQuoteCalculator({
                         id="eventDate"
                         type="date"
                         required
-                        min={new Date().toISOString().split("T")[0]}
-                        value={formData.eventDate}
+                        min={today}
+                        name="eventDate" value={formData.eventDate}
                         onChange={(e) => setFormData({ ...formData, eventDate: e.target.value })}
                         className="w-full bg-transparent border border-cream/15 px-4 py-3 text-cream font-accent text-sm placeholder:text-cream/60 focus:border-gold/40 focus:outline-none transition-all [color-scheme:dark]"
                       />
@@ -445,7 +449,7 @@ export default function EventQuoteCalculator({
                       </label>
                       <select
                         id="eventTime"
-                        value={formData.eventTime}
+                        name="eventTime" value={formData.eventTime}
                         onChange={(e) => setFormData({ ...formData, eventTime: e.target.value })}
                         className="w-full bg-charcoal border border-cream/15 px-4 py-3 text-cream font-accent text-sm focus:border-gold/40 focus:outline-none transition-all"
                       >
@@ -470,7 +474,7 @@ export default function EventQuoteCalculator({
                     </div>
                   </div>
                   <textarea
-                    value={formData.message}
+                    name="message" value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     aria-label="Anything else we should know (dietary needs, A/V, etc.)" placeholder="Anything else we should know? (dietary needs, A/V, etc.)"
                     rows={3}

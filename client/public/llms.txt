@@ -16,8 +16,16 @@ Andiamo in Banca is an upscale Italian restaurant in South San Francisco, Califo
 - **Website:** https://www.andiamoinbanca.com
 - **Hours:** Tuesday–Friday 11am–2pm and 4pm–9pm; Saturday–Sunday 4pm–9pm; Closed Mondays
 - **Happy Hour:** Tuesday–Friday 4pm–5pm
-- **Reservations:** Available via OpenTable
+- **Reservations:** Online through OpenTable (see "How to book" below), or by phone or text
 - **Price range:** $$$ (upscale)
+
+## How to book
+- **A table:** reserve online through OpenTable: https://www.opentable.com/r/andiamo-in-banca-reservations-san-francisco?restref=1035160
+- **A table, with party size and time filled in:** https://www.opentable.com/restref/client/?rid=1035160&restref=1035160&partysize=4&datetime=2026-12-05T19:00 (change `partysize` and `datetime`; the page opens on available times for that party and hour)
+- **By phone or text:** call (650) 745-8811 or text (650) 249-7956
+- **A private event or group dinner (12 or more guests):** send an inquiry from https://www.andiamoinbanca.com/private-dining, https://www.andiamoinbanca.com/the-vault, https://www.andiamoinbanca.com/holiday-parties or https://www.andiamoinbanca.com/rehearsal-dinners, email events@andiamoinbanca.com, or call. An inquiry is a request, not a confirmed booking; the events desk replies within a day with availability and a proposal. No deposit is required to hold a date.
+- **An estimate for an event:** the calculator at https://www.andiamoinbanca.com/banquet-catering#quote-calculator totals menu, wine pairing, 20% gratuity and sales tax per guest
+- **Off-site catering (trays, office lunches):** order online through ezCater: https://www.ezcater.com/catering/andiamo-in-banca-3
 
 ## Pages
 - [Home](https://www.andiamoinbanca.com/)

@@ -34,6 +34,10 @@
     <meta name="geo.position" content="37.6547;-122.4125" />
     <meta name="ICBM" content="37.6547, -122.4125" />
     <link rel="canonical" href="https://www.andiamoinbanca.com" />
+    <!-- Pages are prerendered without a query string. Where the query changes what the page shows
+         (the catering tab), hide the prerendered markup until the app renders the right view. -->
+    <script>if(/[?&]tab=catering(&|$)/.test(location.search))document.documentElement.setAttribute("data-csr","")</script>
+    <style>html[data-csr] #root{visibility:hidden}</style>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />
@@ -50,14 +54,17 @@
       });
     </script>
 
-    <!-- Structured Data: Restaurant -->
+    <!-- Structured Data: Restaurant. Facts only, and only ones the pages also show.
+         No rating here: the star ratings belong to OpenTable, Yelp and Google, not to this site. -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Restaurant",
+      "@id": "https://www.andiamoinbanca.com/#restaurant",
       "name": "Andiamo in Banca",
       "description": "Upscale Italian dining in a beautifully restored 1920s bank building. Handmade pasta, award-winning wine program, and The Vault private dining room.",
       "url": "https://www.andiamoinbanca.com",
+      "image": "https://www.andiamoinbanca.com/og-image.jpg",
       "telephone": "+1-650-745-8811",
       "email": "events@andiamoinbanca.com",
       "address": {
@@ -78,47 +85,56 @@
       "openingHoursSpecification": [
         {
           "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday"],
+          "dayOfWeek": [
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
           "opens": "11:00",
           "closes": "14:00"
         },
         {
           "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday"],
+          "dayOfWeek": [
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
           "opens": "16:00",
           "closes": "21:00"
         },
         {
           "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Saturday", "Sunday"],
+          "dayOfWeek": [
+            "Saturday",
+            "Sunday"
+          ],
           "opens": "16:00",
           "closes": "21:00"
         }
       ],
-      "acceptsReservations": "True",
-      "hasMenu": {
-        "@type": "Menu",
-        "name": "Dinner Menu",
-        "description": "Handmade pasta, Italian classics, and an award-winning wine list"
-      },
-      "award": "Wine Spectator Award of Excellence 2026",
-      "hasCredential": {
-        "@type": "EducationalOccupationalCredential",
-        "name": "Wine Spectator Award of Excellence",
-        "credentialCategory": "Award",
-        "datePublished": "2026",
-        "recognizedBy": {
-          "@type": "Organization",
-          "name": "Wine Spectator",
-          "url": "https://www.winespectator.com"
+      "acceptsReservations": "https://www.opentable.com/r/andiamo-in-banca-reservations-san-francisco?restref=1035160",
+      "hasMenu": "https://www.andiamoinbanca.com/menu",
+      "potentialAction": {
+        "@type": "ReserveAction",
+        "name": "Reserve a table",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://www.opentable.com/r/andiamo-in-banca-reservations-san-francisco?restref=1035160",
+          "inLanguage": "en-US",
+          "actionPlatform": [
+            "https://schema.org/DesktopWebPlatform",
+            "https://schema.org/MobileWebPlatform"
+          ]
+        },
+        "result": {
+          "@type": "FoodEstablishmentReservation",
+          "name": "Table reservation at Andiamo in Banca"
         }
       },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.2",
-        "reviewCount": "348",
-        "bestRating": "5"
-      },
+      "award": "Wine Spectator Award of Excellence 2026",
       "sameAs": [
         "https://www.instagram.com/andiamoinbanca/",
         "https://www.yelp.com/biz/andiamo-in-banca-south-san-francisco-3",

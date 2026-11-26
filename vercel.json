@@ -50,6 +50,6 @@
     { "source": "/event-menus/120", "destination": "/banquet-catering#dinner-120", "statusCode": 302 }
   ],
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/(.*)", "destination": "/spa-fallback.html" }
   ]
 }

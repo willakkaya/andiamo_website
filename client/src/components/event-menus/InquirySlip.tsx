@@ -1,8 +1,12 @@
-import { useState } from "react";
-import { submitForm } from "@/lib/formspree";
+import { useRef, useState } from "react";
+import { submitForm, formValues, NO_SCRIPT_POST } from "@/lib/formspree";
+import { useAdoptFormValues, withFound } from "@/hooks/useAdoptFormValues";
+import InquiryFormMeta from "@/components/InquiryFormMeta";
+import { EVENT_INQUIRY_SENT, EVENT_INQUIRY_TOOL, replyToAgent } from "@/lib/agentTools";
 import { trackContactSubmit, trackPhoneClick } from "@/lib/analytics";
 import { TIERS } from "@/data/eventMenus";
 import TextLink from "@/components/TextLink";
+import { useToday } from "@/hooks/useToday";
 
 /* The event inquiry as a bank slip: ruled paper, underline-only fields,
    one block button. The room can be preset by the page ("Hold The Vault"). */
@@ -49,10 +53,19 @@ export default function InquirySlip({
   const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
     setForm({ ...form, [k]: e.target.value });
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const formRef = useRef<HTMLFormElement>(null);
+  useAdoptFormValues(formRef, (found) => {
+    setForm((prev) => withFound(prev, found));
+    if (found.room) onRoomChange(found.room);
+  });
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setState("sending");
-    const ok = await submitForm({ ...form, room: room || "Not sure yet", _subject: subject, source });
+    const filled = formValues(e.currentTarget);
+    const sending = submitForm({ ...form, ...filled, room: (filled.room ?? room) || "Not sure yet", _subject: subject, source });
+    replyToAgent(e, sending, EVENT_INQUIRY_SENT);
+    const ok = await sending;
     if (ok) {
       setState("sent");
       trackContactSubmit(source);
@@ -61,7 +74,7 @@ export default function InquirySlip({
     }
   };
 
-  const today = new Date().toISOString().slice(0, 10);
+  const today = useToday();
 
   return (
     <div className="bg-background border border-charcoal/30 p-1.5">
@@ -84,45 +97,46 @@ export default function InquirySlip({
             </p>
           </div>
         ) : (
-          <form onSubmit={handleSubmit}>
+          <form ref={formRef} {...NO_SCRIPT_POST} {...EVENT_INQUIRY_TOOL} onSubmit={handleSubmit}>
+            <InquiryFormMeta subject={subject} source={source} />
             <div className="grid grid-cols-1 sm:grid-cols-12 gap-x-8 gap-y-7">
               <div className="sm:col-span-4">
                 <label htmlFor={`${source}-date`} className={LABEL}>{dateLabel}</label>
-                <input id={`${source}-date`} type="date" min={today} required value={form.eventDate} onChange={set("eventDate")} className={FIELD} />
+                <input id={`${source}-date`} type="date" min={today} required name="eventDate" value={form.eventDate} onChange={set("eventDate")} className={FIELD} />
               </div>
               <div className="sm:col-span-3">
                 <label htmlFor={`${source}-guests`} className={LABEL}>Number of guests</label>
-                <input id={`${source}-guests`} type="number" inputMode="numeric" min={1} max={200} required value={form.guestCount} onChange={set("guestCount")} className={FIELD} />
+                <input id={`${source}-guests`} type="number" inputMode="numeric" min={1} max={200} required name="guestCount" value={form.guestCount} onChange={set("guestCount")} className={FIELD} />
               </div>
               <div className="sm:col-span-5">
                 <label htmlFor={`${source}-room`} className={LABEL}>Room</label>
-                <select id={`${source}-room`} value={room} onChange={(e) => onRoomChange(e.target.value)} className={`${FIELD} appearance-none`}>
+                <select id={`${source}-room`} name="room" value={room} onChange={(e) => onRoomChange(e.target.value)} className={`${FIELD} appearance-none`}>
                   <option value="">Choose a room</option>
                   {ROOMS.map((r) => <option key={r}>{r}</option>)}
                 </select>
               </div>
               <div className="sm:col-span-6">
                 <label htmlFor={`${source}-menu`} className={LABEL}>Menu</label>
-                <select id={`${source}-menu`} value={form.menu} onChange={set("menu")} className={`${FIELD} appearance-none`}>
+                <select id={`${source}-menu`} name="menu" value={form.menu} onChange={set("menu")} className={`${FIELD} appearance-none`}>
                   <option value="">Choose a menu</option>
                   {MENUS.map((m) => <option key={m}>{m}</option>)}
                 </select>
               </div>
               <div className="sm:col-span-6">
                 <label htmlFor={`${source}-company`} className={LABEL}>{companyLabel}</label>
-                <input id={`${source}-company`} type="text" autoComplete="organization" value={form.company} onChange={set("company")} className={FIELD} />
+                <input id={`${source}-company`} type="text" autoComplete="organization" name="company" value={form.company} onChange={set("company")} className={FIELD} />
               </div>
               <div className="sm:col-span-4">
                 <label htmlFor={`${source}-name`} className={LABEL}>Your name</label>
-                <input id={`${source}-name`} type="text" autoComplete="name" required value={form.name} onChange={set("name")} className={FIELD} />
+                <input id={`${source}-name`} type="text" autoComplete="name" required name="name" value={form.name} onChange={set("name")} className={FIELD} />
               </div>
               <div className="sm:col-span-4">
                 <label htmlFor={`${source}-email`} className={LABEL}>Email</label>
-                <input id={`${source}-email`} type="email" autoComplete="email" required value={form.email} onChange={set("email")} className={FIELD} />
+                <input id={`${source}-email`} type="email" autoComplete="email" required name="email" value={form.email} onChange={set("email")} className={FIELD} />
               </div>
               <div className="sm:col-span-4">
                 <label htmlFor={`${source}-phone`} className={LABEL}>Telephone</label>
-                <input id={`${source}-phone`} type="tel" autoComplete="tel" value={form.phone} onChange={set("phone")} className={FIELD} />
+                <input id={`${source}-phone`} type="tel" autoComplete="tel" name="phone" value={form.phone} onChange={set("phone")} className={FIELD} />
               </div>
             </div>
 

@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { ShoppingBag } from "lucide-react";
 import { Link } from "wouter";
 import { trackEventMenusClick } from "@/lib/analytics";
+import JsonLd from "@/components/JsonLd";
 
 type MenuTab = "dinner" | "lunch" | "catering" | "wine" | "happyhour";
 type Tag = "GF" | "V";
@@ -321,6 +322,44 @@ const TABS: { key: MenuTab; label: string }[] = [
   { key: "happyhour", label: "Happy Hour" },
 ];
 
+/* Structured data for the two food menus, built from the arrays above so it can
+   never drift from what the page prints. A price is only marked up when it is a
+   single number (wine is priced glass | bottle and is left as text). */
+const DIET: Record<Tag, string> = {
+  GF: "https://schema.org/GlutenFreeDiet",
+  V: "https://schema.org/VegetarianDiet",
+};
+
+function menuSchema(id: string, name: string, sections: Record<string, Section>) {
+  return {
+    "@type": "Menu",
+    "@id": `https://www.andiamoinbanca.com/menu#${id}`,
+    name,
+    inLanguage: "en-US",
+    hasMenuSection: Object.values(sections).map((section) => ({
+      "@type": "MenuSection",
+      name: section.title,
+      hasMenuItem: section.items.map((item) => ({
+        "@type": "MenuItem",
+        name: item.name,
+        ...(item.desc ? { description: item.desc } : {}),
+        ...(/^\d+(\.\d+)?$/.test(item.price)
+          ? { offers: { "@type": "Offer", price: item.price, priceCurrency: "USD" } }
+          : {}),
+        ...(item.tags?.length ? { suitableForDiet: item.tags.map((t) => DIET[t]) } : {}),
+      })),
+    })),
+  };
+}
+
+const MENU_SCHEMA = {
+  "@context": "https://schema.org",
+  "@graph": [
+    menuSchema("dinner", "Andiamo in Banca dinner menu", DINNER),
+    menuSchema("lunch", "Andiamo in Banca lunch menu", LUNCH),
+  ],
+};
+
 function MenuItem({ item }: { item: Item }) {
   return (
     <div className="break-inside-avoid mb-5">
@@ -373,10 +412,10 @@ export default function Menu() {
   usePageMeta("/menu");
 
   const [active, setActive] = useState<MenuTab>("dinner");
-  const sections = Object.values(MENUS[active]);
 
   return (
     <PageLayout>
+      <JsonLd data={MENU_SCHEMA} />
       {/* Hero */}
       <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
@@ -394,10 +433,15 @@ export default function Menu() {
       <section className="section-padding bg-background">
         <div className="container max-w-5xl">
           {/* Tab Navigation */}
-          <div className="flex flex-wrap justify-center gap-x-2 gap-y-1 mb-16 border-b border-charcoal/8 pb-6">
+          <div role="tablist" aria-label="Menus" className="flex flex-wrap justify-center gap-x-2 gap-y-1 mb-16 border-b border-charcoal/8 pb-6">
             {TABS.map((tab) => (
               <button
                 key={tab.key}
+                type="button"
+                role="tab"
+                id={`menu-tab-${tab.key}`}
+                aria-selected={active === tab.key}
+                aria-controls={`menu-panel-${tab.key}`}
                 onClick={() => setActive(tab.key)}
                 className={`px-6 py-2.5 font-accent text-base md:text-lg tracking-[0.15em] transition-all duration-500 ${
                   active === tab.key ? "text-gold border-b-2 border-gold" : "text-charcoal/60 hover:text-charcoal"
@@ -420,132 +464,146 @@ export default function Menu() {
             </Link>
           </div>
 
-          {/* Catering intro */}
-          {active === "catering" && (
-            <div className="max-w-2xl mx-auto text-center -mt-4 mb-14">
-              <p className="font-accent text-charcoal/70 text-base md:text-lg leading-relaxed">
-                Family-style trays for office lunches, meetings, and gatherings, delivered. Browse below, then order online through ezCater, or ask us about a custom spread.
-              </p>
-            </div>
-          )}
+          {/* One panel per menu. All five are in the page markup, so the prerendered HTML
+              (what crawlers and assistants read) carries every menu; only the selected one shows. */}
+          {TABS.map(({ key: tab }) => (
+            <div
+              key={tab}
+              id={`menu-panel-${tab}`}
+              role="tabpanel"
+              aria-labelledby={`menu-tab-${tab}`}
+              hidden={active !== tab}
+            >
+              {/* Catering intro */}
+              {tab === "catering" && (
+                <div className="max-w-2xl mx-auto text-center -mt-4 mb-14">
+                  <p className="font-accent text-charcoal/70 text-base md:text-lg leading-relaxed">
+                    Family-style trays for office lunches, meetings, and gatherings, delivered. Browse below, then order online through ezCater, or ask us about a custom spread.
+                  </p>
+                </div>
+              )}
 
-          {/* Wine tab — Wine Spectator Award of Excellence badge */}
-          {active === "wine" && (
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 max-w-3xl mx-auto -mt-4 mb-14 text-center sm:text-left">
-              <a
-                href={LINKS.wineSpectatorAwards}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="shrink-0 group"
-                aria-label="Wine Spectator Award of Excellence 2026"
+              {/* Wine tab — Wine Spectator Award of Excellence badge */}
+              {tab === "wine" && (
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-6 max-w-3xl mx-auto -mt-4 mb-14 text-center sm:text-left">
+                  <a
+                    href={LINKS.wineSpectatorAwards}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="shrink-0 group"
+                    aria-label="Wine Spectator Award of Excellence 2026"
+                  >
+                    <img
+                      src={IMAGES.wineSpectatorAward}
+                      alt="Wine Spectator Award of Excellence 2026"
+                      width={66}
+                      height={122}
+                      className="w-[62px] h-auto opacity-95 group-hover:opacity-100 transition-opacity"
+                      loading="lazy"
+                    />
+                  </a>
+                  <p className="font-accent text-charcoal/70 text-base md:text-lg leading-relaxed">
+                    Our cellar earned the <span className="text-charcoal">2026 Wine Spectator Award of Excellence</span> for a list of Italian classics, California cult bottles, and reserve Champagne, chosen to pair with every plate.
+                  </p>
+                </div>
+              )}
+
+              {/* Lunch tab — three-course lunch special */}
+              {tab === "lunch" && (
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-8 max-w-3xl mx-auto -mt-4 mb-14 text-center sm:text-left">
+                  <img
+                    src={IMAGES.lunchSpecial}
+                    alt="Three-course lunch special, 25.95 per person, Tuesday through Friday 11am to 2pm at Andiamo in Banca"
+                    width={1200}
+                    height={900}
+                    className="w-full max-w-[340px] h-auto border border-charcoal/10 shrink-0"
+                    loading="lazy"
+                  />
+                  <div>
+                    <h3 className="font-display text-2xl md:text-3xl text-charcoal">Three-Course Lunch Special</h3>
+                    <p className="font-accent text-gold text-base md:text-lg tracking-wide mt-1">
+                      25.95 per person &nbsp;&middot;&nbsp; Tuesday&ndash;Friday, 11am&ndash;2pm
+                    </p>
+                    <p className="font-accent text-charcoal/70 text-base md:text-lg leading-relaxed mt-3">
+                      Soup or salad, a choice of six mains, and dolce. Add a glass of house wine
+                      or an Aperol Spritz for 8. Parties of up to four.
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {/* Menu Items — two-column on desktop, like the printed menu */}
+              <motion.div
+                // initial={false}: the selected menu is visible in the prerendered
+                // page instead of waiting for the script to fade it in. Switching
+                // tabs still fades the new menu up.
+                initial={false}
+                animate={active === tab ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
+                transition={{ duration: 0.5 }}
+                className="md:columns-2 md:gap-x-14 lg:gap-x-20 [column-rule:1px_solid_oklch(0.20_0.01_50_/_8%)]"
               >
-                <img
-                  src={IMAGES.wineSpectatorAward}
-                  alt="Wine Spectator Award of Excellence 2026"
-                  width={66}
-                  height={122}
-                  className="w-[62px] h-auto opacity-95 group-hover:opacity-100 transition-opacity"
-                  loading="lazy"
-                />
-              </a>
-              <p className="font-accent text-charcoal/70 text-base md:text-lg leading-relaxed">
-                Our cellar earned the <span className="text-charcoal">2026 Wine Spectator Award of Excellence</span> for a list of Italian classics, California cult bottles, and reserve Champagne, chosen to pair with every plate.
-              </p>
-            </div>
-          )}
+                {Object.values(MENUS[tab]).map((section) => (
+                  <MenuSection key={section.title} section={section} />
+                ))}
+              </motion.div>
 
-          {/* Lunch tab — three-course lunch special */}
-          {active === "lunch" && (
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-8 max-w-3xl mx-auto -mt-4 mb-14 text-center sm:text-left">
-              <img
-                src={IMAGES.lunchSpecial}
-                alt="Three-course lunch special, 25.95 per person, Tuesday through Friday 11am to 2pm at Andiamo in Banca"
-                width={1200}
-                height={900}
-                className="w-full max-w-[340px] h-auto border border-charcoal/10 shrink-0"
-                loading="lazy"
-              />
-              <div>
-                <h3 className="font-display text-2xl md:text-3xl text-charcoal">Three-Course Lunch Special</h3>
-                <p className="font-accent text-gold text-base md:text-lg tracking-wide mt-1">
-                  25.95 per person &nbsp;&middot;&nbsp; Tuesday&ndash;Friday, 11am&ndash;2pm
-                </p>
-                <p className="font-accent text-charcoal/70 text-base md:text-lg leading-relaxed mt-3">
-                  Soup or salad, a choice of six mains, and dolce. Add a glass of house wine
-                  or an Aperol Spritz for 8. Parties of up to four.
-                </p>
-              </div>
-            </div>
-          )}
+              {/* Legend — wine */}
+              {tab === "wine" && (
+                <div className="mt-6 border-t border-charcoal/8 pt-8 text-center">
+                  <p className="font-accent text-charcoal/55 text-sm md:text-base tracking-wide">
+                    <span className="text-gold/70">&#10022;</span> house pour &nbsp;&middot;&nbsp; by-the-glass prices shown glass&nbsp;|&nbsp;bottle
+                  </p>
+                  <p className="font-accent text-charcoal/60 text-xs md:text-sm mt-2 tracking-wide">
+                    A selection from our cellar. The full wine book is available at the table.
+                  </p>
+                </div>
+              )}
 
-          {/* Menu Items — two-column on desktop, like the printed menu */}
-          <motion.div
-            key={active}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="md:columns-2 md:gap-x-14 lg:gap-x-20 [column-rule:1px_solid_oklch(0.20_0.01_50_/_8%)]"
-          >
-            {sections.map((section) => (
-              <MenuSection key={section.title} section={section} />
-            ))}
-          </motion.div>
+              {/* Legend — dinner & lunch */}
+              {(tab === "dinner" || tab === "lunch") && (
+                <div className="mt-6 border-t border-charcoal/8 pt-8 text-center">
+                  <p className="font-accent text-charcoal/55 text-sm md:text-base tracking-wide">
+                    <span className="text-gold/70">&#10022;</span> signature &nbsp;·&nbsp;
+                    <span className="text-gold/70 font-medium">GF</span> gluten-free &nbsp;·&nbsp;
+                    <span className="text-gold/70 font-medium">V</span> vegetarian
+                  </p>
+                  <p className="font-accent text-charcoal/60 text-xs md:text-sm mt-2 tracking-wide">
+                    Gluten-free &amp; vegan lentil pasta available for any pasta dish. Please inform your server of any allergies or intolerances.
+                  </p>
+                </div>
+              )}
 
-          {/* Legend — wine */}
-          {active === "wine" && (
-            <div className="mt-6 border-t border-charcoal/8 pt-8 text-center">
-              <p className="font-accent text-charcoal/55 text-sm md:text-base tracking-wide">
-                <span className="text-gold/70">&#10022;</span> house pour &nbsp;&middot;&nbsp; by-the-glass prices shown glass&nbsp;|&nbsp;bottle
-              </p>
-              <p className="font-accent text-charcoal/60 text-xs md:text-sm mt-2 tracking-wide">
-                A selection from our cellar. The full wine book is available at the table.
-              </p>
+              {/* Order CTA — tab-aware: takeout (Slice) for food, ezCater for catering */}
+              {(tab === "dinner" || tab === "lunch") && (
+                <div className="mt-12 text-center">
+                  <a
+                    href={LINKS.onlineOrdering}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-12 py-4 bg-charcoal text-white font-body text-[12px] tracking-[0.2em] uppercase font-semibold hover:bg-espresso transition-all duration-500"
+                  >
+                    Order Online <ShoppingBag size={13} />
+                  </a>
+                </div>
+              )}
+              {tab === "catering" && (
+                <div className="mt-12 text-center">
+                  <a
+                    href={LINKS.ezcater}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-12 py-4 bg-charcoal text-white font-body text-[12px] tracking-[0.2em] uppercase font-semibold hover:bg-espresso transition-all duration-500"
+                  >
+                    Order Catering Online <ShoppingBag size={13} />
+                  </a>
+                  <p className="font-accent text-charcoal/60 text-sm mt-5 tracking-wide">
+                    Delivered through ezCater. Hosting at the restaurant?{" "}
+                    <Link href="/banquet-catering" className="text-gold hover:text-gold-light transition-colors">See event menus &amp; pricing</Link>.
+                  </p>
+                </div>
+              )}
             </div>
-          )}
-
-          {/* Legend — dinner & lunch */}
-          {(active === "dinner" || active === "lunch") && (
-            <div className="mt-6 border-t border-charcoal/8 pt-8 text-center">
-              <p className="font-accent text-charcoal/55 text-sm md:text-base tracking-wide">
-                <span className="text-gold/70">&#10022;</span> signature &nbsp;·&nbsp;
-                <span className="text-gold/70 font-medium">GF</span> gluten-free &nbsp;·&nbsp;
-                <span className="text-gold/70 font-medium">V</span> vegetarian
-              </p>
-              <p className="font-accent text-charcoal/60 text-xs md:text-sm mt-2 tracking-wide">
-                Gluten-free &amp; vegan lentil pasta available for any pasta dish. Please inform your server of any allergies or intolerances.
-              </p>
-            </div>
-          )}
-
-          {/* Order CTA — tab-aware: takeout (Slice) for food, ezCater for catering */}
-          {(active === "dinner" || active === "lunch") && (
-            <div className="mt-12 text-center">
-              <a
-                href={LINKS.onlineOrdering}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-12 py-4 bg-charcoal text-white font-body text-[12px] tracking-[0.2em] uppercase font-semibold hover:bg-espresso transition-all duration-500"
-              >
-                Order Online <ShoppingBag size={13} />
-              </a>
-            </div>
-          )}
-          {active === "catering" && (
-            <div className="mt-12 text-center">
-              <a
-                href={LINKS.ezcater}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-12 py-4 bg-charcoal text-white font-body text-[12px] tracking-[0.2em] uppercase font-semibold hover:bg-espresso transition-all duration-500"
-              >
-                Order Catering Online <ShoppingBag size={13} />
-              </a>
-              <p className="font-accent text-charcoal/60 text-sm mt-5 tracking-wide">
-                Delivered through ezCater. Hosting at the restaurant?{" "}
-                <Link href="/banquet-catering" className="text-gold hover:text-gold-light transition-colors">See event menus &amp; pricing</Link>.
-              </p>
-            </div>
-          )}
+          ))}
 
           {/* Family line + links */}
           <div className="mt-14 text-center">

@@ -3,8 +3,11 @@ import { MapPin, Phone, Mail, Clock, Instagram, ExternalLink, MessageSquare } fr
 import { IMAGES, LINKS } from "@/lib/images";
 import { trackPhoneClick, trackPlannerPdf, trackTextClick } from "@/lib/analytics";
 import { PLANNER_PDF } from "@/data/eventMenus";
+import { useToday } from "@/hooks/useToday";
 
 export default function Footer() {
+  // Build year in the prerendered HTML; the visitor's own year once the page is running.
+  const year = useToday()?.slice(0, 4) ?? String(__BUILD_YEAR__);
   return (
     <footer className="print:hidden">
       {/* Pre-footer CTA — warm cream background */}
@@ -176,7 +179,7 @@ export default function Footer() {
         <div className="border-t border-cream/8 py-6">
           <div className="container flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-[11px] text-cream/60 tracking-wider">
-              &copy; {new Date().getFullYear()} Andiamo in Banca. All rights reserved.
+              &copy; {year} Andiamo in Banca. All rights reserved.
             </p>
             <div className="flex items-center gap-6">
               <a

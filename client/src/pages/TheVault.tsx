@@ -2,11 +2,14 @@ import PageLayout from "@/components/PageLayout";
 import { IMAGES, LINKS } from "@/lib/images";
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Link } from "wouter";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import { toast } from "sonner";
-import { submitForm } from "@/lib/formspree";
+import { submitForm, formValues, NO_SCRIPT_POST } from "@/lib/formspree";
+import { useAdoptFormValues, withFound } from "@/hooks/useAdoptFormValues";
+import InquiryFormMeta from "@/components/InquiryFormMeta";
+import { EVENT_INQUIRY_SENT, EVENT_INQUIRY_TOOL, replyToAgent } from "@/lib/agentTools";
 import { trackContactSubmit, trackEventMenusClick } from "@/lib/analytics";
 import EventMenuRates from "@/components/event-menus/EventMenuRates";
 import { tierHref } from "@/data/eventMenus";
@@ -31,10 +34,17 @@ export default function TheVault() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const formRef = useRef<HTMLFormElement>(null);
+  useAdoptFormValues(formRef, (found) => {
+    setFormData((prev) => withFound(prev, found));
+  });
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
-    const ok = await submitForm({ ...formData, _subject: "The Vault Inquiry", source: "the-vault" });
+    const sending = submitForm({ ...formData, ...formValues(e.currentTarget), _subject: "The Vault Inquiry", source: "the-vault" });
+    replyToAgent(e, sending, EVENT_INQUIRY_SENT);
+    const ok = await sending;
     if (ok) {
       setSubmitted(true);
       trackContactSubmit("the-vault");
@@ -270,7 +280,8 @@ export default function TheVault() {
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form ref={formRef} {...NO_SCRIPT_POST} {...EVENT_INQUIRY_TOOL} onSubmit={handleSubmit} className="space-y-6">
+                <InquiryFormMeta subject={"The Vault Inquiry"} source={"the-vault"} />
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {[
                     { label: "Name *", key: "name", type: "text", placeholder: "Your name", required: true },
@@ -286,6 +297,7 @@ export default function TheVault() {
                         id={`vault-${field.key}`}
                         type={field.type}
                         required={field.required}
+                        name={field.key}
                         value={formData[field.key as keyof typeof formData]}
                         onChange={(e) => setFormData({ ...formData, [field.key]: e.target.value })}
                         className="w-full bg-charcoal/[0.03] border border-charcoal/20 px-4 py-3.5 text-charcoal font-accent text-sm placeholder:text-charcoal/60 focus:border-gold/40 focus:bg-white focus:outline-none transition-all duration-300"
@@ -297,7 +309,7 @@ export default function TheVault() {
                 <div>
                   <label htmlFor="vault-event-type" className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/65 mb-2.5">Event Type</label>
                   <select id="vault-event-type"
-                    value={formData.eventType}
+                    name="eventType" value={formData.eventType}
                     onChange={(e) => setFormData({ ...formData, eventType: e.target.value })}
                     className="w-full bg-charcoal/[0.03] border border-charcoal/20 px-4 py-3.5 text-charcoal font-accent text-sm focus:border-gold/40 focus:bg-white focus:outline-none transition-all duration-300"
                   >
@@ -314,7 +326,7 @@ export default function TheVault() {
                 <div>
                   <label htmlFor="vault-additional-details" className="block font-body text-[11px] tracking-[0.2em] uppercase text-charcoal/65 mb-2.5">Additional Details</label>
                   <textarea id="vault-additional-details"
-                    value={formData.message}
+                    name="message" value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     rows={4}
                     className="w-full bg-charcoal/[0.03] border border-charcoal/20 px-4 py-3.5 text-charcoal font-accent text-sm placeholder:text-charcoal/60 focus:border-gold/40 focus:bg-white focus:outline-none transition-all duration-300 resize-none"

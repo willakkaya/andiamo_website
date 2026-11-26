@@ -3,7 +3,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
 import { Route, Switch, useLocation, useSearch } from "wouter";
 import { useLocationProperty } from "wouter/use-browser-location";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { MotionConfig } from "framer-motion";
 import ErrorBoundary from "./components/ErrorBoundary";
 import Home from "./pages/Home";
@@ -24,23 +24,51 @@ const currentHash = () => window.location.hash;
 // element (hard load, cross-page <Link>, or in-page anchor); anything else
 // lands at the top. Runs again once webfonts settle, since the swap shifts
 // layout — unless the visitor has already started scrolling.
+//
+// A hard load is different. The pages are prerendered, so by the time this
+// script runs the page is already on screen and the reader is where they
+// belong: the top, a restored position after a reload, or wherever they have
+// scrolled to while the script was loading. Moving them then would throw them
+// back to the top mid-read. So until the visitor navigates somewhere else we
+// only settle on a #hash target, and only when the reader is still at it or
+// still at the very top (browsers often have not scrolled to it yet).
+//
+// "Until the visitor navigates" is tracked by URL, not by "first run": while
+// React takes over the prerendered page the query string and hash arrive a
+// moment after the first render, so this effect runs two or three times for
+// the same load. Any address with a query string, which is every ad click,
+// would otherwise count as a navigation and be sent to the top.
 function ScrollManager() {
   const [pathname] = useLocation();
   const search = useSearch();
-  const hash = useLocationProperty(currentHash);
+  const hash = useLocationProperty(currentHash, () => "");
+  // The address of the hard load, until the visitor leaves it.
+  const loadUrl = useRef<string | null>(null);
   useEffect(() => {
-    const go = () => {
+    const target = () => {
       let id = hash.slice(1);
       try {
         id = decodeURIComponent(id);
       } catch {
         // malformed escape in the hash — fall back to the raw string
       }
-      const el = id ? document.getElementById(id) : null;
+      return id ? document.getElementById(id) : null;
+    };
+    const go = () => {
+      const el = target();
       if (el) el.scrollIntoView({ behavior: "instant", block: "start" });
       else window.scrollTo({ top: 0, behavior: "instant" });
     };
-    go();
+    const here = window.location.pathname + window.location.search + window.location.hash;
+    if (loadUrl.current === null) loadUrl.current = here;
+    const isLoad = loadUrl.current === here;
+    if (!isLoad) loadUrl.current = ""; // navigated: nothing after this is the load
+    const atTarget = () => {
+      const el = target();
+      return !!el && (window.scrollY === 0 || Math.abs(el.getBoundingClientRect().top) < window.innerHeight);
+    };
+    const settle = !isLoad || atTarget();
+    if (settle) go();
 
     let live = true;
     let moved = false;
@@ -50,7 +78,7 @@ function ScrollManager() {
     const events = ["wheel", "touchstart", "keydown"];
     events.forEach((e) => window.addEventListener(e, mark, { once: true, passive: true }));
     document.fonts?.ready.then(() => {
-      if (live && !moved && hash) go();
+      if (live && !moved && hash && settle) go();
     });
     return () => {
       live = false;

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useSearch } from "wouter";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import PageLayout from "@/components/PageLayout";
@@ -13,6 +13,7 @@ import CateringView from "@/components/event-menus/CateringView";
 import { TIERS, ROOMS, FAQ, SECTION_IDS, CATERING_HREF, PLANNER_PDF, type MenuTier } from "@/data/eventMenus";
 import { trackPhoneClick, trackTierEstimate, trackPlannerPdf } from "@/lib/analytics";
 import TextLink from "@/components/TextLink";
+import JsonLd from "@/components/JsonLd";
 
 const FOCUS =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-charcoal";
@@ -31,23 +32,6 @@ function EventsView() {
   // calculator behaves exactly as before for everyone else.
   const [estimateTier, setEstimateTier] = useState<MenuTier | undefined>();
 
-  // FAQ structured data — built from the same array as the visible answers
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.type = "application/ld+json";
-    script.id = "banquet-faq-schema";
-    script.text = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: FAQ.map((f) => ({
-        "@type": "Question",
-        name: f.q,
-        acceptedAnswer: { "@type": "Answer", text: f.a },
-      })),
-    });
-    document.head.appendChild(script);
-    return () => { document.getElementById("banquet-faq-schema")?.remove(); };
-  }, []);
 
   const onEstimate = (tier: MenuTier) => {
     setEstimateTier(tier);
@@ -56,6 +40,18 @@ function EventsView() {
 
   return (
     <div data-print-root className="event-menus">
+      {/* FAQ structured data — built from the same array as the visible answers */}
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: FAQ.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
+        }}
+      />
       {/* Masthead — type only, so the rates sit on the first screen */}
       <section className="bg-background pt-24 md:pt-[7.25rem]">
         <div className="container">

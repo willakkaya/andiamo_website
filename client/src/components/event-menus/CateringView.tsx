@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Link } from "wouter";
 import { ShoppingBag, Clock } from "lucide-react";
 import { LINKS } from "@/lib/images";
 import { trackPhoneClick, trackContactSubmit, trackCateringInquiry, trackEzCaterClick } from "@/lib/analytics";
-import { submitForm } from "@/lib/formspree";
+import { submitForm, formValues, NO_SCRIPT_POST } from "@/lib/formspree";
+import { useAdoptFormValues, withFound } from "@/hooks/useAdoptFormValues";
+import InquiryFormMeta from "@/components/InquiryFormMeta";
+import { CATERING_INQUIRY_SENT, CATERING_INQUIRY_TOOL, replyToAgent } from "@/lib/agentTools";
 import { EVENT_MENUS_PATH, SECTION_IDS } from "@/data/eventMenus";
 import ViewSwitch from "./ViewSwitch";
 
@@ -71,16 +74,24 @@ function CateringOrderForm() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const formRef = useRef<HTMLFormElement>(null);
+  useAdoptFormValues(formRef, (found) => {
+    setForm((prev) => withFound(prev, found));
+  });
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
     setError(false);
-    const ok = await submitForm({ ...form, _subject: "Catering Order Inquiry", source: "catering-direct" });
+    const values = { ...form, ...formValues(e.currentTarget) };
+    const sending = submitForm({ ...values, _subject: "Catering Order Inquiry", source: "catering-direct" });
+    replyToAgent(e, sending, CATERING_INQUIRY_SENT);
+    const ok = await sending;
     setSubmitting(false);
     if (ok) {
       setSubmitted(true);
       trackContactSubmit("catering-direct");
-      trackCateringInquiry(form.headcount || "unspecified");
+      trackCateringInquiry(values.headcount || "unspecified");
     } else {
       setError(true);
     }
@@ -103,18 +114,19 @@ function CateringOrderForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-2xl mx-auto">
+    <form ref={formRef} {...NO_SCRIPT_POST} {...CATERING_INQUIRY_TOOL} onSubmit={handleSubmit} className="max-w-2xl mx-auto">
+      <InquiryFormMeta subject={"Catering Order Inquiry"} source={"catering-direct"} />
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <input required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} aria-label="Your name" placeholder="Your name *" className={field} />
-        <input required type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} aria-label="Phone" placeholder="Phone *" className={field} />
-        <input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} aria-label="Email (optional)" placeholder="Email (optional)" className={field} />
-        <input required type="date" value={form.date} onChange={(e) => setForm({ ...form, date: e.target.value })} aria-label="Delivery date" className={field} />
+        <input required name="name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} aria-label="Your name" placeholder="Your name *" className={field} />
+        <input required type="tel" name="phone" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} aria-label="Phone" placeholder="Phone *" className={field} />
+        <input type="email" name="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} aria-label="Email (optional)" placeholder="Email (optional)" className={field} />
+        <input required type="date" name="date" value={form.date} onChange={(e) => setForm({ ...form, date: e.target.value })} aria-label="Delivery date" className={field} />
       </div>
       <div className="mt-4">
-        <input required value={form.headcount} onChange={(e) => setForm({ ...form, headcount: e.target.value })} aria-label="How many people" placeholder="How many people? *" className={field} />
+        <input required name="headcount" value={form.headcount} onChange={(e) => setForm({ ...form, headcount: e.target.value })} aria-label="How many people" placeholder="How many people? *" className={field} />
       </div>
       <div className="mt-4">
-        <textarea rows={3} value={form.notes} onChange={(e) => setForm({ ...form, notes: e.target.value })} aria-label="Anything else Tray preferences, dietary needs, delivery address" placeholder="Anything else? Tray preferences, dietary needs, delivery address…" className={field} />
+        <textarea rows={3} name="notes" value={form.notes} onChange={(e) => setForm({ ...form, notes: e.target.value })} aria-label="Anything else Tray preferences, dietary needs, delivery address" placeholder="Anything else? Tray preferences, dietary needs, delivery address…" className={field} />
       </div>
       {error && (
         <p className="font-accent text-sm text-red-700/80 mt-4">

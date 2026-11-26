@@ -1,5 +1,5 @@
-import { useEffect } from "react";
 import PageLayout from "@/components/PageLayout";
+import JsonLd from "@/components/JsonLd";
 import { IMAGES, LINKS } from "@/lib/images";
 import { motion } from "framer-motion";
 import { ArrowRight, ShoppingBag } from "lucide-react";
@@ -52,26 +52,21 @@ const FAQ = [
 export default function PrivateEvents() {
   usePageMeta("/private-events");
 
-  // FAQ structured data — helps Google rich results and AI assistants cite us
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.type = "application/ld+json";
-    script.id = "private-events-faq-schema";
-    script.text = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: FAQ.map((f) => ({
-        "@type": "Question",
-        name: f.q,
-        acceptedAnswer: { "@type": "Answer", text: f.a },
-      })),
-    });
-    document.head.appendChild(script);
-    return () => { document.getElementById("private-events-faq-schema")?.remove(); };
-  }, []);
 
   return (
     <PageLayout>
+      {/* FAQ structured data — built from the same array as the visible answers */}
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: FAQ.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
+        }}
+      />
       {/* ========== HERO ========== */}
       <section className="relative h-[70vh] min-h-[520px] flex items-end justify-center overflow-hidden">
         <div className="absolute inset-0">
